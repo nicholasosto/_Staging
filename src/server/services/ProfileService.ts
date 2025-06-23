@@ -1,8 +1,19 @@
-// src/server/services/ProfileService.ts
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ProfileService.ts
+ * @module      ProfileService
+ * @layer       Server/Services
+ * @description Wrapper around ProfileService for player data.
+ */
+
+/* =============================================== Imports =============================================== */
 import ProfileService from "@rbxts/profileservice";
 import { AttributesDTO, DefaultAttributes } from "shared/data";
+/* =============================================== Constants =============================================== */
 
 const DATASTORE_NAME = "SoulSteelPlayerProfile";
+/* =============================================== Types =============================================== */
 
 export interface PlayerProfile {
 	xp: number;
@@ -17,6 +28,7 @@ export const Profiles = ProfileService.GetProfileStore<PlayerProfile>(DATASTORE_
 	slots: 1,
 	attributes: DefaultAttributes,
 });
+/* =============================================== Functions =============================================== */
 
 export function loadProfile(player: Player) {
 	const profile = Profiles.LoadProfileAsync(`Player_${player.UserId}`);

@@ -1,3 +1,18 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        LayoutContainer.ts
+ * @module      LayoutContainer
+ * @layer       Client/UI/Atoms
+ * @description Container component to arrange items with preset layouts.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ */
+
+/* =============================================== Imports =============================================== */
 import Fusion, { ForKeys, ForValues } from "@rbxts/fusion";
 import { getLayoutStyle, Layout, LayoutStyle } from "client/ui/style";
 
@@ -27,6 +42,7 @@ const testData: DataItem[] = [
 	},
 ];
 
+/* =============================================== Props =============================================== */
 export interface LayoutContainerProps {
 	LayoutItems: Array<DataItem>;
 	LayoutStyle: LayoutStyle;
@@ -35,6 +51,7 @@ export interface LayoutContainerProps {
 	AnchorPoint?: Vector2;
 }
 
+/* =============================================== LayoutContainer Component =============================================== */
 export const LayoutContainer = (props: LayoutContainerProps) => {
 	const LayoutInstance = getLayoutStyle(props.LayoutStyle ?? "Vertical");
 	const items = new Array<TextLabel>();

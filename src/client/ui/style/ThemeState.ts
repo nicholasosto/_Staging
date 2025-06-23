@@ -1,3 +1,13 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ThemeState.ts
+ * @module      ThemeState
+ * @layer       Client/Style
+ * @description Centralized theme values for UI.
+ */
+
+/* =============================================== Imports =============================================== */
 import Fusion, { Value } from "@rbxts/fusion";
 
 export const ThemeState = {
