@@ -1,8 +1,10 @@
+/// <reference types="@rbxts/types" />
+
 /**
+ * @file        image.ts
  * @module      ImageAssets
- * @author      Trembus
- * @layer       Constants
- * @description List of image asset IDs used in the game, including icons and backgrounds.
+ * @layer       Shared/Assets
+ * @description List of image asset IDs used in the game.
  *
  * ╭──────────────────────────────╮
  * │  Soul Steel · Coding Guide   │
@@ -12,6 +14,7 @@
  * @since        0.1.0
  * @lastUpdated  2025-06-10 by Trembus
  */
+/* =============================================== Image Constants =============================================== */
 
 export const GameImages = {
 	Borders: {

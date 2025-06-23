@@ -1,3 +1,13 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        main.server.ts
+ * @module      ServerMain
+ * @layer       Server
+ * @description Entry point for server-side logic.
+ */
+
+/* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
 import { loadProfile } from "./services";
 

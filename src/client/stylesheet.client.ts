@@ -1,5 +1,26 @@
-// StarterPlayerScripts/CreateStyleSheets.client.ts
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        stylesheet.client.ts
+ * @module      StylesheetClient
+ * @layer       Client
+ * @description Prototype stylesheet setup for testing StyleSheet service.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
+/* =============================================== Imports =============================================== */
 import { Players, ReplicatedStorage, CollectionService } from "@rbxts/services";
+
+/* =============================================== Token Sheet =============================================== */
 
 function makeTokenSheet() {
 	const tokens = new Instance("StyleSheet");
@@ -13,6 +34,7 @@ function makeTokenSheet() {
 	return tokens;
 }
 
+/* =============================================== Design Sheet =============================================== */
 function makeDesignSheet(tokens: StyleSheet) {
 	const design = new Instance("StyleSheet");
 	design.Name = "DesignSheet";
@@ -47,6 +69,7 @@ function makeDesignSheet(tokens: StyleSheet) {
 	return design;
 }
 
+/* =============================================== Link Setup =============================================== */
 const tokens = makeTokenSheet();
 const design = makeDesignSheet(tokens);
 

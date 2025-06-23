@@ -67,3 +67,14 @@ The purpose of this document is to provide a concise overview of coding conventi
 import Fusion from "@rbxts/fusion";
 // …component code…
 ```
+
+## 5 Development Summary
+
+1. Maintain `AGENTS_DEVELOPMENT_SUMMARY.md` in the `src` folder.
+2. Update this summary whenever code is added or modified.
+3. List each module under its Network Layer (`client`, `server`, `shared`) and assign a status:
+   - **Rock Solid** – production ready
+   - **Usable** – works but can be improved
+   - **Under Construction** – partial functionality
+   - **Stub** – placeholder logic
+4. Use the summary as a quick reference for future agents.

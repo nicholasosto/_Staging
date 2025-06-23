@@ -1,6 +1,27 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        IconButton.ts
+ * @module      IconButton
+ * @layer       Client/UI/Atoms
+ * @description Simple icon button component.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
+/* =============================================== Imports =============================================== */
 import Fusion from "@rbxts/fusion";
 import { ButtonSizes } from "client/ui/style";
 import { GameImages, GameImageSubKey } from "shared/assets/image";
+/* =============================================== Props =============================================== */
 
 export interface IconButtonProps {
 	Icon: string;
@@ -10,6 +31,7 @@ export interface IconButtonProps {
 	OnClick?: () => void;
 }
 
+/* =============================================== IconButton Component =============================================== */
 export const IconButton = (props: IconButtonProps) => {
 	const { Icon, Size, Position, AnchorPoint, OnClick } = props;
 
