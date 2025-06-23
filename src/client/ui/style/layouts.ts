@@ -48,7 +48,7 @@ export const Layout = {
 			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
-	HorizontalList: (padding?: number) =>
+	HorizontalScroll: (padding?: number) =>
 		New("UIListLayout")({
 			Name: "HorizontalList",
 			FillDirection: Enum.FillDirection.Horizontal,
@@ -59,7 +59,7 @@ export const Layout = {
 			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
-	VerticleList: (padding?: number) =>
+	VerticleScroll: (padding?: number) =>
 		New("UIListLayout")({
 			Name: "VerticleList",
 			FillDirection: Enum.FillDirection.Vertical,
@@ -81,3 +81,21 @@ export const Layout = {
 			CellPadding: padding ? new UDim2(0, padding, 0, padding) : undefined,
 		}),
 };
+export type LayoutStyle = keyof typeof Layout;
+export function getLayoutStyle(style: LayoutStyle, padding?: number, cellSize?: UDim2) {
+	if (Layout[style]) {
+		return Layout[style](padding, cellSize);
+	} else {
+		warn(`Layout style "${style}" not found. Using default layout.`);
+		return New("UIListLayout")({
+			Name: "DefaultLayout",
+			FillDirection: Enum.FillDirection.Vertical,
+			SortOrder: Enum.SortOrder.LayoutOrder,
+			HorizontalAlignment: Enum.HorizontalAlignment.Center,
+			VerticalAlignment: Enum.VerticalAlignment.Center,
+			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
+			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
+			Padding: padding ? new UDim(0, padding) : undefined,
+		});
+	}
+}

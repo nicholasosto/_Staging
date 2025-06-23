@@ -11,8 +11,8 @@
  *
  * @author       Trembus
  * @license      MIT
- * @since        0.2.0
- * @lastUpdated  2025-05-29 by Luminesa – Initial creation
+ * @since        0.2.1
+ * @lastUpdated  2025-05-29 by Trembus – Update
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
@@ -22,7 +22,7 @@
  */
 
 import Fusion, { New, Children, Computed, Value, OnEvent, PropertyTable } from "@rbxts/fusion";
-import { GameColors, Layout, Stroke } from "../style";
+import { GameColors, Layout, Stroke } from "../../style";
 /* =============================================== GamePanel Props ========================================= */
 export interface GamePanelProps extends PropertyTable<Frame> {
 	BorderImage?: ImageLabel; // Optional border image for the panel

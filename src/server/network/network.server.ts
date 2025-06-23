@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        src/ui/atoms/index.ts
- * @module      UIAtomsIndex
- * @layer       Client/UI/Atoms
- * @description Barrel index file for Atoms in the UI module, exporting all components.
+ * @file        src/server/network/network.server.ts
+ * @module      NetworkServer
+ * @layer       Server/Network
+ * @description Handles network communication for the server.
  *
  * ╭───────────────────────────────╮
  * │  Soul Steel · Coding Guide    │
@@ -20,6 +20,11 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export * from "./Button";
-export * from "./Container";
-export * from "./Image";
+import { Network } from "shared/network";
+
+Network.Server.OnEvent("SpawnManifestation", (player, cframe: CFrame) => {
+	// Handle the spawning of the manifestation
+	print(`Player ${player.Name} requested to spawn a manifestation at ${cframe}`);
+});
+
+print("Network server initialized and listening for events.");

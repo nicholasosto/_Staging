@@ -9,6 +9,12 @@ export const TextSizes = {
 	SmallBar: 16,
 };
 
+export const ButtonSizes = {
+	Default: () => UDim2.fromOffset(150, 50),
+	Icon: () => UDim2.fromOffset(30, 30),
+	GridButton: () => UDim2.fromOffset(90, 90),
+};
+
 export const PanelSizes = {
 	ModalPanel: () => UDim2.fromOffset(600, 400),
 	ResourceBarContainer: () => UDim2.fromOffset(400, 1),

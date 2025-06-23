@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        src/ui/atoms/index.ts
- * @module      UIAtomsIndex
- * @layer       Client/UI/Atoms
- * @description Barrel index file for Atoms in the UI module, exporting all components.
+ * @file        src/server/services/index.ts
+ * @module      ServerServicesIndex
+ * @layer       Server/Services
+ * @description Barrel index file for server services, exporting all components.
  *
  * ╭───────────────────────────────╮
  * │  Soul Steel · Coding Guide    │
@@ -20,6 +20,4 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export * from "./Button";
-export * from "./Container";
-export * from "./Image";
+export * from "./ProfileService";
