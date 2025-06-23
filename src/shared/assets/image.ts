@@ -20,6 +20,10 @@ export const GameImages = {
 	Borders: {
 		GothicMetal: "rbxassetid://80375133768026",
 		RedThick: "rbxassetid://134322739825066",
+		CommonSet: "rbxassetid://85778039199330",
+		RareSet: "rbxassetid://82228066842612",
+		EpicSet: "rbxassetid://135166624307221",
+		LegendarySet: "rbxassetid://85570068018789",
 	},
 	Attrubutes: {
 		Strength: "rbxassetid://127745571044516",

@@ -26,6 +26,9 @@ import { Players } from "@rbxts/services";
 import { Network } from "shared/network";
 import { GameImages } from "shared/assets/image";
 import { IconButton, GameImage, GamePanel, testContainer } from "./ui";
+import { DataButtons } from "./ui/molecules/DataButtons";
+import { ItemButton } from "./ui/atoms/Button/ItemButton";
+import { CommonGems } from "shared/data/gems";
 
 /* =============================================== UI Imports ========================================= */
 
@@ -43,12 +46,18 @@ const IconButtonTest = IconButton({
 	},
 });
 
+const gridRarityTest = ItemButton("sample-item-123");
+const commonGem = CommonGems[0];
+const GemButton = ItemButton(commonGem.id);
+
 New("ScreenGui")({
 	Name: "GamePanelGui",
 	DisplayOrder: 1000,
 	ResetOnSpawn: false,
 	Parent: playerGui,
 	[Children]: {
+		DataButtons: DataButtons(),
+		GridItem: GemButton,
 		GamePanel: GamePanel({
 			Name: "GamePanel",
 			Size: UDim2.fromOffset(800, 600),

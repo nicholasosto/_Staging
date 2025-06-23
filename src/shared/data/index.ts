@@ -8,5 +8,3 @@
  */
 
 export * from "./attributes";
-export * from "./rarity";
-export * from "./Gem";

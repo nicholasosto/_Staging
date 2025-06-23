@@ -9,17 +9,17 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import { loadProfile } from "./services";
+import DataProfileController from "./services/ProfileService";
+DataProfileController.Start();
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {
 	// Create a new player profile
-	const profile = loadProfile(player);
-	if (!profile) {
-		player.Kick("Data failed to load!");
-		return;
+	const profile = DataProfileController.GetProfile(player);
+	if (profile) {
+		// Initialize player profile data
+		print(`Profile created for player: ${player.Name}`);
 	} else {
-		// Set the player's profile
-		print(`Player ${player.Name} joined with profile:`, profile);
+		warn(`Failed to create profile for player: ${player.Name}`);
 	}
 });

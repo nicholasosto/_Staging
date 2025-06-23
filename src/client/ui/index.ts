@@ -20,4 +20,5 @@
  *   @rbxts/fusion ^0.4.0
  */
 export * from "./atoms";
+export * from "./molecules";
 export * from "./style";
