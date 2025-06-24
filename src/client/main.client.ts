@@ -24,7 +24,7 @@
 import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets/image";
-import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton, GameTextScreen, GemForgeScreen } from "./ui";
+import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton, GameTextScreen, GemForgeScreen, PlayerHUDScreen } from "./ui";
 import { EventButtons } from "./ui/organisms/EventButtons";
 import { AbilityInfoPanel } from "./ui/molecules/AbilityInfoPanel";
 import { OrganismTestingScreen } from "./ui/screens/OrganismScreen";
@@ -63,4 +63,5 @@ const ScreenGUI = New("ScreenGui")({
 GameTextScreen();
 OrganismTestingScreen();
 GemForgeScreen();
+PlayerHUDScreen();
 ScreenGUI.Enabled = true; // Enable the GUI
