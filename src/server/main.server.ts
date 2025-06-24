@@ -9,11 +9,12 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import { ManifestationForgeService, DataProfileController } from "./services";
+import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
 ManifestationForgeService.Start();
+BattleRoomService.Start();
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {

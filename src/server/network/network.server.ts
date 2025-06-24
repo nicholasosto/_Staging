@@ -25,7 +25,7 @@ import { HttpService } from "@rbxts/services";
 import { Network } from "shared/network";
 
 /* Custom Services */
-import { DataProfileController } from "server/services";
+import { DataProfileController, BattleRoomService } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey } from "shared/data";
@@ -69,6 +69,19 @@ Network.Server.OnEvent("AddGem", (player, gemid: string) => {
 	}
 
 	print(`Added gem to player ${player.Name}'s profile:`, profile.Data);
+});
+
+// MATCHMAKING -----------------------------------------------------
+Network.Server.Get("CreateRoom").SetCallback((player) => {
+	return BattleRoomService.CreateRoom(player);
+});
+
+Network.Server.OnEvent("JoinRoom", (player, roomId: string) => {
+	BattleRoomService.JoinRoom(player, roomId);
+});
+
+Network.Server.OnEvent("SetActiveGem", (player, roomId: string, gemId: string) => {
+	BattleRoomService.SetActiveGem(player, roomId, gemId);
 });
 
 print("Network server initialized and listening for events.");
