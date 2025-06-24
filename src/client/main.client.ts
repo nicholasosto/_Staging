@@ -26,6 +26,7 @@ import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets/image";
 import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton } from "./ui";
 import { Network } from "shared";
+import { EventButtons } from "./ui/organisms/EventButtons";
 
 /* =============================================== Events and Remotes ============================================= */
 
@@ -48,9 +49,15 @@ const SpawnManifestationButton = IconButton({
 });
 
 // Game Images
-const ColorableGem = GameImage({
-	Name: "ColorableGem",
+const ColorableGem1 = GameImage({
+	Name: "ColorableGem1",
 	Image: GameImages.Gems.Colorable,
+	Size: UDim2.fromOffset(50, 50),
+});
+const ColorableGem2 = GameImage({
+	Name: "ColorableGem2",
+	Image: GameImages.Gems.Colorable,
+	ImageColor3: new Color3(0.5, 0.5, 1),
 	Size: UDim2.fromOffset(50, 50),
 });
 // Drag Panel
@@ -65,6 +72,7 @@ const DragPanel = GamePanel({
 			Name: "Top",
 			Size: UDim2.fromScale(1, 0.5),
 			Children: {
+				ColorImage: ColorableGem1,
 				TestingObject: SpawnManifestationButton,
 			},
 		}),
@@ -74,7 +82,10 @@ const DragPanel = GamePanel({
 			Position: UDim2.fromScale(0, 0.5),
 			BackgroundTransparency: 0.5,
 			BackgroundColor3: new Color3(0.2, 0.2, 0.2),
-			Children: {},
+			Children: {
+				ColorImage2: ColorableGem2,
+				SpawnManifestationButton: SpawnManifestationButton,
+			},
 		}),
 	},
 });
@@ -86,6 +97,7 @@ const ScreenGUI = New("ScreenGui")({
 	Parent: playerGui,
 	Enabled: false, // Initially disabled
 	[Children]: {
+		EventButtons: EventButtons(),
 		DragPanel: DragPanel,
 	},
 });

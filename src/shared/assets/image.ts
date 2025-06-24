@@ -26,7 +26,7 @@ export const GameImages = {
 		Blood_Elemental: "rbxassetid://122556254156811",
 		Spirit_Circles: "rbxassetid://78703065651895",
 	},
-	Attrubutes: {
+	Attributes: {
 		Strength: "rbxassetid://127745571044516",
 		Dexterity: "rbxassetid://73893872719367",
 		Intelligence: "rbxassetid://107600003376684",

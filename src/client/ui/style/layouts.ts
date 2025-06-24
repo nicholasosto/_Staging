@@ -44,8 +44,6 @@ export const Layout = {
 			SortOrder: Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment: Enum.HorizontalAlignment.Center,
 			VerticalAlignment: Enum.VerticalAlignment.Top,
-			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
-			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
 	HorizontalSet: (padding?: number) =>
@@ -66,8 +64,6 @@ export const Layout = {
 			SortOrder: Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment: Enum.HorizontalAlignment.Left,
 			VerticalAlignment: Enum.VerticalAlignment.Center,
-			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
-			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
 

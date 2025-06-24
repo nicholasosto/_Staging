@@ -21,12 +21,13 @@
  */
 
 /* =============================================== Imports ========================================= */
-import Fusion, { New } from "@rbxts/fusion";
+import Fusion, { Children, New } from "@rbxts/fusion";
 import { GameImages } from "shared/assets/image";
 
 /* =============================================== Props ========================================= */
 export interface GameImageProps extends Fusion.PropertyTable<ImageLabel> {
 	Test?: boolean; // For testing purposes
+	RatioConstraint?: number;
 }
 
 /* =============================================== GameImage Component ========================================= */
@@ -43,6 +44,14 @@ export function GameImage(props: GameImageProps): ImageLabel {
 		SliceCenter: props.SliceCenter ?? new Rect(0, 0, 0, 0),
 		ImageRectOffset: props.ImageRectOffset ?? new Vector2(0, 0),
 		ImageRectSize: props.ImageRectSize ?? new Vector2(0, 0),
+		[Children]: {
+			RatioConstraint: props.RatioConstraint
+				? New("UIAspectRatioConstraint")({
+						AspectRatio: props.RatioConstraint,
+						DominantAxis: Enum.DominantAxis.Height,
+					})
+				: undefined,
+		},
 	});
 }
 
