@@ -1,3 +1,25 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        GameButton.ts
+ * @module      GameButton
+ * @layer       Client/UI/Atoms
+ * @description Simple button component built from `GamePanel` and `GameImage`.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Luminesa – Added documentation header
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import Fusion, { Children, OnEvent, PropertyTable } from "@rbxts/fusion";
 import { GamePanel } from "../Container";
 import { GameImage } from "../Image";
