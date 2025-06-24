@@ -24,7 +24,6 @@ import { HttpService } from "@rbxts/services";
 import DataProfileController from "server/services/ProfileService";
 import { AttributeKey } from "shared/data";
 import { Network } from "shared/network";
-import { GemSaveData } from "shared/types";
 
 // SPAWN MANIFESTATION
 Network.Server.OnEvent("SpawnManifestation", (player, cframe: CFrame) => {
@@ -65,20 +64,8 @@ Network.Server.OnEvent("AddGem", (player, gemid: string) => {
 		warn(`Player profile not found for ${player.Name}`);
 		return;
 	}
-	const gemData: GemSaveData = {
-		id: HttpService.GenerateGUID(false), // Generate a unique ID for the gem
-		Capacity: 1,
-		metadataKey: gemid,
-		displayName: `Gem ${gemid}`,
-		Rarity: "Common",
-		AttributeBonuses: {
-			Strength: 1,
-		},
-		AbilityIds: ["ability1", "ability2"],
-	};
 
-	profile.Data.gems[gemData.id] = gemData;
-	print(`Added gem to player ${player.Name}'s profile:`, gemData);
+	print(`Added gem to player ${player.Name}'s profile:`, profile.Data);
 });
 
 print("Network server initialized and listening for events.");

@@ -10,7 +10,6 @@
 /* =============================================== Imports =============================================== */
 import Net from "@rbxts/net";
 import { AttributeKey } from "shared/data";
-import { GemSaveData } from "shared/types";
 
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({

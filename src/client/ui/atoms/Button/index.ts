@@ -8,3 +8,4 @@
  */
 
 export * from "./IconButton";
+export * from "./ItemButton";

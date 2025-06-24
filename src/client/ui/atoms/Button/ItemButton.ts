@@ -1,4 +1,4 @@
-import { Rarity, RarityKeys } from "shared/types/base";
+import { RarityKey } from "shared/types/base";
 import { GamePanel, GamePanelProps } from "../Container/GamePanel";
 import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";
 import { BorderImage, GameImage } from "../Image";
@@ -7,7 +7,7 @@ import { GameImages } from "shared/assets";
 
 const sampleItemMetadata = {
 	DisplayName: "Sample Item",
-	Rarity: "Common" as Rarity,
+	Rarity: "Common" as RarityKey,
 	itemId: "sample-item-123",
 	Icon: "rbxassetid://124443221759409", // Replace with actual icon ID
 	OnClick: () => {

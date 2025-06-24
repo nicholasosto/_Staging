@@ -1,1 +1,1 @@
-export * from "./Gem";
+export * from "./base";

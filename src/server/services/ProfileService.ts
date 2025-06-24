@@ -7,46 +7,27 @@
  * @description Wrapper around ProfileService for player data.
  */
 
-/* =============================================== Imports =============================================== */
+/* =============================================== Imports ====================================================== */
 import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
-import { Profile, ProfileStore } from "@rbxts/profileservice/globals";
-import { AttributesDTO } from "shared/data";
-import { GemSaveData } from "shared/types";
-/* =============================================== Constants =============================================== */
+import { Profile } from "@rbxts/profileservice/globals";
+// DTO
+import { AttributesDTO, DefaultAttributes } from "shared/data";
 
+/* ========================================== Profile Store Setup =============================================== */
+
+// Datastore Name
 const DATASTORE_NAME = "SoulSteelPlayerProfile";
 
-/* =============================================== Defaults =============================================== */
-
-// Gems
-const DefaultGems: Record<string, GemSaveData> = {};
-
-// Attributes
-const DefaultAttributes: AttributesDTO = {
-	str: 10,
-	agi: 10,
-	vit: 10,
-	int: 10,
-	lck: 10,
-	AvailablePoints: 5, // Starting with 5 points to distribute
-	SpentPoints: 0, // No points spent initially
-};
-
-/* =============================================== Types =============================================== */
-
+// Main Profile Data Type
 export interface PlayerProfile {
-	xp: number;
-	slots: number;
 	attributes: AttributesDTO;
-	gems: Record<string, GemSaveData>;
 }
 
+/* =============================================== Default Data =============================================== */
+
 export const PlayerDTOTemplate: PlayerProfile = {
-	xp: 0,
-	slots: 0,
 	attributes: DefaultAttributes,
-	gems: DefaultGems,
 };
 
 /* Data Profile Controller */
@@ -95,15 +76,28 @@ export default class DataProfileController {
 
 	/* On Player Joining */
 	private static async _onPlayerJoining(player: Player) {
+		/* Create Player Key */
+		const playerKey = player.Name + "_" + tostring(player.UserId);
 		try {
-			const profile = await this._profileStore.LoadProfileAsync(player.Name + "_" + tostring(player.UserId));
+			// Attempt to load the profile for the player
+			const profile = await this._profileStore.LoadProfileAsync(playerKey);
+
+			// Warn if the profile is nil
 			if (profile === undefined) {
 				warn(`Failed to load profile for player: ${player.Name}`);
-				return; // Return if profile loading fails
+				return;
 			}
-			this._profileMap.set(player, profile); // Store the profile in the map
-			print(`[${player.Name}] - Profile loaded:`, profile.Data); // Debug log
-			profile.Reconcile(); // Reconcile the profile
+
+			// Store the profile in the map
+			this._profileMap.set(player, profile);
+
+			// Print debug log
+			print(`[${player.Name}] - Profile loaded:`, profile.Data);
+
+			// Reconcile the profile to ensure it has the correct data structure
+			profile.Reconcile();
+
+			// Listen for logout and release events
 			profile.ListenToRelease(() => {
 				print(`[${player.Name}] - Profile released.`);
 				this._profileMap.delete(player); // Remove the profile from the map
@@ -118,7 +112,6 @@ export default class DataProfileController {
 		//print(`Player leaving: ${player.Name}`);
 		this._profileMap.delete(player); // Remove the profile from the map
 	}
-	/* Update Profile */
 
 	/* Get Profile */
 	public static GetProfile(player: Player): Profile<PlayerProfile> | undefined {

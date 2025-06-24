@@ -77,8 +77,3 @@ export const LayoutContainer = (props: LayoutContainerProps) => {
 
 	return Container;
 };
-
-export const testContainer = LayoutContainer({
-	LayoutItems: testData,
-	LayoutStyle: "VerticleSet",
-});

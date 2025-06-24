@@ -1,5 +1,5 @@
 export interface Identification {
-	id: string; // UUID v4
+	uuid?: string; // UUID v4
+	key?: string; // Unique key for the identification
 	displayName: string; // Display name for the identification
-	metadataKey: string; // Key for metadata storage
 }

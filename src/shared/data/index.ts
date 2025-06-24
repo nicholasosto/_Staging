@@ -7,4 +7,6 @@
  * @description Barrel export for shared data modules.
  */
 
-export * from "./attributes";
+export * from "./AttributeData";
+export * from "./GemData";
+export * from "./PlayerData";

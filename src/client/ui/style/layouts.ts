@@ -26,9 +26,9 @@
 import { New } from "@rbxts/fusion";
 
 export const Layout = {
-	VerticleSet: (padding?: number) =>
+	VerticalSet: (padding?: number) =>
 		New("UIListLayout")({
-			Name: "VerticleSet",
+			Name: "VerticalSet",
 			FillDirection: Enum.FillDirection.Vertical,
 			SortOrder: Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment: Enum.HorizontalAlignment.Center,
@@ -59,9 +59,9 @@ export const Layout = {
 			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
-	VerticleScroll: (padding?: number) =>
+	VerticalScroll: (padding?: number) =>
 		New("UIListLayout")({
-			Name: "VerticleList",
+			Name: "VerticalList",
 			FillDirection: Enum.FillDirection.Vertical,
 			SortOrder: Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment: Enum.HorizontalAlignment.Center,

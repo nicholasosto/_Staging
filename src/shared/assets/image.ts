@@ -17,21 +17,6 @@
 /* =============================================== Image Constants =============================================== */
 
 export const GameImages = {
-	Borders: {
-		GothicMetal: "rbxassetid://80375133768026",
-		RedThick: "rbxassetid://134322739825066",
-		CommonSet: "rbxassetid://85778039199330",
-		RareSet: "rbxassetid://82228066842612",
-		EpicSet: "rbxassetid://135166624307221",
-		LegendarySet: "rbxassetid://85570068018789",
-	},
-	Attrubutes: {
-		Strength: "rbxassetid://127745571044516",
-		Dexterity: "rbxassetid://73893872719367",
-		Intelligence: "rbxassetid://107600003376684",
-		Vitality: "rbxassetid://121291227474039",
-		Luck: "rbxassetid://114767496083209",
-	},
 	Ability: {
 		Unassigned: "rbxassetid://98384046526938",
 		Flame_Sythe: "rbxassetid://108246514585300",
@@ -40,6 +25,21 @@ export const GameImages = {
 		Blood_Horror: "rbxassetid://82257212198629",
 		Blood_Elemental: "rbxassetid://122556254156811",
 		Spirit_Circles: "rbxassetid://78703065651895",
+	},
+	Attrubutes: {
+		Strength: "rbxassetid://127745571044516",
+		Dexterity: "rbxassetid://73893872719367",
+		Intelligence: "rbxassetid://107600003376684",
+		Vitality: "rbxassetid://121291227474039",
+		Luck: "rbxassetid://114767496083209",
+	},
+	Borders: {
+		GothicMetal: "rbxassetid://80375133768026",
+		RedThick: "rbxassetid://134322739825066",
+		CommonSet: "rbxassetid://85778039199330",
+		RareSet: "rbxassetid://82228066842612",
+		EpicSet: "rbxassetid://135166624307221",
+		LegendarySet: "rbxassetid://85570068018789",
 	},
 	Control: {
 		Increment: "rbxassetid://102421835119714",
@@ -52,9 +52,13 @@ export const GameImages = {
 		Shards: "rbxassetid://73893872719367",
 		Tombs: "rbxassetid://121291227474039",
 	},
-	TextureImage: {
-		BoneDoily: "rbxassetid://108018297611555",
-		Mystical: "rbxassetid://108018297611556",
+	Gems: {
+		Colorable: "rbxassetid://71842732472075",
+		Common: "rbxassetid://R",
+		Uncommon: "rbxassetid://R",
+		Rare: "rbxassetid://R",
+		Epic: "rbxassetid://R",
+		Legendary: "rbxassetid://R",
 	},
 	SlotImage: {
 		Unassigned: "rbxassetid://98384046526938",
@@ -62,6 +66,10 @@ export const GameImages = {
 		Armor: "rbxassetid://98384046526938",
 		Weapon: "rbxassetid://98384046526938",
 		Accessory: "rbxassetid://98384046526938",
+	},
+	TextureImage: {
+		BoneDoily: "rbxassetid://108018297611555",
+		Mystical: "rbxassetid://108018297611556",
 	},
 } as const;
 

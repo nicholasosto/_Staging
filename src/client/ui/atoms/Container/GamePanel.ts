@@ -17,8 +17,6 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  *
- * @remarks
- *   Uses them  from shared/quarks.ts.
  */
 
 import Fusion, { New, Children, Computed, Value, OnEvent, PropertyTable } from "@rbxts/fusion";
@@ -95,11 +93,11 @@ export const GamePanel = (props: GamePanelProps) => {
 	/* ----- Component Defaults Setup ----- */
 	/* -- Frame Properties -- */
 	props.Name = props.Name ?? "GamePanel";
-	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0.5, 0.5);
+	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0, 0);
 	props.BackgroundColor3 = props.BackgroundColor3 ?? GameColors.BackgroundDefault;
 	props.BackgroundTransparency = props.BackgroundTransparency ?? 0.2;
-	props.Position = props.Position ?? UDim2.fromScale(0.5, 0.5);
-	props.Size = props.Size ?? UDim2.fromScale(0.5, 0.5);
+	props.Position = props.Position ?? UDim2.fromScale(0, 0);
+	props.Size = props.Size ?? UDim2.fromScale(1, 1);
 	props.LayoutOrder = props.LayoutOrder ?? 1;
 
 	/* -- Special Properties -- */

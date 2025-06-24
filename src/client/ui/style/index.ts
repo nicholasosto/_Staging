@@ -19,8 +19,10 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-export * from "./theme";
+
 export * from "./gradients";
 export * from "./layouts";
+export * from "./padding";
 export * from "./sizes";
 export * from "./stroke";
+export * from "./theme";

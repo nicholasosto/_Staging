@@ -25,46 +25,61 @@ import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 import { Network } from "shared/network";
 import { GameImages } from "shared/assets/image";
-import { IconButton, GameImage, GamePanel, testContainer } from "./ui";
-import { DataButtons } from "./ui/molecules/DataButtons";
-import { ItemButton } from "./ui/atoms/Button/ItemButton";
-import { CommonGems } from "shared/data/gems";
+import { IconButton, DataButtons, GamePanel, ItemButton, BorderImage, GameImage, Padding, ResourceBars } from "./ui";
 
 /* =============================================== UI Imports ========================================= */
 
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
-const IconButtonTest = IconButton({
-	Icon: GameImages.Control.Close,
-	OnClick: () => {
-		const character = Players.LocalPlayer.Character;
-		if (!character) {
-			warn("No character found for player.");
-			return;
-		}
-		Network.Client.Get("SpawnManifestation").SendToServer(character.GetPivot());
+/* =============================================== UI Components ========================================= */
+// Game Images
+const ColorableGem = GameImage({
+	Name: "ColorableGem",
+	Image: GameImages.Gems.Colorable,
+	Size: UDim2.fromOffset(50, 50),
+});
+// Drag Panel
+const DragPanel = GamePanel({
+	Name: "DragPanel",
+	Size: UDim2.fromOffset(500, 500),
+	Position: UDim2.fromScale(0.5, 0.5),
+	AnchorPoint: new Vector2(0.5, 0.5),
+	DragEnabled: true,
+	BorderImage: BorderImage.GothicMetal(),
+	Padding: Padding(4),
+	Children: {
+		Top: GamePanel({
+			Name: "Top",
+			Size: UDim2.fromScale(1, 0.5),
+			Children: {
+				ResourceBars: ResourceBars(),
+			},
+		}),
+		Bottom: GamePanel({
+			Name: "Bottom",
+			Size: UDim2.fromScale(1, 0.5),
+			Position: UDim2.fromScale(0, 0.5),
+			BackgroundTransparency: 0.5,
+			BackgroundColor3: new Color3(0.2, 0.2, 0.2),
+			Children: {
+				Image: GameImage({
+					Name: "BottomImage",
+					Image: GameImages.Ability.Blood_Siphon,
+				}),
+			},
+		}),
 	},
 });
 
-const gridRarityTest = ItemButton("sample-item-123");
-const commonGem = CommonGems[0];
-const GemButton = ItemButton(commonGem.id);
-
-New("ScreenGui")({
-	Name: "GamePanelGui",
+const ScreenGUI = New("ScreenGui")({
+	Name: "Main GUI",
 	DisplayOrder: 1000,
 	ResetOnSpawn: false,
 	Parent: playerGui,
+	Enabled: false, // Initially disabled
 	[Children]: {
-		DataButtons: DataButtons(),
-		GridItem: GemButton,
-		GamePanel: GamePanel({
-			Name: "GamePanel",
-			Size: UDim2.fromOffset(800, 600),
-			Children: {
-				IconButtonTestArea: IconButtonTest,
-			},
-		}),
-		LayoutContainer: testContainer,
+		DragPanel: DragPanel,
 	},
 });
+
+ScreenGUI.Enabled = true; // Enable the GUI
