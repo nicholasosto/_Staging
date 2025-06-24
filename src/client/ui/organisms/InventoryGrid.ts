@@ -7,14 +7,26 @@
  * @description Placeholder grid container for inventory slots.
  */
 
-import Fusion from "@rbxts/fusion";
-import { GamePanel } from "../atoms";
+import Fusion, { ForPairs } from "@rbxts/fusion";
+import { GamePanel, GemSlot } from "../atoms";
 import { Layout } from "../style";
+import { RarityKey } from "shared/data";
 
-export const InventoryGrid = () => {
-	return GamePanel({
-		Name: "InventoryGrid",
-		Layout: Layout.Grid(5, UDim2.fromOffset(48, 48)),
-		Children: {},
-	});
+export interface InventoryGridProps {
+        items: Map<string, { icon: string; rarity: RarityKey }>;
+}
+
+export const InventoryGrid = (props: InventoryGridProps) => {
+        return GamePanel({
+                Name: "InventoryGrid",
+                Scrolling: true,
+                Layout: Layout.Grid(5, UDim2.fromOffset(70, 70)),
+                Children: {
+                        Slots: ForPairs(props.items, (id, data) => $tuple(id, GemSlot({
+                                Name: `Slot-${id}`,
+                                Icon: data.icon,
+                                Rarity: data.rarity,
+                        }))),
+                },
+        });
 };

@@ -14,7 +14,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
 |Client|`client/ui/atoms`|Usable|Core UI atoms (buttons, panels)|
 |Client|`client/ui/style`|Rock Solid|Tokenized layout and colors|
-|Client|`client/ui/screens`|Stub|Gem forge placeholder screen|
+|Client|`client/ui/screens`|Under Construction|Gem forge screen basic layout|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
 |Server|`server/services/ProfileService.ts`|Under Construction|Loads player profiles|
