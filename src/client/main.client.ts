@@ -35,7 +35,6 @@ import { AbilityInfoPanel } from "./ui/molecules/AbilityInfoPanel";
 
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
-
 // Drag Panel
 const DragPanel = GamePanel({
 	Name: "DragPanel",
