@@ -24,29 +24,29 @@ import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
 import { GamePanel } from "../atoms";
 
 export interface BarMeterProps {
-        value: Fusion.Value<number>;
-        max: Fusion.Value<number> | number;
-        Size?: UDim2;
+	value: Fusion.Value<number>;
+	max: Fusion.Value<number> | number;
+	Size?: UDim2;
 }
 
 export function BarMeter(props: BarMeterProps) {
-        const maxVal = typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>);
-        const ratio = Computed(() => math.clamp(props.value.get() / maxVal.get(), 0, 1));
+	const maxVal = typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>);
+	const ratio = Computed(() => math.clamp(props.value.get() / maxVal.get(), 0, 1));
 
-        const fillSize = Computed(() => UDim2.fromScale(ratio.get(), 1));
-        const fill = New("Frame")({
-                Name: "Fill",
-                BackgroundColor3: Color3.fromRGB(120, 200, 120),
-                Size: fillSize,
-                BackgroundTransparency: 0.2,
-        });
+	const fillSize = Computed(() => UDim2.fromScale(ratio.get(), 1));
+	const fill = New("Frame")({
+		Name: "Fill",
+		BackgroundColor3: Color3.fromRGB(120, 200, 120),
+		Size: fillSize,
+		BackgroundTransparency: 0.2,
+	});
 
-        return GamePanel({
-                Name: "BarMeter",
-                Size: props.Size ?? UDim2.fromOffset(200, 20),
-                BackgroundTransparency: 0.4,
-                Children: {
-                        Fill: fill,
-                },
-        });
+	return GamePanel({
+		Name: "BarMeter",
+		Size: props.Size ?? UDim2.fromOffset(200, 20),
+		BackgroundTransparency: 0.4,
+		Children: {
+			Fill: fill,
+		},
+	});
 }

@@ -27,38 +27,38 @@ import { GameImage } from "../Image/GameImage";
 import { RarityKey } from "shared/data";
 
 export interface GemSlotProps extends PropertyTable<ImageButton> {
-        Icon?: string;
-        Rarity?: RarityKey;
-        OnClick?: () => void;
+	Icon?: string;
+	Rarity?: RarityKey;
+	OnClick?: () => void;
 }
 
 export function GemSlot(props: GemSlotProps) {
-        const border = () => {
-                switch (props.Rarity) {
-                        case "Rare":
-                                return BorderImage.RareRarity();
-                        case "Epic":
-                                return BorderImage.EpicRarity();
-                        case "Legendary":
-                                return BorderImage.LegendaryRarity();
-                        default:
-                                return BorderImage.GothicMetal();
-                }
-        };
-        return New("ImageButton")({
-                Name: props.Name ?? "GemSlot",
-                Size: props.Size ?? UDim2.fromOffset(70, 70),
-                BackgroundTransparency: 1,
-                ImageTransparency: 1,
-                [OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
-                [Children]: {
-                        Border: border(),
-                        Icon: GameImage({
-                                Image: props.Icon ?? GameImages.Gems.Colorable,
-                                Size: UDim2.fromScale(0.8, 0.8),
-                                Position: UDim2.fromScale(0.5, 0.5),
-                                AnchorPoint: new Vector2(0.5, 0.5),
-                        }),
-                },
-        });
+	const border = () => {
+		switch (props.Rarity) {
+			case "Rare":
+				return BorderImage.RareRarity();
+			case "Epic":
+				return BorderImage.EpicRarity();
+			case "Legendary":
+				return BorderImage.LegendaryRarity();
+			default:
+				return BorderImage.GothicMetal();
+		}
+	};
+	return New("ImageButton")({
+		Name: props.Name ?? "GemSlot",
+		Size: props.Size ?? UDim2.fromOffset(70, 70),
+		BackgroundTransparency: 1,
+		ImageTransparency: 1,
+		[OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
+		[Children]: {
+			Border: border(),
+			Icon: GameImage({
+				Image: props.Icon ?? GameImages.Gems.Colorable,
+				Size: UDim2.fromScale(0.8, 0.8),
+				Position: UDim2.fromScale(0.5, 0.5),
+				AnchorPoint: new Vector2(0.5, 0.5),
+			}),
+		},
+	});
 }

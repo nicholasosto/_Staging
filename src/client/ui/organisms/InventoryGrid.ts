@@ -13,20 +13,25 @@ import { Layout } from "../style";
 import { RarityKey } from "shared/data";
 
 export interface InventoryGridProps {
-        items: Map<string, { icon: string; rarity: RarityKey }>;
+	items: Map<string, { icon: string; rarity: RarityKey }>;
 }
 
 export const InventoryGrid = (props: InventoryGridProps) => {
-        return GamePanel({
-                Name: "InventoryGrid",
-                Scrolling: true,
-                Layout: Layout.Grid(5, UDim2.fromOffset(70, 70)),
-                Children: {
-                        Slots: ForPairs(props.items, (id, data) => $tuple(id, GemSlot({
-                                Name: `Slot-${id}`,
-                                Icon: data.icon,
-                                Rarity: data.rarity,
-                        }))),
-                },
-        });
+	return GamePanel({
+		Name: "InventoryGrid",
+		Scrolling: true,
+		Layout: Layout.Grid(5, UDim2.fromOffset(70, 70)),
+		Children: {
+			Slots: ForPairs(props.items, (id, data) =>
+				$tuple(
+					id,
+					GemSlot({
+						Name: `Slot-${id}`,
+						Icon: data.icon,
+						Rarity: data.rarity,
+					}),
+				),
+			),
+		},
+	});
 };
