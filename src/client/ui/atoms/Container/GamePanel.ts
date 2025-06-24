@@ -1,3 +1,5 @@
+/// <reference types="@rbxts/types" />
+
 /**
  * @file        GamePanel.ts
  * @module      GamePanel

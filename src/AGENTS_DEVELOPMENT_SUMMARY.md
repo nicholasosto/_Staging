@@ -9,10 +9,12 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/data/Gem.ts`|Under Construction|Basic types only|
 |Shared|`shared/data/rarity.ts`|Stub|Placeholder rarity enums|
 |Shared|`shared/assets`|Usable|Image asset constants|
+|Shared|`shared/states`|Usable|Signal-based shared state|
 |Client|`client/main.client.ts`|Usable|Entry point and UI bootstrap|
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
 |Client|`client/ui/atoms`|Usable|Core UI atoms (buttons, panels)|
 |Client|`client/ui/style`|Rock Solid|Tokenized layout and colors|
+|Client|`client/ui/screens`|Stub|Gem forge placeholder screen|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
 |Server|`server/services/ProfileService.ts`|Under Construction|Loads player profiles|
