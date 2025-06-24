@@ -16,6 +16,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
 |Server|`server/services/ProfileService.ts`|Under Construction|Loads player profiles|
+|Server|`server/services/BattleRoomService.ts`|Stub|Matchmaking and teleport skeleton|
 |Server|`server/entity/Manifestation.ts`|Stub|Placeholder creation logic|
 
 Keep this summary updated whenever modules are added or changed.
