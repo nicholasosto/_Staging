@@ -1,3 +1,25 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ItemButton.ts
+ * @module      ItemButton
+ * @layer       Client/UI/Atoms
+ * @description Clickable inventory item button with rarity border and icon.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.1
+ * @lastUpdated  2025-06-25 by Luminesa – Added documentation header
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import { RarityKey } from "shared";
 import { GamePanel, GamePanelProps } from "../Container/GamePanel";
 import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";

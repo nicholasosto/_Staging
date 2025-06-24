@@ -9,3 +9,4 @@
 
 export * from "./IconButton";
 export * from "./ItemButton";
+export * from "./GameButton";

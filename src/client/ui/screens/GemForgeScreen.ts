@@ -18,5 +18,21 @@
  *   @rbxts/fusion ^0.4.0
  *
  */
-import Fusion, { New, Children, Value, Computed } from "@rbxts/fusion";
+import Fusion, { New, Children } from "@rbxts/fusion";
 import { GamePanel, BorderImage } from "../atoms";
+
+export const GemForgeScreen = () => {
+	return GamePanel({
+		Name: "GemForgeScreen",
+		Size: UDim2.fromScale(1, 1),
+		Children: {
+			ForgePanel: GamePanel({
+				Name: "ForgePanel",
+				Size: UDim2.fromScale(0.5, 0.5),
+				Position: UDim2.fromScale(0.5, 0.5),
+				AnchorPoint: new Vector2(0.5, 0.5),
+				BorderImage: BorderImage.GothicMetal(),
+			}),
+		},
+	});
+};
