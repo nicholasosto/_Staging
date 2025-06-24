@@ -27,6 +27,7 @@ import { GameImages } from "shared/assets/image";
 import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton, GameTextScreen } from "./ui";
 import { EventButtons } from "./ui/organisms/EventButtons";
 import { AbilityInfoPanel } from "./ui/molecules/AbilityInfoPanel";
+import { OrganismTestingScreen } from "./ui/screens/OrganismScreen";
 
 /* =============================================== Events and Remotes ============================================= */
 
@@ -60,4 +61,5 @@ const ScreenGUI = New("ScreenGui")({
 	},
 });
 GameTextScreen();
+OrganismTestingScreen();
 ScreenGUI.Enabled = true; // Enable the GUI

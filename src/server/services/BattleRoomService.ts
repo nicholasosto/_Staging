@@ -13,8 +13,8 @@ import { HttpService, TeleportService } from "@rbxts/services";
 import { Network } from "shared/network";
 
 /* =============================================== Constants ================================= */
-const COUNTDOWN_TIME = 30; // seconds
-const BATTLE_PLACE_ID = 0; // TODO: replace with actual place ID
+const COUNTDOWN_TIME = 10; // seconds
+const BATTLE_PLACE_ID = 78520415943353; // TODO: replace with actual place ID
 
 /* =============================================== Types ===================================== */
 interface BattleRoom {
@@ -42,6 +42,7 @@ export class BattleRoomService {
 	/* ------------------------------- Public API ------------------------------- */
 
 	public static CreateRoom(owner: Player): string {
+		print(`Creating battle room for player: ${owner.Name}`);
 		this.Start();
 		const id = HttpService.GenerateGUID(false);
 		const room: BattleRoom = {
@@ -54,6 +55,7 @@ export class BattleRoomService {
 	}
 
 	public static JoinRoom(player: Player, roomId: string) {
+		print(`Player ${player.Name} joining room: ${roomId}`);
 		const room = this._rooms.get(roomId);
 		if (!room) {
 			warn(`BattleRoom ${roomId} not found`);
@@ -68,6 +70,7 @@ export class BattleRoomService {
 	}
 
 	public static SetActiveGem(player: Player, roomId: string, gemId: string) {
+		print(`Setting active gem for player ${player.Name} in room ${roomId} to ${gemId}`);
 		const room = this._rooms.get(roomId);
 		if (!room) return;
 		if (room.players.has(player)) {
@@ -78,10 +81,12 @@ export class BattleRoomService {
 	/* ------------------------------- Internal ------------------------------- */
 
 	private static _startCountdown(room: BattleRoom) {
+		print(`Starting countdown for room: ${room.id}`);
 		room.countdownTask = task.spawn(() => {
 			for (let remaining = COUNTDOWN_TIME; remaining > 0; remaining--) {
 				const players = this._collectPlayers(room);
 				Network.Server.Get("RoomCountdown").SendToPlayers(players, room.id, remaining);
+				print(`Countdown for room ${room.id}: ${remaining} seconds remaining`);
 				task.wait(1);
 			}
 			this._launchRoom(room);
@@ -91,13 +96,19 @@ export class BattleRoomService {
 	private static _collectPlayers(room: BattleRoom): Player[] {
 		const result = new Array<Player>();
 		room.players.forEach((_, p) => result.push(p));
+		if (result.size() === 0) {
+			warn(`No players in room ${room.id}`);
+			return result;
+		}
+		print(`Collecting players for room ${room.id}: ${result.map((p) => p.Name).join(", ")}`);
 		return result;
 	}
 
 	private static _launchRoom(room: BattleRoom) {
 		const players = this._collectPlayers(room);
-		const [code] = TeleportService.ReserveServer(BATTLE_PLACE_ID);
-		TeleportService.TeleportToPrivateServer(BATTLE_PLACE_ID, code, players);
+		const teleportsResult = TeleportService.TeleportAsync(BATTLE_PLACE_ID, players);
+		print(`Launching battle room ${room.id} with code: ${teleportsResult}`);
 		this._rooms.delete(room.id);
+		print(`Battle room ${room.id} launched and deleted.`);
 	}
 }

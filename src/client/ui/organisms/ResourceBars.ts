@@ -28,17 +28,17 @@ export const ResourceBars = () => {
 		Name: "ResourceBars",
 		Layout: Layout.VerticalSet(5),
 		Children: {
-			HealthBar: New("Frame")({
+			HealthBar: GamePanel({
 				Name: "HealthBar",
 				BackgroundColor3: new Color3(1, 0, 0),
 				Size: UDim2.fromScale(1, 0.2),
 			}),
-			ManaBar: New("Frame")({
+			ManaBar: GamePanel({
 				Name: "ManaBar",
 				BackgroundColor3: new Color3(0, 0, 1),
 				Size: UDim2.fromScale(1, 0.2),
 			}),
-			StaminaBar: New("Frame")({
+			StaminaBar: GamePanel({
 				Name: "StaminaBar",
 				BackgroundColor3: new Color3(0, 1, 0),
 				Size: UDim2.fromScale(1, 0.2),
