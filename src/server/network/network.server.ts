@@ -19,18 +19,21 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-
+/* =============================================== Imports =============================================== */
 import { HttpService } from "@rbxts/services";
-import DataProfileController from "server/services/ProfileService";
-import { AttributeKey } from "shared/data";
+
 import { Network } from "shared/network";
 
+/* Custom Services */
+import { DataProfileController } from "server/services";
+
+/* Factories and Types */
+import { AttributeKey } from "shared/data";
+import { GemFactory } from "server/factories";
+
 // SPAWN MANIFESTATION
-Network.Server.OnEvent("SpawnManifestation", (player, cframe: CFrame) => {
-	// Handle the spawning of the manifestation
-	print(`Player ${player.Name} requested to spawn a manifestation at ${cframe}`);
-	const profile = DataProfileController.GetProfile(player);
-	print(`Player Profile:`, profile);
+Network.Server.OnEvent("SpawnManifestation", (player, formId, abilityId, bonusId) => {
+	GemFactory.createManifestationGem();
 });
 
 // INCREASE ATTRIBUTE

@@ -24,13 +24,29 @@
 import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets/image";
-import { GamePanel, BorderImage, GameImage, Padding, ResourceBars } from "./ui";
+import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton } from "./ui";
+import { Network } from "shared";
+
+/* =============================================== Events and Remotes ============================================= */
+
+const SpawnManifestationEvent = Network.Client.Get("SpawnManifestation");
 
 /* =============================================== UI Imports ========================================= */
 
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
 /* =============================================== UI Components ========================================= */
+// Spawn Manifestation Button
+const SpawnManifestationButton = IconButton({
+	Icon: GameImages.Gems.Colorable,
+	OnClick: () => {
+		const formId = "exampleForm"; // Replace with actual form ID
+		const abilityId = "exampleAbility"; // Replace with actual ability ID
+		const bonusId = "exampleBonus"; // Replace with actual bonus ID
+		SpawnManifestationEvent.SendToServer(formId, abilityId, bonusId);
+	},
+});
+
 // Game Images
 const ColorableGem = GameImage({
 	Name: "ColorableGem",
@@ -49,7 +65,7 @@ const DragPanel = GamePanel({
 			Name: "Top",
 			Size: UDim2.fromScale(1, 0.5),
 			Children: {
-				ResourceBars: ResourceBars(),
+				TestingObject: SpawnManifestationButton,
 			},
 		}),
 		Bottom: GamePanel({

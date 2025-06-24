@@ -9,8 +9,11 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import DataProfileController from "./services/ProfileService";
+import { ManifestationForgeService, DataProfileController } from "./services";
+
+/* =============================================== Initialization ========================================= */
 DataProfileController.Start();
+ManifestationForgeService.Start();
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {

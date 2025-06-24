@@ -31,7 +31,7 @@ export const PlayerDTOTemplate: PlayerProfile = {
 };
 
 /* Data Profile Controller */
-export default class DataProfileController {
+export class DataProfileController {
 	/* Singleton Instance */
 	private static _instance: DataProfileController | undefined;
 

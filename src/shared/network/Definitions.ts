@@ -14,7 +14,7 @@ import { AttributeKey } from "shared/data";
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
 	// fire-and-forget from client → server
-	SpawnManifestation: Net.Definitions.ClientToServerEvent<[cframe: CFrame]>(),
+	SpawnManifestation: Net.Definitions.ClientToServerEvent<[formId: string, abilityId: string, bonusId: string]>(),
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 	AddGem: Net.Definitions.ClientToServerEvent<[gemid: string]>(),
 

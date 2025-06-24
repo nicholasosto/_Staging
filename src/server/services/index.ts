@@ -21,3 +21,4 @@
  */
 
 export * from "./ProfileService";
+export * from "./ManifestationForgeService";
