@@ -11,14 +11,45 @@
 // External Imports
 import { HttpService } from "@rbxts/services";
 // Custom Imports
-import { RarityKey } from "./Rarity";
+import { RarityKey } from "./RarityData";
 import { AttributesMap } from "./AttributeData";
-import { Identification } from "shared/types";
+// shared/Enums/GemSubtype.ts
+export type GemSubtype = "Form" | "Ability" | "Bonus" | "Manifestation";
 
-// Metadata for gem abilities
-export interface GemMetadata {
-	Idendification: Identification;
-	Rarity: RarityKey;
-	attributes: AttributesMap;
-	abilities: string[]; // List of ability names
+// shared/DTO/BaseGemDTO.ts
+export interface BaseGemDTO {
+	Uuid: string; // HttpService.GenerateGUID
+	Rarity: RarityKey; // Common … Legendary
+	Subtype: GemSubtype;
+	Name: string; // Generated “Radiant Opal Shard”
+}
+
+/* 3 specialised leaf DTOs ---------------------------------------- */
+export interface FormGemDTO extends BaseGemDTO {
+	Subtype: "Form";
+	HumanoidDescriptionJson: string; // serialised HumanoidDescription
+}
+
+export interface AbilityGemDTO extends BaseGemDTO {
+	Subtype: "Ability";
+	AbilityId: string; // e.g. "FireBreath"
+	PowerScale: number; // scaler 0–1 based on rarity roll
+}
+
+export interface BonusGemDTO extends BaseGemDTO {
+	Subtype: "Bonus";
+	Stats: {
+		Attack: number;
+		Health: number;
+		PhysDef: number;
+		MagDef: number;
+	};
+}
+
+/* The crafted result --------------------------------------------- */
+export interface ManifestationGemDTO extends BaseGemDTO {
+	Subtype: "Manifestation";
+	FormGemUuid: string;
+	AbilityGemUuid: string;
+	BonusGemUuid: string;
 }

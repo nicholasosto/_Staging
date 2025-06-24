@@ -9,4 +9,6 @@
 
 export * from "./AttributeData";
 export * from "./GemData";
+export * from "./ItemData";
 export * from "./PlayerData";
+export * from "./RarityData";

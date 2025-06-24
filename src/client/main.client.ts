@@ -23,9 +23,8 @@
 /* =============================================== External Imports ============================================= */
 import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
-import { Network } from "shared/network";
 import { GameImages } from "shared/assets/image";
-import { IconButton, DataButtons, GamePanel, ItemButton, BorderImage, GameImage, Padding, ResourceBars } from "./ui";
+import { GamePanel, BorderImage, GameImage, Padding, ResourceBars } from "./ui";
 
 /* =============================================== UI Imports ========================================= */
 
@@ -42,8 +41,6 @@ const ColorableGem = GameImage({
 const DragPanel = GamePanel({
 	Name: "DragPanel",
 	Size: UDim2.fromOffset(500, 500),
-	Position: UDim2.fromScale(0.5, 0.5),
-	AnchorPoint: new Vector2(0.5, 0.5),
 	DragEnabled: true,
 	BorderImage: BorderImage.GothicMetal(),
 	Padding: Padding(4),
@@ -61,12 +58,7 @@ const DragPanel = GamePanel({
 			Position: UDim2.fromScale(0, 0.5),
 			BackgroundTransparency: 0.5,
 			BackgroundColor3: new Color3(0.2, 0.2, 0.2),
-			Children: {
-				Image: GameImage({
-					Name: "BottomImage",
-					Image: GameImages.Ability.Blood_Siphon,
-				}),
-			},
+			Children: {},
 		}),
 	},
 });

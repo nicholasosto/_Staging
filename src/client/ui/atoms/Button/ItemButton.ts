@@ -1,4 +1,4 @@
-import { RarityKey } from "shared/types/base";
+import { RarityKey } from "shared";
 import { GamePanel, GamePanelProps } from "../Container/GamePanel";
 import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";
 import { BorderImage, GameImage } from "../Image";
