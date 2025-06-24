@@ -15,6 +15,7 @@
 /* =============================================== Imports =============================================== */
 import Fusion, { ForKeys, ForValues } from "@rbxts/fusion";
 import { getLayoutStyle, Layout, LayoutStyle } from "client/ui/style";
+import { GameText } from "../Text";
 
 const { New, Children, Computed, Value, OnEvent, ForPairs } = Fusion;
 
@@ -57,7 +58,7 @@ export const LayoutContainer = (props: LayoutContainerProps) => {
 	const items = new Array<TextLabel>();
 	ForValues(props.LayoutItems, (item) => {
 		items.push(
-			New("TextLabel")({
+			GameText({
 				Name: item.Name,
 				Text: item.Name,
 			}),

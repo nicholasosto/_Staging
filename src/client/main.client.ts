@@ -24,8 +24,7 @@
 import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets/image";
-import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton } from "./ui";
-
+import { GamePanel, BorderImage, GameImage, Padding, ResourceBars, IconButton, GameTextScreen } from "./ui";
 import { EventButtons } from "./ui/organisms/EventButtons";
 import { AbilityInfoPanel } from "./ui/molecules/AbilityInfoPanel";
 
@@ -60,5 +59,5 @@ const ScreenGUI = New("ScreenGui")({
 		DragPanel: DragPanel,
 	},
 });
-
+GameTextScreen();
 ScreenGUI.Enabled = true; // Enable the GUI

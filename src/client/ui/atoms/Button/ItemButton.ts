@@ -26,6 +26,7 @@ import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";
 import { BorderImage, GameImage } from "../Image";
 import { ButtonSizes } from "client/ui/style";
 import { GameImages } from "shared/assets";
+import { GameText } from "../Text";
 
 const sampleItemMetadata = {
 	DisplayName: "Sample Item",
@@ -68,7 +69,7 @@ export function ItemButton(itemId?: string) {
 				Position: UDim2.fromScale(0.5, 0.5),
 				AnchorPoint: new Vector2(0.5, 0.5),
 			}),
-			displayName: New("TextLabel")({
+			displayName: GameText({
 				Name: "DisplayName",
 				Text: itemMetadata.DisplayName,
 				TextColor3: Color3.fromRGB(255, 255, 255),
