@@ -37,6 +37,17 @@ export const Layout = {
 			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
+	VerticalScroll: (padding?: number) =>
+		New("UIListLayout")({
+			Name: "VerticalList",
+			FillDirection: Enum.FillDirection.Vertical,
+			SortOrder: Enum.SortOrder.LayoutOrder,
+			HorizontalAlignment: Enum.HorizontalAlignment.Center,
+			VerticalAlignment: Enum.VerticalAlignment.Top,
+			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
+			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
+			Padding: padding ? new UDim(0, padding) : undefined,
+		}),
 	HorizontalSet: (padding?: number) =>
 		New("UIListLayout")({
 			Name: "HorizontalSet",
@@ -59,17 +70,7 @@ export const Layout = {
 			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
-	VerticalScroll: (padding?: number) =>
-		New("UIListLayout")({
-			Name: "VerticalList",
-			FillDirection: Enum.FillDirection.Vertical,
-			SortOrder: Enum.SortOrder.LayoutOrder,
-			HorizontalAlignment: Enum.HorizontalAlignment.Center,
-			VerticalAlignment: Enum.VerticalAlignment.Top,
-			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
-			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
-			Padding: padding ? new UDim(0, padding) : undefined,
-		}),
+
 	Grid: (padding?: number, cellSize?: UDim2) =>
 		New("UIGridLayout")({
 			Name: "GridLayout",
