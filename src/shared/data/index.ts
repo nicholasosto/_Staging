@@ -6,7 +6,7 @@
  * @layer       Shared
  * @description Barrel export for shared data modules.
  */
-
+export * from "./AbilityData";
 export * from "./AttributeData";
 export * from "./GemData";
 export * from "./ItemData";

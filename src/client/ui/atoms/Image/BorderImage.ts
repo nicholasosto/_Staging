@@ -1,50 +1,48 @@
 import { GameImage } from "./GameImage";
 import { GameImages } from "shared/assets/image";
 
+/* =============================================== SliceImage ========================================= */
+export interface SliceImageProps {
+	Image: string;
+	SliceCenter?: Rect;
+	ZIndex?: number;
+}
+
+export const SliceImage = (props: SliceImageProps) => {
+	return GameImage({
+		Image: props.Image,
+		ScaleType: Enum.ScaleType.Slice,
+		SliceCenter: props.SliceCenter ?? new Rect(0, 0, 0, 0),
+		ZIndex: props.ZIndex ?? 100,
+	});
+};
+
+/* =============================================== Slice Constants ========================================= */
+
 /* =============================================== BorderImage Component (9-Slice) ========================================= */
 export const BorderImage = {
 	GothicMetal: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.GothicMetal,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(150, 150, 360, 360),
-			ZIndex: 100,
 		}),
 	RedThick: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.RedThick,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(500, 500, 500, 500),
-			ImageRectOffset: new Vector2(30, 30),
-			ImageRectSize: new Vector2(960, 960),
-			ZIndex: 100,
 		}),
 	CommonRarity: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.CommonSet,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(150, 150, 360, 360),
-			ZIndex: 100,
 		}),
 	RareRarity: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.RareSet,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(150, 150, 360, 360),
-			ZIndex: 100,
 		}),
 	EpicRarity: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.EpicSet,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(150, 150, 360, 360),
-			ZIndex: 100,
 		}),
 	LegendaryRarity: () =>
-		GameImage({
+		SliceImage({
 			Image: GameImages.Borders.LegendarySet,
-			ScaleType: Enum.ScaleType.Slice,
-			SliceCenter: new Rect(150, 150, 360, 360),
-			ZIndex: 100,
 		}),
 };

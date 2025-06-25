@@ -1,7 +1,7 @@
 import { GameImage, GamePanel } from "../atoms";
 import Fusion, { New, Children, Value, Computed } from "@rbxts/fusion";
 import { GameImages, Network } from "shared";
-import { Layout } from "../style";
+import { Layout } from "../tokens";
 import { GameButton } from "../atoms/Button/GameButton";
 
 /*================================================ Network Definitions =============================================*/

@@ -9,7 +9,7 @@
 
 import Fusion, { ForPairs } from "@rbxts/fusion";
 import { GamePanel, GemSlot } from "../atoms";
-import { Layout } from "../style";
+import { Layout } from "../tokens";
 import { RarityKey } from "shared/data";
 
 export interface InventoryGridProps {

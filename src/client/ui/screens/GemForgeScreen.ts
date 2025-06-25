@@ -25,7 +25,7 @@ import { Players } from "@rbxts/services";
 import { GamePanel, RingSlot } from "../atoms";
 import { InventoryGrid } from "../organisms";
 import { BarMeter } from "../molecules";
-import { Layout, Padding } from "../style";
+import { Layout, Padding } from "../tokens";
 import { GameImages } from "shared/assets";
 import { RarityKey } from "shared/data";
 

@@ -29,7 +29,6 @@ import { EventButtons } from "./ui/organisms";
 /* =============================================== References ============================================= */
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
-
 const ScreenGUI = New("ScreenGui")({
 	Name: "Main GUI",
 	DisplayOrder: 1000,

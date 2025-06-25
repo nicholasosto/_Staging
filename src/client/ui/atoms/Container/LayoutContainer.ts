@@ -14,7 +14,7 @@
 
 /* =============================================== Imports =============================================== */
 import Fusion, { ForKeys, ForValues } from "@rbxts/fusion";
-import { getLayoutStyle, Layout, LayoutStyle } from "client/ui/style";
+import { getLayoutStyle, Layout, LayoutStyle } from "client/ui/tokens";
 import { GameText } from "../Text";
 
 const { New, Children, Computed, Value, OnEvent, ForPairs } = Fusion;

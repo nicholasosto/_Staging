@@ -24,7 +24,7 @@ import { RarityKey } from "shared";
 import { GamePanel, GamePanelProps } from "../Container/GamePanel";
 import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";
 import { BorderImage, GameImage } from "../Image";
-import { ButtonSizes } from "client/ui/style";
+import { ButtonSizes } from "client/ui/tokens";
 import { GameImages } from "shared/assets";
 import { GameText } from "../Text";
 

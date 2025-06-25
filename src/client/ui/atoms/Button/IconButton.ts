@@ -19,7 +19,7 @@
 
 /* =============================================== Imports =============================================== */
 import Fusion from "@rbxts/fusion";
-import { ButtonSizes } from "client/ui/style";
+import { ButtonSizes } from "client/ui/tokens";
 import { GameImages, GameImageSubKey } from "shared/assets/image";
 /* =============================================== Props =============================================== */
 

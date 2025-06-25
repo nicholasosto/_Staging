@@ -7,4 +7,5 @@
  * @description Barrel export for asset constants.
  */
 
+export * from "./audio";
 export * from "./image";

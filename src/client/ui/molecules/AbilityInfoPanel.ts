@@ -1,7 +1,7 @@
 import { AbilitiesMeta, AbilityKey } from "shared/data/AbilityData";
 import { GamePanel, GameImage, GameText } from "../atoms";
 import { New } from "@rbxts/fusion";
-import { Layout } from "../style";
+import { Layout } from "../tokens";
 
 export interface AbilityInfoPanelProps {
 	abilityKey: AbilityKey;

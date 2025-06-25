@@ -22,7 +22,8 @@
  */
 
 import Fusion, { New, Children, Computed, Value, OnEvent, PropertyTable } from "@rbxts/fusion";
-import { GameColors, Layout, Stroke } from "../../style";
+import { Layout, Stroke } from "../../tokens";
+import { PanelBackgroundColors } from "client/ui/tokens/color";
 /* =============================================== GamePanel Props ========================================= */
 export interface GamePanelProps extends PropertyTable<Frame> {
 	BorderImage?: ImageLabel; // Optional border image for the panel
@@ -44,11 +45,10 @@ function ScrollContent(children: Fusion.ChildrenValue, layout?: UIListLayout | U
 	return New("ScrollingFrame")({
 		Name: "ScrollContent",
 		BackgroundTransparency: 0.8,
-		BackgroundColor3: GameColors.BackgroundDefault,
+		BackgroundColor3: PanelBackgroundColors.RobotTheme.BackgroundColor,
 		Size: UDim2.fromScale(1, 1),
 		Position: UDim2.fromScale(0, 0),
 		ScrollBarThickness: 2,
-		ScrollBarImageColor3: GameColors.ScrollBar,
 		ScrollBarImageTransparency: 0.5,
 		[Children]: {
 			Layout: layout ?? Layout.Grid(10, UDim2.fromOffset(100, 100)),
@@ -79,7 +79,9 @@ export const GamePanel = (props: GamePanelProps) => {
 
 	// UI Stroke Hover Effect
 	const strokeColor = Computed(() => {
-		return isHovered.get() && props.HoverEffect ? GameColors.StrokeHover : GameColors.StrokeDefault;
+		return isHovered.get() && props.HoverEffect
+			? PanelBackgroundColors.RobotTheme.BackgroundColor
+			: PanelBackgroundColors.RobotTheme.BackgroundColor;
 	});
 
 	// Stroke Thickness
@@ -96,7 +98,7 @@ export const GamePanel = (props: GamePanelProps) => {
 	/* -- Frame Properties -- */
 	props.Name = props.Name ?? "GamePanel";
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0, 0);
-	props.BackgroundColor3 = props.BackgroundColor3 ?? GameColors.BackgroundDefault;
+	props.BackgroundColor3 = props.BackgroundColor3 ?? PanelBackgroundColors.RobotTheme.BackgroundColor;
 	props.BackgroundTransparency = props.BackgroundTransparency ?? 0.2;
 	props.Position = props.Position ?? UDim2.fromScale(0, 0);
 	props.Size = props.Size ?? UDim2.fromScale(1, 1);
