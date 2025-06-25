@@ -10,6 +10,8 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/data/rarity.ts`|Stub|Placeholder rarity enums|
 |Shared|`shared/assets`|Usable|Image asset constants|
 |Shared|`shared/states`|Usable|Signal-based shared state|
+|Shared|`theme`|Usable|Fusion theme store|
+|Shared|`constants`|Rock Solid|Sizes and asset ids|
 |Client|`client/main.client.ts`|Usable|Entry point and UI bootstrap|
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
 |Client|`client/ui/atoms`|Usable|Core UI atoms (buttons, panels)|
