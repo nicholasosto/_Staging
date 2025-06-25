@@ -21,11 +21,12 @@
  */
 
 import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
-import { GamePanel } from "../atoms";
+import { BorderImage, GamePanel } from "../atoms";
 
 export interface BarMeterProps {
 	value: Fusion.Value<number>;
 	max: Fusion.Value<number> | number;
+	color?: Color3;
 	Size?: UDim2;
 }
 
@@ -36,7 +37,7 @@ export function BarMeter(props: BarMeterProps) {
 	const fillSize = Computed(() => UDim2.fromScale(ratio.get(), 1));
 	const fill = New("Frame")({
 		Name: "Fill",
-		BackgroundColor3: Color3.fromRGB(120, 200, 120),
+		BackgroundColor3: props.color ?? Color3.fromRGB(0, 255, 0), // Default to green if no color is provided
 		Size: fillSize,
 		BackgroundTransparency: 0.2,
 	});
@@ -45,6 +46,7 @@ export function BarMeter(props: BarMeterProps) {
 		Name: "BarMeter",
 		Size: props.Size ?? UDim2.fromOffset(200, 20),
 		BackgroundTransparency: 0.4,
+		BorderImage: BorderImage.GothicMetal(),
 		Children: {
 			Fill: fill,
 		},

@@ -82,5 +82,6 @@ import Fusion from "@rbxts/fusion";
 ## 6 Additional References
 
 1. [AGENTS_DEVELOPMENT_SUMMARY.md](./src/AGENTS_DEVELOPMENT_SUMMARY.md) – for tracking module status and updates.
-2. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
-3. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.
+2. [Organism Structure Guide](./Documents/OrganismStructure.md) – for understanding the structure and conventions of Fusion organisms and commenting examples.
+3. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
+4. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.

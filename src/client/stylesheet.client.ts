@@ -75,7 +75,11 @@ const design = makeDesignSheet(tokens);
 
 // link once per GUI tree
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui") as PlayerGui;
-const gui = playerGui.WaitForChild("StyleSheet") as ScreenGui;
+const gui = new Instance("ScreenGui");
+gui.Name = "StyleGUI";
+gui.DisplayOrder = 1000;
+gui.ResetOnSpawn = false;
+gui.Parent = playerGui;
 const link = new Instance("StyleLink");
 link.StyleSheet = design;
 link.Parent = gui;

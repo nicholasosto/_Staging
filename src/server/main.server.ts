@@ -20,12 +20,13 @@ BattleRoomService.Start();
 Players.PlayerAdded.Connect((player) => {
 	// Create a new player profile
 	const profile = DataProfileController.GetProfile(player);
+	wait(1);
 	if (profile) {
 		// Initialize player profile data
 		print(`Profile created for player: ${player.Name}`);
-		BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
+		//BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
 	} else {
 		warn(`Failed to create profile for player: ${player.Name}`);
-		BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
+		//BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
 	}
 });

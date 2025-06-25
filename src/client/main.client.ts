@@ -23,41 +23,12 @@
 /* =============================================== External Imports ============================================= */
 import { Children, New } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
-import { GameImages } from "shared/assets/image";
-import {
-	GamePanel,
-	BorderImage,
-	GameImage,
-	Padding,
-	ResourceBars,
-	IconButton,
-	GameTextScreen,
-	GemForgeScreen,
-	PlayerHUDScreen,
-} from "./ui";
-import { EventButtons } from "./ui/organisms/EventButtons";
-import { AbilityInfoPanel } from "./ui/molecules/AbilityInfoPanel";
-import { OrganismTestingScreen } from "./ui/screens/OrganismScreen";
+import { PlayerHUDScreen } from "./ui/screens";
+import { EventButtons } from "./ui/organisms";
 
-/* =============================================== Events and Remotes ============================================= */
-
-/* =============================================== UI Imports ========================================= */
-
+/* =============================================== References ============================================= */
 const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
-// Drag Panel
-const DragPanel = GamePanel({
-	Name: "DragPanel",
-	Size: UDim2.fromOffset(500, 500),
-	DragEnabled: true,
-	//BorderImage: BorderImage.GothicMetal(),
-	Padding: Padding(4),
-	Children: {
-		TestOrganism: AbilityInfoPanel({
-			abilityKey: "fireball", // Replace with actual ability key
-		}),
-	},
-});
 
 const ScreenGUI = New("ScreenGui")({
 	Name: "Main GUI",
@@ -67,11 +38,7 @@ const ScreenGUI = New("ScreenGui")({
 	Enabled: false, // Initially disabled
 	[Children]: {
 		EventButtons: EventButtons(),
-		DragPanel: DragPanel,
 	},
 });
-// GameTextScreen();
-// OrganismTestingScreen();
-// GemForgeScreen();
 PlayerHUDScreen();
 ScreenGUI.Enabled = true; // Enable the GUI

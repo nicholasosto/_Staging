@@ -2,8 +2,8 @@
 
 /**
  * @file        image.ts
- * @module      ImageAssets
- * @layer       Shared/Assets
+ * @module      GameImages
+ * @layer       shared/assets
  * @description List of image asset IDs used in the game.
  *
  * ╭──────────────────────────────╮
