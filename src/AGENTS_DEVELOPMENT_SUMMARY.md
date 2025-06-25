@@ -18,6 +18,8 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/style`|Rock Solid|Tokenized layout and colors|
 |Client|`client/ui/atoms/Screen/GameScreen.ts`|Usable|Base screen wrapper|
 |Client|`client/ui/molecules/CountdownTimer.ts`|Usable|Displays battle countdown|
+|Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
+|Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
 |Client|`client/ui/screens`|Under Construction|Gem forge and HUD screens|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
