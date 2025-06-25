@@ -23,9 +23,15 @@
 					}
 				}
 			},
-			"TS": {
-				"$path": "out/shared"
-			}
+                        "TS": {
+                                "$path": "out/shared"
+                        },
+                        "Theme": {
+                                "$path": "out/theme"
+                        },
+                        "Constants": {
+                                "$path": "out/constants"
+                        }
 		},
 		"StarterPlayer": {
 			"$className": "StarterPlayer",
