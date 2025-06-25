@@ -21,23 +21,8 @@
  */
 
 /* =============================================== External Imports ============================================= */
-import { Children, New } from "@rbxts/fusion";
-import { Players } from "@rbxts/services";
 import { PlayerHUDScreen } from "./ui/screens";
-import { EventButtons } from "./ui/organisms";
 
 /* =============================================== References ============================================= */
-const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
 
-const ScreenGUI = New("ScreenGui")({
-	Name: "Main GUI",
-	DisplayOrder: 1000,
-	ResetOnSpawn: false,
-	Parent: playerGui,
-	Enabled: false, // Initially disabled
-	[Children]: {
-		EventButtons: EventButtons(),
-	},
-});
 PlayerHUDScreen();
-ScreenGUI.Enabled = true; // Enable the GUI

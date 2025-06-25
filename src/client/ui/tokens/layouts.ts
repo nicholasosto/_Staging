@@ -53,8 +53,6 @@ export const Layout = {
 			SortOrder: Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment: Enum.HorizontalAlignment.Center,
 			VerticalAlignment: Enum.VerticalAlignment.Center,
-			HorizontalFlex: Enum.UIFlexAlignment.SpaceEvenly,
-			VerticalFlex: Enum.UIFlexAlignment.SpaceEvenly,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),
 	HorizontalScroll: (padding?: number) =>

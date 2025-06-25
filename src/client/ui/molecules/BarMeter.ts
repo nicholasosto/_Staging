@@ -23,6 +23,7 @@
 import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
 import { BorderImage, GamePanel } from "../atoms";
 import { useToken } from "theme/hooks";
+import { ComponentSizes, Sizes } from "constants";
 
 export interface BarMeterProps {
 	value: Fusion.Value<number>;
@@ -47,7 +48,7 @@ export function BarMeter(props: BarMeterProps) {
 
 	return GamePanel({
 		Name: "BarMeter",
-		Size: props.Size ?? UDim2.fromOffset(200, 20),
+		Size: props.Size ?? ComponentSizes.ResourceBar,
 		BackgroundTransparency: 0.4,
 		BorderImage: BorderImage.GothicMetal(),
 		Children: {

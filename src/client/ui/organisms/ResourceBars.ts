@@ -28,6 +28,7 @@ import { BarMeter } from "client/ui/molecules";
 import { PlayerHealth, PlayerMana, PlayerStamina } from "shared/states/PlayerState";
 import { Layout, Padding } from "client/ui/tokens";
 import { GameImages } from "shared/assets";
+import { Sizes } from "constants";
 
 // -------------- Design-tokens / theme -------------------------------------- //
 const COLORS = {
@@ -39,15 +40,12 @@ const COLORS = {
 // -------------- Organism constants ----------------------------------------- //
 const ORG = {
 	// small object beats 5 globals
-	SIZE: UDim2.fromOffset(400, 200),
-	POSITION: UDim2.fromScale(0.5, 0.5),
-	ANCHOR_POINT: new Vector2(0.5, 0.5),
-	BG_TRANSPARENCY: 0.5,
+	SIZE: new UDim2(1, 0, 0, Sizes.ResourceBar.Height * 3),
 };
 
 const DEBUG = {
 	BUTTON_SIZE: UDim2.fromOffset(50, 50),
-	CONTAINER_SIZE: UDim2.fromOffset(ORG.SIZE.X.Offset, 50),
+	CONTAINER_SIZE: new UDim2(1, 0, 0, 50),
 };
 
 // -------------- Public factory --------------------------------------------- //
@@ -91,10 +89,11 @@ export const ResourceBars = (debug = false) => {
 	return GamePanel({
 		Name: "ResourceBarsOrganism",
 		Size: ORG.SIZE,
-		Position: ORG.POSITION,
-		AnchorPoint: ORG.ANCHOR_POINT,
-		BackgroundTransparency: ORG.BG_TRANSPARENCY,
+		BackgroundTransparency: 1,
 		DragEnabled: false, // safer default – opt-in later
+		FlexInstance: New("UIFlexItem")({
+			FlexMode: Enum.UIFlexMode.Fill,
+		}),
 		Children: {
 			DebugPanel, // omitted entirely when undefined
 			Bars,
