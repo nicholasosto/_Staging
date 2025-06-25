@@ -51,16 +51,16 @@ export function ItemButton(itemId?: string) {
 				return BorderImage.GothicMetal();
 		}
 	}).get();
-        const bg = useToken("panelBg");
-        const textColor = useToken("textPrimary");
+	const bg = useToken("panelBg");
+	const textColor = useToken("textPrimary");
 
-        const button = New("ImageButton")({
-                Name: "GridItemButton",
-                BackgroundTransparency: 0.2,
-                BackgroundColor3: bg,
-                BorderSizePixel: 0,
-                Image: borderImage.Image,
-                Size: UDim2.fromScale(1, 1),
+	const button = New("ImageButton")({
+		Name: "GridItemButton",
+		BackgroundTransparency: 0.2,
+		BackgroundColor3: bg,
+		BorderSizePixel: 0,
+		Image: borderImage.Image,
+		Size: UDim2.fromScale(1, 1),
 		[OnEvent("Activated")]: () => {
 			if (itemMetadata.OnClick) {
 				itemMetadata.OnClick();
@@ -73,15 +73,15 @@ export function ItemButton(itemId?: string) {
 				Position: UDim2.fromScale(0.5, 0.5),
 				AnchorPoint: new Vector2(0.5, 0.5),
 			}),
-                        displayName: GameText({
-                                Name: "DisplayName",
-                                Text: itemMetadata.DisplayName,
-                                TextColor3: textColor,
-                                TextSize: 14,
-                                Size: UDim2.fromScale(1, 0.2),
-                                Position: UDim2.fromScale(0, 0.8),
-                                BackgroundTransparency: 1,
-                        }),
+			displayName: GameText({
+				Name: "DisplayName",
+				Text: itemMetadata.DisplayName,
+				TextColor3: textColor,
+				TextSize: 14,
+				Size: UDim2.fromScale(1, 0.2),
+				Position: UDim2.fromScale(0, 0.8),
+				BackgroundTransparency: 1,
+			}),
 		},
 	});
 

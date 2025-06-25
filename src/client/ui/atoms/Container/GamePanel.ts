@@ -42,20 +42,20 @@ export interface GamePanelProps extends PropertyTable<Frame> {
 
 /* =============================================== Scroll Component ========================================= */
 function ScrollContent(children: Fusion.ChildrenValue, layout?: UIListLayout | UIGridLayout) {
-        const bg = useToken("panelBg");
-        return New("ScrollingFrame")({
-                Name: "ScrollContent",
-                BackgroundTransparency: 0.8,
-                BackgroundColor3: bg,
-                Size: UDim2.fromScale(1, 1),
-                Position: UDim2.fromScale(0, 0),
-                ScrollBarThickness: 2,
-                ScrollBarImageTransparency: 0.5,
-                [Children]: {
-                        Layout: layout ?? Layout.Grid(10, UDim2.fromOffset(100, 100)),
-                        ...children,
-                },
-        });
+	const bg = useToken("panelBg");
+	return New("ScrollingFrame")({
+		Name: "ScrollContent",
+		BackgroundTransparency: 0.8,
+		BackgroundColor3: bg,
+		Size: UDim2.fromScale(1, 1),
+		Position: UDim2.fromScale(0, 0),
+		ScrollBarThickness: 2,
+		ScrollBarImageTransparency: 0.5,
+		[Children]: {
+			Layout: layout ?? Layout.Grid(10, UDim2.fromOffset(100, 100)),
+			...children,
+		},
+	});
 }
 
 /* =============================================== Content Component ========================================= */
@@ -74,18 +74,16 @@ function Content(children: Fusion.ChildrenValue, layout?: UIListLayout | UIGridL
 
 /* =============================================== GamePanel Component ========================================= */
 export const GamePanel = (props: GamePanelProps) => {
-        /* ----- State Setup ----- */
-        // Hover State
-        const isHovered = Value(false);
-        const bg = useToken("panelBg");
-        const borderColor = useToken("panelBorder");
+	/* ----- State Setup ----- */
+	// Hover State
+	const isHovered = Value(false);
+	const bg = useToken("panelBg");
+	const borderColor = useToken("panelBorder");
 
 	// UI Stroke Hover Effect
-        const strokeColor = Computed(() => {
-                return isHovered.get() && props.HoverEffect
-                        ? borderColor.get()
-                        : borderColor.get();
-        });
+	const strokeColor = Computed(() => {
+		return isHovered.get() && props.HoverEffect ? borderColor.get() : borderColor.get();
+	});
 
 	// Stroke Thickness
 	const strokeThickness = Computed(() => {
@@ -101,7 +99,7 @@ export const GamePanel = (props: GamePanelProps) => {
 	/* -- Frame Properties -- */
 	props.Name = props.Name ?? "GamePanel";
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0, 0);
-        props.BackgroundColor3 = props.BackgroundColor3 ?? bg;
+	props.BackgroundColor3 = props.BackgroundColor3 ?? bg;
 	props.BackgroundTransparency = props.BackgroundTransparency ?? 0.2;
 	props.Position = props.Position ?? UDim2.fromScale(0, 0);
 	props.Size = props.Size ?? UDim2.fromScale(1, 1);

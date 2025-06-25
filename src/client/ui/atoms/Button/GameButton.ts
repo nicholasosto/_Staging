@@ -31,13 +31,13 @@ export interface GameButtonProps extends PropertyTable<ImageButton> {
 }
 
 export function GameButton(props: GameButtonProps) {
-        const SelectedState = Fusion.Value<boolean>(props.Selected ?? false);
-        const bg = useToken("panelBg");
-        return GamePanel({
-                Name: props.Name,
-                Size: props.Size ?? UDim2.fromOffset(100, 50),
-                BackgroundColor3: bg,
-                BorderSizePixel: 0,
+	const SelectedState = Fusion.Value<boolean>(props.Selected ?? false);
+	const bg = useToken("panelBg");
+	return GamePanel({
+		Name: props.Name,
+		Size: props.Size ?? UDim2.fromOffset(100, 50),
+		BackgroundColor3: bg,
+		BorderSizePixel: 0,
 		Children: {
 			ButtonImage: Fusion.New("ImageButton")({
 				Name: "ButtonImage",

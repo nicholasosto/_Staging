@@ -13,7 +13,7 @@
  */
 
 export const Sizes = {
-    panelWidth: 320,
-    panelHeight: 200,
-    gutter: 12,
+	panelWidth: 320,
+	panelHeight: 200,
+	gutter: 12,
 };

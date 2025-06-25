@@ -15,8 +15,8 @@
 /* =============================================== Theme Enumeration ======================= */
 
 export enum ThemeKey {
-    CyberGothic = "CyberGothic",
-    SolarDrift = "SolarDrift",
+	CyberGothic = "CyberGothic",
+	SolarDrift = "SolarDrift",
 }
 
 export const DEFAULT_THEME = ThemeKey.CyberGothic;

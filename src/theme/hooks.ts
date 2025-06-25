@@ -19,13 +19,13 @@ import { ColourTokens, FontTokens, ImageTokens } from "./types";
 const { Computed } = Fusion;
 
 export function useToken<K extends keyof ColourTokens>(key: K): Fusion.Computed<Color3> {
-    return Computed(() => ThemeState.tokens.get().colours[key]);
+	return Computed(() => ThemeState.tokens.get().colours[key]);
 }
 
 export function useFont(): Fusion.Computed<FontTokens> {
-    return Computed(() => ThemeState.tokens.get().fonts);
+	return Computed(() => ThemeState.tokens.get().fonts);
 }
 
 export function useImage<K extends keyof ImageTokens>(key: K): Fusion.Computed<string> {
-    return Computed(() => ThemeState.tokens.get().images[key]);
+	return Computed(() => ThemeState.tokens.get().images[key]);
 }

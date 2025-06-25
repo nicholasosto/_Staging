@@ -13,6 +13,6 @@
  */
 
 export const AssetIds = {
-    clickAudio: "rbxassetid://0987654321",
-    logoTexture: "rbxassetid://1122334455",
+	clickAudio: "rbxassetid://0987654321",
+	logoTexture: "rbxassetid://1122334455",
 };

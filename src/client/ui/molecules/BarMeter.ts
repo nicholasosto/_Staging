@@ -32,18 +32,18 @@ export interface BarMeterProps {
 }
 
 export function BarMeter(props: BarMeterProps) {
-        const maxVal = typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>);
-        const ratio = Computed(() => math.clamp(props.value.get() / maxVal.get(), 0, 1));
+	const maxVal = typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>);
+	const ratio = Computed(() => math.clamp(props.value.get() / maxVal.get(), 0, 1));
 
-        const defaultColor = useToken("textPrimary");
+	const defaultColor = useToken("textPrimary");
 
 	const fillSize = Computed(() => UDim2.fromScale(ratio.get(), 1));
-        const fill = New("Frame")({
-                Name: "Fill",
-                BackgroundColor3: props.color ?? defaultColor,
-                Size: fillSize,
-                BackgroundTransparency: 0.2,
-        });
+	const fill = New("Frame")({
+		Name: "Fill",
+		BackgroundColor3: props.color ?? defaultColor,
+		Size: fillSize,
+		BackgroundTransparency: 0.2,
+	});
 
 	return GamePanel({
 		Name: "BarMeter",

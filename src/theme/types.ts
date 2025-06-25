@@ -15,24 +15,24 @@
 /* =============================================== Token Groups ============================ */
 
 export interface ColourTokens {
-    panelBg: Color3;
-    panelBorder: Color3;
-    textPrimary: Color3;
-    textSecondary: Color3;
+	panelBg: Color3;
+	panelBorder: Color3;
+	textPrimary: Color3;
+	textSecondary: Color3;
 }
 
 export interface FontTokens {
-    family: Enum.Font;
-    weightNormal: number;
-    weightBold: number;
+	family: Enum.Font;
+	weightNormal: number;
+	weightBold: number;
 }
 
 export interface ImageTokens {
-    panelBorderSlice: string;
+	panelBorderSlice: string;
 }
 
 export type ThemeTokens = {
-    colours: ColourTokens;
-    fonts: FontTokens;
-    images: ImageTokens;
+	colours: ColourTokens;
+	fonts: FontTokens;
+	images: ImageTokens;
 };

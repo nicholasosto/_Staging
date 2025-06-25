@@ -23,14 +23,14 @@ const { Value, Computed } = Fusion;
 const themeKey = Value<ThemeKey>(DEFAULT_THEME);
 
 const themeMap: Record<ThemeKey, ThemeTokens> = {
-    [ThemeKey.CyberGothic]: cyberGothic,
-    [ThemeKey.SolarDrift]: solarDrift,
+	[ThemeKey.CyberGothic]: cyberGothic,
+	[ThemeKey.SolarDrift]: solarDrift,
 };
 
 const currentTokens = Computed(() => themeMap[themeKey.get()]);
 
 export const ThemeState = {
-    set: (key: ThemeKey) => themeKey.set(key),
-    key: themeKey,
-    tokens: currentTokens,
+	set: (key: ThemeKey) => themeKey.set(key),
+	key: themeKey,
+	tokens: currentTokens,
 };
