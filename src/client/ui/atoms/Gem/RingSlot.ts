@@ -26,7 +26,7 @@ import { GameImages } from "shared/assets";
 export interface RingSlotProps extends PropertyTable<ImageButton> {
 	Label?: string;
 	HighlightColor?: Color3;
-	OnDrop?: () => void;
+	OnDrop?: (gem: Instance) => void;
 }
 
 export function RingSlot(props: RingSlotProps) {

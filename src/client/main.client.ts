@@ -70,8 +70,8 @@ const ScreenGUI = New("ScreenGui")({
 		DragPanel: DragPanel,
 	},
 });
-GameTextScreen();
-OrganismTestingScreen();
-GemForgeScreen();
+// GameTextScreen();
+// OrganismTestingScreen();
+// GemForgeScreen();
 PlayerHUDScreen();
 ScreenGUI.Enabled = true; // Enable the GUI

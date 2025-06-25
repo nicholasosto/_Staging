@@ -25,6 +25,7 @@ import { GameImages } from "shared/assets";
 import { BorderImage } from "../Image";
 import { GameImage } from "../Image/GameImage";
 import { RarityKey } from "shared/data";
+import { GameButton } from "../Button";
 
 export interface GemSlotProps extends PropertyTable<ImageButton> {
 	Icon?: string;
@@ -45,13 +46,23 @@ export function GemSlot(props: GemSlotProps) {
 				return BorderImage.GothicMetal();
 		}
 	};
-	return New("ImageButton")({
+	return GameButton({
 		Name: props.Name ?? "GemSlot",
 		Size: props.Size ?? UDim2.fromOffset(70, 70),
-		BackgroundTransparency: 1,
+		BackgroundTransparency: 0.5,
 		ImageTransparency: 1,
 		[OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
 		[Children]: {
+			Dragger: New("UIDragDetector")({
+				Name: "GemSlotDragger",
+				Enabled: true,
+				[OnEvent("DragStart")]: () => {
+					print("Drag started on gem slot");
+				},
+				[OnEvent("DragEnd")]: () => {
+					print("Drag ended on gem slot");
+				},
+			}),
 			Border: border(),
 			Icon: GameImage({
 				Image: props.Icon ?? GameImages.Gems.Colorable,

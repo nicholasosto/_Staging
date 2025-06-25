@@ -25,12 +25,12 @@ import { GamePanel } from "../Container";
 import { GameImage } from "../Image";
 
 export interface GameButtonProps extends PropertyTable<ImageButton> {
-	Name?: string;
-	Image?: string;
 	OnClick?: () => void;
+	Selected?: boolean;
 }
 
 export function GameButton(props: GameButtonProps) {
+	const SelectedState = Fusion.Value<boolean>(props.Selected ?? false);
 	return GamePanel({
 		Name: props.Name,
 		Size: props.Size ?? UDim2.fromOffset(100, 50),
