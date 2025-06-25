@@ -24,14 +24,14 @@ import Fusion, { Computed, Value } from "@rbxts/fusion";
 import { GameText } from "../atoms";
 
 export interface CountdownTimerProps {
-        remaining: Fusion.Value<number>;
+	remaining: Fusion.Value<number>;
 }
 
 export function CountdownTimer(props: CountdownTimerProps) {
-        const text = Computed(() => `Battle starts in: ${props.remaining.get()}s`);
-        return GameText({
-                Name: "CountdownTimer",
-                Text: text,
-                TextSize: 28,
-        });
+	const text = Computed(() => `Battle starts in: ${props.remaining.get()}s`);
+	return GameText({
+		Name: "CountdownTimer",
+		Text: text,
+		TextSize: 28,
+	});
 }

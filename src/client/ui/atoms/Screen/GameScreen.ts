@@ -25,22 +25,22 @@ import Fusion, { Children, New, PropertyTable } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 
 export interface GameScreenProps extends PropertyTable<ScreenGui> {
-        Children?: Fusion.ChildrenValue;
+	Children?: Fusion.ChildrenValue;
 }
 
 export const GameScreen = (props: GameScreenProps) => {
-        props.Name = props.Name ?? "GameScreen";
-        props.DisplayOrder = props.DisplayOrder ?? 1000;
-        props.ResetOnSpawn = props.ResetOnSpawn ?? false;
-        props.Enabled = props.Enabled ?? true;
-        const parent = props.Parent ?? Players.LocalPlayer.WaitForChild("PlayerGui");
+	props.Name = props.Name ?? "GameScreen";
+	props.DisplayOrder = props.DisplayOrder ?? 1000;
+	props.ResetOnSpawn = props.ResetOnSpawn ?? false;
+	props.Enabled = props.Enabled ?? true;
+	const parent = props.Parent ?? Players.LocalPlayer.WaitForChild("PlayerGui");
 
-        return New("ScreenGui")({
-                Name: props.Name,
-                DisplayOrder: props.DisplayOrder,
-                ResetOnSpawn: props.ResetOnSpawn,
-                Enabled: props.Enabled,
-                Parent: parent,
-                [Children]: props.Children ?? {},
-        });
+	return New("ScreenGui")({
+		Name: props.Name,
+		DisplayOrder: props.DisplayOrder,
+		ResetOnSpawn: props.ResetOnSpawn,
+		Enabled: props.Enabled,
+		Parent: parent,
+		[Children]: props.Children ?? {},
+	});
 };
