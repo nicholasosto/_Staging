@@ -20,15 +20,15 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion, { Children, Computed } from "@rbxts/fusion";
-import { GamePanel, GameScreen } from "../atoms";
-import { TitleBar } from "./TitleBar";
-import { Layout } from "../tokens";
+import Fusion, { Children, New } from "@rbxts/fusion";
+import { GameButton } from "../atoms";
+import { Players } from "@rbxts/services";
+import { GameImages, ScreenKey, ScreenState } from "shared";
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 	Title?: string;
-	VisibleState: Fusion.Value<boolean>;
-	Children?: Fusion.ChildrenValue;
+	ScreenKey: ScreenKey;
+	Content?: Fusion.ChildrenValue;
 }
 
 export function GameWindow(props: GameWindowProps) {
@@ -36,36 +36,58 @@ export function GameWindow(props: GameWindowProps) {
 	props.Size = props.Size ?? UDim2.fromOffset(300, 200);
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0.5, 0.5);
 	props.Position = props.Position ?? UDim2.fromScale(0.5, 0.5);
+	props.Parent = props.Parent ?? Players.LocalPlayer.WaitForChild("PlayerGui");
 
-	/* Window Content */
-	const content = GamePanel({
-		Name: "WindowContent",
-		BackgroundTransparency: 1,
-		Size: UDim2.fromScale(1, 0.9),
-		Position: UDim2.fromScale(0, 0.1),
-		Transparency: 1,
-		Content: props.Children ?? {},
+	/* Title Bar */
+	const titleBar = New("TextLabel")({
+		Name: "TitleText",
+		Size: UDim2.fromScale(1, 0.1),
+		Position: UDim2.fromScale(0, 0),
+		Text: props.Title,
+		BackgroundTransparency: 0.95,
+		TextColor3: Color3.fromRGB(255, 255, 255),
+		TextStrokeColor3: Color3.fromRGB(0, 0, 0),
+		TextStrokeTransparency: 0.5,
+		TextSize: 25,
+		Font: Enum.Font.SourceSansBold,
+		TextXAlignment: Enum.TextXAlignment.Center,
+		TextYAlignment: Enum.TextYAlignment.Center,
 	});
 
-	const screenGUI = GameScreen({
+	/* Close Button */
+	const closeBtn = GameButton({
+		Name: "CloseButton",
+		Size: UDim2.fromOffset(35, 35),
+		AnchorPoint: new Vector2(0.5, 0.5),
+		Position: UDim2.fromScale(1, 0),
+		BackgroundTransparency: 1,
+		Image: GameImages.Control.Close,
+		OnClick: () => ScreenState[props.ScreenKey].set(false),
+	});
+
+	/* Window Content */
+	const windowContainer = New("Frame")({
+		Name: "WindowContainer",
+		Size: props.Size,
+		Position: props.Position,
+		AnchorPoint: props.AnchorPoint,
+		BackgroundTransparency: 0.9,
+		[Children]: {
+			TitleBar: titleBar,
+			CloseButton: closeBtn,
+			Content: props.Content ?? {},
+		},
+	});
+
+	/* Screen GUI */
+	const screenGUI = New("ScreenGui")({
 		Name: props.Name,
-		Enabled: Computed(() => props.VisibleState.get()),
-		Content: {
-			Container: GamePanel({
-				Name: "WindowContainer",
-				Size: props.Size,
-				AnchorPoint: props.AnchorPoint,
-				Position: props.Position,
-				Layout: Layout.VerticalSet(2),
-				Content: {
-					TitleBar: TitleBar({
-						Title: props.Title ?? "Window",
-						VisibleState: props.VisibleState,
-					}),
-					Content: content,
-				},
-			}),
-			Content: content,
+		Parent: props.Parent,
+		ResetOnSpawn: false,
+		DisplayOrder: 1,
+		Enabled: ScreenState[props.ScreenKey],
+		[Children]: {
+			ContentPanel: windowContainer,
 		},
 	});
 

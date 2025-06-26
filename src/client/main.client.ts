@@ -21,9 +21,13 @@
  */
 
 /* =============================================== External Imports ============================================= */
-import { DragDropScreen, PlayerHUDScreen } from "./ui/screens";
+import { GemForgeScreen, PlayerHUDScreen } from "./ui/screens";
+import { SettingsScreen } from "./ui/screens/SettingsScreen";
+import { TeleportScreen } from "./ui/screens/TeleportScreen";
 
 /* =============================================== References ============================================= */
 
 PlayerHUDScreen();
-//DragDropScreen();
+GemForgeScreen();
+SettingsScreen();
+TeleportScreen();

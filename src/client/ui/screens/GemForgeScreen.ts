@@ -28,6 +28,7 @@ import { BarMeter } from "../molecules";
 import { Layout, Padding } from "../tokens";
 import { GameImages } from "shared/assets";
 import { RarityKey } from "shared/data";
+import { ScreenState } from "shared";
 
 export const GemForgeScreen = () => {
 	const playerGui = Players.LocalPlayer.WaitForChild("PlayerGui");
@@ -52,8 +53,8 @@ export const GemForgeScreen = () => {
 		Name: "GemForgeScreen",
 		Parent: playerGui,
 		ResetOnSpawn: false,
-		DisplayOrder: 1000,
-		Enabled: true,
+		DisplayOrder: 1,
+		Enabled: ScreenState["GemForge"],
 		[Children]: {
 			MainFrame: GamePanel({
 				Name: "ForgeMainFrame",
@@ -73,6 +74,10 @@ export const GemForgeScreen = () => {
 								Name: "FormSlot",
 								Size: UDim2.fromOffset(64, 64),
 								Position: UDim2.fromOffset(308, 168),
+								OnDrop: (gem: Instance) => {
+									print(`Form slot received gem: ${gem.Name}`);
+									formFilled.set(true);
+								},
 							}),
 							AbilitySlot: RingSlot({
 								Name: "AbilitySlot",

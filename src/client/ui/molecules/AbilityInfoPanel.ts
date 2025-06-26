@@ -1,6 +1,6 @@
 import { AbilitiesMeta, AbilityKey } from "shared/data/AbilityData";
 import { GamePanel, GameImage, GameText } from "../atoms";
-import { New } from "@rbxts/fusion";
+import { New, Value } from "@rbxts/fusion";
 import { Layout } from "../tokens";
 
 export interface AbilityInfoPanelProps {
@@ -18,25 +18,25 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 
 	const abilityName = GameText({
 		Name: `AbilityName-${abilityKey}`,
-		Text: abilityMeta.displayName,
+		TextStateValue: Value(abilityMeta.displayName),
 		Size: UDim2.fromScale(0.8, 1),
 	});
 	const abilityDescription = GameText({
 		Name: `AbilityDescription-${abilityKey}`,
-		Text: abilityMeta.description,
+		TextStateValue: Value(abilityMeta.description),
 		Size: UDim2.fromScale(1, 0.3),
 		TextWrapped: true,
 	});
 	const abilityCooldown = GameText({
 		Name: `AbilityCooldown-${abilityKey}`,
-		Text: `Cooldown: ${abilityMeta.cooldown} seconds`,
+		TextStateValue: Value(`Cooldown: ${abilityMeta.cooldown} seconds`),
 		Size: UDim2.fromScale(1, 0.3),
 		BackgroundTransparency: 1,
 		TextColor3: Color3.fromRGB(255, 100, 100), //
 	});
 	const abilityPower = GameText({
 		Name: `AbilityPower-${abilityKey}`,
-		Text: `Base Power: ${abilityMeta.basePower}`,
+		TextStateValue: Value(`Base Power: ${abilityMeta.basePower}`),
 		BackgroundTransparency: 1,
 		TextColor3: Color3.fromRGB(100, 255, 100), //
 		Size: UDim2.fromScale(1, 0.3),

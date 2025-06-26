@@ -1,5 +1,7 @@
 /// <reference types="@rbxts/types" />
 
+import { ScreenKey } from "shared/states";
+
 /**
  * @file        image.ts
  * @module      GameImages
@@ -16,15 +18,18 @@
  */
 /* =============================================== Image Constants =============================================== */
 
+export const MenuButtonImageMap: Record<ScreenKey, string> = {
+	Settings: "rbxassetid://122289639886993",
+	Inventory: "rbxassetid://132702292243603",
+	Character: "rbxassetid://100274464430589",
+	Quests: "rbxassetid://116506062642047",
+	Shop: "rbxassetid://101998590177560",
+	Teleport: "rbxassetid://127118741571164",
+	GemForge: "rbxassetid://116506062642047",
+} as const;
+
 export const GameImages = {
 	MenuButtonImage: "rbxassetid://79163709624038",
-	MenuIcon: {
-		SoulForge: "rbxassetid://107861186268821",
-		Inventory: "rbxassetid://132702292243603",
-		Character: "rbxassetid://100274464430589",
-		Teleport: "rbxassetid://127118741571164",
-		Settings: "rbxassetid://122289639886993",
-	},
 	Ability: {
 		Unassigned: "rbxassetid://98384046526938",
 		Flame_Sythe: "rbxassetid://108246514585300",

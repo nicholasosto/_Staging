@@ -22,7 +22,7 @@
 
 import { RarityKey } from "shared";
 import { GamePanel, GamePanelProps } from "../Container/GamePanel";
-import { Computed, ChildrenValue, New, Children, OnEvent } from "@rbxts/fusion";
+import { Computed, ChildrenValue, New, Children, OnEvent, Value } from "@rbxts/fusion";
 import { BorderImage, GameImage } from "../Image";
 import { ButtonSizes } from "client/ui/tokens";
 import { GameImages } from "shared/assets";
@@ -75,7 +75,7 @@ export function ItemButton(itemId?: string) {
 			}),
 			displayName: GameText({
 				Name: "DisplayName",
-				Text: itemMetadata.DisplayName,
+				TextStateValue: Value(itemMetadata.DisplayName),
 				TextColor3: textColor,
 				TextSize: 14,
 				Size: UDim2.fromScale(1, 0.2),

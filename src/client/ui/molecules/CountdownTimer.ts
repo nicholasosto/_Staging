@@ -31,7 +31,7 @@ export function CountdownTimer(props: CountdownTimerProps) {
 	const text = Computed(() => `Battle starts in: ${props.remaining.get()}s`);
 	return GameText({
 		Name: "CountdownTimer",
-		Text: text,
+		TextStateValue: Value(text.get()),
 		TextSize: 28,
 	});
 }

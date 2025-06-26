@@ -35,7 +35,10 @@ export function GameButton(props: GameButtonProps) {
 	const bg = useToken("panelBg");
 	return GamePanel({
 		Name: props.Name,
-		Size: props.Size ?? UDim2.fromOffset(100, 50),
+		Size: props.Size ?? UDim2.fromOffset(50, 50),
+		Position: props.Position ?? UDim2.fromScale(0, 0),
+		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
+		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,
 		BackgroundColor3: bg,
 		BorderSizePixel: 0,
 		Content: {

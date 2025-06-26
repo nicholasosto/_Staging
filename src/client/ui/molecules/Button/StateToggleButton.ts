@@ -1,13 +1,13 @@
 import Fusion, { Children, Computed, New, OnEvent, Value } from "@rbxts/fusion";
 import { GameImage } from "client/ui/atoms";
-import { GameImages, ScreenState } from "shared";
+import { GameImages, MenuButtonImageMap, ScreenKey, ScreenState, ShowScreen } from "shared";
 
 export interface ToggleMenuProps extends Fusion.PropertyTable<ImageButton> {
-	SelectedState?: Value<boolean>;
+	ScreenKey: ScreenKey;
 }
 
 export const StateToggleButton = (props: ToggleMenuProps) => {
-	const SelectedState = props.SelectedState ?? Value(false);
+	const SelectedState = ScreenState[props.ScreenKey] ?? Value(false);
 	const Hovered = Value(false);
 
 	const computedBGColor = Computed(() => {
@@ -26,11 +26,19 @@ export const StateToggleButton = (props: ToggleMenuProps) => {
 		BackgroundColor3: computedBGColor,
 		[OnEvent("MouseEnter")]: () => Hovered.set(true),
 		[OnEvent("MouseLeave")]: () => Hovered.set(false),
-		[OnEvent("Activated")]: () => SelectedState.set(!SelectedState.get()),
+		[OnEvent("Activated")]: () => {
+			SelectedState.set(!SelectedState.get());
+			if (SelectedState.get()) {
+				ShowScreen(props.ScreenKey);
+			} else {
+				ScreenState[props.ScreenKey].set(false);
+			}
+		},
+
 		[Children]: {
 			ButtonIcon: GameImage({
 				Name: "SoulForgeIcon",
-				Image: GameImages.MenuIcon.SoulForge,
+				Image: MenuButtonImageMap[props.ScreenKey] ?? GameImages.MenuButtonImage,
 				Size: UDim2.fromScale(0.8, 0.8),
 				BackgroundTransparency: 1,
 				Position: UDim2.fromScale(0.5, 0.5),
