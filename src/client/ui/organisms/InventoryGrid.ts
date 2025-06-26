@@ -21,7 +21,7 @@ export const InventoryGrid = (props: InventoryGridProps) => {
 		Name: "InventoryGrid",
 		Scrolling: true,
 		Layout: Layout.Grid(5, UDim2.fromOffset(70, 70)),
-		Children: {
+		Content: {
 			Slots: ForPairs(props.items, (id, data) =>
 				$tuple(
 					id,

@@ -47,12 +47,12 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 		Size: UDim2.fromOffset(300, 200),
 		Layout: Layout.VerticalSet(2),
 
-		Children: {
+		Content: {
 			TopRow: GamePanel({
 				Name: `TopRow-${abilityKey}`,
 				Layout: Layout.HorizontalSet(2),
 				Size: UDim2.fromScale(1, 0.3),
-				Children: {
+				Content: {
 					AbilityIcon: abilityIcon,
 					AbilityName: abilityName,
 				},
@@ -61,7 +61,7 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 				Name: `BottomRow-${abilityKey}`,
 				Layout: Layout.VerticalSet(2),
 				Size: UDim2.fromScale(1, 0.7),
-				Children: {
+				Content: {
 					AbilityDescription: abilityDescription,
 					AbilityCooldown: abilityCooldown,
 					AbilityPower: abilityPower,

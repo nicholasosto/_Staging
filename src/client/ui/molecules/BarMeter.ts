@@ -51,7 +51,7 @@ export function BarMeter(props: BarMeterProps) {
 		Size: props.Size ?? ComponentSizes.ResourceBar,
 		BackgroundTransparency: 0.4,
 		BorderImage: BorderImage.GothicMetal(),
-		Children: {
+		Content: {
 			Fill: fill,
 		},
 	});

@@ -17,7 +17,7 @@ export const CharacterInfoCard = () => {
 		BackgroundTransparency: 0.5,
 		BorderSizePixel: 0,
 		Layout: Layout.HorizontalSet(0),
-		Children: {
+		Content: {
 			Avatar: Avatar,
 			ResourceBars: ResourceBars(false),
 		},

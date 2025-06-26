@@ -13,7 +13,7 @@ export const OrganismTestingScreen = () => {
 				Name: "OrganismTestingPanel",
 				Size: UDim2.fromScale(1, 1),
 				BackgroundTransparency: 1,
-				Children: {
+				Content: {
 					Organism1: {},
 					Organism2: {},
 					Organism3: {},

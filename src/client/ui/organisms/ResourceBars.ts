@@ -66,7 +66,7 @@ export const ResourceBars = (debug = false) => {
 				Position: UDim2.fromScale(0, 1),
 				Layout: Layout.HorizontalSet(5),
 				Padding: Padding(2),
-				Children: {
+				Content: {
 					HealthDown: makeDrainButton(GameImages.Attributes.Vitality, PlayerHealth.Current),
 					ManaDown: makeDrainButton(GameImages.Attributes.Intelligence, PlayerMana.Current),
 					StaminaDown: makeDrainButton(GameImages.Attributes.Dexterity, PlayerStamina.Current),
@@ -78,7 +78,7 @@ export const ResourceBars = (debug = false) => {
 	const Bars = GamePanel({
 		Name: "ResourceBarsStack",
 		Layout: Layout.VerticalSet(5),
-		Children: {
+		Content: {
 			Health: makeBar(PlayerHealth, COLORS.HEALTH),
 			Mana: makeBar(PlayerMana, COLORS.MANA),
 			Stamina: makeBar(PlayerStamina, COLORS.STAMINA),
@@ -94,7 +94,7 @@ export const ResourceBars = (debug = false) => {
 		FlexInstance: New("UIFlexItem")({
 			FlexMode: Enum.UIFlexMode.Fill,
 		}),
-		Children: {
+		Content: {
 			DebugPanel, // omitted entirely when undefined
 			Bars,
 		},

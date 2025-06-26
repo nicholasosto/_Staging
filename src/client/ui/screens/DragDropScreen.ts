@@ -22,11 +22,40 @@
 
 import Fusion, { Children, New, Value, OnEvent } from "@rbxts/fusion";
 import { GameScreen, GamePanel, DraggableButton, DraggableButtonProps } from "../atoms";
+
 import { Layout } from "../tokens";
 import { DroppedInside } from "../helpers";
 import { GameImages } from "shared";
+import { GameWindow } from "../molecules";
 const dropAreaRef = Value<Frame | undefined>(undefined);
 
+const DragWindowTest = GameWindow({
+	Name: "DragWindowTest",
+	Title: "Drag Test Window",
+	VisibleState: Value(true),
+	Size: UDim2.fromOffset(400, 300),
+	[Children]: {
+		DraggableButton1: DraggableButton({
+			Name: "DraggableButton1",
+			Size: UDim2.fromOffset(100, 50),
+			Position: UDim2.fromScale(0.1, 0.1),
+			Image: GameImages.Control.Close,
+			Ghost: true,
+			OnDrop: (ghost) => {
+				const dropArea = dropAreaRef.get();
+				if (ghost && dropArea && DroppedInside(dropArea, ghost)) {
+					// Successfully dropped inside the drop area
+					ghost.Position = UDim2.fromScale(0.5, 0.5); // Center the ghost in the drop area
+					ghost.Parent = dropArea; // Move the ghost to the drop area
+					ghost.Visible = true; // Make it visible again
+				} else if (ghost) {
+					// Not dropped inside, destroy the ghost
+					ghost.Destroy();
+				}
+			},
+		} as DraggableButtonProps),
+	},
+});
 
 /* --------------------------------- Main Screen ----------------------------- */
 export const DragDropScreen = () => {
@@ -43,22 +72,8 @@ export const DragDropScreen = () => {
 		BackgroundTransparency: 0.5,
 		Scrolling: true,
 		//Layout: Layout.VerticalScroll(6),
-		Children: {
-			Button1: DraggableButton({
-				Name: "Button1",
-				Size: UDim2.fromScale(1, 0),
-				BackgroundColor3: Color3.fromRGB(255, 100, 100),
-				Image: GameImages.Ability.Blood_Elemental, // replace with your button image
-				Ghost: true,
-				OnDrop: (ghost) => {
-					if (ghost && DroppedInside(dropAreaRef.get()!, ghost)) {
-						ghost.Position = new UDim2(0.5, 0, 0.5, 0);
-						ghost.Parent = dropArea;
-					} else if (ghost) {
-						ghost.Destroy();
-					}
-				},
-			}),
+		Content: {
+			GameWindow: DragWindowTest,
 		},
 	});
 

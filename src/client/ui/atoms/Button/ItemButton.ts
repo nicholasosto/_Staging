@@ -90,7 +90,7 @@ export function ItemButton(itemId?: string) {
 		Size: ButtonSizes.GridButton(),
 		BackgroundTransparency: 1,
 		DragEnabled: true,
-		Children: {
+		Content: {
 			ImageButton: button,
 		},
 	});

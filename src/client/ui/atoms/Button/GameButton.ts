@@ -38,7 +38,7 @@ export function GameButton(props: GameButtonProps) {
 		Size: props.Size ?? UDim2.fromOffset(100, 50),
 		BackgroundColor3: bg,
 		BorderSizePixel: 0,
-		Children: {
+		Content: {
 			ButtonImage: Fusion.New("ImageButton")({
 				Name: "ButtonImage",
 				ImageTransparency: 1,

@@ -61,14 +61,14 @@ export const GemForgeScreen = () => {
 				Position: UDim2.fromScale(0.5, 0.5),
 				AnchorPoint: new Vector2(0.5, 0.5),
 				Padding: Padding(6),
-				Children: {
+				Content: {
 					Layout: Layout.HorizontalSet(10),
 					Inventory: InventoryGrid({ items: gemStore }),
 					ForgeArea: GamePanel({
 						Name: "ForgeArea",
 						Size: UDim2.fromOffset(400, 400),
 						BackgroundTransparency: 1,
-						Children: {
+						Content: {
 							FormSlot: RingSlot({
 								Name: "FormSlot",
 								Size: UDim2.fromOffset(64, 64),

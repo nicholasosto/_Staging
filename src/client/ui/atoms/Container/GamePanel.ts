@@ -27,7 +27,7 @@ import { useToken } from "theme/hooks";
 /* =============================================== GamePanel Props ========================================= */
 export interface GamePanelProps extends PropertyTable<Frame> {
 	BorderImage?: ImageLabel; // Optional border image for the panel
-	Children?: Fusion.ChildrenValue;
+	Content?: Fusion.ChildrenValue;
 	DragEnabled?: boolean; // Optional drag functionality
 	FlexInstance?: UIFlexItem; // Optional flex layout
 	HoverEffect?: boolean; // Optional hover effect
@@ -90,8 +90,8 @@ export const GamePanel = (props: GamePanelProps) => {
 
 	// Content (Scrollable or not)
 	const content = props.Scrolling
-		? ScrollContent(props.Children ?? {}, props.Layout)
-		: Content(props.Children ?? {}, props.Layout);
+		? ScrollContent(props.Content ?? {}, props.Layout)
+		: Content(props.Content ?? {}, props.Layout);
 
 	/* ----- Component Defaults Setup ----- */
 	/* -- Frame Properties -- */

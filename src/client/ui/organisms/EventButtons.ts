@@ -17,7 +17,7 @@ export const EventButtons = () => {
 		DragEnabled: true,
 		Scrolling: true,
 		Layout: Layout.VerticalScroll(3),
-		Children: {
+		Content: {
 			SpawnManifestationButton: GameButton({
 				Name: "SpawnManifestationButton",
 				Image: GameImages.Currency.Tombs,

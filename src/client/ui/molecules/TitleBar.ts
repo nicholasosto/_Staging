@@ -51,7 +51,7 @@ export function TitleBar(props: TitleBarProps) {
 		Size: UDim2.fromScale(1, 0.1),
 		BackgroundTransparency: 0.3,
 		Layout: Layout.HorizontalSet(2),
-		Children: {
+		Content: {
 			TitleText: titleText,
 			Close: closeBtn,
 		},

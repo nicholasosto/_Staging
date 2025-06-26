@@ -22,7 +22,7 @@ export const GameTextScreen = () => {
 				Name: "MainPanel",
 				Size: UDim2.fromScale(1, 1),
 				BackgroundTransparency: 1,
-				Children: {
+				Content: {
 					GameText: TextItem1,
 				},
 			}),

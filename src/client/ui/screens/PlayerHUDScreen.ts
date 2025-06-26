@@ -13,7 +13,7 @@ const LeftPanel = () =>
 		Size: new UDim2(0, 300, 1, 0),
 		BackgroundTransparency: 1,
 		LayoutOrder: 1,
-		Children: {
+		Content: {
 			Avatar: {},
 			ResourceBars: CharacterInfoCard(),
 			MenuButtonBar: {},
@@ -32,7 +32,7 @@ const CenterPanel = () => {
 		FlexInstance: New("UIFlexItem")({
 			FlexMode: Enum.UIFlexMode.Fill,
 		}),
-		Children: {
+		Content: {
 			ActionBar: {},
 			CountdownTimer: CountdownTimer({ remaining }),
 		},
@@ -47,7 +47,7 @@ const RightPanel = () =>
 		BackgroundColor3: Color3.fromRGB(50, 50, 50),
 		BackgroundTransparency: 1,
 		LayoutOrder: 3,
-		Children: {
+		Content: {
 			CharacterInfoCard: {},
 			RightPanelButtons: {},
 		},

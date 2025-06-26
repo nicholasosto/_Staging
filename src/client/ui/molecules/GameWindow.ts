@@ -41,7 +41,7 @@ export function GameWindow(props: GameWindowProps) {
 		BackgroundTransparency: 1,
 		Size: UDim2.fromScale(1, 0.9),
 		Position: UDim2.fromScale(0, 0.1),
-		Children: props.Children ?? {},
+		Content: props.Children ?? {},
 	});
 
 	return GamePanel({
@@ -50,7 +50,7 @@ export function GameWindow(props: GameWindowProps) {
 		Position: props.Position,
 		AnchorPoint: props.AnchorPoint,
 		Visible: props.VisibleState,
-		Children: {
+		Content: {
 			TitleBar: TitleBar({
 				Title: props.Title ?? "Window",
 				VisibleState: props.VisibleState,
