@@ -7,6 +7,7 @@
  * @description Barrel export for button atoms.
  */
 
+export * from "./DraggableButton";
 export * from "./IconButton";
 export * from "./ItemButton";
 export * from "./GameButton";

@@ -21,8 +21,9 @@
  */
 
 /* =============================================== External Imports ============================================= */
-import { PlayerHUDScreen } from "./ui/screens";
+import { DragDropScreen, PlayerHUDScreen } from "./ui/screens";
 
 /* =============================================== References ============================================= */
 
 //PlayerHUDScreen();
+DragDropScreen();

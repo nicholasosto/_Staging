@@ -21,49 +21,15 @@
  */
 
 import Fusion, { Children, New, Value, OnEvent } from "@rbxts/fusion";
-import { GameScreen, GamePanel } from "../atoms";
+import { GameScreen, GamePanel, DraggableButton, DraggableButtonProps } from "../atoms";
 import { Layout } from "../tokens";
+import { DroppedInside } from "../helpers";
+import { GameImages } from "shared";
+const dropAreaRef = Value<Frame | undefined>(undefined);
 
-/* --------------------------------- Drop Detection -------------------------- */
-function isInside(drop: Frame, obj: Frame) {
-	const dp = drop.AbsolutePosition;
-	const ds = drop.AbsoluteSize;
-	const op = obj.AbsolutePosition;
-	const os = obj.AbsoluteSize;
-	const cx = op.X + os.X / 2;
-	const cy = op.Y + os.Y / 2;
-	return cx >= dp.X && cx <= dp.X + ds.X && cy >= dp.Y && cy <= dp.Y + ds.Y;
-}
-
-/* --------------------------------- Draggable Button Factory ---------------- */
-function DraggableButton(name: string, dropRef: Fusion.Value<Frame | undefined>) {
-	const panel = GamePanel({
-		Name: name,
-		Size: UDim2.fromOffset(120, 40),
-		DragEnabled: true,
-		OnDragEnd: () => {
-			const drop = dropRef.get();
-			if (drop && isInside(drop, panel)) {
-				print(`Dropped ${panel.Name} into drop area`);
-				print(`Instance properties: position=${panel.Position}, size=${panel.Size}`);
-			}
-		},
-		Children: {
-			Label: New("TextLabel")({
-				Text: name,
-				Size: UDim2.fromScale(1, 1),
-				BackgroundTransparency: 1,
-				TextScaled: true,
-			}),
-		},
-	});
-	return panel;
-}
 
 /* --------------------------------- Main Screen ----------------------------- */
 export const DragDropScreen = () => {
-	const dropAreaRef = Value<Frame | undefined>(undefined);
-
 	const dropArea = GamePanel({
 		Name: "DropArea",
 		Size: UDim2.fromScale(0.7, 1),
@@ -76,11 +42,23 @@ export const DragDropScreen = () => {
 		Size: UDim2.fromScale(0.3, 1),
 		BackgroundTransparency: 0.5,
 		Scrolling: true,
-		Layout: Layout.VerticalScroll(6),
+		//Layout: Layout.VerticalScroll(6),
 		Children: {
-			Button1: DraggableButton("Button1", dropAreaRef),
-			Button2: DraggableButton("Button2", dropAreaRef),
-			Button3: DraggableButton("Button3", dropAreaRef),
+			Button1: DraggableButton({
+				Name: "Button1",
+				Size: UDim2.fromScale(1, 0),
+				BackgroundColor3: Color3.fromRGB(255, 100, 100),
+				Image: GameImages.Ability.Blood_Elemental, // replace with your button image
+				Ghost: true,
+				OnDrop: (ghost) => {
+					if (ghost && DroppedInside(dropAreaRef.get()!, ghost)) {
+						ghost.Position = new UDim2(0.5, 0, 0.5, 0);
+						ghost.Parent = dropArea;
+					} else if (ghost) {
+						ghost.Destroy();
+					}
+				},
+			}),
 		},
 	});
 
