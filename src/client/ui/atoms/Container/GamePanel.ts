@@ -28,6 +28,7 @@ import { useToken } from "theme/hooks";
 export interface GamePanelProps extends PropertyTable<Frame> {
 	BorderImage?: ImageLabel; // Optional border image for the panel
 	Content?: Fusion.ChildrenValue;
+	StyleChildren?: Fusion.ChildrenValue; // Optional children for the panel
 	DragEnabled?: boolean; // Optional drag functionality
 	FlexInstance?: UIFlexItem; // Optional flex layout
 	HoverEffect?: boolean; // Optional hover effect
@@ -134,6 +135,7 @@ export const GamePanel = (props: GamePanelProps) => {
 				Padding: props.Padding,
 				Content: content,
 			},
+			StyleChildren: props.StyleChildren ?? {},
 		},
 	});
 	return customComponent;

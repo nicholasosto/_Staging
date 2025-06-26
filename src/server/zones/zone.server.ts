@@ -13,8 +13,8 @@ const ZoneContainer = Workspace.WaitForChild("Zones") as Folder;
 
 /* Lobby Zone */
 const Containers = {
-	LobbyZone: ZoneContainer.WaitForChild("LobbyZone") as Folder,
-	BattleZone: ZoneContainer.WaitForChild("BattleZone") as Folder,
+	LobbyZone: ZoneContainer.WaitForChild("LobbyZone") as Part,
+	BattleZone: ZoneContainer.WaitForChild("BattleZone") as Part,
 };
 
 function onPlayerEnteredZone(player: Player, zoneName: string): void {

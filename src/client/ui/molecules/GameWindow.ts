@@ -21,9 +21,11 @@
  */
 
 import Fusion, { Children, New } from "@rbxts/fusion";
-import { GameButton } from "../atoms";
+import { GameButton, GamePanel } from "../atoms";
 import { Players } from "@rbxts/services";
 import { GameImages, ScreenKey, ScreenState } from "shared";
+import { Padding } from "../tokens";
+import { ComponentSizes, Sizes } from "constants";
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 	Title?: string;
@@ -33,7 +35,8 @@ export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 
 export function GameWindow(props: GameWindowProps) {
 	props.Name = props.Name ?? "GameWindow";
-	props.Size = props.Size ?? UDim2.fromOffset(300, 200);
+	props.Size = props.Size ?? ComponentSizes.HUDPanel;
+	props.Title = props.Title ?? `${props.ScreenKey} Window`;
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0.5, 0.5);
 	props.Position = props.Position ?? UDim2.fromScale(0.5, 0.5);
 	props.Parent = props.Parent ?? Players.LocalPlayer.WaitForChild("PlayerGui");
@@ -52,30 +55,46 @@ export function GameWindow(props: GameWindowProps) {
 		Font: Enum.Font.SourceSansBold,
 		TextXAlignment: Enum.TextXAlignment.Center,
 		TextYAlignment: Enum.TextYAlignment.Center,
-	});
-
-	/* Close Button */
-	const closeBtn = GameButton({
-		Name: "CloseButton",
-		Size: UDim2.fromOffset(35, 35),
-		AnchorPoint: new Vector2(0.5, 0.5),
-		Position: UDim2.fromScale(1, 0),
-		BackgroundTransparency: 1,
-		Image: GameImages.Control.Close,
-		OnClick: () => ScreenState[props.ScreenKey].set(false),
+		[Children]: {
+			CloseButton: GameButton({
+				Name: "CloseButton",
+				Size: UDim2.fromOffset(30, 30),
+				AnchorPoint: new Vector2(0.5, 0.5),
+				Position: UDim2.fromScale(1, 0),
+				BackgroundTransparency: 1,
+				Image: GameImages.Control.Close,
+				OnClick: () => ScreenState[props.ScreenKey].set(false),
+			}),
+		},
 	});
 
 	/* Window Content */
-	const windowContainer = New("Frame")({
+	const windowContent = GamePanel({
+		Name: "WindowContent",
+		Size: UDim2.fromScale(1, 0.9),
+		Position: UDim2.fromScale(0, 0.1),
+		BackgroundTransparency: 0.1,
+		Padding: Padding(4),
+		BorderSizePixel: 0,
+		ClipsDescendants: true,
+		Content: {
+			ContainerContents: props.Content ?? {},
+		},
+	});
+
+	/* Window Container */
+	const windowContainer = GamePanel({
 		Name: "WindowContainer",
 		Size: props.Size,
 		Position: props.Position,
 		AnchorPoint: props.AnchorPoint,
-		BackgroundTransparency: 0.9,
-		[Children]: {
+		BackgroundTransparency: 0.2,
+		StyleChildren: New("UICorner")({
+			CornerRadius: new UDim(0, 8),
+		}),
+		Content: {
 			TitleBar: titleBar,
-			CloseButton: closeBtn,
-			Content: props.Content ?? {},
+			WindowContent: windowContent,
 		},
 	});
 
@@ -87,7 +106,7 @@ export function GameWindow(props: GameWindowProps) {
 		DisplayOrder: 1,
 		Enabled: ScreenState[props.ScreenKey],
 		[Children]: {
-			ContentPanel: windowContainer,
+			WindowContainer: windowContainer,
 		},
 	});
 

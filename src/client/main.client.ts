@@ -22,7 +22,10 @@
 
 /* =============================================== External Imports ============================================= */
 import { GemForgeScreen, PlayerHUDScreen } from "./ui/screens";
+import { CharacterScreen } from "./ui/screens/CharacterScreen";
+import { InventoryScreen } from "./ui/screens/InventoryScreen";
 import { SettingsScreen } from "./ui/screens/SettingsScreen";
+import { ShopScreen } from "./ui/screens/ShopScreen";
 import { TeleportScreen } from "./ui/screens/TeleportScreen";
 
 /* =============================================== References ============================================= */
@@ -31,3 +34,6 @@ PlayerHUDScreen();
 GemForgeScreen();
 SettingsScreen();
 TeleportScreen();
+ShopScreen();
+CharacterScreen();
+InventoryScreen();

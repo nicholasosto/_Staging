@@ -21,7 +21,6 @@ BattleRoomService.Start();
 Players.PlayerAdded.Connect((player) => {
 	// Create a new player profile
 	const profile = DataProfileController.GetProfile(player);
-	let alienCount = 0;
 	wait(1);
 	if (profile) {
 		// Initialize player profile data
@@ -33,9 +32,5 @@ Players.PlayerAdded.Connect((player) => {
 	}
 	player.CharacterAdded.Connect((character) => {
 		print(`Character added for player: ${player.Name}`);
-		new AlienOrganism(`TestAlien-${player.Name}-${alienCount}`, character.GetPivot());
-		print(`CCCC  Alien created for player: ${player.Name}`);
-		alienCount++;
-		print(`Total aliens created for player ${player.Name}: ${alienCount}`);
 	});
 });

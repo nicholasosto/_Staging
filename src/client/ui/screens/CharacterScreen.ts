@@ -1,8 +1,8 @@
 import { GameWindow, GameWindowProps } from "../molecules";
 
-export const SettingsScreen = () => {
+export const CharacterScreen = () => {
 	return GameWindow({
-		ScreenKey: "Settings",
+		ScreenKey: "Character",
 		Content: {},
 	});
 };

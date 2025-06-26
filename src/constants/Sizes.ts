@@ -49,6 +49,11 @@ export const Sizes = {
 		Width: 300,
 		Height: 200,
 	},
+
+	HUDPanel: {
+		Width: 600,
+		Height: 450,
+	},
 };
 
 function createUDim2(sizeType: keyof typeof Sizes): UDim2 {
@@ -66,5 +71,6 @@ export const ComponentSizes = {
 	ActionBar: createUDim2("ActionBar"),
 	MenuButtonBar: createUDim2("MenuButtonBar"),
 	CharacterInfoCard: createUDim2("CharacterInfoCard"),
+	HUDPanel: createUDim2("HUDPanel"),
 	ResourceBar: createUDim2("ResourceBar"),
 };
