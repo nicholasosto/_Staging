@@ -22,8 +22,13 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/CountdownTimer.ts`|Usable|Displays battle countdown|
 |Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
-|Client|`client/ui/screens`|Under Construction|Gem forge and HUD screens|
+|Client|`client/ui/screens`|Under Construction|Gem forge, character, inventory, shop, settings, teleport and HUD screens|
 |Client|`client/ui/screens/DragDropScreen.ts`|Usable|Drag and drop demo|
+|Client|`client/ui/screens/CharacterScreen.ts`|Stub|Character info window|
+|Client|`client/ui/screens/InventoryScreen.ts`|Stub|Inventory window|
+|Client|`client/ui/screens/ShopScreen.ts`|Stub|Item shop window|
+|Client|`client/ui/screens/SettingsScreen.ts`|Stub|Settings window|
+|Client|`client/ui/screens/TeleportScreen.ts`|Stub|Teleport locations window|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
 |Server|`server/services/ProfileService.ts`|Under Construction|Loads player profiles|
