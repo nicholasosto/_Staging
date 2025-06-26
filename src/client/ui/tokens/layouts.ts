@@ -42,7 +42,7 @@ export const Layout = {
 			Name: "VerticalList",
 			FillDirection: Enum.FillDirection.Vertical,
 			SortOrder: Enum.SortOrder.LayoutOrder,
-			HorizontalAlignment: Enum.HorizontalAlignment.Center,
+			HorizontalAlignment: Enum.HorizontalAlignment.Left,
 			VerticalAlignment: Enum.VerticalAlignment.Top,
 			Padding: padding ? new UDim(0, padding) : undefined,
 		}),

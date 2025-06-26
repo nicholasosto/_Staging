@@ -8,18 +8,51 @@
  */
 
 import { SCREEN_KEYS } from "shared";
-import { GameScreen } from "../atoms";
+import { GamePanel, GameScreen } from "../atoms";
 import { HUDMenuBar } from "../organisms/HUDMenuBar";
+import { CharacterInfoCard } from "../organisms";
+import { Layout, Padding } from "../tokens";
 
 /* =============================================== Player HUD Screen ============================================= */
 
+interface PlayerHUDScreenProps {
+	CharacterInfoCard?: Frame;
+	HUDMenuBar?: Frame;
+	CurrencyInfo?: Frame;
+}
+
+const HudProps = {
+	CharacterInfoCard: CharacterInfoCard(),
+	HUDMenuBar: HUDMenuBar({
+		ScreenStateKeys: [...SCREEN_KEYS],
+	}),
+	CurrencyInfo: undefined, // Placeholder for future currency info
+};
+
 export const PlayerHUDScreen = () => {
-	return GameScreen({
-		Name: "PlayerHUDScreen",
+	/* HUD Container */
+	const HUDContainer = GamePanel({
+		Name: "HUDContainer",
+		Size: new UDim2(1, 0, 1, 0),
+		BackgroundTransparency: 1,
+		Padding: Padding(10),
 		Content: {
-			HUDMenuBar: HUDMenuBar({
-				ScreenStateKeys: [...SCREEN_KEYS],
+			LeftPanel: GamePanel({
+				Layout: Layout.VerticalScroll(5),
+				Name: "LeftPanel",
+				Size: new UDim2(0.5, 0, 1, 0),
+				BackgroundTransparency: 0.9,
+				Content: {
+					CharacterInfoCard: HudProps.CharacterInfoCard,
+					MenuBar: HudProps.HUDMenuBar,
+				},
 			}),
 		},
+	});
+
+	/* Screen */
+	return GameScreen({
+		Name: "PlayerHUDScreen",
+		Content: HUDContainer,
 	});
 };

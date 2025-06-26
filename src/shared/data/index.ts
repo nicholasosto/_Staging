@@ -12,3 +12,4 @@ export * from "./GemData";
 export * from "./ItemData";
 export * from "./PlayerData";
 export * from "./RarityData";
+export * from "./ResourceData";

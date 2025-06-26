@@ -1,4 +1,5 @@
 import Fusion, { Value } from "@rbxts/fusion";
+import { ResourceKey } from "shared/data/ResourceData";
 
 /**
  * @file        src/shared/states/PlayerState.ts
@@ -24,9 +25,6 @@ export type ResourceState = {
 	Current: Value<number>;
 	Max: Value<number>;
 };
-
-export const ResourceKeys = ["Health", "Mana", "Stamina"] as const;
-export type ResourceKey = (typeof ResourceKeys)[number];
 
 export const PlayerResources: Record<ResourceKey, ResourceState> = {
 	Health: {

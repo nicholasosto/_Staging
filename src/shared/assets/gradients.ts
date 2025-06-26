@@ -98,3 +98,21 @@ export const GlassGradient = () =>
 			new NumberSequenceKeypoint(1, 0.8),
 		]),
 	});
+
+/**
+ * Lava-like gradient with fiery colors.
+ *
+ * @returns {UIGradient} The lava gradient.
+ * @since 0.2.0
+ * 	*/
+export const LavaGradient = () =>
+	New("UIGradient")({
+		Name: "LavaGradient",
+		Color: new ColorSequence([
+			new ColorSequenceKeypoint(0, Color3.fromRGB(255, 85, 0)),
+			new ColorSequenceKeypoint(0.5, Color3.fromRGB(255, 122, 0)),
+			new ColorSequenceKeypoint(1, Color3.fromRGB(255, 0, 0)),
+		]),
+		Transparency: new NumberSequence(0),
+		Rotation: 90,
+	});

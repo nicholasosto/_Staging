@@ -30,7 +30,7 @@ import { SunriseGradient } from "client/ui/tokens";
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
 	value: Fusion.Value<number> | number;
 	max: Fusion.Value<number> | number;
-	color?: Color3;
+	gradient?: UIGradient;
 }
 
 export function BarMeter(props: BarMeterProps) {
@@ -42,7 +42,7 @@ export function BarMeter(props: BarMeterProps) {
 				typeOf(props.value) === "number" ? Value(props.value as number) : (props.value as Fusion.Value<number>),
 			Max: typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>),
 		},
-		Gradient: SunriseGradient(),
+		Gradient: props.gradient ?? undefined,
 	});
 
 	return GamePanel({

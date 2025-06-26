@@ -20,7 +20,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export * from "./gradients";
+export * from "../../../shared/assets/gradients";
 export * from "./layouts";
 export * from "./padding";
 export * from "../../../shared/constants/sizes";
