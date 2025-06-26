@@ -20,8 +20,8 @@ import { GameImage } from "client/ui/atoms";
 import { GameImages, MenuButtonImageMap, ScreenKey, ScreenState, ShowScreen } from "shared";
 
 export interface HUDMenuButtonProps extends Fusion.PropertyTable<ImageButton> {
-        /** Which screen this button toggles. */
-        ScreenKey: ScreenKey;
+	/** Which screen this button toggles. */
+	ScreenKey: ScreenKey;
 }
 
 /* =============================== HUDMenuButton Component ====================== */

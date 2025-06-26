@@ -18,15 +18,7 @@ import { Value } from "@rbxts/fusion";
 /**
  * Ordered list of all HUD-related screen keys.
  */
-export const SCREEN_KEYS = [
-        "Settings",
-        "Inventory",
-        "Character",
-        "Quests",
-        "Shop",
-        "Teleport",
-        "GemForge",
-] as const;
+export const SCREEN_KEYS = ["Settings", "Inventory", "Character", "Quests", "Shop", "Teleport", "GemForge"] as const;
 
 export type ScreenKey = (typeof SCREEN_KEYS)[number];
 export type ScreenMap = Record<ScreenKey, Value<boolean>>;
@@ -58,7 +50,7 @@ export const ScreenOrder: ScreenOrder = {
  * @param key - Screen to show.
  */
 export function ShowScreen(key: ScreenKey) {
-        for (const screenKey of SCREEN_KEYS) {
-                ScreenState[screenKey].set(screenKey === key);
-        }
+	for (const screenKey of SCREEN_KEYS) {
+		ScreenState[screenKey].set(screenKey === key);
+	}
 }

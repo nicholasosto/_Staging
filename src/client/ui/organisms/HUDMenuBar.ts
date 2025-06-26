@@ -18,13 +18,13 @@ export interface HudMenuBarProps {
 }
 
 export const HUDMenuBar = (props: HudMenuBarProps) => {
-        const HUDMenuButtons = ForValues(props.ScreenStateKeys, (value) => {
-                return HUDMenuButton({
-                        ScreenKey: value,
-                        Name: `${value}Button`,
-                        LayoutOrder: ScreenOrder[value] ?? 0,
-                        Image: MenuButtonImageMap[value] ?? GameImages.MenuButtonImage,
-                });
+	const HUDMenuButtons = ForValues(props.ScreenStateKeys, (value) => {
+		return HUDMenuButton({
+			ScreenKey: value,
+			Name: `${value}Button`,
+			LayoutOrder: ScreenOrder[value] ?? 0,
+			Image: MenuButtonImageMap[value] ?? GameImages.MenuButtonImage,
+		});
 	});
 	const container = GamePanel({
 		Name: "HUDMenuBar",
