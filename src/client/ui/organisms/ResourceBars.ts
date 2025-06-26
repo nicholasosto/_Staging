@@ -25,10 +25,12 @@
 import Fusion, { New } from "@rbxts/fusion";
 import { GamePanel, GameButton } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules";
-import { PlayerHealth, PlayerMana, PlayerStamina } from "shared/states/PlayerState";
+import { PlayerResources } from "shared/states/PlayerState";
 import { Layout, Padding } from "client/ui/tokens";
 import { GameImages } from "shared/assets";
 import { Sizes } from "constants";
+
+const { Health: PlayerHealth, Mana: PlayerMana, Stamina: PlayerStamina } = PlayerResources;
 
 // -------------- Design-tokens / theme -------------------------------------- //
 const COLORS = {
