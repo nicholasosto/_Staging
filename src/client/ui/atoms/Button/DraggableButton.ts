@@ -42,16 +42,16 @@ export function DraggableButton(props: DraggableButtonProps) {
 				/* ——— EVENTS ——— */
 				OnDragStart: (pos) => {
 					print(`Drag started at: ${pos.X}, ${pos.Y}`);
-                                        if (props.Ghost === undefined) return;
+					if (props.Ghost === undefined) return;
 
-                                        const g = button.Clone() as ImageButton;
-                                        g.Name = `${button.Name}_Ghost`;
-                                        g.AnchorPoint = new Vector2(0.5, 0.5);
-                                        g.Position = UDim2.fromOffset(pos.X, pos.Y);
-                                        g.ZIndex += 1000;
-                                        g.Parent = button.FindFirstAncestorWhichIsA("ScreenGui");
-                                        button.Visible = false;
-                                        ghostRef.set(g);
+					const g = button.Clone() as ImageButton;
+					g.Name = `${button.Name}_Ghost`;
+					g.AnchorPoint = new Vector2(0.5, 0.5);
+					g.Position = UDim2.fromOffset(pos.X, pos.Y);
+					g.ZIndex += 1000;
+					g.Parent = button.FindFirstAncestorWhichIsA("ScreenGui");
+					button.Visible = false;
+					ghostRef.set(g);
 				},
 				OnDragContinue: (pos) => {
 					const g = ghostRef.get();
