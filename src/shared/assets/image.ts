@@ -59,12 +59,13 @@ export const GameImages = {
 		EpicSet: "rbxassetid://135166624307221",
 		LegendarySet: "rbxassetid://85570068018789",
 	},
-	Control: {
-		Increment: "rbxassetid://102421835119714",
-		Decrement: "rbxassetid://78091115085992",
-		Close: "rbxassetid://91437543746962",
-		TrippleArrow: "rbxassetid://136693752293641",
-	},
+        /* Buttons and UI controls */
+        Control: {
+                Increment: "rbxassetid://102421835119714",
+                Decrement: "rbxassetid://78091115085992",
+                Close: "rbxassetid://91437543746962",
+                TripleArrow: "rbxassetid://136693752293641",
+        },
 	Currency: {
 		Coins: "rbxassetid://127745571044516",
 		Shards: "rbxassetid://73893872719367",

@@ -1,12 +1,31 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        HUDMenuButton.ts
+ * @module      HUDMenuButton
+ * @layer       Client/UI/Molecules/Button
+ * @description Toggle button used in the HUD menu bar to show or hide screens.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @since        0.2.1
+ * @lastUpdated  2025-07-05 by Codex – Documentation cleanup
+ */
+
 import Fusion, { Children, Computed, New, OnEvent, Value } from "@rbxts/fusion";
 import { GameImage } from "client/ui/atoms";
 import { GameImages, MenuButtonImageMap, ScreenKey, ScreenState, ShowScreen } from "shared";
 
-export interface ToggleMenuProps extends Fusion.PropertyTable<ImageButton> {
-	ScreenKey: ScreenKey;
+export interface HUDMenuButtonProps extends Fusion.PropertyTable<ImageButton> {
+        /** Which screen this button toggles. */
+        ScreenKey: ScreenKey;
 }
 
-export const StateToggleButton = (props: ToggleMenuProps) => {
+/* =============================== HUDMenuButton Component ====================== */
+export const HUDMenuButton = (props: HUDMenuButtonProps) => {
 	const SelectedState = ScreenState[props.ScreenKey] ?? Value(false);
 	const Hovered = Value(false);
 
