@@ -11,7 +11,7 @@ const LeftPanel = () =>
 	GamePanel({
 		Name: "LeftPanel",
 		Size: new UDim2(0, 300, 1, 0),
-		BackgroundTransparency: 0.5,
+		BackgroundTransparency: 1,
 		LayoutOrder: 1,
 		Children: {
 			Avatar: {},
@@ -27,7 +27,7 @@ const CenterPanel = () => {
 	return GamePanel({
 		Name: "CenterPanel",
 		BackgroundColor3: Color3.fromRGB(50, 50, 50),
-		BackgroundTransparency: 0.5,
+		BackgroundTransparency: 1,
 		LayoutOrder: 2,
 		FlexInstance: New("UIFlexItem")({
 			FlexMode: Enum.UIFlexMode.Fill,
@@ -45,7 +45,7 @@ const RightPanel = () =>
 		AnchorPoint: new Vector2(1, 0),
 		Position: new UDim2(1, 0, 0, 0),
 		BackgroundColor3: Color3.fromRGB(50, 50, 50),
-		BackgroundTransparency: 0.5,
+		BackgroundTransparency: 1,
 		LayoutOrder: 3,
 		Children: {
 			CharacterInfoCard: {},

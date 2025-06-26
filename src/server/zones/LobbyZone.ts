@@ -1,6 +1,7 @@
 import { Zone } from "@rbxts/zone-plus";
 import { Players, Workspace } from "@rbxts/services";
 import { BattleRoomService } from "server/services";
+import { AlienOrganism } from "server/entity/AlienOrganism";
 
 /**
  * @file        src/server/zones/LobbyZone.ts
@@ -62,6 +63,7 @@ export class LobbyZone {
 		if (!LobbyZone.PlayersInZone.has(player.UserId)) {
 			LobbyZone.PlayersInZone.set(player.UserId, player);
 			BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
+			const testAlien = new AlienOrganism(`TestAlien-${player.Name}`, new CFrame(0, 5, 0));
 			print(`Player ${player.Name} has joined the Lobby Zone.`);
 		}
 	}
