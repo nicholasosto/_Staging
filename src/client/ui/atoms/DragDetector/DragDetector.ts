@@ -1,4 +1,25 @@
-// DragDetector.ts
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        DragDetector.ts
+ * @module      DragDetector
+ * @layer       Client/UI/Atoms
+ * @description Wrapper component for `UIDragDetector` with typed events.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.1
+ * @lastUpdated  2025-07-03 by Codex – Added documentation header
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import { New, OnEvent, Children, PropertyTable } from "@rbxts/fusion";
 
 export interface DragDetectorEvents {

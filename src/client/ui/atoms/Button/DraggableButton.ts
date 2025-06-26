@@ -1,3 +1,25 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        DraggableButton.ts
+ * @module      DraggableButton
+ * @layer       Client/UI/Atoms
+ * @description Button component that can be dragged using a `DragDetector`.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.1
+ * @lastUpdated  2025-07-03 by Codex – Added documentation header
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import Fusion, { Children, New, Value } from "@rbxts/fusion";
 import { DragDetector, DragDetectorProps } from "../DragDetector"; // your existing DragDetector component
 import { GameButton } from "./GameButton"; // your existing visual atom
