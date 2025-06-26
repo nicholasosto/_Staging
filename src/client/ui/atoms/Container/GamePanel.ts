@@ -48,7 +48,6 @@ function ScrollContent(children: Fusion.ChildrenValue, layout?: UIListLayout | U
 		BackgroundTransparency: 0.8,
 		BackgroundColor3: bg,
 		Size: UDim2.fromScale(1, 1),
-		Position: UDim2.fromScale(0, 0),
 		ScrollBarThickness: 2,
 		ScrollBarImageTransparency: 0.5,
 		[Children]: {
@@ -64,7 +63,6 @@ function Content(children: Fusion.ChildrenValue, layout?: UIListLayout | UIGridL
 		Name: "Content",
 		BackgroundTransparency: 1,
 		Size: UDim2.fromScale(1, 1),
-		Position: UDim2.fromScale(0, 0),
 		[Children]: {
 			Layout: layout ?? [],
 			...children,
