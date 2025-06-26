@@ -23,6 +23,9 @@ export const HUDMenuBar = (props: HudMenuBarProps) => {
 		BackgroundTransparency: 0.5,
 		Layout: Layout.HorizontalSet(5),
 		DragEnabled: true,
+		FlexInstance: New("UIFlexItem")({
+			FlexMode: Enum.UIFlexMode.Grow,
+		}),
 		Content: {
 			Buttons: HUDMenuButtons,
 		},

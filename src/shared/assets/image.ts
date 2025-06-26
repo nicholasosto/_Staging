@@ -22,7 +22,7 @@ export const MenuButtonImageMap: Record<ScreenKey, string> = {
 	Settings: "rbxassetid://122289639886993",
 	Inventory: "rbxassetid://132702292243603",
 	Character: "rbxassetid://100274464430589",
-	Quests: "rbxassetid://116506062642047",
+	Quests: "rbxassetid://129030346503415",
 	Shop: "rbxassetid://101998590177560",
 	Teleport: "rbxassetid://127118741571164",
 	GemForge: "rbxassetid://116506062642047",
