@@ -127,16 +127,13 @@ export const GamePanel = (props: GamePanelProps) => {
 		[Children]: {
 			Gradient: props.Gradient,
 			BorderImage: props.BorderImage,
-			Corner: New("UICorner")({}),
-			Flex: props.FlexInstance,
-			Dragger: New("UIDragDetector")({
-				Enabled: props.DragEnabled,
-				[OnEvent("DragStart")]: props.OnDragStart,
-				[OnEvent("DragEnd")]: props.OnDragEnd,
-			}),
 			Padding: props.Padding,
-			Stroke: props.Stroke,
-			Content: content,
+			//Stroke: props.Stroke,
+			FlexInstance: props.FlexInstance,
+			Content: {
+				Padding: props.Padding,
+				Content: content,
+			},
 		},
 	});
 	return customComponent;

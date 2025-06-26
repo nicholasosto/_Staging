@@ -20,53 +20,46 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion, { Children, New, Value } from "@rbxts/fusion";
-import { DragDetector, DragDetectorProps } from "../DragDetector"; // your existing DragDetector component
-import { GameButton } from "./GameButton"; // your existing visual atom
+import Fusion, { Children, OnEvent, PropertyTable } from "@rbxts/fusion";
 
-export interface DraggableButtonProps extends Fusion.PropertyTable<ImageButton> {
-	Ghost?: boolean; // whether to use a ghost clone during drag
-	OnDrop?: (ghost: ImageButton | undefined) => void; // callback for when the drag ends
+export interface DraggableButtonProps extends PropertyTable<ImageButton> {
+	OnClick?: () => void;
+	OnDragStart?: (pos: Vector2) => void;
+	OnDragContinue?: (pos: Vector2) => void;
+	OnDragEnd?: (pos: Vector2) => void;
 }
-/* ---------- Draggable factory ---------- */
-export function DraggableButton(props: DraggableButtonProps) {
-	/* state for optional ghost clone */
-	const ghostRef = Value<ImageButton | undefined>(undefined);
-	print(`DraggableButton: ${props.Name} created`);
-	/* the visual button that stays in the layout */
-	const button = New("ImageButton")({
-		[Children]: {
-			Drag: DragDetector({
-				Enabled: true,
-				DragStyle: Enum.UIDragDetectorDragStyle.Scriptable,
-				/* ——— EVENTS ——— */
-				OnDragStart: (pos) => {
-					print(`Drag started at: ${pos.X}, ${pos.Y}`);
-					if (props.Ghost === undefined) return;
 
-					const g = button.Clone() as ImageButton;
-					g.Name = `${button.Name}_Ghost`;
-					g.AnchorPoint = new Vector2(0.5, 0.5);
-					g.Position = UDim2.fromOffset(pos.X, pos.Y);
-					g.ZIndex += 1000;
-					g.Parent = button.FindFirstAncestorWhichIsA("ScreenGui");
-					button.Visible = false;
-					ghostRef.set(g);
+export function DraggableButton(props: DraggableButtonProps) {
+	const dragButton = Fusion.New("ImageButton")({
+		Name: props.Name ?? "DraggableButton",
+		Size: props.Size ?? UDim2.fromOffset(100, 50),
+		BackgroundTransparency: 0.9,
+		ImageTransparency: 1,
+		[OnEvent("Activated")]: props.OnClick,
+		[Children]: {
+			Image: Fusion.New("ImageLabel")({
+				Name: "ButtonImage",
+				ImageTransparency: 1,
+				Size: UDim2.fromScale(1, 1),
+				BackgroundTransparency: 1,
+				Image: props.Image ?? "rbxassetid://121566852339881",
+			}),
+			DragDetector: Fusion.New("UIDragDetector")({
+				Name: "DragDetector",
+				Enabled: true,
+				DragRelativity: Enum.UIDragDetectorDragRelativity.Absolute,
+				DragStyle: Enum.UIDragDetectorDragStyle.Scriptable,
+				[OnEvent("DragStart")]: (pos) => {
+					props.OnDragStart?.(pos);
 				},
-				OnDragContinue: (pos) => {
-					const g = ghostRef.get();
-					if (g) g.Position = UDim2.fromOffset(pos.X, pos.Y);
+				[OnEvent("DragContinue")]: (pos) => {
+					props.OnDragContinue?.(pos);
 				},
-				OnDragEnd: () => {
-					const g = ghostRef.get();
-					if (props.OnDrop) props.OnDrop(g); // hit-test externally if you like
-					if (g) g.Destroy();
-					ghostRef.set(undefined);
-					button.Visible = true;
+				[OnEvent("DragEnd")]: (pos) => {
+					props.OnDragEnd?.(pos);
 				},
 			}),
 		},
 	});
-
-	return button;
+	return dragButton;
 }

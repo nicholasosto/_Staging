@@ -21,8 +21,9 @@
  */
 
 import Fusion, { Children, Computed } from "@rbxts/fusion";
-import { GamePanel } from "../atoms";
+import { GamePanel, GameScreen } from "../atoms";
 import { TitleBar } from "./TitleBar";
+import { Layout } from "../tokens";
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 	Title?: string;
@@ -36,26 +37,37 @@ export function GameWindow(props: GameWindowProps) {
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0.5, 0.5);
 	props.Position = props.Position ?? UDim2.fromScale(0.5, 0.5);
 
+	/* Window Content */
 	const content = GamePanel({
 		Name: "WindowContent",
 		BackgroundTransparency: 1,
 		Size: UDim2.fromScale(1, 0.9),
 		Position: UDim2.fromScale(0, 0.1),
+		Transparency: 1,
 		Content: props.Children ?? {},
 	});
 
-	return GamePanel({
+	const screenGUI = GameScreen({
 		Name: props.Name,
-		Size: props.Size,
-		Position: props.Position,
-		AnchorPoint: props.AnchorPoint,
-		Visible: props.VisibleState,
+		Enabled: Computed(() => props.VisibleState.get()),
 		Content: {
-			TitleBar: TitleBar({
-				Title: props.Title ?? "Window",
-				VisibleState: props.VisibleState,
+			Container: GamePanel({
+				Name: "WindowContainer",
+				Size: props.Size,
+				AnchorPoint: props.AnchorPoint,
+				Position: props.Position,
+				Layout: Layout.VerticalSet(2),
+				Content: {
+					TitleBar: TitleBar({
+						Title: props.Title ?? "Window",
+						VisibleState: props.VisibleState,
+					}),
+					Content: content,
+				},
 			}),
 			Content: content,
 		},
 	});
+
+	return screenGUI;
 }

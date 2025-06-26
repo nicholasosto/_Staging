@@ -17,6 +17,14 @@
 /* =============================================== Image Constants =============================================== */
 
 export const GameImages = {
+	MenuButtonImage: "rbxassetid://79163709624038",
+	MenuIcon: {
+		SoulForge: "rbxassetid://107861186268821",
+		Inventory: "rbxassetid://132702292243603",
+		Character: "rbxassetid://100274464430589",
+		Teleport: "rbxassetid://127118741571164",
+		Settings: "rbxassetid://122289639886993",
+	},
 	Ability: {
 		Unassigned: "rbxassetid://98384046526938",
 		Flame_Sythe: "rbxassetid://108246514585300",
@@ -75,6 +83,7 @@ export const GameImages = {
 	TextureImage: {
 		BoneDoily: "rbxassetid://108018297611555",
 		Mystical: "rbxassetid://108018297611556",
+		WavyMetal: "rbxassetid://99123505462124",
 	},
 } as const;
 

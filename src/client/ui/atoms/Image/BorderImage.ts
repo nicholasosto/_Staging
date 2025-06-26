@@ -12,7 +12,7 @@ export const SliceImage = (props: SliceImageProps) => {
 	return GameImage({
 		Image: props.Image,
 		ScaleType: Enum.ScaleType.Slice,
-		SliceCenter: props.SliceCenter ?? new Rect(150, 150, 150, 150),
+		SliceCenter: props.SliceCenter ?? new Rect(250, 250, 250, 250),
 		ZIndex: props.ZIndex ?? 100,
 	});
 };

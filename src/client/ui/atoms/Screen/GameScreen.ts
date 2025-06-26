@@ -25,7 +25,7 @@ import Fusion, { Children, New, PropertyTable } from "@rbxts/fusion";
 import { Players } from "@rbxts/services";
 
 export interface GameScreenProps extends PropertyTable<ScreenGui> {
-	Children?: Fusion.ChildrenValue;
+	Content?: Fusion.ChildrenValue;
 }
 
 export const GameScreen = (props: GameScreenProps) => {
@@ -41,6 +41,6 @@ export const GameScreen = (props: GameScreenProps) => {
 		ResetOnSpawn: props.ResetOnSpawn,
 		Enabled: props.Enabled,
 		Parent: parent,
-		[Children]: props.Children ?? {},
+		[Children]: props.Content ?? {},
 	});
 };

@@ -21,29 +21,28 @@
  */
 
 import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
-import { BorderImage, GamePanel } from "../atoms";
+import { BorderImage, GamePanel } from "../../atoms";
 import { useToken } from "theme/hooks";
-import { ComponentSizes, Sizes } from "constants";
+import { ComponentSizes } from "constants";
+import { FillBarFrame } from "./FillFrame";
+import { SunriseGradient } from "client/ui/tokens";
 
-export interface BarMeterProps {
-	value: Fusion.Value<number>;
+export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
+	value: Fusion.Value<number> | number;
 	max: Fusion.Value<number> | number;
 	color?: Color3;
-	Size?: UDim2;
 }
 
 export function BarMeter(props: BarMeterProps) {
-	const maxVal = typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>);
-	const ratio = Computed(() => math.clamp(props.value.get() / maxVal.get(), 0, 1));
-
-	const defaultColor = useToken("textPrimary");
-
-	const fillSize = Computed(() => UDim2.fromScale(ratio.get(), 1));
-	const fill = New("Frame")({
-		Name: "Fill",
-		BackgroundColor3: props.color ?? defaultColor,
-		Size: fillSize,
-		BackgroundTransparency: 0.2,
+	const fillBar = FillBarFrame({
+		Name: "FillBar",
+		Size: UDim2.fromScale(1, 1),
+		Progress: {
+			Current:
+				typeOf(props.value) === "number" ? Value(props.value as number) : (props.value as Fusion.Value<number>),
+			Max: typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>),
+		},
+		Gradient: SunriseGradient(),
 	});
 
 	return GamePanel({
@@ -52,7 +51,7 @@ export function BarMeter(props: BarMeterProps) {
 		BackgroundTransparency: 0.4,
 		BorderImage: BorderImage.GothicMetal(),
 		Content: {
-			Fill: fill,
+			Fill: fillBar,
 		},
 	});
 }

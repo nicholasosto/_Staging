@@ -25,35 +25,30 @@ import { GameScreen, GamePanel, DraggableButton, DraggableButtonProps } from "..
 
 import { Layout } from "../tokens";
 import { DroppedInside } from "../helpers";
-import { GameImages } from "shared";
+import { GameImages, ScreenState } from "shared";
 import { GameWindow } from "../molecules";
 const dropAreaRef = Value<Frame | undefined>(undefined);
 
 const DragWindowTest = GameWindow({
 	Name: "DragWindowTest",
 	Title: "Drag Test Window",
-	VisibleState: Value(true),
+	VisibleState: ScreenState.DragDropScreenVisible,
 	Size: UDim2.fromOffset(400, 300),
-	[Children]: {
+	Children: {
 		DraggableButton1: DraggableButton({
-			Name: "DraggableButton1",
-			Size: UDim2.fromOffset(100, 50),
-			Position: UDim2.fromScale(0.1, 0.1),
-			Image: GameImages.Control.Close,
-			Ghost: true,
-			OnDrop: (ghost) => {
-				const dropArea = dropAreaRef.get();
-				if (ghost && dropArea && DroppedInside(dropArea, ghost)) {
-					// Successfully dropped inside the drop area
-					ghost.Position = UDim2.fromScale(0.5, 0.5); // Center the ghost in the drop area
-					ghost.Parent = dropArea; // Move the ghost to the drop area
-					ghost.Visible = true; // Make it visible again
-				} else if (ghost) {
-					// Not dropped inside, destroy the ghost
-					ghost.Destroy();
-				}
+			OnClick: () => {
+				print("Button 1 clicked");
 			},
-		} as DraggableButtonProps),
+			OnDragStart: (pos) => {
+				print(`Button 1 drag started at ${pos}`);
+			},
+			OnDragContinue: (pos) => {
+				print(`Button 1 dragging at ${pos}`);
+			},
+			OnDragEnd: (pos) => {
+				print(`Button 1 drag ended at ${pos}`);
+			},
+		}),
 	},
 });
 
@@ -70,8 +65,7 @@ export const DragDropScreen = () => {
 		Name: "ButtonPanel",
 		Size: UDim2.fromScale(0.3, 1),
 		BackgroundTransparency: 0.5,
-		Scrolling: true,
-		//Layout: Layout.VerticalScroll(6),
+		Layout: Layout.VerticalSet(10),
 		Content: {
 			GameWindow: DragWindowTest,
 		},
@@ -79,12 +73,8 @@ export const DragDropScreen = () => {
 
 	return GameScreen({
 		Name: "DragDropScreen",
-		Children: {
-			Layout: Layout.HorizontalSet(6),
-			ButtonPanel: buttonPanel,
-			DropArea: dropArea,
+		Content: {
+			GameWindow: DragWindowTest,
 		},
 	});
 };
-
-export const ExampleDragDropScreen = DragDropScreen;

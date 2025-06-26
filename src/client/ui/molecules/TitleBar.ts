@@ -34,6 +34,8 @@ export function TitleBar(props: TitleBarProps) {
 	const titleText = GameText({
 		Name: "WindowTitle",
 		Text: props.Title,
+		BackgroundTransparency: 0.9,
+		TextColor3: Color3.fromRGB(255, 255, 255),
 		Size: UDim2.fromScale(0.9, 1),
 		AnchorPoint: new Vector2(0, 0.5),
 		Position: UDim2.fromScale(0, 0.5),
@@ -50,6 +52,7 @@ export function TitleBar(props: TitleBarProps) {
 		Name: "TitleBar",
 		Size: UDim2.fromScale(1, 0.1),
 		BackgroundTransparency: 0.3,
+		BackgroundColor3: Color3.fromRGB(40, 40, 40),
 		Layout: Layout.HorizontalSet(2),
 		Content: {
 			TitleText: titleText,
