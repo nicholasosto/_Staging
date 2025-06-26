@@ -1,9 +1,23 @@
-import { GameImage, GamePanel } from "../atoms";
-import Fusion, { New, Children, Value, Computed } from "@rbxts/fusion";
+/**
+ * @file EventButtons.tsx
+ * @module EventButtons
+ * @layer Client/UI/Organisms
+ * @description Contains buttons for various game events like spawning manifestations, increasing attributes, and creating gems
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ * @author Trembus
+ * @license MIT
+ * @since 0.2.0
+ * @lastUpdated 2025-06-25 by Trembus – Initial creation
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
+import { GamePanel, GameButton } from "../atoms";
 import { GameImages, Network } from "shared";
 import { Layout } from "../tokens";
-import { GameButton } from "../atoms/Button/GameButton";
-
 /*================================================ Network Definitions =============================================*/
 const SpawnManifestationEvent = Network.Client.Get("SpawnManifestation");
 const IncreaseAttributeEvent = Network.Client.Get("IncreaseAttribute");

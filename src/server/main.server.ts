@@ -11,11 +11,13 @@
 import { Players } from "@rbxts/services";
 import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
 import { AlienOrganism } from "./entity/AlienOrganism";
+import { EntityResource } from "./entity/entityResource/EntityResource";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
 ManifestationForgeService.Start();
 BattleRoomService.Start();
+EntityResource.SpawnResource(new CFrame(0, 10, 0));
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {
