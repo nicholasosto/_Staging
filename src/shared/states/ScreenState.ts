@@ -15,7 +15,18 @@
 
 import { Value } from "@rbxts/fusion";
 
-export const SCREEN_KEYS = ["Settings", "Inventory", "Character", "Quests", "Shop", "Teleport", "GemForge"] as const;
+/**
+ * Ordered list of all HUD-related screen keys.
+ */
+export const SCREEN_KEYS = [
+        "Settings",
+        "Inventory",
+        "Character",
+        "Quests",
+        "Shop",
+        "Teleport",
+        "GemForge",
+] as const;
 
 export type ScreenKey = (typeof SCREEN_KEYS)[number];
 export type ScreenMap = Record<ScreenKey, Value<boolean>>;
@@ -41,12 +52,13 @@ export const ScreenOrder: ScreenOrder = {
 	GemForge: 7,
 } satisfies ScreenOrder;
 
+/**
+ * Sets the given screen to visible while hiding all others.
+ *
+ * @param key - Screen to show.
+ */
 export function ShowScreen(key: ScreenKey) {
-	for (const screenKey of SCREEN_KEYS) {
-		if (screenKey !== key) {
-			ScreenState[screenKey].set(false);
-		} else {
-			ScreenState[screenKey].set(true);
-		}
-	}
+        for (const screenKey of SCREEN_KEYS) {
+                ScreenState[screenKey].set(screenKey === key);
+        }
 }
