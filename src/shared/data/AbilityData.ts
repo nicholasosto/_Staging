@@ -37,7 +37,7 @@ export interface AbilityMeta {
 export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	fireball: {
 		displayName: "Fireball",
-		iconId: GameImages.Ability.Flame_Sythe, // Replace with actual asset ID
+		iconId: GameImages.Ability.Flame_Sythe,
 		animationId: "rbxassetid://0987654321", // Replace with actual animation ID
 		description: "Launches a fiery projectile that explodes on impact.",
 		cooldown: 5,
@@ -45,15 +45,15 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	},
 	ice_shard: {
 		displayName: "Ice Shard",
-		iconId: GameImages.Ability.Ice_Shard, // Replace with actual asset ID
-		animationId: "rbxassetid://0987654322", // Replace with actual animation ID
+		iconId: GameImages.Ability.Ice_Shard,
+		animationId: "rbxassetid://77085115837905", // Replace with actual animation ID
 		description: "Launches a shard of ice that pierces through enemies.",
 		cooldown: 6,
 		basePower: 40,
 	},
 	lightning_bolt: {
 		displayName: "Lightning Bolt",
-		iconId: "rbxassetid://1234567892", // Replace with actual asset ID
+		iconId: GameImages.Ability.Lightning_Bolt,
 		animationId: "rbxassetid://0987654323", // Replace with actual animation ID
 		description: "Calls down a bolt of lightning to strike enemies.",
 		cooldown: 7,
@@ -61,7 +61,7 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	},
 	earthquake: {
 		displayName: "Earthquake",
-		iconId: "rbxassetid://1234567893", // Replace with actual asset ID
+		iconId: GameImages.Ability.Earthquake,
 		animationId: "rbxassetid://0987654324", // Replace with actual animation ID
 		description: "Causes the ground to shake, damaging all nearby enemies.",
 		cooldown: 10,
@@ -69,7 +69,7 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	},
 	melee: {
 		displayName: "Melee Attack",
-		iconId: "rbxassetid://1234567894", // Replace with actual
+		iconId: GameImages.Ability.Melee,
 		animationId: "rbxassetid://0987654325", // Replace with actual animation ID
 		description: "A basic melee attack that deals physical damage.",
 		cooldown: 2,

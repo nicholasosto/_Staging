@@ -1,6 +1,8 @@
 /// <reference types="@rbxts/types" />
 
-import Fusion from "@rbxts/fusion";
+import Fusion, { Children, Value } from "@rbxts/fusion";
+import { EquipmentSlotKey, EquipmentSlotMeta } from "shared/data/PanelSelectorData";
+import { GameButton, GameText } from "../atoms";
 
 /**
  * @file        src/client/ui/molecules/PanelSelector.ts
@@ -23,5 +25,34 @@ import Fusion from "@rbxts/fusion";
  */
 
 export interface PanelSelectorProps extends Fusion.PropertyTable<Frame> {
-	SelectorKey: string;
+	SelectorKey: EquipmentSlotKey;
 }
+
+export const PanelSelector = (props: PanelSelectorProps) => {
+	const SelectorMetaData = EquipmentSlotMeta[props.SelectorKey];
+
+	const CategoryText = GameText({
+		TextStateValue: Value(SelectorMetaData.displayName),
+		TextSize: 14,
+		TextColor3: Color3.fromRGB(255, 255, 255),
+		TextXAlignment: Enum.TextXAlignment.Left,
+		TextYAlignment: Enum.TextYAlignment.Top,
+		Size: new UDim2(1, -10, 1, -10),
+		Position: new UDim2(0, 5, 0, 5),
+		BackgroundTransparency: 1,
+		Font: Enum.Font.Gotham,
+	});
+	const SelectorButton = GameButton({
+		Name: `${props.SelectorKey}SelectorButton`,
+		Size: new UDim2(1, 0, 0, 50),
+		BackgroundColor3: Color3.fromRGB(50, 50, 50),
+		BorderSizePixel: 0,
+		Image: SelectorMetaData.iconId,
+		ImageColor3: Color3.fromRGB(255, 255, 255),
+		[Children]: {
+			CategoryText: CategoryText,
+		},
+	});
+
+	return SelectorButton;
+};

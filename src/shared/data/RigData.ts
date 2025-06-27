@@ -17,7 +17,7 @@
  */
 
 import { ReplicatedStorage } from "@rbxts/services";
-const RigsFolder = ReplicatedStorage.WaitForChild("SS Game Package").WaitForChild("Rigs");
+const RigsFolder = ReplicatedStorage.WaitForChild("SS Game Package").WaitForChild("Models").WaitForChild("Rigs");
 const BloodRigFolder = RigsFolder.WaitForChild("Blood");
 const DecayRigsFolder = RigsFolder.WaitForChild("Decay");
 const FatelessRigsFolder = RigsFolder.WaitForChild("Fateless");
@@ -41,7 +41,7 @@ export const RigTemplates: RigMap = {
 		Fateless: FatelessRigsFolder.WaitForChild("Fateless Master"),
 	},
 	Spirit: {
-		AnimeFemale: SpiritRigsFolder.WaitForChild("Anime_Female"),
+		AnimeFemale: SpiritRigsFolder.WaitForChild("Anime Female"),
 		DragonBoy: SpiritRigsFolder.WaitForChild("Dragon Boy"),
 		DragonGirl: SpiritRigsFolder.WaitForChild("Dragon Girl"),
 		Elemental: SpiritRigsFolder.WaitForChild("Elemental"),
