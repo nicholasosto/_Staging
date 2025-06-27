@@ -20,11 +20,15 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+import { ScreenKey } from "shared";
 import { GameWindow } from "../molecules";
+
+const Key: ScreenKey = "Teleport";
 
 export const TeleportScreen = () => {
 	return GameWindow({
-		ScreenKey: "Teleport",
+		Name: `${Key}Screen`,
+		ScreenKey: Key,
 		Content: {},
 	});
 };

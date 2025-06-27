@@ -21,9 +21,13 @@
  */
 
 import { GameWindow } from "../molecules";
+import { ScreenKey } from "shared";
+const Key: ScreenKey = "Inventory";
+
 export const InventoryScreen = () => {
 	return GameWindow({
-		ScreenKey: "Inventory",
+		Name: `${Key}Screen`,
+		ScreenKey: Key,
 		Content: {},
 	});
 };

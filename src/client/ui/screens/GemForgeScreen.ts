@@ -21,9 +21,13 @@
  */
 
 import { GameWindow } from "../molecules";
+import { ScreenKey } from "shared";
+const Key: ScreenKey = "GemForge";
+
 export const GemForgeScreen = () => {
 	return GameWindow({
-		ScreenKey: "GemForge",
+		ScreenKey: Key,
+		Name: `${Key}Screen`,
 		Content: {},
 	});
 };
