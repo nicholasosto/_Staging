@@ -1,6 +1,6 @@
 /**
  * Codon.ts
- * @module      Codon
+ * @module      CodonDefinitions
  * @layer       Shared/Data
  * @description Contains constants and types related to codons used in the game.
  * @author      Trembus

@@ -2,7 +2,7 @@
 
 /**
  * @file        Gem.ts
- * @module      Gem
+ * @module      GemDefinitions
  * @layer       Shared/Data
  * @description Type definitions for gem data.
  */

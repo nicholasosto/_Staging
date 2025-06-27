@@ -2,12 +2,13 @@
 
 /**
  * @file        src/shared/data/index.ts
- * @module      SharedDataIndex
+ * @module      data
  * @layer       Shared
  * @description Barrel export for shared data modules.
  */
 export * from "./AbilityData";
 export * from "./AttributeData";
+export * from "./CodonData";
 export * from "./GemData";
 export * from "./ItemData";
 export * from "./PlayerData";
