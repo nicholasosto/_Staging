@@ -1,4 +1,7 @@
+/// <reference types="@rbxts/types" />
+
 /**
+ * @file        AttributeData.ts
  * @module      AttributesDefinitions
  * @author      Trembus
  * @layer       Constants

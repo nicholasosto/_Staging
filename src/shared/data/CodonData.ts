@@ -1,5 +1,7 @@
+/// <reference types="@rbxts/types" />
+
 /**
- * Codon.ts
+ * @file        CodonData.ts
  * @module      CodonDefinitions
  * @layer       Shared/Data
  * @description Contains constants and types related to codons used in the game.

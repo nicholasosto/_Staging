@@ -1,4 +1,12 @@
-// shared/data/ItemDTO.ts
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ItemData.ts
+ * @module      ItemData
+ * @layer       Shared/Data
+ * @description Item data transfer object definitions.
+ */
+
 import { AttributeMeta } from "./AttributeData";
 import { BaseGemDTO } from "./GemData";
 

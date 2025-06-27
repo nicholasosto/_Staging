@@ -1,3 +1,12 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        PlayerData.ts
+ * @module      PlayerData
+ * @layer       Shared/Data
+ * @description Player profile data shapes and defaults.
+ */
+
 /**
  * Represents the complete data shape for a player in Soul Steel.
  * Each major subsection corresponds to a portion of the player's saved data,

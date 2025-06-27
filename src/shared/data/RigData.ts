@@ -1,4 +1,7 @@
+/// <reference types="@rbxts/types" />
+
 /**
+ * @file        RigData.ts
  * @module      RigTemplates
  * @author      Trembus
  * @layer       Data

@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        Gem.ts
+ * @file        GemData.ts
  * @module      GemDefinitions
  * @layer       Shared/Data
  * @description Type definitions for gem data.
@@ -9,7 +9,6 @@
 
 /* =============================================== Imports =============================================== */
 // External Imports
-import { HttpService } from "@rbxts/services";
 // Custom Imports
 import { RarityKey } from "./RarityData";
 import { AttributesMap } from "./AttributeData";
