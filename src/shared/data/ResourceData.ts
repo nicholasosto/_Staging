@@ -1,4 +1,7 @@
+/// <reference types="@rbxts/types" />
+
 /**
+ * @file        ResourceData.ts
  * @module      ResourceData
  * @author      Trembus
  * @layer       Constants
@@ -13,7 +16,6 @@
  * @lastUpdated  2025-06-10 by Trembus
  */
 
-import { New } from "@rbxts/fusion";
 import { GameImages, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
 
 // Resource Keys

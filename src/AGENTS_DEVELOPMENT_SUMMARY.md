@@ -5,9 +5,15 @@ The table below lists core modules grouped by network layer and their current st
 | Layer   | Module                                   | Status             | Notes |
 |--------|------------------------------------------|--------------------|-------|
 |Shared|`shared/network`|Rock Solid|Typed event definitions|
-|Shared|`shared/data/attributes.ts`|Rock Solid|Attribute metadata and helpers|
-|Shared|`shared/data/Gem.ts`|Under Construction|Basic types only|
-|Shared|`shared/data/rarity.ts`|Stub|Placeholder rarity enums|
+|Shared|`shared/data/AbilityData.ts`|Under Construction|Ability metadata|
+|Shared|`shared/data/AttributeData.ts`|Rock Solid|Attribute metadata and helpers|
+|Shared|`shared/data/CodonData.ts`|Rock Solid|Genetic codon constants|
+|Shared|`shared/data/GemData.ts`|Under Construction|Gem DTOs|
+|Shared|`shared/data/ItemData.ts`|Usable|Generic item DTO|
+|Shared|`shared/data/PlayerData.ts`|Stub|Player profile template|
+|Shared|`shared/data/RarityData.ts`|Rock Solid|Rarity metadata|
+|Shared|`shared/data/ResourceData.ts`|Rock Solid|Resource metadata|
+|Shared|`shared/data/RigData.ts`|Usable|Rig template references|
 |Shared|`shared/assets`|Usable|Image asset constants|
 |Shared|`shared/states`|Usable|Signal-based shared state|
 |Shared|`theme`|Usable|Fusion theme store|

@@ -3,7 +3,7 @@
 import { GameImages } from "shared/assets";
 
 /**
- * @file        rarity.ts
+ * @file        RarityData.ts
  * @module      Rarity
  * @layer       Shared/Data
  * @description Enum types for gem rarity levels.
