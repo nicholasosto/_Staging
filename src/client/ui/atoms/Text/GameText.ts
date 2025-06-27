@@ -28,6 +28,8 @@ export function GameText(props: GameTextProps): TextLabel {
 		BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		Text: Computed(() => props.TextStateValue.get()),
 		TextSize: props.TextSize ?? 14,
+		ZIndex: props.ZIndex ?? 1,
+		LayoutOrder: props.LayoutOrder ?? 0,
 		/* TextStroke properties */
 		//...TextStrokeProps,
 		[OnEvent("MouseEnter")]: () => HoveredState.set(true),

@@ -8,3 +8,4 @@
  */
 
 export * from "./HUDMenuButton";
+export * from "./AbilityButton";

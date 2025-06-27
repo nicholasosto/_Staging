@@ -21,37 +21,56 @@
  */
 
 import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
-import { BorderImage, GamePanel } from "../../atoms";
-import { useToken } from "theme/hooks";
+import { BorderImage, GamePanel, GameText } from "../../atoms";
 import { ComponentSizes } from "constants";
-import { FillBarFrame } from "./FillFrame";
-import { SunriseGradient } from "client/ui/tokens";
 
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
-	value: Fusion.Value<number> | number;
-	max: Fusion.Value<number> | number;
-	gradient?: UIGradient;
+	ProgressState?: Computed<number>;
+	CurrentValue?: Value<number>;
+	MaxValue?: Value<number>;
+	Gradient?: UIGradient;
+	Text?: string;
 }
 
 export function BarMeter(props: BarMeterProps) {
-	const fillBar = FillBarFrame({
+	const TextValue = Value(props.Text ?? "Bar Meter");
+
+	/* Fill Bar */
+	const fillBar = New("Frame")({
 		Name: "FillBar",
-		Size: UDim2.fromScale(1, 1),
-		Progress: {
-			Current:
-				typeOf(props.value) === "number" ? Value(props.value as number) : (props.value as Fusion.Value<number>),
-			Max: typeOf(props.max) === "number" ? Value(props.max as number) : (props.max as Fusion.Value<number>),
+		Size: Computed(() => {
+			const progress = props.ProgressState?.get() ?? 0;
+			return new UDim2(progress, 0, 1, 0);
+		}),
+		ZIndex: 90,
+		[Children]: {
+			Gradient: props.Gradient ?? {},
 		},
-		Gradient: props.gradient ?? undefined,
 	});
 
-	return GamePanel({
+	/* Text Label */
+	const TextLabel = GameText({
+		TextStateValue: TextValue,
+		Size: UDim2.fromScale(0.9, 0.9),
+		AnchorPoint: new Vector2(0.5, 0.5),
+		Position: new UDim2(0.5, 0, 0.5, 0),
+		TextScaled: true,
+		TextColor3: Color3.fromRGB(255, 255, 255),
+		ZIndex: 100,
+	});
+
+	/* Container */
+	const container = GamePanel({
 		Name: "BarMeter",
 		Size: props.Size ?? ComponentSizes.ResourceBar,
-		BackgroundTransparency: 0.4,
+		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
+		Position: props.Position ?? new UDim2(0.5, 0, 0.5, 0),
 		BorderImage: BorderImage.GothicMetal(),
 		Content: {
-			Fill: fillBar,
+			FillBar: fillBar,
+			Text: TextLabel,
 		},
 	});
+
+	return container;
 }

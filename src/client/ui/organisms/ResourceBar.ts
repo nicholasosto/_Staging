@@ -26,6 +26,7 @@ import { GamePanel } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules";
 import { PlayerResources } from "shared/states/PlayerState";
 import { ResourceKey, ResourceMeta } from "shared/data/ResourceData";
+import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey) {
@@ -36,10 +37,11 @@ export function ResourceBar(resourceKey: ResourceKey) {
 		Size: UDim2.fromScale(1, 0.3),
 		Content: {
 			FillBar: BarMeter({
-				value: state.Current,
-				max: state.Max,
-				gradient: meta.gradient,
+				ProgressState: Computed(() => state.Current.get() / state.Max.get()),
+				MaxValue: state.Max,
+				Gradient: meta.gradient,
 				Size: UDim2.fromScale(1, 1),
+				Text: meta.displayName,
 			}),
 		},
 	});

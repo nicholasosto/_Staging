@@ -30,6 +30,7 @@ export const MenuButtonImageMap: Record<ScreenKey, string> = {
 
 export const GameImages = {
 	MenuButtonImage: "rbxassetid://79163709624038",
+	DefaultUnassigned: "rbxassetid://117838504772569",
 	Ability: {
 		Unassigned: "rbxassetid://98384046526938",
 		Flame_Sythe: "rbxassetid://108246514585300",
@@ -73,11 +74,11 @@ export const GameImages = {
 	},
 	Gems: {
 		Colorable: "rbxassetid://71842732472075",
-		Common: "rbxassetid://R",
-		Uncommon: "rbxassetid://R",
-		Rare: "rbxassetid://R",
-		Epic: "rbxassetid://R",
-		Legendary: "rbxassetid://R",
+		Common: "rbxassetid://71842732472075",
+		Uncommon: "rbxassetid://71842732472075",
+		Rare: "rbxassetid://71842732472075",
+		Epic: "rbxassetid://119000054151103",
+		Legendary: "rbxassetid://71842732472075",
 	},
 	SlotImage: {
 		Unassigned: "rbxassetid://98384046526938",

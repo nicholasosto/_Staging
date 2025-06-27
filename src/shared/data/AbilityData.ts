@@ -73,3 +73,11 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		basePower: 30,
 	},
 } satisfies Record<AbilityKey, AbilityMeta>;
+
+export const DefaultAbilities: Record<AbilityKey, number> = {
+	fireball: 0,
+	ice_shard: 0,
+	lightning_bolt: 0,
+	earthquake: 0,
+	melee: 0,
+};

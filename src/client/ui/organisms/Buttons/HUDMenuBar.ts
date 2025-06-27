@@ -6,11 +6,10 @@
  * @layer       Client/Organisms
  * @description Horizontal container of HUD menu buttons.
  */
-
-import { GamePanel } from "../atoms";
-import { HUDMenuButton } from "../molecules/Button";
-import Fusion, { ForValues } from "@rbxts/fusion";
-import { Layout } from "../tokens";
+import { ForValues } from "@rbxts/fusion";
+import { Layout } from "client/ui/tokens";
+import { GamePanel } from "client/ui/atoms";
+import { HUDMenuButton } from "client/ui/molecules";
 import { GameImages, MenuButtonImageMap, ScreenKey, ScreenOrder } from "shared";
 
 export interface HudMenuBarProps {

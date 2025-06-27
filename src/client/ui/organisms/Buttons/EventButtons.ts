@@ -15,9 +15,9 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { GamePanel, GameButton } from "../atoms";
+import { GamePanel, GameButton } from "../../atoms";
 import { GameImages, Network } from "shared";
-import { Layout } from "../tokens";
+import { Layout } from "../../tokens";
 /*================================================ Network Definitions =============================================*/
 const SpawnManifestationEvent = Network.Client.Get("SpawnManifestation");
 const IncreaseAttributeEvent = Network.Client.Get("IncreaseAttribute");

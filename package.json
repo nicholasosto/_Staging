@@ -30,10 +30,13 @@
   "dependencies": {
     "@rbxts/cmdr": "^1.12.1",
     "@rbxts/fusion": "^0.2.0",
+    "@rbxts/maid": "^1.1.0",
     "@rbxts/matter": "^0.8.5",
     "@rbxts/net": "^3.0.10",
     "@rbxts/profileservice": "^1.4.2",
     "@rbxts/services": "^1.5.5",
+    "@rbxts/signal": "^1.1.1",
+    "@rbxts/signals": "^1.0.5",
     "@rbxts/t": "^3.2.1",
     "@rbxts/zone-plus": "^3.2.0",
     "io-serve": "^1.1.2"
