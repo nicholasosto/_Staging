@@ -7,13 +7,7 @@ import { Workspace } from "@rbxts/services";
  * @description Represents the Alien Bob NPC entity.
  */
 
-export const MUTATION_KEYS = [
-    "ColorChange",
-    "SizeChange",
-    "SpeedBoost",
-    "HealthBoost",
-    "EnergyBoost",
-] as const;
+export const MUTATION_KEYS = ["ColorChange", "SizeChange", "SpeedBoost", "HealthBoost", "EnergyBoost"] as const;
 export class AlienBob {
 	private static _instance: AlienBob | undefined;
 	public static BobOrganism: Model | undefined;
