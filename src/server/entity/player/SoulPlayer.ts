@@ -1,4 +1,5 @@
 import { AbilityKey } from "shared";
+import { loadAnimation } from "shared/assets/animations";
 
 /**
  * SoulPlayer class represents a base player entity in the game.
@@ -30,6 +31,12 @@ export default class SoulPlayer {
 
 		// Initialize player properties
 		this.initializePlayerProperties();
+
+		// Animations 
+		loadAnimation(this.CharacterModel, "Dodge");
+		loadAnimation(this.CharacterModel, "SpinKick");
+		loadAnimation(this.CharacterModel, "TakeDamage");
+		loadAnimation(this.CharacterModel, "ScytheAttack");
 
 		// Register the player in the registry
 		this.registerSoulPlayer();

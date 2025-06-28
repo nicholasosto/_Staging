@@ -86,3 +86,42 @@ import Fusion from "@rbxts/fusion";
 2. [Organism Structure Guide](./Documents/OrganismStructure.md) – for understanding the structure and conventions of Fusion organisms and commenting examples.
 3. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
 4. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.
+
+## Appendix A: Mermaid Flowchart
+
+```mermaid
+%% Module & data-flow overview
+graph TD
+  subgraph Shared
+    AttributeKey["AttributeKey<br/>KEYS · KeyType · Meta · Map"]
+    GemKey["GemKey<br/>KEYS · KeyType · Meta · Map"]
+    EquipSlotKey["EquipmentSlotKey<br/>…"]
+  end
+
+
+
+  subgraph Server
+    CombatSvc["CombatService<br/>fires RemoteEvent"]
+  end
+
+  subgraph Client
+    PlayerState["PlayerStateService<br/>Fusion Values"]
+    ResourceBar["ResourceBar Atom<br/>Computed fill%"]
+  end
+
+  %% Shared definitions feed the registry
+  AttributeKey --> Registry
+  GemKey --> Registry
+  EquipSlotKey --> Registry
+
+  %% Server pushes live data
+  CombatSvc -- healthChanged --> PlayerState
+
+  %% Client UI reactivity
+  PlayerState --> ResourceBar
+
+  %% Meta lookups for styling / validation
+  Registry -. validate .-> PlayerState
+  Registry -. style .-> ResourceBar
+```
+

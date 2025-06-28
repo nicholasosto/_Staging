@@ -22,6 +22,7 @@ import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { GameImages } from "shared";
+import { ActivateAbility } from "client/network/CallServer";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
@@ -62,6 +63,7 @@ export function AbilityButton(props: AbilityButtonProps) {
 		[OnEvent("Activated")]: () => {
 			if (cooldownTimer.Progress.get() <= 0) {
 				print(`Activating ability: ${props.abilityKey}`);
+				ActivateAbility(props.abilityKey);
 				cooldownTimer.start();
 			}
 		},

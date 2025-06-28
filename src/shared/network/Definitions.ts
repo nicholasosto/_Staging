@@ -28,4 +28,7 @@ export const Network = Net.Definitions.Create({
 	// server → client
 	ProfileChanged: Net.Definitions.ServerToClientEvent<[data: unknown]>(),
 	RoomCountdown: Net.Definitions.ServerToClientEvent<[roomId: string, remaining: number]>(),
+
+	/* Activate Ability */
+	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
 });

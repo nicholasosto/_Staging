@@ -28,9 +28,10 @@ import { Network } from "shared/network";
 import { DataProfileController, BattleRoomService } from "server/services";
 
 /* Factories and Types */
-import { AttributeKey } from "shared/definitions";
+import { AttributeKey, AbilityKey, AbilitiesMeta } from "shared/definitions";
 import Net from "@rbxts/net";
 import { GetSoulPlayer } from "server/entity/player/SoulPlayer";
+import { playAnimation } from "shared/assets/animations";
 
 // INCREASE ATTRIBUTE
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
@@ -54,6 +55,18 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 	print(`Player Profile:`, profile);
 });
 
+// Abilities -----------------------------------------------------
+Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
+	const soulPlayer = GetSoulPlayer(player);
+	const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+	if (soulPlayer) {
+		if (soulPlayer.CharacterModel) {
+			playAnimation(soulPlayer.CharacterModel, animationKey);
+		}
+	} else {
+		warn(`SoulPlayer not found for ${player.Name}`);
+	}
+});
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
 	// Handle the request for player abilities
 	print(`Player ${player.Name} requested their abilities.`);
