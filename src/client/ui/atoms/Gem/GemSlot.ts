@@ -24,7 +24,7 @@ import Fusion, { Children, New, OnEvent, PropertyTable } from "@rbxts/fusion";
 import { GameImages } from "shared/assets";
 import { BorderImage } from "../Image";
 import { GameImage } from "../Image/GameImage";
-import { RarityKey } from "shared/data";
+import { RarityKey } from "shared/definitions";
 import { GameButton } from "../Button";
 
 export interface GemSlotProps extends PropertyTable<ImageButton> {

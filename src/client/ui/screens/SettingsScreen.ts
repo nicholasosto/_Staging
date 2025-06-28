@@ -21,8 +21,7 @@
  */
 
 import { GameWindow } from "../molecules";
-import { ScreenKey } from "shared";
-
+import { ScreenKey } from "client/states";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {

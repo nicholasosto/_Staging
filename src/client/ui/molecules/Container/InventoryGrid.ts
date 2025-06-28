@@ -10,7 +10,7 @@
 import Fusion, { ForPairs } from "@rbxts/fusion";
 import { GamePanel, GemSlot } from "../../atoms";
 import { Layout } from "../../tokens";
-import { RarityKey } from "shared/data";
+import { RarityKey } from "shared/definitions";
 
 export interface InventoryGridProps {
 	items: Map<string, { icon: string; rarity: RarityKey }>;

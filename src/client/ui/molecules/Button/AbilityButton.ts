@@ -16,7 +16,7 @@
  */
 import { RunService } from "@rbxts/services";
 import { New, Value, OnChange, OnEvent, Computed, Children } from "@rbxts/fusion";
-import { AbilityKey, AbilitiesMeta } from "shared/data";
+import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 import { GamePanel, GameText } from "client/ui/atoms";
 import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";

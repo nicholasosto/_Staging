@@ -12,6 +12,7 @@ import { Players } from "@rbxts/services";
 import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
 import { AlienOrganism } from "./entity/AlienOrganism";
 import { EntityResource } from "./entity/entityResource/EntityResource";
+import SoulPlayer from "./entity/player/SoulPlayer";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
@@ -32,6 +33,8 @@ Players.PlayerAdded.Connect((player) => {
 		warn(`Failed to create profile for player: ${player.Name}`);
 		//BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
 	}
+	const soulPlayer = new SoulPlayer(player);
+	print(`SoulPlayer created for player: ${player.Name}`);
 	player.CharacterAdded.Connect((character) => {
 		print(`Character added for player: ${player.Name}`);
 	});

@@ -25,8 +25,12 @@
  *  abilities during gameplay.
  */
 
-import { GamePanel } from "client/ui/atoms";
+import { Value } from "@rbxts/fusion";
+import { GetPlayerAbilities } from "client/network/CallServer";
+import PlayerState from "client/states/PlayerState";
+import { GamePanel, GameText } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules";
+import { AvatarBust } from "client/ui/molecules/AvatarBust";
 import { Layout } from "client/ui/tokens";
 import { AbilityKey } from "shared";
 
@@ -50,3 +54,10 @@ export function AbilityBar(props: AbilityBarProps) {
 		},
 	});
 }
+export const SoulPlayerAbilityBar = (player: Player) => {
+	const abilities = PlayerState.getInstance().PlayerAbilities;
+	const abilityBar = AbilityBar({
+		abilities: abilities,
+	});
+	return abilityBar;
+};

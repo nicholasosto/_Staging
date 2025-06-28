@@ -23,7 +23,8 @@
 import Fusion, { Children, New } from "@rbxts/fusion";
 import { GameButton, GamePanel } from "../atoms";
 import { Players } from "@rbxts/services";
-import { GameImages, ScreenKey, ScreenState } from "shared";
+import { GameImages } from "shared/assets";
+import { ScreenKey, ScreenState } from "client/states";
 import { Padding } from "../tokens";
 import { ComponentSizes, Sizes } from "constants";
 

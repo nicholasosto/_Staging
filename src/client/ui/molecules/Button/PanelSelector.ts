@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/types" />
 
 import Fusion, { Children, Value } from "@rbxts/fusion";
-import { EquipmentSlotKey, EquipmentSlotMeta } from "shared/data/EquipmentSelector";
+import { EquipmentSlotKey, EquipmentSlotMeta } from "shared/definitions/Equipment";
 import { GameButton, GameText } from "../../atoms";
 
 /**

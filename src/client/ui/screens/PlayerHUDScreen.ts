@@ -7,13 +7,12 @@
  * @description Primary heads-up display shown during gameplay.
  */
 
-import { SCREEN_KEYS } from "shared";
 import { GamePanel, GameScreen } from "../atoms";
-import { HUDMenuBar, AbilityBar } from "client/ui/organisms";
+import { HUDMenuBar, SoulPlayerAbilityBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
-import { BarMeter } from "../molecules";
-import { GridContainer } from "../atoms/Container/GridContainer";
+import { Players } from "@rbxts/services";
+import { SCREEN_KEYS } from "client/states";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -32,6 +31,8 @@ const HudProps = {
 };
 
 export const PlayerHUDScreen = () => {
+	/* Ability Bar */
+	const abilityBar = SoulPlayerAbilityBar(Players.LocalPlayer);
 	/* HUD Container */
 	const HUDContainer = GamePanel({
 		Name: "HUDContainer",
@@ -54,10 +55,7 @@ export const PlayerHUDScreen = () => {
 				Size: new UDim2(1, 0, 1, 0),
 				BackgroundTransparency: 1,
 				Content: {
-					GridContainer: GridContainer({}),
-					AbilityBar: AbilityBar({
-						abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"],
-					}),
+					AbilityBar: abilityBar,
 				},
 			}),
 		},

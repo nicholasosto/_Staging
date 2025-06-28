@@ -18,7 +18,7 @@ import { GamePanel } from "../Container";
 import { GameText } from "../Text";
 import { BorderImage } from "../Image";
 import { GameImages } from "shared/assets";
-import { RarityKey } from "shared/data/RarityData";
+import { RarityKey } from "shared/definitions/Rarity";
 import { ButtonSizes } from "shared/constants/sizes";
 import { useToken } from "theme/hooks";
 

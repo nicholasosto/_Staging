@@ -12,7 +12,7 @@ import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AttributesDTO, DefaultAttributes } from "shared/data";
+import { AttributesDTO, DefaultAttributes } from "shared/definitions";
 
 /* ========================================== Profile Store Setup =============================================== */
 

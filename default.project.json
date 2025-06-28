@@ -26,9 +26,7 @@
                         "TS": {
                                 "$path": "out/shared"
                         },
-                        "Theme": {
-                                "$path": "out/theme"
-                        },
+
                         "Constants": {
                                 "$path": "out/constants"
                         }
@@ -39,7 +37,10 @@
 				"$className": "StarterPlayerScripts",
 				"TS": {
 					"$path": "out/client"
-				}
+				},
+				    "Theme": {
+                        "$path": "out/theme"
+                }
 			}
 		},
 		"Workspace": {

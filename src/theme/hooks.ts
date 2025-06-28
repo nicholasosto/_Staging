@@ -13,7 +13,7 @@
  */
 
 import Fusion from "@rbxts/fusion";
-import { ThemeState } from "./ThemeState";
+import { ThemeState } from "../client/states/ThemeState";
 import { ColourTokens, FontTokens, ImageTokens } from "./types";
 
 const { Computed } = Fusion;

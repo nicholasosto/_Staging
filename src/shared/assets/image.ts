@@ -1,6 +1,6 @@
 /// <reference types="@rbxts/types" />
 
-import { ScreenKey } from "shared/states";
+import { ScreenKey } from "client/states";
 
 /**
  * @file        image.ts

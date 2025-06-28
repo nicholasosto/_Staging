@@ -10,7 +10,8 @@ import { ForValues } from "@rbxts/fusion";
 import { Layout } from "client/ui/tokens";
 import { GamePanel } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules";
-import { GameImages, MenuButtonImageMap, ScreenKey, ScreenOrder } from "shared";
+import { GameImages, MenuButtonImageMap } from "shared/assets";
+import { ScreenKey, ScreenOrder } from "client/states";
 
 export interface HudMenuBarProps {
 	ScreenStateKeys: ScreenKey[];

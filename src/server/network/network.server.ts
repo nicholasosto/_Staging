@@ -28,7 +28,9 @@ import { Network } from "shared/network";
 import { DataProfileController, BattleRoomService } from "server/services";
 
 /* Factories and Types */
-import { AttributeKey } from "shared/data";
+import { AttributeKey } from "shared/definitions";
+import Net from "@rbxts/net";
+import { GetSoulPlayer } from "server/entity/player/SoulPlayer";
 
 // INCREASE ATTRIBUTE
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
@@ -52,6 +54,12 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 	print(`Player Profile:`, profile);
 });
 
+Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
+	// Handle the request for player abilities
+	print(`Player ${player.Name} requested their abilities.`);
+	const soulPlayer = GetSoulPlayer(player);
+	return soulPlayer ? soulPlayer.Abilities : undefined;
+});
 // MATCHMAKING -----------------------------------------------------
 Network.Server.Get("CreateRoom").SetCallback((player) => {
 	return BattleRoomService.CreateRoom(player);

@@ -7,7 +7,7 @@
  * @description Inventory item button wrapper using `UIButton`.
  */
 
-import { RarityKey } from "shared/data/RarityData";
+import { RarityKey } from "shared/definitions/Rarity";
 import { UIButton } from "./UIButton";
 
 const sampleItemMetadata = {

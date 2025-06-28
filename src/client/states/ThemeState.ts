@@ -13,10 +13,10 @@
  */
 
 import Fusion from "@rbxts/fusion";
-import { ThemeKey, DEFAULT_THEME } from "./ThemeKey";
-import { cyberGothic } from "./tokens/cyberGothic";
-import { solarDrift } from "./tokens/solarDrift";
-import { ThemeTokens } from "./types";
+import { ThemeKey, DEFAULT_THEME } from "../../theme/ThemeKey";
+import { cyberGothic } from "../../theme/tokens/cyberGothic";
+import { solarDrift } from "../../theme/tokens/solarDrift";
+import { ThemeTokens } from "../../theme/types";
 
 const { Value, Computed } = Fusion;
 

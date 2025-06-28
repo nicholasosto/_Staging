@@ -19,4 +19,4 @@ export enum ThemeKey {
 	SolarDrift = "SolarDrift",
 }
 
-export const DEFAULT_THEME = ThemeKey.CyberGothic;
+export const DEFAULT_THEME = ThemeKey.SolarDrift;

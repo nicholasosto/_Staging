@@ -9,10 +9,12 @@
 
 /* =============================================== Imports =============================================== */
 import Net from "@rbxts/net";
-import { AttributeKey } from "shared/data";
+import { AbilityKey, AttributeKey } from "shared/definitions";
 
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
+	// Get SoulPlayer
+	GetPlayerAbilities: Net.Definitions.ServerFunction<(player: Player) => AbilityKey[] | undefined>(),
 	// fire-and-forget from client → server
 	SpawnManifestation: Net.Definitions.ClientToServerEvent<[formId: string, abilityId: string, bonusId: string]>(),
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),

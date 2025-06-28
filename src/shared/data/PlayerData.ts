@@ -14,7 +14,7 @@
  */
 
 /* Data Transfer Object for Player Data */
-import { AttributesDTO, DefaultAttributes } from "./AttributeData";
+import { AttributesDTO, DefaultAttributes } from "../definitions/Attributes";
 
 /* Progression Data Transfer Object - Player Progression */
 export interface ProgressionDTO {
