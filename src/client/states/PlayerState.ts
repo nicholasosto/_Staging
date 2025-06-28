@@ -4,9 +4,9 @@ import { ResourceKey } from "shared/data/ResourceData";
 import { GetPlayerAbilities } from "client/network/CallServer";
 
 /**
- * @file        src/shared/states/PlayerState.ts
+ * @file        src/client/states/PlayerState.ts
  * @module      PlayerState
- * @layer       Shared
+ * @layer       Client
  * @description Defines the player's health, mana, and stamina states.
  *
  * ╭───────────────────────────────╮
