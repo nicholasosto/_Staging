@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        GridContainer.ts
- * @module      GridContainer
+ * @file        HorizontalContainer.ts
+ * @module      HorizontalContainer
  * @layer       Client/UI/Atoms
- * @description BaseContainer with grid layout helper.
+ * @description Wrapper that arranges children horizontally.
  *
  * ╭───────────────────────────────╮
  * │  Soul Steel · Coding Guide    │
@@ -16,14 +16,13 @@ import Fusion from "@rbxts/fusion";
 import { BaseContainer, BaseContainerProps } from "./BaseContainer";
 import { Layout } from "../../tokens";
 
-export interface GridContainerProps extends Partial<BaseContainerProps> {
+export interface HorizontalContainerProps extends Partial<BaseContainerProps> {
     Gap?: number;
-    CellSize?: UDim2;
 }
 
-export const GridContainer = (props: GridContainerProps) => {
+export const HorizontalContainer = (props: HorizontalContainerProps) => {
     const content = {
-        Layout: Layout.Grid(props.Gap, props.CellSize),
+        Layout: Layout.HorizontalSet(props.Gap),
         ...(props.Content ?? {}),
     } as Fusion.ChildrenValue;
 
