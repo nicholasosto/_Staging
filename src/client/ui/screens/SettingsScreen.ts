@@ -22,12 +22,21 @@
 
 import { GameWindow } from "../molecules";
 import { ScreenKey } from "client/states";
+import { PanelSelector } from "../molecules/Button/PanelSelector";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
-		Content: {},
+		Content: {
+			SettingsTest: PanelSelector({
+				SelectorKey: "Helmet",
+				Size: new UDim2(1, 0, 0, 50),
+				Position: new UDim2(0, 0, 0, 50),
+				BackgroundColor3: Color3.fromRGB(50, 50, 50),
+				BorderSizePixel: 0,
+			}),
+		},
 	});
 };
