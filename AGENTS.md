@@ -13,14 +13,13 @@ The purpose of this document is to provide a concise overview of coding conventi
 2. **Barrel Modules**: Ensure folders contain barrel files for easy imports. Check existing folders and ensure barrel files are present and correctly exporting components.
 3. **Asset Use and Management**: Use available assets from the `shared/assets` folder. If an asset is not available, create a placeholder asset and a #ASSETREQUEST comment in the code to request the asset from the art team.
 4. **Agent-Created Atoms**: If you identify a core (atomic) component that is missing, create a new file in the `src/atoms` folder and follow the coding conventions outlined in this guide. add a #AGENT_ATOM comment to the top of the file to indicate it is an agent-created atom.
-5. **Testing**: All components should be testable. Use the `TestParts` screen to add example tests for new components. Ensure that tests cover the expected behavior and edge cases of the component.
-6. **Create a const export** for simple example components when a new component is created. This allows for easy testing and demonstration of the component's functionality.
-7. **Documentation**: Use TSDoc comments to document components, including their purpose, properties, and events. This helps maintain clarity and understanding of the codebase.
-8. **Check the AGENTS_TODO.md file** for any additional tasks or components that need to be created. This file serves as a central place for tracking agent-created components and tasks.
+5. **USE and ADD Keys as master reference**: When creating components, use the `Key` type from `shared/data` as the master reference for keys. This ensures consistency across the codebase. If a key is not available, create a new key in the `shared/data` folder and add it to the `Key` type.
+6. **Documentation**: Use TSDoc comments to document components, including their purpose, properties, and events. This helps maintain clarity and understanding of the codebase.
+7. **Check the AGENTS_TODO.md file** for any additional tasks or components that need to be created. This file serves as a central place for tracking agent-created components and tasks.
 
 ## 3 Pitfalls to Avoid
 
-1. Fusions OnEvent, OnChange follow the format: (keep in mind not all events or properties will be used in every component - A framebased component may not use OnEvent("Activated") but a GUIButton based component will, for example):
+**Fusion Event Calling Style**: Fusions OnEvent, OnChange follow the format: (keep in mind not all events or properties will be used in every component - A framebased component may not use OnEvent("Activated") but a GUIButton based component will, for example):
 
 ```ts
     MyComponent({
@@ -33,6 +32,8 @@ The purpose of this document is to provide a concise overview of coding conventi
     },
 })
 ```
+
+**Avoid nil checks using `if(!value)` or `if(value == null)`**. Instead, use `if(value === undefined)` to check for specific nil values. This ensures that you are explicitly checking for the intended value and not inadvertently allowing other falsy values to pass through.
 
 ## 4 Code Header Style
 

@@ -24,7 +24,7 @@ import { useToken } from "theme/hooks";
 
 // -------------- Helpers -------------- //
 function resolveIcon(icon?: string): string {
-	if (!icon) return "";
+	if (icon === undefined) return "";
 	const lookup = (GameImages as unknown as Record<string, string>)[icon];
 	return lookup ?? icon;
 }
