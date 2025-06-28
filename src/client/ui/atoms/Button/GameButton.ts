@@ -4,60 +4,20 @@
  * @file        GameButton.ts
  * @module      GameButton
  * @layer       Client/UI/Atoms
- * @description Simple button component built from `GamePanel` and `GameImage`.
- *
- * ╭───────────────────────────────╮
- * │  Soul Steel · Coding Guide    │
- * │  Fusion v4 · Strict TS · ECS  │
- * ╰───────────────────────────────╯
- *
- * @author       Trembus
- * @license      MIT
- * @since        0.2.0
- * @lastUpdated  2025-06-25 by Luminesa – Added documentation header
- *
- * @dependencies
- *   @rbxts/fusion ^0.4.0
+ * @description Panel-style button wrapper around `UIButton`.
  */
 
-import Fusion, { Children, OnEvent, PropertyTable } from "@rbxts/fusion";
-import { GamePanel } from "../Container";
-import { GameImage } from "../Image";
-import { useToken } from "theme/hooks";
+import { UIButton, UIButtonProps } from "./UIButton";
 
-export interface GameButtonProps extends PropertyTable<ImageButton> {
-	OnClick?: () => void;
-	Selected?: boolean;
+export interface GameButtonProps extends Partial<UIButtonProps> {
+    Image?: string; // backward compatibility
 }
 
-export function GameButton(props: GameButtonProps) {
-	const SelectedState = Fusion.Value<boolean>(props.Selected ?? false);
-	const bg = useToken("panelBg");
-	return GamePanel({
-		Name: props.Name,
-		Size: props.Size ?? UDim2.fromOffset(50, 50),
-		Position: props.Position ?? UDim2.fromScale(0, 0),
-		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
-		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,
-		BackgroundColor3: bg,
-		BorderSizePixel: 0,
-		Content: {
-			ButtonImage: Fusion.New("ImageButton")({
-				Name: "ButtonImage",
-				ImageTransparency: 1,
-				Size: UDim2.fromScale(1, 1),
-				BackgroundTransparency: 1,
-				[OnEvent("Activated")]: () => {
-					props.OnClick?.();
-				},
-				[Children]: {
-					Image: GameImage({
-						Name: "ButtonImage",
-						RatioConstraint: 1,
-						Image: props.Image ?? "rbxassetid://121566852339881",
-					}),
-				},
-			}),
-		},
-	});
-}
+export const GameButton = (p: GameButtonProps) => {
+    const icon = p.Icon ?? p.Image;
+    const props: Partial<UIButtonProps> = { ...p };
+    delete (props as Partial<GameButtonProps>).Image;
+    delete props.Icon;
+    return UIButton({ Icon: icon, Variant: "panel", ...props });
+};
+

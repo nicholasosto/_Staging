@@ -24,7 +24,8 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/style`|Rock Solid|Tokenized layout and colors|
 |Client|`client/ui/atoms/Screen/GameScreen.ts`|Usable|Base screen wrapper|
 |Client|`client/ui/atoms/DragDetector/DragDetector.ts`|Usable|Drag detector atom|
-|Client|`client/ui/atoms/Button/DraggableButton.ts`|Usable|Draggable button using DragDetector|
+|Client|`client/ui/atoms/Button/UIButton.ts`|Usable|Unified button primitive|
+|Client|`client/ui/atoms/Button/DraggableButton.ts`|Usable|Wrapper preset for draggable buttons|
 |Client|`client/ui/molecules/CountdownTimer.ts`|Usable|Displays battle countdown|
 |Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
