@@ -8,8 +8,8 @@
  */
 
 import Fusion, { ForPairs } from "@rbxts/fusion";
-import { GamePanel, GemSlot } from "../atoms";
-import { Layout } from "../tokens";
+import { GamePanel, GemSlot } from "../../atoms";
+import { Layout } from "../../tokens";
 import { RarityKey } from "shared/data";
 
 export interface InventoryGridProps {

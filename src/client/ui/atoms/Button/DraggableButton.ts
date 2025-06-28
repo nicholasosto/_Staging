@@ -10,14 +10,13 @@
 import { UIButton, UIButtonProps } from "./UIButton";
 
 export interface DraggableButtonProps extends Partial<UIButtonProps> {
-    Image?: string;
+	Image?: string;
 }
 
 export const DraggableButton = (p: DraggableButtonProps) => {
-    const icon = p.Icon ?? p.Image;
-    const props: Partial<UIButtonProps> = { ...p };
-    delete (props as Partial<DraggableButtonProps>).Image;
-    delete props.Icon;
-    return UIButton({ Draggable: true, Variant: "flat", Icon: icon, ...props });
+	const icon = p.Icon ?? p.Image;
+	const props: Partial<UIButtonProps> = { ...p };
+	delete (props as Partial<DraggableButtonProps>).Image;
+	delete props.Icon;
+	return UIButton({ Draggable: true, Variant: "flat", Icon: icon, ...props });
 };
-

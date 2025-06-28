@@ -24,120 +24,120 @@ import { useToken } from "theme/hooks";
 
 // -------------- Helpers -------------- //
 function resolveIcon(icon?: string): string {
-    if (!icon) return "";
-    const lookup = (GameImages as unknown as Record<string, string>)[icon];
-    return lookup ?? icon;
+	if (!icon) return "";
+	const lookup = (GameImages as unknown as Record<string, string>)[icon];
+	return lookup ?? icon;
 }
 
 function resolveBorder(rarity?: RarityKey) {
-    if (!rarity) return undefined;
-    switch (rarity) {
-        case "Common":
-            return BorderImage.CommonRarity();
-        case "Uncommon":
-            return BorderImage.CommonRarity();
-        case "Rare":
-            return BorderImage.RareRarity();
-        case "Epic":
-            return BorderImage.EpicRarity();
-        case "Legendary":
-            return BorderImage.LegendaryRarity();
-    }
+	if (!rarity) return undefined;
+	switch (rarity) {
+		case "Common":
+			return BorderImage.CommonRarity();
+		case "Uncommon":
+			return BorderImage.CommonRarity();
+		case "Rare":
+			return BorderImage.RareRarity();
+		case "Epic":
+			return BorderImage.EpicRarity();
+		case "Legendary":
+			return BorderImage.LegendaryRarity();
+	}
 }
 
 // -------------- Props ---------------- //
 export interface UIButtonProps extends PropertyTable<ImageButton> {
-    /** Main icon – raw asset id or GameImages key */
-    Icon?: string;
-    /** Optional rarity key → resolves to BorderImage */
-    Rarity?: RarityKey;
-    /** Optional label under the icon */
-    Label?: string;
-    /** Show as panel-style (token background) or flat */
-    Variant?: "flat" | "panel";
-    /** Interactive flags */
-    Draggable?: boolean;
-    Selected?: boolean;
+	/** Main icon – raw asset id or GameImages key */
+	Icon?: string;
+	/** Optional rarity key → resolves to BorderImage */
+	Rarity?: RarityKey;
+	/** Optional label under the icon */
+	Label?: string;
+	/** Show as panel-style (token background) or flat */
+	Variant?: "flat" | "panel";
+	/** Interactive flags */
+	Draggable?: boolean;
+	Selected?: boolean;
 
-    /* Event handlers */
-    OnClick?: () => void;
-    OnDragStart?: (pos: Vector2) => void;
-    OnDragContinue?: (pos: Vector2) => void;
-    OnDragEnd?: (pos: Vector2) => void;
+	/* Event handlers */
+	OnClick?: () => void;
+	OnDragStart?: (pos: Vector2) => void;
+	OnDragContinue?: (pos: Vector2) => void;
+	OnDragEnd?: (pos: Vector2) => void;
 }
 
 // -------------- UIButton Component --------------- //
 export const UIButton = (props: UIButtonProps) => {
-    const variant = props.Variant ?? "flat";
-    const selected = Value(props.Selected ?? false);
-    const bg = useToken("panelBg");
-    const borderColour = useToken("panelBorder");
+	const variant = props.Variant ?? "flat";
+	const selected = Value(props.Selected ?? false);
+	const bg = useToken("panelBg");
+	const borderColour = useToken("panelBorder");
 
-    const background = Computed(() => (selected.get() ? borderColour.get() : bg.get()));
-    const borderTransparency = Computed(() => (selected.get() ? 0 : 1));
+	const background = Computed(() => (selected.get() ? borderColour.get() : bg.get()));
+	const borderTransparency = Computed(() => (selected.get() ? 0 : 1));
 
-    const drag = props.Draggable
-        ? New("UIDragDetector")({
-                Name: "DragDetector",
-                Enabled: true,
-                DragRelativity: Enum.UIDragDetectorDragRelativity.Absolute,
-                DragStyle: Enum.UIDragDetectorDragStyle.Scriptable,
-                [OnEvent("DragStart")]: props.OnDragStart,
-                [OnEvent("DragContinue")]: props.OnDragContinue,
-                [OnEvent("DragEnd")]: props.OnDragEnd,
-          })
-        : undefined;
+	const drag = props.Draggable
+		? New("UIDragDetector")({
+				Name: "DragDetector",
+				Enabled: true,
+				DragRelativity: Enum.UIDragDetectorDragRelativity.Absolute,
+				DragStyle: Enum.UIDragDetectorDragStyle.Scriptable,
+				[OnEvent("DragStart")]: props.OnDragStart,
+				[OnEvent("DragContinue")]: props.OnDragContinue,
+				[OnEvent("DragEnd")]: props.OnDragEnd,
+			})
+		: undefined;
 
-    const button = New("ImageButton")({
-        Name: props.Name ?? "UIButton",
-        Size: props.Size ?? ButtonSizes.Icon(),
-        AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
-        Position: props.Position ?? UDim2.fromScale(0.5, 0.5),
-        BackgroundTransparency: variant === "flat" ? 1 : props.BackgroundTransparency ?? 0,
-        BackgroundColor3: variant === "panel" ? background : props.BackgroundColor3 ?? new Color3(1, 1, 1),
-        Image: resolveIcon(props.Icon),
-        ImageColor3: props.ImageColor3 ?? new Color3(1, 1, 1),
-        [OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
-        [Children]: {
-            Label: props.Label
-                ? GameText({
-                        Name: "Label",
-                        TextStateValue: Value(props.Label),
-                        AnchorPoint: new Vector2(0.5, 1),
-                        Position: UDim2.fromScale(0.5, 1),
-                        Size: UDim2.fromScale(1, 0.25),
-                        BackgroundTransparency: 1,
-                        TextSize: 14,
-                  })
-                : undefined,
-            Border: props.Rarity
-                ? (() => {
-                        const b = resolveBorder(props.Rarity!);
-                        if (b) {
-                            b.AnchorPoint = new Vector2(0.5, 0.5);
-                            b.Position = UDim2.fromScale(0.5, 0.5);
-                            b.Size = UDim2.fromScale(1, 1);
-                            (b as unknown as ImageLabel & { ImageTransparency: number }).ImageTransparency = borderTransparency as unknown as number;
-                        }
-                        return b;
-                  })()
-                : undefined,
-            Drag: variant === "flat" ? drag : undefined,
-        },
-    });
+	const button = New("ImageButton")({
+		Name: props.Name ?? "UIButton",
+		Size: props.Size ?? ButtonSizes.Icon(),
+		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
+		Position: props.Position ?? UDim2.fromScale(0.5, 0.5),
+		BackgroundTransparency: variant === "flat" ? 1 : (props.BackgroundTransparency ?? 0),
+		BackgroundColor3: variant === "panel" ? background : (props.BackgroundColor3 ?? new Color3(1, 1, 1)),
+		Image: resolveIcon(props.Icon),
+		ImageColor3: props.ImageColor3 ?? new Color3(1, 1, 1),
+		[OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
+		[Children]: {
+			Label: props.Label
+				? GameText({
+						Name: "Label",
+						TextStateValue: Value(props.Label),
+						AnchorPoint: new Vector2(0.5, 1),
+						Position: UDim2.fromScale(0.5, 1),
+						Size: UDim2.fromScale(1, 0.25),
+						BackgroundTransparency: 1,
+						TextSize: 14,
+					})
+				: undefined,
+			Border: props.Rarity
+				? (() => {
+						const b = resolveBorder(props.Rarity!);
+						if (b) {
+							b.AnchorPoint = new Vector2(0.5, 0.5);
+							b.Position = UDim2.fromScale(0.5, 0.5);
+							b.Size = UDim2.fromScale(1, 1);
+							(b as unknown as ImageLabel & { ImageTransparency: number }).ImageTransparency =
+								borderTransparency as unknown as number;
+						}
+						return b;
+					})()
+				: undefined,
+			Drag: variant === "flat" ? drag : undefined,
+		},
+	});
 
-    if (variant === "panel") {
-        return GamePanel({
-            Name: `${props.Name ?? "UIButton"}Panel`,
-            Size: props.Size ?? ButtonSizes.Icon(),
-            BackgroundTransparency: 0.2,
-            Content: {
-                Button: button,
-                Drag: drag,
-            },
-        });
-    }
+	if (variant === "panel") {
+		return GamePanel({
+			Name: `${props.Name ?? "UIButton"}Panel`,
+			Size: props.Size ?? ButtonSizes.Icon(),
+			BackgroundTransparency: 0.2,
+			Content: {
+				Button: button,
+				Drag: drag,
+			},
+		});
+	}
 
-    return button;
+	return button;
 };
-
