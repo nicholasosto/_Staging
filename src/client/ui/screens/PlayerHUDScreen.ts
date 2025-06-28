@@ -54,7 +54,7 @@ export const PlayerHUDScreen = () => {
 				Size: new UDim2(1, 0, 1, 0),
 				BackgroundTransparency: 1,
 				Content: {
-                                        GridContainer: GridContainer({}),
+					GridContainer: GridContainer({}),
 					AbilityBar: AbilityBar({
 						abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"],
 					}),

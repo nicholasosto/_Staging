@@ -17,18 +17,18 @@ import { BaseContainer, BaseContainerProps } from "./BaseContainer";
 import { Layout } from "../../tokens";
 
 export interface GridContainerProps extends Partial<BaseContainerProps> {
-    Gap?: number;
-    CellSize?: UDim2;
+	Gap?: number;
+	CellSize?: UDim2;
 }
 
 export const GridContainer = (props: GridContainerProps) => {
-    const content = {
-        Layout: Layout.Grid(props.Gap, props.CellSize),
-        ...(props.Content ?? {}),
-    } as Fusion.ChildrenValue;
+	const content = {
+		Layout: Layout.Grid(props.Gap, props.CellSize),
+		...(props.Content ?? {}),
+	} as Fusion.ChildrenValue;
 
-    return BaseContainer({
-        ...props,
-        Content: content,
-    });
+	return BaseContainer({
+		...props,
+		Content: content,
+	});
 };

@@ -17,17 +17,17 @@ import { BaseContainer, BaseContainerProps } from "./BaseContainer";
 import { Layout } from "../../tokens";
 
 export interface HorizontalContainerProps extends Partial<BaseContainerProps> {
-    Gap?: number;
+	Gap?: number;
 }
 
 export const HorizontalContainer = (props: HorizontalContainerProps) => {
-    const content = {
-        Layout: Layout.HorizontalSet(props.Gap),
-        ...(props.Content ?? {}),
-    } as Fusion.ChildrenValue;
+	const content = {
+		Layout: Layout.HorizontalSet(props.Gap),
+		...(props.Content ?? {}),
+	} as Fusion.ChildrenValue;
 
-    return BaseContainer({
-        ...props,
-        Content: content,
-    });
+	return BaseContainer({
+		...props,
+		Content: content,
+	});
 };

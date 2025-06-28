@@ -17,17 +17,17 @@ import { BaseContainer, BaseContainerProps } from "./BaseContainer";
 import { Layout } from "../../tokens";
 
 export interface VerticalContainerProps extends Partial<BaseContainerProps> {
-    Gap?: number;
+	Gap?: number;
 }
 
 export const VerticalContainer = (props: VerticalContainerProps) => {
-    const content = {
-        Layout: Layout.VerticalSet(props.Gap),
-        ...(props.Content ?? {}),
-    } as Fusion.ChildrenValue;
+	const content = {
+		Layout: Layout.VerticalSet(props.Gap),
+		...(props.Content ?? {}),
+	} as Fusion.ChildrenValue;
 
-    return BaseContainer({
-        ...props,
-        Content: content,
-    });
+	return BaseContainer({
+		...props,
+		Content: content,
+	});
 };
