@@ -13,6 +13,7 @@ import { HUDMenuBar, AbilityBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { BarMeter } from "../molecules";
+import { DefaultGridContainer } from "../atoms/Container/GridContainer";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -53,6 +54,7 @@ export const PlayerHUDScreen = () => {
 				Size: new UDim2(1, 0, 1, 0),
 				BackgroundTransparency: 1,
 				Content: {
+					GridContainer: DefaultGridContainer({}),
 					AbilityBar: AbilityBar({
 						abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"],
 					}),

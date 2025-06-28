@@ -25,9 +25,8 @@
  *  abilities during gameplay.
  */
 
-import Fusion from "@rbxts/fusion";
 import { GamePanel } from "client/ui/atoms";
-import { AbilityButton, AbilityButtonProps } from "client/ui/molecules";
+import { AbilityButton } from "client/ui/molecules";
 import { Layout } from "client/ui/tokens";
 import { AbilityKey } from "shared";
 

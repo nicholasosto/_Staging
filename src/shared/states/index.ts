@@ -20,8 +20,8 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export * from "./GemForgeState";
-export * from "./InventoryState";
+// export * from "./GemForgeState";
+// export * from "./InventoryState";
 export * from "./PlayerState";
 export * from "./ScreenState";
 export * from "./ThemeState";

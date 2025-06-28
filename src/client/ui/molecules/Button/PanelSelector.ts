@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/types" />
 
 import Fusion, { Children, Value } from "@rbxts/fusion";
-import { EquipmentSlotKey, EquipmentSlotMeta } from "shared/data/PanelSelectorData";
-import { GameButton, GameText } from "../atoms";
+import { EquipmentSlotKey, EquipmentSlotMeta } from "shared/data/EquipmentSelector";
+import { GameButton, GameText } from "../../atoms";
 
 /**
  * @file        src/client/ui/molecules/PanelSelector.ts

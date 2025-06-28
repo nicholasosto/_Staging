@@ -29,12 +29,6 @@ import { DataProfileController, BattleRoomService } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey } from "shared/data";
-import { GemFactory } from "server/factories";
-
-// SPAWN MANIFESTATION
-Network.Server.OnEvent("SpawnManifestation", (player, formId, abilityId, bonusId) => {
-	GemFactory.createManifestationGem();
-});
 
 // INCREASE ATTRIBUTE
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
@@ -56,19 +50,6 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 	profile.Data.attributes[attributeKey as keyof typeof profile.Data.attributes] += amount;
 	profile.Data.attributes.AvailablePoints -= amount;
 	print(`Player Profile:`, profile);
-});
-
-// ADD GEM to player profile
-Network.Server.OnEvent("AddGem", (player, gemid: string) => {
-	// Handle the addition of a gem to the player's profile
-	print(`Player ${player.Name} requested to add gem with ID: ${gemid}`);
-	const profile = DataProfileController.GetProfile(player);
-	if (!profile) {
-		warn(`Player profile not found for ${player.Name}`);
-		return;
-	}
-
-	print(`Added gem to player ${player.Name}'s profile:`, profile.Data);
 });
 
 // MATCHMAKING -----------------------------------------------------

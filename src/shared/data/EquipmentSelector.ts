@@ -21,12 +21,3 @@ export const EquipmentSlotMeta: Record<EquipmentSlotKey, EquipmentSlotMeta> = {
 	Necklace: { displayName: "Necklace", iconId: GameImages.SlotImage.Accessory },
 	Ring: { displayName: "Ring", iconId: GameImages.SlotImage.Accessory },
 } satisfies Record<EquipmentSlotKey, EquipmentSlotMeta>;
-
-// Default equipment slots with empty values
-export const DefaultEquipmentSlots: EquipmentSlotMap = {
-	Helmet: "",
-	Chest: "",
-	Back: "",
-	Necklace: "",
-	Ring: "",
-};

@@ -1,1 +1,1 @@
-export * from "./GemFactory";
+export * from "./NPCFactory";
