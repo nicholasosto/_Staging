@@ -9,7 +9,7 @@
 
 /* =============================================== Imports =============================================== */
 import Net from "@rbxts/net";
-import { AbilityKey, AttributeKey, SettingKey, PlayerSettings } from "shared/definitions";
+import { AbilityKey, AttributeKey, SettingKey, PlayerSettings, ResourceKey } from "shared/definitions";
 
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
@@ -34,4 +34,7 @@ export const Network = Net.Definitions.Create({
 
 	/* Activate Ability */
 	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+
+	/* Send Player Resource */
+	ResourceUpdate: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
 });

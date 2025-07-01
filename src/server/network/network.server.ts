@@ -43,6 +43,8 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 	}
 });
 
+// Resources -----------------------------------------------------
+
 // Abilities -----------------------------------------------------
 Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
 	const soulPlayer = SoulPlayer.GetSoulPlayer(player);

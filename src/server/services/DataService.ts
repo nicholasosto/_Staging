@@ -12,7 +12,7 @@ import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AttributesDTO, DefaultAttributes } from "shared/definitions";
+import { AbilityKey, AttributesDTO, DefaultAttributes } from "shared/definitions";
 
 /* ========================================== Profile Store Setup =============================================== */
 
@@ -22,12 +22,14 @@ const DATASTORE_NAME = "SoulSteelPlayerProfile";
 // Main Profile Data Type
 export interface PlayerProfile {
 	attributes: AttributesDTO;
+	abilities?: AbilityKey[]; // Optional abilities array
 }
 
 /* =============================================== Default Data =============================================== */
 
 export const PlayerDTOTemplate: PlayerProfile = {
 	attributes: DefaultAttributes,
+	abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake"], // Default abilities
 };
 
 /* Data Profile Controller */
