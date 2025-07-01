@@ -20,23 +20,31 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { GameWindow } from "../molecules";
-import { ScreenKey } from "client/states";
-import { PanelSelector } from "../molecules/Button/PanelSelector";
+import Fusion, { ForPairs } from "@rbxts/fusion";
+import { GameWindow, SettingListItem } from "../molecules";
+import { ScreenKey, SettingsState } from "client/states";
+import { SETTING_KEYS, SettingKey } from "shared/definitions/Settings";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {
-	return GameWindow({
-		Name: `${Key}Screen`,
-		ScreenKey: Key,
-		Content: {
-			SettingsTest: PanelSelector({
-				SelectorKey: "Helmet",
-				Size: new UDim2(1, 0, 0, 50),
-				Position: new UDim2(0, 0, 0, 50),
-				BackgroundColor3: Color3.fromRGB(50, 50, 50),
-				BorderSizePixel: 0,
-			}),
-		},
-	});
+        const state = SettingsState.getInstance();
+        const keys = [...SETTING_KEYS] as SettingKey[];
+        const items = ForPairs(keys, (index, key: SettingKey) =>
+                $tuple(
+                        key,
+                        SettingListItem({
+                                SettingKey: key,
+                                Value: state.Settings[key],
+                                LayoutOrder: index,
+                                OnChanged: (val) => state.set(key, val),
+                        }),
+                ),
+        );
+        return GameWindow({
+                Name: `${Key}Screen`,
+                ScreenKey: Key,
+                Content: {
+                        SettingItems: items,
+                },
+        });
 };

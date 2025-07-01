@@ -29,6 +29,8 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/CountdownTimer.ts`|Usable|Displays battle countdown|
 |Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
+|Client|`client/ui/molecules/SettingListItem.ts`|Usable|Displays and edits a single setting|
+|Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
 |Client|`client/ui/screens`|Under Construction|Gem forge, character, inventory, shop, settings, teleport and HUD screens|
 |Client|`client/ui/screens/DragDropScreen.ts`|Usable|Drag and drop demo|
 |Client|`client/ui/screens/CharacterScreen.ts`|Stub|Character info window|
@@ -40,6 +42,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/network/network.server.ts`|Usable|Server network handlers|
 |Server|`server/services/ProfileService.ts`|Under Construction|Loads player profiles|
 |Server|`server/services/BattleRoomService.ts`|Stub|Matchmaking and teleport skeleton|
+|Server|`server/services/SettingsService.ts`|Usable|Stores player settings|
 |Server|`server/entity/Manifestation.ts`|Stub|Placeholder creation logic|
 |Server|`server/entity/npc/NPC.ts`|Usable|Basic NPC class|
 |Server|`server/entity/player/SoulPlayer.ts`|Usable|Player data container|
