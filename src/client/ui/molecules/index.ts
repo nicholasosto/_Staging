@@ -3,3 +3,4 @@ export * from "./FillBar/BarMeter";
 export * from "./CountdownTimer";
 export * from "./GameWindow";
 export * from "./Button";
+export * from "./SettingListItem";

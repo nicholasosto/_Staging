@@ -25,10 +25,10 @@ import { HttpService } from "@rbxts/services";
 import { Network } from "shared/network";
 
 /* Custom Services */
-import { DataProfileController, BattleRoomService } from "server/services";
+import { DataProfileController, BattleRoomService, SettingsService } from "server/services";
 
 /* Factories and Types */
-import { AttributeKey, AbilityKey, AbilitiesMeta } from "shared/definitions";
+import { AttributeKey, AbilityKey, AbilitiesMeta, SettingKey } from "shared/definitions";
 import Net from "@rbxts/net";
 import { GetSoulPlayer } from "server/entity/player/SoulPlayer";
 import { playAnimation } from "shared/assets/animations";
@@ -83,7 +83,15 @@ Network.Server.OnEvent("JoinRoom", (player, roomId: string) => {
 });
 
 Network.Server.OnEvent("SetActiveGem", (player, roomId: string, gemId: string) => {
-	BattleRoomService.SetActiveGem(player, roomId, gemId);
+        BattleRoomService.SetActiveGem(player, roomId, gemId);
+});
+
+Network.Server.Get("GetPlayerSettings").SetCallback((player) => {
+        return SettingsService.Get(player);
+});
+
+Network.Server.OnEvent("UpdatePlayerSetting", (player, key: SettingKey, value: boolean | string) => {
+        SettingsService.Set(player, key, value);
 });
 
 print("Network server initialized and listening for events.");

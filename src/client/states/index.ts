@@ -25,3 +25,4 @@
 export * from "./PlayerState";
 export * from "./ScreenState";
 export * from "./ThemeState";
+export { default as SettingsState } from "./SettingsState";
