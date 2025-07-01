@@ -83,13 +83,10 @@ export default class SoulPlayer {
 	}
 
 	private _loadAnimations() {
-		if (!this.CharacterModel) {
-			warn(`Character model for player ${this.Player.Name} is not loaded.`);
+		if (this.CharacterModel === undefined) {
+			warn(`Character model for player ${this.Player.Name} is undefined.`);
 			return;
 		}
-
-		print(`Loading animations for player ${this.Player.Name}...`, this.Abilities);
-		// Animations
 		this.Abilities.forEach((abilityKey) => {
 			if (this.CharacterModel === undefined) {
 				warn(`Character model for player ${this.Player.Name} is undefined.`);

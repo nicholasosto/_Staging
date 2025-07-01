@@ -20,7 +20,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export * from "./ProfileService";
+export * from "./DataService";
 export * from "./ManifestationForgeService";
 export * from "./BattleRoomService";
 export * from "./SettingsService";

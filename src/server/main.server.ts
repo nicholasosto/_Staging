@@ -10,7 +10,6 @@
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
 import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
-import { AlienOrganism } from "./entity/AlienOrganism";
 import { EntityResource } from "./entity/entityResource/EntityResource";
 import SoulPlayer from "./entity/player/SoulPlayer";
 

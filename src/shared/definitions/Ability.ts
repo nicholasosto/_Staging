@@ -33,6 +33,10 @@ export interface AbilityMeta {
 	description: string;
 	cooldown: number; // Cooldown in seconds
 	basePower: number; // Base power of the ability
+	cost: {
+		mana: number; // Mana cost for the ability
+		stamina: number; // Stamina cost for the ability
+	};
 }
 
 export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
@@ -43,6 +47,10 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		description: "Launches a fiery projectile that explodes on impact.",
 		cooldown: 5,
 		basePower: 50,
+		cost: {
+			mana: 20, // Example mana cost
+			stamina: 10, // Example stamina cost
+		},
 	},
 	ice_shard: {
 		displayName: "Ice Shard",
@@ -51,6 +59,10 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		description: "Launches a shard of ice that pierces through enemies.",
 		cooldown: 6,
 		basePower: 40,
+		cost: {
+			mana: 15, // Example mana cost
+			stamina: 5, // Example stamina cost
+		},
 	},
 	lightning_bolt: {
 		displayName: "Lightning Bolt",
@@ -59,6 +71,10 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		description: "Calls down a bolt of lightning to strike enemies.",
 		cooldown: 7,
 		basePower: 60,
+		cost: {
+			mana: 25, // Example mana cost
+			stamina: 15, // Example stamina cost
+		},
 	},
 	earthquake: {
 		displayName: "Earthquake",
@@ -67,6 +83,10 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		description: "Causes the ground to shake, damaging all nearby enemies.",
 		cooldown: 10,
 		basePower: 80,
+		cost: {
+			mana: 30, // Example mana cost
+			stamina: 20, // Example stamina cost
+		},
 	},
 	melee: {
 		displayName: "Melee Attack",
@@ -75,6 +95,10 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 		description: "A basic melee attack that deals physical damage.",
 		cooldown: 2,
 		basePower: 30,
+		cost: {
+			mana: 0,
+			stamina: 5,
+		},
 	},
 } satisfies Record<AbilityKey, AbilityMeta>;
 

@@ -12,4 +12,5 @@ export * from "./AlienOrganism";
 export * from "./Manifestation";
 export * from "./entityResource";
 export * from "./npc";
+export * from "./helpers";
 export * from "./player";
