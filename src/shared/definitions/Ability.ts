@@ -39,7 +39,7 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	fireball: {
 		displayName: "Fireball",
 		iconId: GameImages.Ability.Flame_Sythe,
-		animationKey: "ScytheAttack", // Replace with actual animation key
+		animationKey: "TakeDamage", // Replace with actual animation key
 		description: "Launches a fiery projectile that explodes on impact.",
 		cooldown: 5,
 		basePower: 50,
@@ -47,7 +47,7 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 	ice_shard: {
 		displayName: "Ice Shard",
 		iconId: GameImages.Ability.Ice_Shard,
-		animationKey: "ScytheAttack", // Replace with actual animation key
+		animationKey: "SpinKick", // Replace with actual animation key
 		description: "Launches a shard of ice that pierces through enemies.",
 		cooldown: 6,
 		basePower: 40,

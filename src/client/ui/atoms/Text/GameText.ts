@@ -8,6 +8,7 @@ export interface GameTextProps extends Fusion.PropertyTable<TextLabel> {
 }
 
 export function GameText(props: GameTextProps): TextLabel {
+	print("GameText Component Rendered", props.Size, props.TextStateValue.get());
 	const HoveredState = Value(false);
 	const colour = useToken("textPrimary");
 	const regularFont = new Font("SourceSans", Enum.FontWeight.Regular, Enum.FontStyle.Normal);

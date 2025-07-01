@@ -22,7 +22,7 @@ export class SettingsService {
 	}
 
 	public static Start(): SettingsService {
-		if (!this._instance) {
+		if (this._instance === undefined) {
 			this._instance = new SettingsService();
 		}
 		return this._instance;

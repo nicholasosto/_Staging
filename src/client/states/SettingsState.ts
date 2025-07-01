@@ -29,7 +29,7 @@ export default class SettingsState {
 
 	private async fetchFromServer() {
 		const data = await GetPlayerSettings();
-		if (data) {
+		if (data !== undefined) {
 			for (const key of SETTING_KEYS) {
 				const val = data[key];
 				this.Settings[key].set(val);

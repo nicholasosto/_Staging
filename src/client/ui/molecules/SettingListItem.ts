@@ -28,45 +28,41 @@ export interface SettingListItemProps extends Fusion.PropertyTable<Frame> {
 // -------------- Component --------------------------------------------------- //
 export const SettingListItem = (props: SettingListItemProps) => {
 	const meta = SettingsMeta[props.SettingKey];
+	const ContainerSize = new UDim2(1, 0, 0, 50);
 
 	const newContainer = GamePanel({
 		Name: "SettingListItemContainer",
-		Size: props.Size ?? UDim2.fromScale(1, 0),
+		Size: props.Size ?? ContainerSize,
 		Layout: Layout.HorizontalSet(2),
 		Padding: Padding(4),
-		BackgroundColor3: Color3.fromRGB(30, 30, 30),
-		BorderSizePixel: 0,
-		[OnEvent("MouseEnter")]: () => {
-			newContainer.BackgroundColor3 = Color3.fromRGB(40, 40, 40);
-		},
-		[OnEvent("MouseLeave")]: () => {
-			newContainer.BackgroundColor3 = Color3.fromRGB(30, 30, 30);
-		},
-
 		Content: {
 			Title: GameText({
-				Name: "SettingName",
+				Name: "SettingTitle",
 				TextStateValue: Value(meta.displayName),
-				TextSize: 16,
-				Size: UDim2.fromOffset(0.3, 1),
+				TextSize: 14,
+				Size: UDim2.fromScale(0.4, 1),
 				BackgroundTransparency: 1,
+				LayoutOrder: 1,
 				TextXAlignment: Enum.TextXAlignment.Left,
 			}),
-			Description: GameText({
-				Name: "SettingDescription",
-				TextStateValue: Value(meta.description),
-				TextSize: 12,
-				Size: UDim2.fromOffset(0.3, 1),
-				BackgroundTransparency: 1,
-				TextXAlignment: Enum.TextXAlignment.Center,
-			}),
-			Control: GameText({
+			Control: GameButton({
 				Name: "SettingControl",
-				TextStateValue: Value(meta.controlType),
-				TextSize: 12,
-				Size: UDim2.fromOffset(0.3, 1),
-				BackgroundTransparency: 1,
-				TextXAlignment: Enum.TextXAlignment.Center,
+				Size: UDim2.fromScale(0.6, 1),
+				BackgroundTransparency: 0.3,
+				LayoutOrder: 2,
+				OnClick: () => {
+					print("SettingControl Clicked", props.SettingKey, props.Value.get());
+					if (meta.controlType === "boolean") {
+						const newValue = !(props.Value.get() as boolean);
+						props.Value.set(newValue);
+						props.OnChanged?.(newValue);
+					} else if (meta.controlType === "string") {
+						// Handle string input, e.g., open a text input dialog
+						const newValue = "New Value"; // Placeholder for actual input logic
+						props.Value.set(newValue);
+						props.OnChanged?.(newValue);
+					}
+				},
 			}),
 		},
 	});

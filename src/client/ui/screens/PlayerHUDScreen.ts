@@ -50,14 +50,7 @@ export const PlayerHUDScreen = () => {
 					MenuBar: HudProps.HUDMenuBar,
 				},
 			}),
-			Free: GamePanel({
-				Name: "FreeSpace",
-				Size: new UDim2(1, 0, 1, 0),
-				BackgroundTransparency: 1,
-				Content: {
-					AbilityBar: abilityBar,
-				},
-			}),
+			AbilityBar: abilityBar,
 		},
 	});
 

@@ -30,47 +30,28 @@ import { DataProfileController, BattleRoomService, SettingsService } from "serve
 /* Factories and Types */
 import { AttributeKey, AbilityKey, AbilitiesMeta, SettingKey } from "shared/definitions";
 import Net from "@rbxts/net";
-import { GetSoulPlayer } from "server/entity/player/SoulPlayer";
 import { playAnimation } from "shared/assets/animations";
+import SoulPlayer from "server/entity/player/SoulPlayer";
 
 // INCREASE ATTRIBUTE
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
-	// Handle the spawning of the manifestation
-	print(`Player ${player.Name} requested to increase attribute ${attributeKey} by ${amount}`);
-
-	const profile = DataProfileController.GetProfile(player);
-
-	if (!profile) {
-		warn(`Player profile not found for ${player.Name}`);
-		return;
-	}
-	const AvailablePoints = profile?.Data.attributes.AvailablePoints ?? 0;
-	if (AvailablePoints < amount) {
-		warn(`Not enough available points to increase ${attributeKey} by ${amount}. Available: ${AvailablePoints}`);
-		return;
-	}
-
-	profile.Data.attributes[attributeKey as keyof typeof profile.Data.attributes] += amount;
-	profile.Data.attributes.AvailablePoints -= amount;
-	print(`Player Profile:`, profile);
-});
-
-// Abilities -----------------------------------------------------
-Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
-	const soulPlayer = GetSoulPlayer(player);
-	const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
 	if (soulPlayer) {
-		if (soulPlayer.CharacterModel) {
-			playAnimation(soulPlayer.CharacterModel, animationKey);
-		}
+		//soulPlayer.IncreaseAttribute(attributeKey, amount);
 	} else {
 		warn(`SoulPlayer not found for ${player.Name}`);
 	}
 });
+
+// Abilities -----------------------------------------------------
+Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
+	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
+	soulPlayer?.ActivateAbility(abilityKey);
+});
+
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
 	// Handle the request for player abilities
-	print(`Player ${player.Name} requested their abilities.`);
-	const soulPlayer = GetSoulPlayer(player);
+	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
 	return soulPlayer ? soulPlayer.Abilities : undefined;
 });
 // MATCHMAKING -----------------------------------------------------
@@ -86,6 +67,7 @@ Network.Server.OnEvent("SetActiveGem", (player, roomId: string, gemId: string) =
 	BattleRoomService.SetActiveGem(player, roomId, gemId);
 });
 
+// SETTINGS -----------------------------------------------------
 Network.Server.Get("GetPlayerSettings").SetCallback((player) => {
 	return SettingsService.Get(player);
 });

@@ -1,5 +1,7 @@
-import { AbilityKey } from "shared";
-import { loadAnimation } from "shared/assets/animations";
+import { AbilitiesMeta, AbilityKey, PlayerDataDTO } from "shared";
+import { loadAnimation, playAnimation } from "shared/assets/animations";
+import { DataProfileController, PlayerProfile } from "server/services";
+import { Profile } from "@rbxts/profileservice/globals";
 
 /**
  * SoulPlayer class represents a base player entity in the game.
@@ -7,7 +9,7 @@ import { loadAnimation } from "shared/assets/animations";
  */
 const testAbilities: AbilityKey[] = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"];
 
-/* ============================================= Player Registry ====================================================== */
+/* ============================================= Player Registry <userId, SoulPlayer> ====================================================== */
 export const PlayerRegistry = new Map<number, SoulPlayer>();
 
 /* Get SoulPlayer by Player */
@@ -19,56 +21,87 @@ export function GetSoulPlayer(player: Player): SoulPlayer | undefined {
 }
 
 export default class SoulPlayer {
+	/* Static Properties */
+	public static readonly Binder = new Map<number, SoulPlayer>();
+	/* Static Methods */
+	public static GetSoulPlayer(player: Player): SoulPlayer | undefined {
+		return SoulPlayer.Binder.get(player.UserId);
+	}
+
+	/* Instance Properties - Private */
 	private userId: number;
+	private readonly profile?: Profile<PlayerProfile>;
+
+	/* Instance Properties - Public */
 	public readonly Player: Player;
-	public readonly CharacterModel?: Model;
+	public CharacterModel?: Model;
 	public readonly Abilities: AbilityKey[] = testAbilities; // Default abilities for testing
 
+	/* Constructor */
 	constructor(player: Player) {
 		this.Player = player;
 		this.userId = player.UserId;
-		this.CharacterModel = player.Character || player.CharacterAdded.Wait()[0];
+		this.profile = DataProfileController.GetProfile(player);
+		this.CharacterModel = player.Character;
 
-		// Initialize player properties
-		this.initializePlayerProperties();
-
-		// Animations
-		loadAnimation(this.CharacterModel, "Dodge");
-		loadAnimation(this.CharacterModel, "SpinKick");
-		loadAnimation(this.CharacterModel, "TakeDamage");
-		loadAnimation(this.CharacterModel, "ScytheAttack");
+		this.Player.CharacterAppearanceLoaded.Connect((character) => this.CharacterAppearanceLoaded(character));
 
 		// Register the player in the registry
-		this.registerSoulPlayer();
+		SoulPlayer.Binder.set(this.userId, this);
+		print(`SoulPlayer created for ${this.Player.Name} with UserId: ${this.userId}`, this.profile);
 	}
 
-	private registerSoulPlayer() {
-		if (!PlayerRegistry.has(this.userId)) {
-			PlayerRegistry.set(this.userId, this);
+	private CharacterAppearanceLoaded(character: Model) {
+		this.CharacterModel = character;
+		this._loadAnimations();
+	}
+
+	public ActivateAbility(abilityKey: AbilityKey) {
+		if (this.Abilities.includes(abilityKey)) {
+			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+			const character = this.CharacterModel;
+			if (character) {
+				playAnimation(character, animationKey);
+			} else {
+				warn(`Character model not found for ${this.Player.Name}`);
+			}
 		} else {
-			warn(`SoulPlayer for userId ${this.userId} is already registered.`);
+			warn(`Ability ${abilityKey} is not available for player ${this.Player.Name}`);
 		}
 	}
 
-	private deregisterSoulPlayer() {
-		if (PlayerRegistry.has(this.userId)) {
-			PlayerRegistry.delete(this.userId);
-		} else {
-			warn(`SoulPlayer for userId ${this.userId} is not registered.`);
-		}
+	/* Instance Methods */
+	/**
+	 * Increases the player's attribute by a specified amount.
+	 * @param attributeKey The key of the attribute to increase.
+	 * @param amount The amount to increase the attribute by.
+	 */
+	public IncreaseAttribute(attributeKey: string, amount: number) {
+		// Logic to increase the player's attribute
+		print(`Increasing attribute ${attributeKey} by ${amount} for player ${this.Player.Name}`);
+		// Here you would typically update the player's profile or stats
 	}
 
-	private initializePlayerProperties() {
-		// Ensure the character model is loaded
+	private _loadAnimations() {
 		if (!this.CharacterModel) {
 			warn(`Character model for player ${this.Player.Name} is not loaded.`);
 			return;
 		}
+
+		print(`Loading animations for player ${this.Player.Name}...`, this.Abilities);
+		// Animations
+		this.Abilities.forEach((abilityKey) => {
+			if (this.CharacterModel === undefined) {
+				warn(`Character model for player ${this.Player.Name} is undefined.`);
+				return;
+			}
+			loadAnimation(this.CharacterModel, AbilitiesMeta[abilityKey]?.animationKey);
+		});
 	}
 
 	private died() {
 		// Handle player death logic here
 		warn(`Player ${this.Player.Name} has died.`);
-		this.deregisterSoulPlayer();
+		SoulPlayer.Binder.delete(this.userId);
 	}
 }
