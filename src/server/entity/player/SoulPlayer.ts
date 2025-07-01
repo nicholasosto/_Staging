@@ -32,7 +32,7 @@ export default class SoulPlayer {
 		// Initialize player properties
 		this.initializePlayerProperties();
 
-		// Animations 
+		// Animations
 		loadAnimation(this.CharacterModel, "Dodge");
 		loadAnimation(this.CharacterModel, "SpinKick");
 		loadAnimation(this.CharacterModel, "TakeDamage");

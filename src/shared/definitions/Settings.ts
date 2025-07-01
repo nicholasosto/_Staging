@@ -22,33 +22,33 @@ export type SettingKey = (typeof SETTING_KEYS)[number];
 export type SettingType = "boolean" | "string";
 
 export interface SettingMeta {
-        displayName: string;
-        description: string;
-        controlType: SettingType;
+	displayName: string;
+	description: string;
+	controlType: SettingType;
 }
 
 export const SettingsMeta: Record<SettingKey, SettingMeta> = {
-        musicEnabled: {
-                displayName: "Music",
-                description: "Toggle background music on or off.",
-                controlType: "boolean",
-        },
-        showFps: {
-                displayName: "Show FPS",
-                description: "Display the current frames per second.",
-                controlType: "boolean",
-        },
-        nickname: {
-                displayName: "Nickname",
-                description: "Set a custom player nickname.",
-                controlType: "string",
-        },
+	musicEnabled: {
+		displayName: "Music",
+		description: "Toggle background music on or off.",
+		controlType: "boolean",
+	},
+	showFps: {
+		displayName: "Show FPS",
+		description: "Display the current frames per second.",
+		controlType: "boolean",
+	},
+	nickname: {
+		displayName: "Nickname",
+		description: "Set a custom player nickname.",
+		controlType: "string",
+	},
 };
 
 export type PlayerSettings = Record<SettingKey, boolean | string>;
 
 export const DefaultSettings: PlayerSettings = {
-        musicEnabled: true,
-        showFps: false,
-        nickname: "",
+	musicEnabled: true,
+	showFps: false,
+	nickname: "",
 };

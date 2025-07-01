@@ -24,27 +24,31 @@ import Fusion, { ForPairs } from "@rbxts/fusion";
 import { GameWindow, SettingListItem } from "../molecules";
 import { ScreenKey, SettingsState } from "client/states";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/Settings";
+import { Layout } from "../tokens";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {
-        const state = SettingsState.getInstance();
-        const keys = [...SETTING_KEYS] as SettingKey[];
-        const items = ForPairs(keys, (index, key: SettingKey) =>
-                $tuple(
-                        key,
-                        SettingListItem({
-                                SettingKey: key,
-                                Value: state.Settings[key],
-                                LayoutOrder: index,
-                                OnChanged: (val) => state.set(key, val),
-                        }),
-                ),
-        );
-        return GameWindow({
-                Name: `${Key}Screen`,
-                ScreenKey: Key,
-                Content: {
-                        SettingItems: items,
-                },
-        });
+	const state = SettingsState.getInstance();
+	const keys = [...SETTING_KEYS] as SettingKey[];
+	const items = ForPairs(keys, (index, key: SettingKey) =>
+		$tuple(
+			key,
+			SettingListItem({
+				SettingKey: key,
+				Size: new UDim2(1, 0, 0, 50),
+				Value: state.Settings[key],
+				LayoutOrder: index,
+				OnChanged: (val) => state.set(key, val),
+			}),
+		),
+	);
+	return GameWindow({
+		Name: `${Key}Screen`,
+		ScreenKey: Key,
+		Size: UDim2.fromOffset(400, 600),
+		Content: {
+			Layout: Layout.VerticalSet(2),
+			SettingItems: items,
+		},
+	});
 };

@@ -14,32 +14,32 @@ import { DefaultSettings, PlayerSettings, SettingKey } from "shared/definitions/
 
 // -------------- Service ----------------------------------------------------- //
 export class SettingsService {
-        private static _instance: SettingsService | undefined;
-        private static _settings = new Map<Player, PlayerSettings>();
+	private static _instance: SettingsService | undefined;
+	private static _settings = new Map<Player, PlayerSettings>();
 
-        private constructor() {
-                print("SettingsService initialized.");
-        }
+	private constructor() {
+		print("SettingsService initialized.");
+	}
 
-        public static Start(): SettingsService {
-                if (!this._instance) {
-                        this._instance = new SettingsService();
-                }
-                return this._instance;
-        }
+	public static Start(): SettingsService {
+		if (!this._instance) {
+			this._instance = new SettingsService();
+		}
+		return this._instance;
+	}
 
-        public static Get(player: Player): PlayerSettings {
-                const existing = this._settings.get(player);
-                if (existing) return existing;
-                const defaults = { ...DefaultSettings };
-                this._settings.set(player, defaults);
-                return defaults;
-        }
+	public static Get(player: Player): PlayerSettings {
+		const existing = this._settings.get(player);
+		if (existing) return existing;
+		const defaults = { ...DefaultSettings };
+		this._settings.set(player, defaults);
+		return defaults;
+	}
 
-        public static Set(player: Player, key: SettingKey, value: boolean | string) {
-                const settings = this.Get(player);
-                settings[key] = value;
-        }
+	public static Set(player: Player, key: SettingKey, value: boolean | string) {
+		const settings = this.Get(player);
+		settings[key] = value;
+	}
 }
 
 // Start service on import

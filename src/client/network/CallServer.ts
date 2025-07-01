@@ -14,13 +14,13 @@ export async function GetPlayerAbilities(): Promise<AbilityKey[] | undefined> {
 }
 
 export function ActivateAbility(abilityKey: AbilityKey): void {
-        ActivateAbilitySignal.SendToServer(abilityKey);
+	ActivateAbilitySignal.SendToServer(abilityKey);
 }
 
 export async function GetPlayerSettings(): Promise<PlayerSettings> {
-        return await GetPlayerSettingsSignal.CallServerAsync(Players.LocalPlayer);
+	return await GetPlayerSettingsSignal.CallServerAsync(Players.LocalPlayer);
 }
 
 export function UpdatePlayerSetting(key: SettingKey, value: boolean | string): void {
-        UpdateSettingSignal.SendToServer(key, value);
+	UpdateSettingSignal.SendToServer(key, value);
 }

@@ -20,10 +20,10 @@ export const Network = Net.Definitions.Create({
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 	AddGem: Net.Definitions.ClientToServerEvent<[gemid: string]>(),
 	JoinRoom: Net.Definitions.ClientToServerEvent<[roomId: string]>(),
-        SetActiveGem: Net.Definitions.ClientToServerEvent<[roomId: string, gemId: string]>(),
+	SetActiveGem: Net.Definitions.ClientToServerEvent<[roomId: string, gemId: string]>(),
 
-        GetPlayerSettings: Net.Definitions.ServerFunction<(player: Player) => PlayerSettings>(),
-        UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
+	GetPlayerSettings: Net.Definitions.ServerFunction<(player: Player) => PlayerSettings>(),
+	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
 
 	// client → server function
 	CreateRoom: Net.Definitions.ServerFunction<() => string>(),

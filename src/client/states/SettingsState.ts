@@ -17,34 +17,34 @@ import { DefaultSettings, PlayerSettings, SETTING_KEYS, SettingKey } from "share
 import { GetPlayerSettings } from "client/network/CallServer";
 
 export default class SettingsState {
-        private static instance: SettingsState;
-        public Settings: Record<SettingKey, Value<boolean | string>> = {} as never;
+	private static instance: SettingsState;
+	public Settings: Record<SettingKey, Value<boolean | string>> = {} as never;
 
-        private constructor() {
-                for (const key of SETTING_KEYS) {
-                        this.Settings[key] = Value(DefaultSettings[key]);
-                }
-                this.fetchFromServer();
-        }
+	private constructor() {
+		for (const key of SETTING_KEYS) {
+			this.Settings[key] = Value(DefaultSettings[key]);
+		}
+		this.fetchFromServer();
+	}
 
-        private async fetchFromServer() {
-                const data = await GetPlayerSettings();
-                if (data) {
-                        for (const key of SETTING_KEYS) {
-                                const val = data[key];
-                                this.Settings[key].set(val);
-                        }
-                }
-        }
+	private async fetchFromServer() {
+		const data = await GetPlayerSettings();
+		if (data) {
+			for (const key of SETTING_KEYS) {
+				const val = data[key];
+				this.Settings[key].set(val);
+			}
+		}
+	}
 
-        public static getInstance(): SettingsState {
-                if (!this.instance) {
-                        this.instance = new SettingsState();
-                }
-                return this.instance;
-        }
+	public static getInstance(): SettingsState {
+		if (!this.instance) {
+			this.instance = new SettingsState();
+		}
+		return this.instance;
+	}
 
-        public set(key: SettingKey, value: boolean | string) {
-                this.Settings[key].set(value);
-        }
+	public set(key: SettingKey, value: boolean | string) {
+		this.Settings[key].set(value);
+	}
 }
