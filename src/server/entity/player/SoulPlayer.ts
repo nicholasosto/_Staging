@@ -1,3 +1,22 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        SoulPlayer.ts
+ * @module      SoulPlayer
+ * @layer       Server/Entity
+ * @description Player wrapper storing profile and gameplay data.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
 import { AbilitiesMeta, AbilityKey, PlayerDataDTO } from "shared";
 import { loadAnimation, playAnimation } from "shared/assets/animations";
 import { DataProfileController, PlayerProfile } from "server/services";

@@ -1,10 +1,20 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        ProfileService.ts
- * @module      ProfileService
+ * @file        DataService.ts
+ * @module      DataService
  * @layer       Server/Services
  * @description Wrapper around ProfileService for player data.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
 /* =============================================== Imports ====================================================== */

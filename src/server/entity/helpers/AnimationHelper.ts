@@ -1,3 +1,22 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        AnimationHelper.ts
+ * @module      AnimationHelper
+ * @layer       Server/Entity
+ * @description Utility for loading ability animations on characters.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 import { loadAnimation } from "shared/assets/animations";
 

@@ -1,3 +1,17 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        animations.ts
+ * @module      AnimationAssets
+ * @layer       Shared/Assets
+ * @description Helpers for loading and playing animation tracks.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ */
+
 export const ANIMATION_KEY = ["Dodge", "SpinKick", "TakeDamage", "ScytheAttack"] as const;
 export type AnimationKey = (typeof ANIMATION_KEY)[number];
 export type TrackMap = Record<AnimationKey, AnimationTrack>;

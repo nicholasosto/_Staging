@@ -1,3 +1,22 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        AlienOrganism.ts
+ * @module      AlienOrganism
+ * @layer       Server/Entity
+ * @description Basic alien entity with simple bias-driven actions.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
 import { Workspace } from "@rbxts/services";
 
 const ACTION_KEY = ["Rest", "Hunt", "Explore"] as const;

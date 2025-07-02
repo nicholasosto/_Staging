@@ -6,6 +6,16 @@
  * @layer       Server/Services
  * @classType   Singleton
  * @description Handles creation of battle rooms and teleports players to the battle place.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
 /* =============================================== Imports ================================== */

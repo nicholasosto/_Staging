@@ -1,9 +1,21 @@
+/// <reference types="@rbxts/types" />
+
 /**
  * @file        ManifestationForgeService.ts
  * @module      ManifestationForgeService
  * @layer       Server/Services
  * @classType   Singleton
  * @description Service for handling the manifestation forge logic. Validates uuid, builds DTO, persists to profile
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 /* =============================================== Imports ====================================================== */
 import { Players } from "@rbxts/services";

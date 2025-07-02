@@ -1,3 +1,22 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        NPC.ts
+ * @module      NPC
+ * @layer       Server/Entity
+ * @description Basic non-player character with attributes.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
 import { createAttributes } from "shared";
 import { ReplicatedStorage } from "@rbxts/services";
 const Rigs = ReplicatedStorage.WaitForChild("SS Game Package").WaitForChild("Rigs");
