@@ -13,6 +13,8 @@ import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { Players } from "@rbxts/services";
 import { SCREEN_KEYS } from "client/states";
+import { AdminBar } from "../organisms/ButtonBars/AdminBar";
+import { Value } from "@rbxts/fusion";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -51,6 +53,7 @@ export const PlayerHUDScreen = () => {
 				},
 			}),
 			AbilityBar: abilityBar,
+			AdminBar: AdminBar(Value(true)), // Admin bar visibility controlled by a Value
 		},
 	});
 

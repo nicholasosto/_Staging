@@ -9,7 +9,7 @@
 
 /* =============================================== Imports =============================================== */
 import Net from "@rbxts/net";
-import { AbilityKey, AttributeKey, SettingKey, PlayerSettings, ResourceKey } from "shared/definitions";
+import { AbilityKey, AttributeKey, SettingKey, PlayerSettings, ResourceKey, NPCKey } from "shared/definitions";
 
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
@@ -40,5 +40,5 @@ export const Network = Net.Definitions.Create({
 });
 
 export const TestNetwork = Net.Definitions.Create({
-	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: string]>(),
+	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
 });
