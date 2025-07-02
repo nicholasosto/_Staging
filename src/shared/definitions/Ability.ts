@@ -39,7 +39,7 @@ export interface AbilityMeta {
 	};
 }
 
-export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
+export const AbilitiesMeta = {
 	fireball: {
 		displayName: "Fireball",
 		iconId: GameImages.Ability.Flame_Sythe,
@@ -100,12 +100,12 @@ export const AbilitiesMeta: Record<AbilityKey, AbilityMeta> = {
 			stamina: 5,
 		},
 	},
-} satisfies Record<AbilityKey, AbilityMeta>;
+} as const satisfies Record<AbilityKey, AbilityMeta>;
 
-export const DefaultAbilities: Record<AbilityKey, number> = {
-	fireball: 0,
-	ice_shard: 0,
-	lightning_bolt: 0,
-	earthquake: 0,
-	melee: 0,
-};
+export const DefaultAbilities = ABILITY_KEYS.reduce<Record<AbilityKey, number>>(
+	(obj, key) => {
+		obj[key] = 0;
+		return obj;
+	},
+	{} as Record<AbilityKey, number>,
+);

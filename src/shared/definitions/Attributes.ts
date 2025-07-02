@@ -41,23 +41,22 @@ export interface AttributeMeta {
 }
 
 // Attribute Metadata Records
-export const AttributesMeta: Record<AttributeKey, AttributeMeta> = {
+export const AttributesMeta = {
 	str: { displayName: "Strength", iconId: "rbxassetid://127745571044516", min: 1, max: 999 },
 	agi: { displayName: "Agility", iconId: "rbxassetid://73893872719367", min: 1, max: 999 },
 	vit: { displayName: "Vitality", iconId: "rbxassetid://121291227474039", min: 1, max: 999 },
 	int: { displayName: "Intellect", iconId: "rbxassetid://107600003376684", min: 1, max: 999 },
 	lck: { displayName: "Luck", iconId: "rbxassetid://114767496083209", min: 1, max: 999 },
-} satisfies Record<AttributeKey, AttributeMeta>;
+} as const satisfies Record<AttributeKey, AttributeMeta>;
 
 // Default attributes with initial values
 export const DefaultAttributes: AttributesDTO = {
-	str: 10,
-	agi: 10,
-	vit: 10,
-	int: 10,
-	lck: 10,
-	AvailablePoints: 5, // Starting with 5 points to distribute
-	SpentPoints: 0, // No points spent initially
+	AvailablePoints: 5,
+	SpentPoints: 0,
+	...ATTR_KEYS.reduce<AttributesMap>((obj, key) => {
+		obj[key] = 10;
+		return obj;
+	}, {} as AttributesMap),
 };
 
 // Helper Functions

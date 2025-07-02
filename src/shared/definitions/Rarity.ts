@@ -24,7 +24,7 @@ export interface RarityMeta {
 }
 
 // Rarity Metadata Records
-export const RarityMeta: Record<RarityKey, RarityMeta> = {
+export const RarityMeta = {
 	Common: {
 		label: "Common",
 		color: Color3.fromRGB(200, 200, 200),
@@ -50,4 +50,4 @@ export const RarityMeta: Record<RarityKey, RarityMeta> = {
 		color: Color3.fromRGB(255, 215, 0),
 		BorderImage: GameImages.Borders.GothicMetal, // Gold border for legendary
 	},
-} satisfies Record<RarityKey, RarityMeta>;
+} as const satisfies Record<RarityKey, RarityMeta>;
