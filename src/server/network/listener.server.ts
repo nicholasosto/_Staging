@@ -22,13 +22,13 @@
 /* =============================================== Imports =============================================== */
 import { HttpService } from "@rbxts/services";
 
-import { Network, TestNetwork } from "shared/network";
+import { ClientDispatch, Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
 import { BattleRoomService, SettingsService, NPCService } from "server/services";
 
 /* Factories and Types */
-import { AttributeKey, AbilityKey, SettingKey, NPCKey } from "shared/definitions";
+import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
 import SoulPlayer from "server/entity/player/SoulPlayer";
 
 // INCREASE ATTRIBUTE
@@ -50,9 +50,8 @@ Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKe
 });
 
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
-	// Handle the request for player abilities
 	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	return soulPlayer ? soulPlayer.Abilities : undefined;
+	return soulPlayer?.GetAbilities() || new Array<AbilityKey>();
 });
 // MATCHMAKING -----------------------------------------------------
 Network.Server.Get("CreateRoom").SetCallback((player) => {
@@ -86,4 +85,13 @@ TestNetwork.Server.OnEvent("SPAWN_NPC", (player, npcKey: NPCKey) => {
 	const playerCFrame = playerCharacter.GetPivot();
 	const spawnCFrame = playerCFrame.mul(new CFrame(0, 0, -5));
 	NPCService.Spawn(npcKey, spawnCFrame);
+});
+
+ClientDispatch.Server.Get("GetData").SetCallback((player, dataKey: ProfileDataKey) => {
+	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
+	if (soulPlayer === undefined) {
+		warn(`SoulPlayer not found for ${player.Name}`);
+		return undefined;
+	}
+	return soulPlayer.GetData(dataKey);
 });

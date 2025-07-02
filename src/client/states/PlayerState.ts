@@ -29,7 +29,7 @@ export type ResourceState = {
 
 export default class PlayerState {
 	private static instance: PlayerState;
-	PlayerAbilities: AbilityKey[] = ["earthquake", "fireball", "ice_shard"]; // Example abilities, replace with actual logic to fetch abilities
+	PlayerAbilities: AbilityKey[] = [];
 	PlayerResources: Record<ResourceKey, ResourceState> = {
 		Health: {
 			Current: Value(100),

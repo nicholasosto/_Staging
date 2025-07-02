@@ -9,7 +9,23 @@
 
 /* =============================================== Imports =============================================== */
 import Net from "@rbxts/net";
-import { AbilityKey, AttributeKey, SettingKey, PlayerSettings, ResourceKey, NPCKey } from "shared/definitions";
+import {
+	AbilityKey,
+	AttributeKey,
+	SettingKey,
+	PlayerSettings,
+	ResourceKey,
+	NPCKey,
+	ProfileDataMap,
+	ProfileDataKey,
+} from "shared/definitions";
+
+/*
+ * Generic helpers ────────────────────────────────────────────────
+ *   - K is inferred from the call, e.g. "Stats"
+ *   - Net’s “Function” wrapper enforces argument/return parity
+ */
+type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMap[K]>;
 
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
@@ -34,11 +50,20 @@ export const Network = Net.Definitions.Create({
 
 	/* Activate Ability */
 	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
-
-	/* Send Player Resource */
-	ResourceUpdate: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
 });
 
 export const TestNetwork = Net.Definitions.Create({
 	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
+});
+
+export const ClientDispatch = Net.Definitions.Create({
+	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
+	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+	GetData:
+		Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
+});
+
+export const ServerDispatchEvents = Net.Definitions.Create({
+	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
+	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: AbilityKey[]]>(),
 });

@@ -17,7 +17,7 @@
  */
 
 import { GameImages } from "shared/assets";
-import { AnimationKey } from "shared/assets/animations";
+import { AnimationKey } from "shared/definitions/Animation";
 
 // Ability Keys
 export const ABILITY_KEYS = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as const;
@@ -43,7 +43,7 @@ export const AbilitiesMeta = {
 	fireball: {
 		displayName: "Fireball",
 		iconId: GameImages.Ability.Flame_Sythe,
-		animationKey: "TakeDamage", // Replace with actual animation key
+		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Launches a fiery projectile that explodes on impact.",
 		cooldown: 5,
 		basePower: 50,
@@ -55,7 +55,7 @@ export const AbilitiesMeta = {
 	ice_shard: {
 		displayName: "Ice Shard",
 		iconId: GameImages.Ability.Ice_Shard,
-		animationKey: "SpinKick", // Replace with actual animation key
+		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Launches a shard of ice that pierces through enemies.",
 		cooldown: 6,
 		basePower: 40,
@@ -67,7 +67,7 @@ export const AbilitiesMeta = {
 	lightning_bolt: {
 		displayName: "Lightning Bolt",
 		iconId: GameImages.Ability.Lightning_Bolt,
-		animationKey: "ScytheAttack", // Replace with actual animation key
+		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Calls down a bolt of lightning to strike enemies.",
 		cooldown: 7,
 		basePower: 60,
@@ -79,7 +79,7 @@ export const AbilitiesMeta = {
 	earthquake: {
 		displayName: "Earthquake",
 		iconId: GameImages.Ability.Earthquake,
-		animationKey: "ScytheAttack", // Replace with actual animation key
+		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Causes the ground to shake, damaging all nearby enemies.",
 		cooldown: 10,
 		basePower: 80,
@@ -91,7 +91,7 @@ export const AbilitiesMeta = {
 	melee: {
 		displayName: "Melee Attack",
 		iconId: GameImages.Ability.Melee,
-		animationKey: "Dodge", // Replace with actual animation key
+		animationKey: "Punch_01", // Replace with actual animation key
 		description: "A basic melee attack that deals physical damage.",
 		cooldown: 2,
 		basePower: 30,

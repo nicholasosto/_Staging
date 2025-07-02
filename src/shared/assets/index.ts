@@ -6,7 +6,7 @@
  * @layer       Shared/Assets
  * @description Barrel export for asset constants.
  */
-export * from "./animations";
+export * from "../definitions/Animation";
 export * from "./audio";
 export * from "./image";
 export * from "./gradients";

@@ -12,7 +12,18 @@
  * ╰───────────────────────────────╯
  */
 
-export const ANIMATION_KEY = ["Dodge", "SpinKick", "TakeDamage", "ScytheAttack"] as const;
+export const ANIMATION_KEY = [
+	"Dodge",
+	"GodLike",
+	"HallowHold",
+	"KickFast",
+	"PowerBeam",
+	"Punch_01",
+	"ScytheAttack",
+	"SpinKick",
+	"TakeDamage",
+	"Taunt",
+] as const;
 export type AnimationKey = (typeof ANIMATION_KEY)[number];
 export type TrackMap = Record<AnimationKey, AnimationTrack>;
 
@@ -38,9 +49,15 @@ export const GetTrack = (model: Model, key: AnimationKey): AnimationTrack | unde
 
 export const AnimationAssets: Record<AnimationKey, string> = {
 	Dodge: "rbxassetid://15487656295", // Replace with actual asset
+	GodLike: "rbxassetid://140479956568725", // Replace with actual asset
+	HallowHold: "rbxassetid://125099220628366", // Replace with actual asset
+	KickFast: "rbxassetid://126544239907410", // Replace with actual asset
+	PowerBeam: "rbxassetid://132928610589952", // Replace with actual asset
+	Punch_01: "rbxassetid://15487656295", // Replace with actual asset
+	ScytheAttack: "rbxassetid://77799116860007", // Replace with actual asset
 	SpinKick: "rbxassetid://100351397638487", // Replace with actual asset
 	TakeDamage: "rbxassetid://16144885391", // Replace with actual
-	ScytheAttack: "rbxassetid://77799116860007", // Replace with actual asset
+	Taunt: "rbxassetid://98363948502311", // Replace with actual asset
 };
 
 export function getAnimationAsset(key: AnimationKey): string {

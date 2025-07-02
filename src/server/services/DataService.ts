@@ -22,24 +22,17 @@ import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AbilityKey, AttributesDTO, DefaultAttributes } from "shared/definitions";
+import { AbilityKey, AttributesDTO, DefaultAttributes, ProfileDataMap } from "shared/definitions";
 
 /* ========================================== Profile Store Setup =============================================== */
 
 // Datastore Name
-const DATASTORE_NAME = "SoulSteelPlayerProfile";
+const DATASTORE_NAME = "A_SoulSteelPlayerProfile";
 
-// Main Profile Data Type
-export interface PlayerProfile {
-	attributes: AttributesDTO;
-	abilities?: AbilityKey[]; // Optional abilities array
-}
-
-/* =============================================== Default Data =============================================== */
-
-export const PlayerDTOTemplate: PlayerProfile = {
-	attributes: DefaultAttributes,
-	abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake"], // Default abilities
+const DefaultProfileData: ProfileDataMap = {
+	// Player Profile Data
+	Abilities: new Array<AbilityKey>(), // List of abilities the player has
+	Attributes: DefaultAttributes, // Player attributes
 };
 
 /* Data Profile Controller */
@@ -48,10 +41,10 @@ export class DataProfileController {
 	private static _instance: DataProfileController | undefined;
 
 	/* ProfileService Initialization */
-	private static _profileStore = ProfileService.GetProfileStore(DATASTORE_NAME, PlayerDTOTemplate);
+	private static _profileStore = ProfileService.GetProfileStore(DATASTORE_NAME, DefaultProfileData);
 
 	/* Map to store player profiles */
-	private static _profileMap = new Map<Player, Profile<PlayerProfile>>(); // Map to store player profiles
+	private static _profileMap = new Map<Player, Profile<ProfileDataMap>>(); // Map to store player profiles
 
 	/* Connections */
 	private static _playerAddedConnection: RBXScriptConnection | undefined;
@@ -126,7 +119,7 @@ export class DataProfileController {
 	}
 
 	/* Get Profile */
-	public static GetProfile(player: Player): Profile<PlayerProfile> | undefined {
+	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
 		//print(`GetProfile(${player.Name})`);
 		return this._profileMap.get(player); // Return the profile from the map
 	}

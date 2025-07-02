@@ -18,7 +18,7 @@
  */
 
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
-import { loadAnimation } from "shared/assets/animations";
+import { loadAnimation } from "shared/definitions/Animation";
 
 // Entity Helpers
 export function LoadAbilityAnimations(character: Model, abilities: AbilityKey[]) {
@@ -27,6 +27,7 @@ export function LoadAbilityAnimations(character: Model, abilities: AbilityKey[])
 		return;
 	}
 	abilities.forEach((abilityKey) => {
+		print(`Loading animation for ability: ${abilityKey}`);
 		loadAnimation(character, AbilitiesMeta[abilityKey]?.animationKey);
 	});
 }

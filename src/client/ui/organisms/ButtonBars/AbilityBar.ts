@@ -53,6 +53,7 @@ export function AbilityBar(props: AbilityBarProps) {
 }
 export const SoulPlayerAbilityBar = (player: Player) => {
 	const abilities = PlayerState.getInstance().PlayerAbilities;
+	print(`SoulPlayerAbilityBar: Player ${player.Name} has abilities: ${abilities.join(", ")}`);
 	const abilityBar = AbilityBar({
 		abilities: abilities,
 	});

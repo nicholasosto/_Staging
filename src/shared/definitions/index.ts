@@ -17,3 +17,4 @@ export * from "./Rarity";
 export * from "../data/ResourceData";
 export * from "../storage/Rigs";
 export * from "./Settings";
+export * from "./Profile";

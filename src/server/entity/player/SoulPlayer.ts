@@ -17,9 +17,10 @@
  * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
-import { AbilitiesMeta, AbilityKey, PlayerDataDTO } from "shared";
-import { loadAnimation, playAnimation } from "shared/assets/animations";
-import { DataProfileController, PlayerProfile } from "server/services/DataService";
+import { AbilitiesMeta, AbilityKey, PlayerDataDTO, ProfileDataKey } from "shared";
+import { loadAnimation, playAnimation } from "shared/definitions/Animation";
+import { DataProfileController } from "server/services/DataService";
+import { ProfileDataMap } from "shared";
 import { Profile } from "@rbxts/profileservice/globals";
 import { LoadAbilityAnimations } from "../helpers";
 
@@ -39,13 +40,12 @@ export default class SoulPlayer {
 
 	/* Instance Properties - Private */
 	private userId: number;
-	private readonly profile?: Profile<PlayerProfile>;
+	private readonly profile?: Profile<ProfileDataMap>;
 
 	/* Instance Properties - Public */
 	public readonly Player: Player;
 	public CharacterModel?: Model;
 	public Humanoid?: Humanoid;
-	public readonly Abilities: AbilityKey[] = []; // Default abilities for testing
 
 	/* Constructor */
 	constructor(player: Player) {
@@ -53,10 +53,11 @@ export default class SoulPlayer {
 		this.Player = player;
 		this.userId = player.UserId;
 		this.profile = DataProfileController.GetProfile(player); // Data profile for the player
-		this.CharacterModel = player.Character || player.CharacterAdded.Wait()[0]; // Character model, waits for character to be added if not present
+		print(`PROFILE: ${this.userId}`, this.profile);
+		//this.CharacterModel = player.Character || player.CharacterAdded.Wait()[0]; // Character model, waits for character to be added if not present
 		this.Humanoid = this.CharacterModel?.FindFirstChildOfClass("Humanoid") as Humanoid; // Humanoid
 
-		LoadAbilityAnimations(this.CharacterModel, this.Abilities);
+		//this.CharacterAppearanceLoaded(this.CharacterModel);
 
 		// Connect events
 		this.Player.CharacterAppearanceLoaded.Connect((character) => this.CharacterAppearanceLoaded(character));
@@ -83,21 +84,32 @@ export default class SoulPlayer {
 
 	private CharacterAppearanceLoaded(character: Model) {
 		this.CharacterModel = character;
-		LoadAbilityAnimations(this.CharacterModel, this.Abilities);
+		print(`Character appearance loaded for ${this.Player.Name}`, character);
+		this.profile?.Data.Abilities?.forEach((abilityKey) => {
+			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+			if (animationKey) {
+				loadAnimation(character, animationKey);
+			} else {
+				warn(`Animation key for ability ${abilityKey} not found.`);
+			}
+		});
+		print(`Abilities loaded for ${this.Player.Name}:`, this.profile?.Data.Abilities);
 	}
 
 	public ActivateAbility(abilityKey: AbilityKey) {
-		if (this.Abilities.includes(abilityKey)) {
-			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+		const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+		if (this.profile?.Data.Abilities!.includes(abilityKey)) {
 			const character = this.CharacterModel;
-			if (character) {
-				playAnimation(character, animationKey);
-			} else {
-				warn(`Character model not found for ${this.Player.Name}`);
+			if (character === undefined) {
+				this.CharacterModel = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
 			}
 		} else {
 			warn(`Ability ${abilityKey} is not available for player ${this.Player.Name}`);
+			return;
 		}
+
+		if (this.CharacterModel === undefined) return;
+		playAnimation(this.CharacterModel, animationKey);
 	}
 
 	/* Instance Methods */
@@ -110,6 +122,21 @@ export default class SoulPlayer {
 		// Logic to increase the player's attribute
 		print(`Increasing attribute ${attributeKey} by ${amount} for player ${this.Player.Name}`);
 		// Here you would typically update the player's profile or stats
+	}
+
+	public GetAbilities(): AbilityKey[] | undefined {
+		// Return the player's abilities from their profile
+		if (this.profile) {
+			print(`Getting abilities for player ${this.Player.Name}:`, this.profile.Data.Abilities);
+			return this.profile.Data.Abilities;
+		} else {
+			warn(`Profile not found for player ${this.Player.Name}`);
+			return undefined;
+		}
+	}
+
+	public GetData(dataKey: ProfileDataKey) {
+		return (this.profile?.Data[dataKey] as ProfileDataMap[ProfileDataKey]) || undefined;
 	}
 
 	/**
