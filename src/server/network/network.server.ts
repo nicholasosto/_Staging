@@ -25,12 +25,11 @@ import { HttpService } from "@rbxts/services";
 import { Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
-import { BattleRoomService, SettingsService } from "server/services";
+import { BattleRoomService, SettingsService, NPCService } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey } from "shared/definitions";
 import SoulPlayer from "server/entity/player/SoulPlayer";
-import { NPC } from "server/entity";
 
 // INCREASE ATTRIBUTE
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
@@ -79,16 +78,12 @@ Network.Server.OnEvent("UpdatePlayerSetting", (player, key: SettingKey, value: b
 
 // Admin Actions -----------------------------------------------------
 TestNetwork.Server.OnEvent("SPAWN_NPC", (player, npcKey: NPCKey) => {
-	print(`Spawning NPC: ${npcKey}`);
-	const playerCharacter = player.Character || player.CharacterAdded.Wait()[0];
-	if (playerCharacter === undefined) {
-		warn(`Player ${player.Name} has no character to spawn NPC into.`);
-		return;
-	}
-	const playerCFrame = playerCharacter.GetPivot();
-	const inFrontOffset = new Vector3(0, 0, -5); // Adjust as needed
-	const spawnPosition = playerCFrame.mul(new CFrame(0, 0, -5)); // Spawn in front of player
-	const spawnPosition2 = new CFrame(playerCFrame.Position.add(inFrontOffset));
-
-	const npc = new NPC(npcKey, spawnPosition);
+        const playerCharacter = player.Character || player.CharacterAdded.Wait()[0];
+        if (playerCharacter === undefined) {
+                warn(`Player ${player.Name} has no character to spawn NPC into.`);
+                return;
+        }
+        const playerCFrame = playerCharacter.GetPivot();
+        const spawnCFrame = playerCFrame.mul(new CFrame(0, 0, -5));
+        NPCService.Spawn(npcKey, spawnCFrame);
 });

@@ -45,9 +45,9 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/BattleRoomService.ts`|Usable|Matchmaking and teleport skeleton|
 |Server|`server/services/SettingsService.ts`|Usable|Stores player settings|
 |Server|`server/entity/Manifestation.ts`|Stub|Placeholder creation logic|
-|Server|`server/entity/npc/NPC.ts`|Usable|Basic NPC class|
+|Server|`server/services/NPCService.ts`|Usable|Spawns NPCs from definitions|
+|Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/player/SoulPlayer.ts`|Usable|Player data container|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
-|Server|`server/factories/NPCFactory.ts`|Stub|Creates NPC instances|
 
 Keep this summary updated whenever modules are added or changed.
