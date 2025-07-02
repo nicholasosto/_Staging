@@ -36,9 +36,9 @@ export function AdminBar(visibleState: Value<boolean>) {
 			Name: "SpawnNPCButton",
 			Size: new UDim2(0, 50, 0, 50),
 			OnClick: () => {
-				print("Spawn NPC button clicked");
+				print("Spawning Mecha Monkey NPC");
 				// Logic to spawn an NPC
-				SpawnNPCEvent.SendToServer("GOBLIN_SCOUT");
+				SpawnNPCEvent.SendToServer("MECHA_MONKEY");
 			},
 		}),
 	};

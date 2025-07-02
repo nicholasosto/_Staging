@@ -1,1 +1,1 @@
-export * from "./NPCFactory";
+//export * from "./NPCFactory";

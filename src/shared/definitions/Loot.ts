@@ -12,7 +12,7 @@ type ItemKey = string; // replace with actual item keys from your game
    1️⃣  Canonical list of loot-table keys
 \*───────────────────────────────────────────────────────────────────────────*/
 export const LOOT_TABLE_KEYS = [
-	"GOBLIN_COMMON",
+	"ZOMBIE_COMMON",
 	"GOBLIN_ELITE",
 	"SKELETON_COMMON",
 	"CRYSTAL_GOLEM",
@@ -50,7 +50,7 @@ export const LootTableMetaMap = {
 	/*───────────────────────────────────────────────────────────────
     Goblin trash mobs – nothing fancy
   ───────────────────────────────────────────────────────────────*/
-	GOBLIN_COMMON: {
+	ZOMBIE_COMMON: {
 		rolls: [1, 2],
 		entries: [
 			{ drop: "COPPER_COIN", quantity: [3, 8], weight: 50 },
