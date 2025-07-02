@@ -19,7 +19,7 @@
 
 import { AbilitiesMeta, AbilityKey, PlayerDataDTO } from "shared";
 import { loadAnimation, playAnimation } from "shared/assets/animations";
-import { DataProfileController, PlayerProfile } from "server/services";
+import { DataProfileController, PlayerProfile } from "server/services/DataService";
 import { Profile } from "@rbxts/profileservice/globals";
 import { LoadAbilityAnimations } from "../helpers";
 
