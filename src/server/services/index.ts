@@ -24,3 +24,4 @@ export * from "./DataService";
 export * from "./ManifestationForgeService";
 export * from "./BattleRoomService";
 export * from "./SettingsService";
+export * from "./NPCService";
