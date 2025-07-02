@@ -1,3 +1,22 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        EntityResource.ts
+ * @module      EntityResource
+ * @layer       Server/Entity
+ * @description Spawns a simple collectible resource model.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
+ */
+
 export class EntityResource {
 	public model: Model;
 	public part: Part;

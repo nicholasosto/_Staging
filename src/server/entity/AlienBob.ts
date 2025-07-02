@@ -1,11 +1,23 @@
-import { Workspace } from "@rbxts/services";
+/// <reference types="@rbxts/types" />
 
 /**
  * @file        AlienBob.ts
  * @module      AlienBob
  * @layer       Server/Entity
  * @description Represents the Alien Bob NPC entity.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
+
+import { Workspace } from "@rbxts/services";
 
 export const MUTATION_KEYS = ["ColorChange", "SizeChange", "SpeedBoost", "HealthBoost", "EnergyBoost"] as const;
 export class AlienBob {
