@@ -7,7 +7,6 @@
 
 import { AbilityKey } from "./Ability";
 import { LootTableKey } from "./Loot";
-import { AnimationKey } from "../assets";
 
 export const NPC_KEYS = ["GOBLIN_SCOUT", "GOBLIN_ARCHER", "SKELETON_WARRIOR", "CRYSTAL_GOLEM"] as const;
 
@@ -30,7 +29,6 @@ export interface NPCMeta {
 	abilities: AbilityKey[];
 	/** Loot-table key rolled on death */
 	lootTable: LootTableKey;
-	/** Animation set reference for the AnimationController binder */
 
 	/** Optional behaviour flags or AI profiles */
 	aiProfile?: "melee" | "ranged" | "caster" | "tank";

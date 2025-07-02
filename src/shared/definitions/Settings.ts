@@ -27,7 +27,7 @@ export interface SettingMeta {
 	controlType: SettingType;
 }
 
-export const SettingsMeta: Record<SettingKey, SettingMeta> = {
+export const SettingsMeta = {
 	musicEnabled: {
 		displayName: "Music",
 		description: "Toggle background music on or off.",
@@ -43,12 +43,12 @@ export const SettingsMeta: Record<SettingKey, SettingMeta> = {
 		description: "Set a custom player nickname.",
 		controlType: "string",
 	},
-};
+} as const satisfies Record<SettingKey, SettingMeta>;
 
 export type PlayerSettings = Record<SettingKey, boolean | string>;
 
-export const DefaultSettings: PlayerSettings = {
+export const DefaultSettings = {
 	musicEnabled: true,
 	showFps: false,
 	nickname: "",
-};
+} as const satisfies PlayerSettings;

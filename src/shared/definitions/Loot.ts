@@ -46,7 +46,7 @@ export interface LootTableMeta {
 	guaranteed?: readonly Omit<LootEntry, "weight">[];
 }
 
-export const LootTableMetaMap: Readonly<Record<LootTableKey, LootTableMeta>> = {
+export const LootTableMetaMap = {
 	/*───────────────────────────────────────────────────────────────
     Goblin trash mobs – nothing fancy
   ───────────────────────────────────────────────────────────────*/
@@ -115,4 +115,4 @@ export const LootTableMetaMap: Readonly<Record<LootTableKey, LootTableMeta>> = {
 			{ drop: "LARGE_HEALTH_POTION", quantity: 2, weight: 25 },
 		],
 	},
-} as const;
+} as const satisfies Record<LootTableKey, LootTableMeta>;
