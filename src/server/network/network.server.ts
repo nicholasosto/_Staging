@@ -78,12 +78,12 @@ Network.Server.OnEvent("UpdatePlayerSetting", (player, key: SettingKey, value: b
 
 // Admin Actions -----------------------------------------------------
 TestNetwork.Server.OnEvent("SPAWN_NPC", (player, npcKey: NPCKey) => {
-        const playerCharacter = player.Character || player.CharacterAdded.Wait()[0];
-        if (playerCharacter === undefined) {
-                warn(`Player ${player.Name} has no character to spawn NPC into.`);
-                return;
-        }
-        const playerCFrame = playerCharacter.GetPivot();
-        const spawnCFrame = playerCFrame.mul(new CFrame(0, 0, -5));
-        NPCService.Spawn(npcKey, spawnCFrame);
+	const playerCharacter = player.Character || player.CharacterAdded.Wait()[0];
+	if (playerCharacter === undefined) {
+		warn(`Player ${player.Name} has no character to spawn NPC into.`);
+		return;
+	}
+	const playerCFrame = playerCharacter.GetPivot();
+	const spawnCFrame = playerCFrame.mul(new CFrame(0, 0, -5));
+	NPCService.Spawn(npcKey, spawnCFrame);
 });

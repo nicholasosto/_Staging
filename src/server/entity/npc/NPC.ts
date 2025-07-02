@@ -17,52 +17,47 @@
  * @lastUpdated  2025-07-02 by Codex – Redesigned to use new NPC definitions
  */
 
-import {
-        NPCKey,
-        NPCMeta,
-        NPCMetaMap,
-        FIRST_NAMES,
-        LAST_NAMES,
-        MONIKERS,
-} from "shared/definitions/NPC";
+import { NPCKey, NPCMeta, NPCMetaMap, FIRST_NAMES, LAST_NAMES, MONIKERS } from "shared/definitions/NPC";
 import { LoadAbilityAnimations } from "../helpers";
 
 export class NPC {
-        public readonly key: NPCKey;
-        public readonly meta: NPCMeta;
-        public readonly model: Model;
-        public readonly humanoid?: Humanoid;
-        public readonly stats: Readonly<typeof NPCMetaMap[NPCKey] extends infer M ? M extends { baseStats: infer B } ? B : never : never>;
-        public readonly name: string;
+	public readonly key: NPCKey;
+	public readonly meta: NPCMeta;
+	public readonly model: Model;
+	public readonly humanoid?: Humanoid;
+	public readonly stats: Readonly<
+		(typeof NPCMetaMap)[NPCKey] extends infer M ? (M extends { baseStats: infer B } ? B : never) : never
+	>;
+	public readonly name: string;
 
-        constructor(key: NPCKey, cFrame: CFrame = new CFrame()) {
-                this.key = key;
-                this.meta = NPCMetaMap[key];
-                this.model = this.meta.modelTemplate.Clone();
-                this.humanoid = this.model.FindFirstChildOfClass("Humanoid") as Humanoid | undefined;
-                this.stats = { ...this.meta.baseStats };
-                this.name = NPC.generateName(key);
+	constructor(key: NPCKey, cFrame: CFrame = new CFrame()) {
+		this.key = key;
+		this.meta = NPCMetaMap[key];
+		this.model = this.meta.modelTemplate.Clone();
+		this.humanoid = this.model.FindFirstChildOfClass("Humanoid") as Humanoid | undefined;
+		this.stats = { ...this.meta.baseStats };
+		this.name = NPC.generateName(key);
 
-                this.model.Name = this.name;
-                this.model.PivotTo(cFrame);
-                this.model.Parent = game.Workspace;
+		this.model.Name = this.name;
+		this.model.PivotTo(cFrame);
+		this.model.Parent = game.Workspace;
 
-                LoadAbilityAnimations(this.model, this.meta.abilities);
-                print(`NPC spawned: ${this.name} (${key})`);
-        }
+		LoadAbilityAnimations(this.model, this.meta.abilities);
+		print(`NPC spawned: ${this.name} (${key})`);
+	}
 
-        public Destroy() {
-                this.model.Destroy();
-        }
+	public Destroy() {
+		this.model.Destroy();
+	}
 
-        private static randomOf<T>(array: readonly T[]): T {
-                return array[math.random(0, array.size() - 1)];
-        }
+	private static randomOf<T>(array: readonly T[]): T {
+		return array[math.random(0, array.size() - 1)];
+	}
 
-        public static generateName(key: NPCKey): string {
-                const first = this.randomOf(FIRST_NAMES);
-                const last = this.randomOf(LAST_NAMES);
-                const moniker = this.randomOf(MONIKERS[key]);
-                return `${first} ${last} ${moniker}`;
-        }
+	public static generateName(key: NPCKey): string {
+		const first = this.randomOf(FIRST_NAMES);
+		const last = this.randomOf(LAST_NAMES);
+		const moniker = this.randomOf(MONIKERS[key]);
+		return `${first} ${last} ${moniker}`;
+	}
 }
