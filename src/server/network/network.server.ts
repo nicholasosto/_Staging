@@ -71,11 +71,11 @@ Network.Server.OnEvent("SetActiveGem", (player, roomId: string, gemId: string) =
 
 // SETTINGS -----------------------------------------------------
 Network.Server.Get("GetPlayerSettings").SetCallback((player) => {
-	return SettingsService.Get(player);
+	return SettingsService.GetSettings(player);
 });
 
 Network.Server.OnEvent("UpdatePlayerSetting", (player, key: SettingKey, value: boolean | string) => {
-	SettingsService.Set(player, key, value);
+	SettingsService.SetSettings(player, key, value);
 });
 
 print("Network server initialized and listening for events.");

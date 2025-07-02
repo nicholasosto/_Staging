@@ -38,3 +38,7 @@ export const Network = Net.Definitions.Create({
 	/* Send Player Resource */
 	ResourceUpdate: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
 });
+
+export const TestNetwork = Net.Definitions.Create({
+	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: string]>(),
+});

@@ -38,7 +38,7 @@ export class SettingsService {
 		return this._instance;
 	}
 
-	public static Get(player: Player): PlayerSettings {
+	public static GetSettings(player: Player): PlayerSettings {
 		const existing = this._settings.get(player);
 		if (existing) return existing;
 		const defaults = { ...DefaultSettings };
@@ -46,8 +46,8 @@ export class SettingsService {
 		return defaults;
 	}
 
-	public static Set(player: Player, key: SettingKey, value: boolean | string) {
-		const settings = this.Get(player);
+	public static SetSettings(player: Player, key: SettingKey, value: boolean | string) {
+		const settings = this.GetSettings(player);
 		settings[key] = value;
 	}
 }

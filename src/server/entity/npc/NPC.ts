@@ -25,6 +25,9 @@ export class NPC {
 	public readonly id: string;
 	public readonly name: string;
 	public readonly description: string;
+	public readonly damage = 5;
+	public readonly health = 100;
+	public readonly maxHealth = 100;
 	public readonly Attributes = createAttributes({
 		str: 10,
 		agi: 10,
