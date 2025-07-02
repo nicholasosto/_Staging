@@ -23,7 +23,7 @@
 import Fusion, { ForPairs } from "@rbxts/fusion";
 import { GameWindow, SettingListItem } from "../molecules";
 import { ScreenKey, SettingsState } from "client/states";
-import { SETTING_KEYS, SettingKey } from "shared/definitions/Settings";
+import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";
 const Key: ScreenKey = "Settings";
 

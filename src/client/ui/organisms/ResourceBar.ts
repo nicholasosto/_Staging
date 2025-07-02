@@ -25,7 +25,7 @@
 import { GamePanel } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules";
 import PlayerState from "client/states/PlayerState";
-import { ResourceKey, ResourceMeta } from "shared/data/ResourceData";
+import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
 import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //

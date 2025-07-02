@@ -5,7 +5,7 @@
  * @description Static catalogue of weighted loot tables.
  */
 
-import { CurrencyKey } from "./Currency"; // optional: gold, gems, etc.
+import { CurrencyKey } from "./ProfileDefinitions/Currency"; // optional: gold, gems, etc.
 type ItemKey = string; // replace with actual item keys from your game
 
 /*───────────────────────────────────────────────────────────────────────────*\

@@ -1,6 +1,6 @@
 import Fusion, { Value } from "@rbxts/fusion";
 import { AbilityKey } from "shared/definitions";
-import { ResourceKey } from "shared/data/ResourceData";
+import { ResourceKey } from "shared/definitions/Resources";
 import { GetPlayerAbilities } from "client/network/CallServer";
 
 /**

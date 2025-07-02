@@ -20,7 +20,7 @@
 
 // -------------- Imports ----------------------------------------------------- //
 import { Players } from "@rbxts/services";
-import { DefaultSettings, PlayerSettings, SettingKey } from "shared/definitions/Settings";
+import { DefaultSettings, PlayerSettings, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 
 // -------------- Service ----------------------------------------------------- //
 export class SettingsService {

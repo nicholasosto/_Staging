@@ -59,8 +59,7 @@ export const TestNetwork = Net.Definitions.Create({
 export const ClientDispatch = Net.Definitions.Create({
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
-	GetData:
-		Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
+	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
 });
 
 export const ServerDispatchEvents = Net.Definitions.Create({

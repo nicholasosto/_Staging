@@ -17,12 +17,9 @@
  * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
-import { AbilitiesMeta, AbilityKey, PlayerDataDTO, ProfileDataKey } from "shared";
-import { loadAnimation, playAnimation } from "shared/definitions/Animation";
+import { AbilitiesMeta, AbilityKey, ProfileDataKey, ProfileDataMap, loadAnimation, playAnimation } from "shared";
 import { DataProfileController } from "server/services/DataService";
-import { ProfileDataMap } from "shared";
 import { Profile } from "@rbxts/profileservice/globals";
-import { LoadAbilityAnimations } from "../helpers";
 
 /**
  * SoulPlayer class represents a base player entity in the game.

@@ -1,4 +1,4 @@
-import { AbilitiesMeta, AbilityKey } from "shared/definitions/Ability";
+import { AbilitiesMeta, AbilityKey } from "shared/definitions/ProfileDefinitions/Ability";
 import { GamePanel, GameImage, GameText } from "../atoms";
 import { New, Value } from "@rbxts/fusion";
 import { Layout } from "../tokens";

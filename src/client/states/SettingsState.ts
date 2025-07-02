@@ -13,7 +13,12 @@
  */
 
 import Fusion, { Value } from "@rbxts/fusion";
-import { DefaultSettings, PlayerSettings, SETTING_KEYS, SettingKey } from "shared/definitions/Settings";
+import {
+	DefaultSettings,
+	PlayerSettings,
+	SETTING_KEYS,
+	SettingKey,
+} from "shared/definitions/ProfileDefinitions/Settings";
 import { GetPlayerSettings } from "client/network/CallServer";
 
 export default class SettingsState {

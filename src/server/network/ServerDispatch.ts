@@ -19,7 +19,7 @@
  */
 /* =============================================== Imports =============================================== */
 import { Network } from "shared/network/Definitions";
-import {ServerDispatchEvents } from "shared/network/Definitions";
+import { ServerDispatchEvents } from "shared/network/Definitions";
 
 /* ================================================ Events =============================================== */
 

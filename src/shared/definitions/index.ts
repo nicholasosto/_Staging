@@ -6,15 +6,14 @@
  * @layer       Shared
  * @description Barrel export for shared data modules.
  */
-export * from "./Ability";
-export * from "./Attributes";
+
+// Folders
+export * from "./ProfileDefinitions";
+
+// Modules
+export * from "./Animation";
 export * from "./Codon";
-export * from "./Currency";
-export * from "../data/PlayerData";
 export * from "./Loot";
 export * from "./NPC";
 export * from "./Rarity";
-export * from "../data/ResourceData";
-export * from "../storage/Rigs";
-export * from "./Settings";
-export * from "./Profile";
+export * from "./Resources";

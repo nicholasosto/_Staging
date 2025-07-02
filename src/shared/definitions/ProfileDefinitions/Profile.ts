@@ -1,4 +1,4 @@
-import { AbilityKey } from ".";
+import { AbilityKey } from "..";
 import { AttributesDTO } from "./Attributes";
 
 // shared/ProfileDataTypes.ts

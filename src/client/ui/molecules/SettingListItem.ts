@@ -16,7 +16,7 @@
 import Fusion, { Children, Computed, New, OnChange, OnEvent, Value } from "@rbxts/fusion";
 import { GamePanel, GameButton, GameText } from "client/ui/atoms";
 import { Layout, Padding } from "client/ui/tokens";
-import { SettingKey, SettingsMeta } from "shared/definitions/Settings";
+import { SettingKey, SettingsMeta } from "shared/definitions/ProfileDefinitions/Settings";
 
 // -------------- Props ------------------------------------------------------- //
 export interface SettingListItemProps extends Fusion.PropertyTable<Frame> {
