@@ -95,7 +95,7 @@ export class ResourcesService {
 
     private _onJoin(player: Player) {
         task.defer(() => {
-            this.Recalculate(player);
+            ResourcesService.Recalculate(player);
         });
     }
 
