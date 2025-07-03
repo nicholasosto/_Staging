@@ -1,5 +1,9 @@
 import container from "@rbxts/matter/lib/debugger/widgets/container";
 import { Zone } from "@rbxts/zone-plus";
+import { EffectMeta, EffectTypeKey } from "shared/definitions/Effects";
+import { CollectionService } from "@rbxts/services";
+
+export const currentHazardZones = CollectionService.GetTagged("ResourceHazard");
 
 export const ZoneBase = (
 	container: Instance,
@@ -9,5 +13,16 @@ export const ZoneBase = (
 	const zoneInstance = new Zone(container);
 	zoneInstance.playerEntered.Connect(onPlayerEntered);
 	zoneInstance.playerExited.Connect(onPlayerExited);
+	return zoneInstance;
+};
+
+export const EffectZone = (
+	effectKey: EffectTypeKey,
+	OnPlayerEntered: (player: Player) => void,
+	OnPlayerExited: (player: Player) => void,
+) => {
+	const zoneInstance = new Zone(container);
+	zoneInstance.playerEntered.Connect(OnPlayerEntered);
+	zoneInstance.playerExited.Connect(OnPlayerExited);
 	return zoneInstance;
 };

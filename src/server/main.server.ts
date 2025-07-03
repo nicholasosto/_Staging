@@ -19,22 +19,22 @@ ManifestationForgeService.Start();
 BattleRoomService.Start();
 OrganismFood.SpawnResource(new CFrame(0, 10, 0));
 
+function CharacterAdded(player: Player, character: Model) {
+	/* Update the SoulPlayer instance with the new character */
+	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
+	if (soulPlayer) {
+		soulPlayer.UpdateCharacter(character);
+	} else {
+		warn(`SoulPlayer not found for ${player.Name}.`);
+	}
+}
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {
-	// Create a new player profile
-	const profile = DataProfileController.GetProfile(player);
-	wait(1);
-	if (profile) {
-		// Initialize player profile data
-		print(`Profile created for player: ${player.Name}`);
-		//BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
-	} else {
-		warn(`Failed to create profile for player: ${player.Name}`);
-		//BattleRoomService.CreateRoom(player); // Automatically create a battle room for the player
+	if (SoulPlayer.GetSoulPlayer(player)) {
+		warn(`SoulPlayer already exists for ${player.Name}.`);
+		return;
 	}
-	const soulPlayer = new SoulPlayer(player);
-	print(`SoulPlayer created for player: ${player.Name}`);
-	player.CharacterAdded.Connect((character) => {
-		print(`Character added for player: ${player.Name}`);
-	});
+	const character = player.Character || player.CharacterAdded.Wait()[0];
+	/* Create a new SoulPlayer instance */
+	new SoulPlayer(player, character);
 });

@@ -20,12 +20,19 @@
 import { AbilitiesMeta, AbilityKey, ProfileDataKey, ProfileDataMap, loadAnimation, playAnimation } from "shared";
 import { DataProfileController } from "server/services/DataService";
 import { Profile } from "@rbxts/profileservice/globals";
+import { CodeSettings } from "shared/constants/CodeSettings";
 
 /**
  * SoulPlayer class represents a base player entity in the game.
  * Its a container for the persistent data of a player, such as their abilities, stats, equipment, inventory, and more.
  */
 /* ============================================= Player Registry <userId, SoulPlayer> ====================================================== */
+
+function DebugLog(message: string, ...args: unknown[]) {
+	if (CodeSettings.DEBUG_PLAYER) {
+		print(`[SoulPlayer] ${message}`, ...args);
+	}
+}
 
 export default class SoulPlayer {
 	/* Static Properties */
@@ -44,69 +51,86 @@ export default class SoulPlayer {
 	public CharacterModel?: Model;
 	public Humanoid?: Humanoid;
 
+	/* Connections */
+	private HumanoidDiedConnection?: RBXScriptConnection; // Connection for humanoid death event
+	private CharacterAddedConnection?: RBXScriptConnection; // Connection for character added event
+
 	/* Constructor */
-	constructor(player: Player) {
+	constructor(player: Player, character: Model) {
 		/* Set the Properties */
 		this.Player = player;
 		this.userId = player.UserId;
 		this.profile = DataProfileController.GetProfile(player); // Data profile for the player
-		print(`PROFILE: ${this.userId}`, this.profile);
-		//this.CharacterModel = player.Character || player.CharacterAdded.Wait()[0]; // Character model, waits for character to be added if not present
-		this.Humanoid = this.CharacterModel?.FindFirstChildOfClass("Humanoid") as Humanoid; // Humanoid
-
-		//this.CharacterAppearanceLoaded(this.CharacterModel);
-
-		// Connect events
-		this.Player.CharacterAppearanceLoaded.Connect((character) => this.CharacterAppearanceLoaded(character));
-
-		if (this.Humanoid) {
-			// Connect to Humanoid health change event
-			this.Humanoid.HealthChanged.Connect((health) => this.HumanoidHealthChanged(health));
-		} else {
-			warn(`Humanoid not found for player ${this.Player.Name}`);
-		}
-
+		this.UpdateCharacter(character);
 		// Register the player in the registry
 		SoulPlayer.Binder.set(this.userId, this);
-		print(`SoulPlayer created for ${this.Player.Name} with UserId: ${this.userId}`, this.profile);
 	}
 
-	private HumanoidHealthChanged(health: number) {
-		if (health <= 0) {
-			this.died();
-		} else {
-			print(`Humanoid health changed for ${this.Player.Name}: ${health}`);
-		}
-	}
-
-	private CharacterAppearanceLoaded(character: Model) {
+	public UpdateCharacter(character: Model) {
+		print(`Updating character for player ${this.Player.Name}.`, this.profile?.Data);
+		/* Set References */
 		this.CharacterModel = character;
-		print(`Character appearance loaded for ${this.Player.Name}`, character);
-		this.profile?.Data.Abilities?.forEach((abilityKey) => {
-			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
-			if (animationKey) {
-				loadAnimation(character, animationKey);
-			} else {
-				warn(`Animation key for ability ${abilityKey} not found.`);
-			}
+		this.Humanoid = character.FindFirstChildOfClass("Humanoid") as Humanoid;
+
+		/*Disconnect Previous Connections*/
+		this.HumanoidDiedConnection?.Disconnect();
+		this.CharacterAddedConnection?.Disconnect();
+
+		/* Connect Humanoid Died Event */
+		this.HumanoidDiedConnection = this.Humanoid?.Died.Connect(() => {
+			this.died();
 		});
-		print(`Abilities loaded for ${this.Player.Name}:`, this.profile?.Data.Abilities);
+		/* Connect Character Added Event */
+		this.CharacterAddedConnection = this.Player.CharacterAdded.Connect((newCharacter) => {
+			DebugLog(`Character added for player ${this.Player.Name}.`);
+			this.UpdateCharacter(newCharacter);
+		});
+		/* Load Animations */
+		this.loadAnimations();
+		DebugLog(`Character updated for player ${this.Player.Name}.`, this.CharacterModel);
+	}
+
+	private loadAnimations() {
+		if (this.CharacterModel === undefined) {
+			warn(`Character model is undefined for player ${this.Player.Name}. Cannot load animations.`);
+			return;
+		}
+		// Load animations for the character
+		if (this.profile?.Data.Abilities === undefined) {
+			warn(`Abilities are undefined for player ${this.Player.Name}. Cannot load animations.`);
+			return;
+		}
+
+		this.profile.Data.Abilities.forEach((abilityKey: AbilityKey) => {
+			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
+			const character = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
+			loadAnimation(character, animationKey);
+		});
 	}
 
 	public ActivateAbility(abilityKey: AbilityKey) {
 		const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
-		if (this.profile?.Data.Abilities!.includes(abilityKey)) {
-			const character = this.CharacterModel;
-			if (character === undefined) {
-				this.CharacterModel = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
-			}
-		} else {
-			warn(`Ability ${abilityKey} is not available for player ${this.Player.Name}`);
+		const hasAbility = this.profile?.Data.Abilities?.includes(abilityKey);
+		if (!animationKey) {
+			warn(`Animation key for ability ${abilityKey} not found.`);
 			return;
 		}
-
-		if (this.CharacterModel === undefined) return;
-		playAnimation(this.CharacterModel, animationKey);
+		if (!hasAbility) {
+			warn(`Player ${this.Player.Name} does not have ability ${abilityKey}.`);
+			return;
+		}
+		const character = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
+		if (!character) {
+			warn(`Character not found for player ${this.Player.Name}. Cannot activate ability ${abilityKey}.`);
+			return;
+		}
+		//const track = loadAnimation(character, animationKey);
+		// if (!track) {
+		// 	warn(`Failed to load animation track for ${animationKey} on player ${this.Player.Name}.`);
+		// 	return;
+		// }
+		//track.Play();
+		playAnimation(character, animationKey);
 	}
 
 	/* Instance Methods */
@@ -143,6 +167,6 @@ export default class SoulPlayer {
 	private died() {
 		// Handle player death logic here
 		warn(`Player ${this.Player.Name} has died.`);
-		SoulPlayer.Binder.delete(this.userId);
+		//SoulPlayer.Binder.delete(this.userId);
 	}
 }

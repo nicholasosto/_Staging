@@ -23,6 +23,7 @@ import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
 import { AbilityKey, AttributesDTO, DefaultAttributes, ProfileDataMap } from "shared/definitions";
+import { CodeSettings } from "shared/constants/CodeSettings";
 
 /* ========================================== Profile Store Setup =============================================== */
 
@@ -31,7 +32,7 @@ const DATASTORE_NAME = "A_SoulSteelPlayerProfile";
 
 const DefaultProfileData: ProfileDataMap = {
 	// Player Profile Data
-	Abilities: new Array<AbilityKey>(), // List of abilities the player has
+	Abilities: ["earthquake", "fireball", "ice_shard"] as AbilityKey[], // Default abilities
 	Attributes: DefaultAttributes, // Player attributes
 };
 
@@ -52,7 +53,7 @@ export class DataProfileController {
 
 	/* Constructor */
 	private constructor() {
-		print("Initialized.");
+		print("DataProfileController Initialized.");
 	}
 
 	/* Start */
@@ -81,6 +82,9 @@ export class DataProfileController {
 
 	/* On Player Joining */
 	private static async _onPlayerJoining(player: Player) {
+		if (CodeSettings.DEBUG_DATASERVICE) {
+			print(`DataProfileController._onPlayerJoining(${player.Name}) called.`);
+		}
 		/* Create Player Key */
 		const playerKey = player.Name + "_" + tostring(player.UserId);
 		try {
@@ -95,9 +99,6 @@ export class DataProfileController {
 
 			// Store the profile in the map
 			this._profileMap.set(player, profile);
-
-			// Print debug log
-			print(`[${player.Name}] - Profile loaded:`, profile.Data);
 
 			// Reconcile the profile to ensure it has the correct data structure
 			profile.Reconcile();
@@ -120,7 +121,9 @@ export class DataProfileController {
 
 	/* Get Profile */
 	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
-		//print(`GetProfile(${player.Name})`);
+		if (CodeSettings.DEBUG_DATASERVICE) {
+			print(`DataProfileController.GetProfile(${player.Name}) called.`, this._profileMap.get(player));
+		}
 		return this._profileMap.get(player); // Return the profile from the map
 	}
 }
