@@ -20,7 +20,7 @@ const Containers = {
 
 function onPlayerEnteredZone(player: Player, zoneName: string): void {
 	print(`Player ${player.Name} has entered the ${zoneName}.`);
-	StatusEffectService.AddEffect(player, "ResourceHazard"); // Example effect when entering a zone
+       StatusEffectService.AddEffect(player, "Bleeding"); // Example effect when entering a zone
 
 	// Additional logic for when a player enters a zone can be added here
 }
