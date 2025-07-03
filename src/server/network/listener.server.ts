@@ -25,7 +25,12 @@ import { HttpService } from "@rbxts/services";
 import { ClientDispatch, Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
-import { BattleRoomService, SettingsService, NPCService } from "server/services";
+import {
+       BattleRoomService,
+       SettingsService,
+       NPCService,
+       AbilityService,
+} from "server/services";
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
@@ -45,17 +50,11 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 
 // Abilities -----------------------------------------------------
 Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
-	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	soulPlayer?.ActivateAbility(abilityKey);
+       AbilityService.Activate(player, abilityKey);
 });
 
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
-	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	if (soulPlayer === undefined) {
-		warn(`SoulPlayer not found for ${player.Name}`);
-		return undefined;
-	}
-	return soulPlayer.GetAbilities();
+       return AbilityService.GetAbilities(player);
 });
 
 // MATCHMAKING -----------------------------------------------------
