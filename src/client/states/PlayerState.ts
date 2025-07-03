@@ -58,6 +58,16 @@ export default class PlayerState {
 				warn("Failed to fetch player abilities.");
 			}
 		});
+		task.delay(4, () => {
+			// Example of updating resources after a delay
+			this.PlayerResources.Health.Current.set(80);
+			this.PlayerResources.Mana.Current.set(50);
+			this.PlayerResources.Stamina.Current.set(30);
+			print("Player resources updated after delay.");
+			PlayerState.instance.PlayerAbilities.set([]);
+			print(`Player abilities updated: ${this.PlayerAbilities.get().join(", ")}`);
+		});
+		// Debug log
 	}
 	public static getInstance(): PlayerState {
 		if (!PlayerState.instance) {

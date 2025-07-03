@@ -16,7 +16,7 @@
  * @lastUpdated  2025-06-10 by Trembus
  */
 
-import { GameImages, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
+import { GameImages, GlassGradient, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
 
 // Resource Keys
 export const RESOURCE_KEYS = ["Health", "Mana", "Stamina"] as const;
@@ -49,7 +49,7 @@ export const ResourceMeta: Record<ResourceKey, ResourceMeta> = {
 	Stamina: {
 		displayName: "Stamina",
 		iconId: GameImages.Attributes.Dexterity, // Use the Dexterity icon for Stamina
-		gradient: ShadowGradient(),
+		gradient: GlassGradient(),
 		layoutOrder: 3,
 	},
 } satisfies Record<ResourceKey, ResourceMeta>;

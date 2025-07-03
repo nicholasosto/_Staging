@@ -25,7 +25,7 @@
  *  abilities during gameplay.
  */
 
-import { Value } from "@rbxts/fusion";
+import { Computed, Value } from "@rbxts/fusion";
 import { GetPlayerAbilities } from "client/network/CallServer";
 import PlayerState from "client/states/PlayerState";
 import { GamePanel } from "client/ui/atoms";
@@ -34,12 +34,13 @@ import { Layout } from "client/ui/tokens";
 import { AbilityKey, ClientDispatch } from "shared";
 
 export interface AbilityBarProps {
-	abilities: AbilityKey[];
+	abilities: Value<AbilityKey[]>;
 }
 export function AbilityBar(props: AbilityBarProps) {
-	const abilityButtons = props.abilities.map((ability) => {
-		return AbilityButton({ abilityKey: ability });
-	});
+	const abilities = Computed(() => props.abilities.get());
+	// const abilityButtons = abilities.get().map((ability) => {
+	// 	return AbilityButton({ abilityKey: ability });
+	// });
 
 	return GamePanel({
 		Name: "AbilityBar",
@@ -49,13 +50,13 @@ export function AbilityBar(props: AbilityBarProps) {
 		BackgroundTransparency: 0.5,
 		Layout: Layout.HorizontalSet(10),
 		Content: {
-			Buttons: abilityButtons,
+			Buttons: abilities.get().map((ability) => {
+				return AbilityButton({ abilityKey: ability });
+			}),
 		},
 	});
 }
 export const SoulPlayerAbilityBar = (player: Player) => {
-	const abilityBar = AbilityBar({
-		abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as AbilityKey[],
-	});
-	return abilityBar;
+	const abilitiesState = PlayerState.getInstance().PlayerAbilities;
+	return AbilityBar({ abilities: abilitiesState });
 };

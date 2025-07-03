@@ -37,6 +37,7 @@ export function ResourceBar(resourceKey: ResourceKey) {
 	const resourceBarContainer = GamePanel({
 		Name: `${resourceKey}BarContainer`,
 		Size: UDim2.fromScale(1, 0.3),
+		LayoutOrder: meta.layoutOrder,
 		Content: {
 			FillBar: BarMeter({
 				ProgressState: Computed(() => state.Current.get() / state.Max.get()),
