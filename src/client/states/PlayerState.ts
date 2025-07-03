@@ -2,6 +2,7 @@ import Fusion, { Value } from "@rbxts/fusion";
 import { AbilityKey } from "shared/definitions";
 import { ResourceKey } from "shared/definitions/Resources";
 import { GetPlayerAbilities } from "client/network/CallServer";
+import { StatusEffect } from "shared/definitions/StatusEffect";
 
 /**
  * @file        src/client/states/PlayerState.ts
@@ -30,6 +31,7 @@ export type ResourceState = {
 export default class PlayerState {
 	private static instance: PlayerState;
 	PlayerAbilities: Value<AbilityKey[]> = Value(["melee"]);
+	PlayerStatusEffects: Value<StatusEffect[]> = Value([]);
 	PlayerResources: Record<ResourceKey, ResourceState> = {
 		Health: {
 			Current: Value(100),
