@@ -23,56 +23,56 @@ import { EffectMeta, EffectTypeKey } from "shared/definitions/Effects";
 
 /* =============================================== Service =============================================== */
 export class StatusEffectService {
-        private static _instance: StatusEffectService | undefined;
-        private readonly _effects = new Map<Player, Map<EffectTypeKey, thread>>();
+	private static _instance: StatusEffectService | undefined;
+	private readonly _effects = new Map<Player, Map<EffectTypeKey, thread>>();
 
-        private constructor() {
-                print("StatusEffectService initialized.");
-        }
+	private constructor() {
+		print("StatusEffectService initialized.");
+	}
 
-        public static Start(): StatusEffectService {
-                if (!this._instance) {
-                        this._instance = new StatusEffectService();
-                }
-                return this._instance;
-        }
+	public static Start(): StatusEffectService {
+		if (!this._instance) {
+			this._instance = new StatusEffectService();
+		}
+		return this._instance;
+	}
 
-        /* ------------------------------- Public API ------------------------------- */
-        public static AddEffect(player: Player, effectKey: EffectTypeKey) {
-                const meta = EffectMeta[effectKey];
-                const svc = this.Start();
-                let map = svc._effects.get(player);
-                if (!map) {
-                        map = new Map<EffectTypeKey, thread>();
-                        svc._effects.set(player, map);
-                }
-                if (map.has(effectKey)) return;
+	/* ------------------------------- Public API ------------------------------- */
+	public static AddEffect(player: Player, effectKey: EffectTypeKey) {
+		const meta = EffectMeta[effectKey];
+		const svc = this.Start();
+		let map = svc._effects.get(player);
+		if (!map) {
+			map = new Map<EffectTypeKey, thread>();
+			svc._effects.set(player, map);
+		}
+		if (map.has(effectKey)) return;
 
-                const runner = task.spawn(() => {
-                        while (map!.has(effectKey)) {
-                                print(`Applying ${effectKey} to ${player.Name}: ${meta.amount}`);
-                                task.wait(meta.tickRate);
-                        }
-                });
-                map.set(effectKey, runner);
-        }
+		const runner = task.spawn(() => {
+			while (map!.has(effectKey)) {
+				print(`Applying ${effectKey} to ${player.Name}: ${meta.amount}`);
+				task.wait(meta.tickRate);
+			}
+		});
+		map.set(effectKey, runner);
+	}
 
-        public static RemoveEffect(player: Player, effectKey: EffectTypeKey) {
-                const svc = this.Start();
-                const map = svc._effects.get(player);
-                if (!map) return;
-                const th = map.get(effectKey);
-                if (th) task.cancel(th);
-                map.delete(effectKey);
-        }
+	public static RemoveEffect(player: Player, effectKey: EffectTypeKey) {
+		const svc = this.Start();
+		const map = svc._effects.get(player);
+		if (!map) return;
+		const th = map.get(effectKey);
+		if (th) task.cancel(th);
+		map.delete(effectKey);
+	}
 
-        public static ClearEffects(player: Player) {
-                const svc = this.Start();
-                const map = svc._effects.get(player);
-                if (!map) return;
-                map.forEach((th) => task.cancel(th));
-                svc._effects.delete(player);
-        }
+	public static ClearEffects(player: Player) {
+		const svc = this.Start();
+		const map = svc._effects.get(player);
+		if (!map) return;
+		map.forEach((th) => task.cancel(th));
+		svc._effects.delete(player);
+	}
 }
 
 // Auto-start on import

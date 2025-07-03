@@ -1,5 +1,6 @@
 import { Workspace } from "@rbxts/services";
 import { ZoneBase } from "./ZoneBase";
+import { StatusEffectService } from "server/services";
 
 /**
  * @file        zone.server.ts
@@ -19,6 +20,8 @@ const Containers = {
 
 function onPlayerEnteredZone(player: Player, zoneName: string): void {
 	print(`Player ${player.Name} has entered the ${zoneName}.`);
+	StatusEffectService.AddEffect(player, "ResourceHazard"); // Example effect when entering a zone
+
 	// Additional logic for when a player enters a zone can be added here
 }
 function onPlayerExitedZone(player: Player, zoneName: string): void {

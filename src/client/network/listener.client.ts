@@ -5,15 +5,15 @@ import { Network, ServerDispatchEvents } from "shared";
 
 // PLAYER RESOURCE: Listen for resource updates from the server
 ServerDispatchEvents.Client.OnEvent("ResourceUpdated", (key, current, max) => {
-    const playerState = PlayerState.getInstance();
-    const resource = playerState.PlayerResources[key];
-    if (resource) {
-        resource.Current.set(current);
-        resource.Max.set(max);
-        print(`Resource ${key} updated: Current=${current}, Max=${max}`);
-    } else {
-        warn(`Resource ${key} not found in PlayerState.`);
-    }
+	const playerState = PlayerState.getInstance();
+	const resource = playerState.PlayerResources[key];
+	if (resource) {
+		resource.Current.set(current);
+		resource.Max.set(max);
+		print(`Resource ${key} updated: Current=${current}, Max=${max}`);
+	} else {
+		warn(`Resource ${key} not found in PlayerState.`);
+	}
 });
 
 // Profile Changed: Listen for profile changes from the server

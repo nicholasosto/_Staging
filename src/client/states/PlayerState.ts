@@ -1,4 +1,4 @@
-import Fusion, { Value } from "@rbxts/fusion";
+import Fusion, { Observer, Value } from "@rbxts/fusion";
 import { AbilityKey } from "shared/definitions";
 import { ResourceKey } from "shared/definitions/Resources";
 import { GetPlayerAbilities } from "client/network/CallServer";
@@ -50,27 +50,22 @@ export default class PlayerState {
 	private constructor() {
 		// Initialize player state
 		PlayerState.instance = this;
-		GetPlayerAbilities().then((abilities) => {
-			if (abilities) {
-				abilities.forEach((ability) => {
-					this.PlayerAbilities.get().push(ability);
-				});
-				print(`Player abilities fetched: ${this.PlayerAbilities.get().join(", ")}`);
-			} else {
-				warn("Failed to fetch player abilities.");
-			}
-		});
-		task.delay(4, () => {
-			// Example of updating resources after a delay
-			this.PlayerResources.Health.Current.set(80);
-			this.PlayerResources.Mana.Current.set(50);
-			this.PlayerResources.Stamina.Current.set(30);
-			print("Player resources updated after delay.");
-			PlayerState.instance.PlayerAbilities.set([]);
-			print(`Player abilities updated: ${this.PlayerAbilities.get().join(", ")}`);
-		});
-		// Debug log
+		this.debugObserverInit();
 	}
+
+	private debugObserverInit() {
+		const instance = PlayerState.getInstance();
+		Observer(instance.PlayerResources.Health.Current).onChange(() => {
+			print(`Player health changed: ${instance.PlayerResources.Health.Current.get()}`);
+		});
+		Observer(instance.PlayerResources.Mana.Current).onChange(() => {
+			print(`Player mana changed: ${instance.PlayerResources.Mana.Current.get()}`);
+		});
+		Observer(instance.PlayerResources.Stamina.Current).onChange(() => {
+			print(`Player stamina changed: ${instance.PlayerResources.Stamina.Current.get()}`);
+		});
+	}
+
 	public static getInstance(): PlayerState {
 		if (!PlayerState.instance) {
 			PlayerState.instance = new PlayerState();

@@ -14,8 +14,8 @@ import { Layout } from "../tokens";
 import { StatusEffect } from "shared/definitions/StatusEffect";
 
 export const StatusRowItem = (statusEffect: StatusEffect) => {
-    const currentTIme = os.time(); // Get the current time in seconds
-    const startTime = statusEffect.startTime; // Timestamp when the effect started
+	const currentTIme = os.time(); // Get the current time in seconds
+	const startTime = statusEffect.startTime; // Timestamp when the effect started
 	const timeRemaining = Value(statusEffect.meta.duration - startTime); // Duration in seconds
 	const container = New("Frame")({
 		Size: new UDim2(1, 0, 0, 30),

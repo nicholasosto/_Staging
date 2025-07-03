@@ -25,12 +25,7 @@ import { HttpService } from "@rbxts/services";
 import { ClientDispatch, Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
-import {
-       BattleRoomService,
-       SettingsService,
-       NPCService,
-       AbilityService,
-} from "server/services";
+import { BattleRoomService, SettingsService, NPCService, AbilityService } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
@@ -50,11 +45,11 @@ Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey,
 
 // Abilities -----------------------------------------------------
 Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKey) => {
-       AbilityService.Activate(player, abilityKey);
+	AbilityService.Activate(player, abilityKey);
 });
 
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
-       return AbilityService.GetAbilities(player);
+	return AbilityService.GetAbilities(player);
 });
 
 // MATCHMAKING -----------------------------------------------------
