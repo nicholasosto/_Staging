@@ -46,6 +46,8 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/SettingsService.ts`|Usable|Stores player settings|
 |Server|`server/entity/Manifestation.ts`|Stub|Placeholder creation logic|
 |Server|`server/services/NPCService.ts`|Usable|Spawns NPCs from definitions|
+|Server|`server/services/AbilityService.ts`|Under Construction|Handles ability activation and cooldowns|
+|Server|`server/services/StatusEffectService.ts`|Under Construction|Applies periodic status effects|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/player/SoulPlayer.ts`|Usable|Player data container|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|

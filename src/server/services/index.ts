@@ -25,3 +25,5 @@ export * from "./ManifestationForgeService";
 export * from "./BattleRoomService";
 export * from "./SettingsService";
 export * from "./NPCService";
+export * from "./AbilityService";
+export * from "./StatusEffectService";
