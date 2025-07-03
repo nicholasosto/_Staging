@@ -29,9 +29,9 @@ import { BattleRoomService, SettingsService, NPCService } from "server/services"
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
-import SoulPlayer from "server/entity/player/SoulPlayer";
+import SoulPlayer from "server/classes/player/SoulPlayer";
 
-// INCREASE ATTRIBUTE
+// Attibutes -----------------------------------------------------
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
 	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
 	if (soulPlayer) {
@@ -51,8 +51,13 @@ Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKe
 
 Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
 	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	return soulPlayer?.GetAbilities() || new Array<AbilityKey>();
+	if (soulPlayer === undefined) {
+		warn(`SoulPlayer not found for ${player.Name}`);
+		return undefined;
+	}
+	return soulPlayer.GetAbilities();
 });
+
 // MATCHMAKING -----------------------------------------------------
 Network.Server.Get("CreateRoom").SetCallback((player) => {
 	return BattleRoomService.CreateRoom(player);
@@ -62,6 +67,7 @@ Network.Server.OnEvent("JoinRoom", (player, roomId: string) => {
 	BattleRoomService.JoinRoom(player, roomId);
 });
 
+// Gems -----------------------------------------------------
 Network.Server.OnEvent("SetActiveGem", (player, roomId: string, gemId: string) => {
 	BattleRoomService.SetActiveGem(player, roomId, gemId);
 });

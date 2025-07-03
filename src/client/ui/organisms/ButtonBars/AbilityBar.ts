@@ -25,11 +25,13 @@
  *  abilities during gameplay.
  */
 
+import { Value } from "@rbxts/fusion";
+import { GetPlayerAbilities } from "client/network/CallServer";
 import PlayerState from "client/states/PlayerState";
 import { GamePanel } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules";
 import { Layout } from "client/ui/tokens";
-import { AbilityKey } from "shared";
+import { AbilityKey, ClientDispatch } from "shared";
 
 export interface AbilityBarProps {
 	abilities: AbilityKey[];
@@ -52,10 +54,8 @@ export function AbilityBar(props: AbilityBarProps) {
 	});
 }
 export const SoulPlayerAbilityBar = (player: Player) => {
-	const abilities = PlayerState.getInstance().PlayerAbilities;
-	print(`SoulPlayerAbilityBar: Player ${player.Name} has abilities: ${abilities.join(", ")}`);
 	const abilityBar = AbilityBar({
-		abilities: abilities,
+		abilities: ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as AbilityKey[],
 	});
 	return abilityBar;
 };

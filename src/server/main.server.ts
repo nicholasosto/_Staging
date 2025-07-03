@@ -10,8 +10,8 @@
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
 import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
-import { EntityResource } from "./entity/entityResource/EntityResource";
-import SoulPlayer from "./entity/player/SoulPlayer";
+import { EntityResource } from "./classes/resources/EntityResource";
+import SoulPlayer from "./classes/player/SoulPlayer";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();

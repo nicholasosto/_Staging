@@ -19,7 +19,7 @@
  */
 
 import { NPCKey } from "shared/definitions/NPC";
-import { NPC } from "server/entity/npc";
+import { NPC } from "server/classes/npc";
 
 export class NPCService {
 	private static _instance: NPCService | undefined;

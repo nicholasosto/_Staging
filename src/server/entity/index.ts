@@ -7,10 +7,10 @@
  * @description Barrel export for server-side entity classes.
  */
 
-export * from "./AlienBob";
-export * from "./AlienOrganism";
-export * from "./Manifestation";
-export * from "./entityResource";
-export * from "./npc";
+export * from "../classes/playground/AlienBob";
+export * from "../classes/playground/AlienOrganism";
+export * from "../classes/playground/Manifestation";
+export * from "../classes/resources";
+export * from "../classes/npc";
 export * from "./helpers";
-export * from "./player";
+export * from "../classes/player";

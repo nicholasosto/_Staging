@@ -29,7 +29,7 @@ export type ResourceState = {
 
 export default class PlayerState {
 	private static instance: PlayerState;
-	PlayerAbilities: AbilityKey[] = [];
+	PlayerAbilities: Value<AbilityKey[]> = Value(["melee"]);
 	PlayerResources: Record<ResourceKey, ResourceState> = {
 		Health: {
 			Current: Value(100),
@@ -48,20 +48,17 @@ export default class PlayerState {
 	private constructor() {
 		// Initialize player state
 		PlayerState.instance = this;
-		this.getPlayerAbilities();
-	}
-
-	private getPlayerAbilities() {
-		print("Fetching player abilities...");
 		GetPlayerAbilities().then((abilities) => {
 			if (abilities) {
-				this.PlayerAbilities = abilities;
+				abilities.forEach((ability) => {
+					this.PlayerAbilities.get().push(ability);
+				});
+				print(`Player abilities fetched: ${this.PlayerAbilities.get().join(", ")}`);
 			} else {
 				warn("Failed to fetch player abilities.");
 			}
 		});
 	}
-
 	public static getInstance(): PlayerState {
 		if (!PlayerState.instance) {
 			PlayerState.instance = new PlayerState();

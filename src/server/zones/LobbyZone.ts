@@ -1,7 +1,7 @@
 import { Zone } from "@rbxts/zone-plus";
 import { Players, Workspace } from "@rbxts/services";
 import { BattleRoomService } from "server/services";
-import { AlienOrganism } from "server/entity/AlienOrganism";
+import { AlienOrganism } from "server/classes/playground/AlienOrganism";
 
 /**
  * @file        src/server/zones/LobbyZone.ts

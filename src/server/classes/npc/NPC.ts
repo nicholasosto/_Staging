@@ -18,7 +18,7 @@
  */
 
 import { NPCKey, NPCMeta, NPCMetaMap, FIRST_NAMES, LAST_NAMES, MONIKERS } from "shared/definitions/NPC";
-import { LoadAbilityAnimations } from "../helpers";
+import { LoadAbilityAnimations } from "../../entity/helpers";
 
 export class NPC {
 	public readonly key: NPCKey;
