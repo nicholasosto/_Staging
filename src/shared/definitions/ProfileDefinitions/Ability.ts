@@ -25,6 +25,11 @@ export const ABILITY_KEYS = ["fireball", "ice_shard", "lightning_bolt", "earthqu
 // Key Type
 export type AbilityKey = (typeof ABILITY_KEYS)[number];
 
+// Ability Key Type Guard
+export function isAbilityKey(key: string): key is AbilityKey {
+	return ABILITY_KEYS.includes(key as AbilityKey);
+}
+
 // Ability Metadata Interface
 export interface AbilityMeta {
 	displayName: string;

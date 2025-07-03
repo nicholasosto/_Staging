@@ -10,14 +10,14 @@
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
 import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
-import { EntityResource } from "./classes/resources/EntityResource";
+import { OrganismFood } from "./classes/playground/OrganismFood";
 import SoulPlayer from "./classes/player/SoulPlayer";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
 ManifestationForgeService.Start();
 BattleRoomService.Start();
-EntityResource.SpawnResource(new CFrame(0, 10, 0));
+OrganismFood.SpawnResource(new CFrame(0, 10, 0));
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {

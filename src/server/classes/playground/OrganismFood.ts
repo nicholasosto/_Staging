@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        EntityResource.ts
- * @module      EntityResource
+ * @file        OrganismFood.ts
+ * @module      OrganismFood
  * @layer       Server/Entity
- * @description Spawns a simple collectible resource model.
+ * @description Spawns a simple collectible OrganismFood model.
  *
  * ╭───────────────────────────────╮
  * │  Soul Steel · Coding Guide    │
@@ -17,7 +17,7 @@
  * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
-export class EntityResource {
+export class OrganismFood {
 	public model: Model;
 	public part: Part;
 	public amount: number;
@@ -40,7 +40,7 @@ export class EntityResource {
 		this.model.Parent = game.Workspace; // Add the model to the workspace
 	}
 
-	public static SpawnResource(location: CFrame): EntityResource {
+	public static SpawnResource(location: CFrame): OrganismFood {
 		const amount = math.random(1, 100); // Random amount of resource
 
 		const model = new Instance("Model");
@@ -57,7 +57,7 @@ export class EntityResource {
 
 		model.PrimaryPart = part;
 		model.PivotTo(location); // Set the model's position
-		const resource = new EntityResource(model, amount);
+		const resource = new OrganismFood(model, amount);
 		return resource;
 	}
 

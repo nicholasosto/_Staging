@@ -18,7 +18,7 @@
  */
 
 import { NPCKey, NPCMeta, NPCMetaMap, FIRST_NAMES, LAST_NAMES, MONIKERS } from "shared/definitions/NPC";
-import { LoadAbilityAnimations } from "../../entity/helpers";
+import { AbilitiesMeta, loadAnimation } from "shared";
 
 export class NPC {
 	public readonly key: NPCKey;
@@ -42,7 +42,10 @@ export class NPC {
 		this.model.PivotTo(cFrame);
 		this.model.Parent = game.Workspace;
 
-		LoadAbilityAnimations(this.model, this.meta.abilities);
+		this.meta.abilities.forEach((abilityKey) => {
+			loadAnimation(this.model, AbilitiesMeta[abilityKey]?.animationKey);
+		});
+
 		print(`NPC spawned: ${this.name} (${key})`);
 	}
 
