@@ -23,8 +23,8 @@ import { StatusEffectMeta, StatusEffectKey } from "shared/definitions/StatusEffe
 
 /* =============================================== Service =============================================== */
 export class StatusEffectService {
-       private static _instance: StatusEffectService | undefined;
-       private readonly _effects = new Map<Player, Map<StatusEffectKey, thread>>();
+	private static _instance: StatusEffectService | undefined;
+	private readonly _effects = new Map<Player, Map<StatusEffectKey, thread>>();
 
 	private constructor() {
 		print("StatusEffectService initialized.");
@@ -38,12 +38,12 @@ export class StatusEffectService {
 	}
 
 	/* ------------------------------- Public API ------------------------------- */
-       public static AddEffect(player: Player, effectKey: StatusEffectKey) {
-               const meta = StatusEffectMeta[effectKey];
+	public static AddEffect(player: Player, effectKey: StatusEffectKey) {
+		const meta = StatusEffectMeta[effectKey];
 		const svc = this.Start();
-               let map = svc._effects.get(player);
-               if (!map) {
-                       map = new Map<StatusEffectKey, thread>();
+		let map = svc._effects.get(player);
+		if (!map) {
+			map = new Map<StatusEffectKey, thread>();
 			svc._effects.set(player, map);
 		}
 		if (map.has(effectKey)) return;
@@ -57,7 +57,7 @@ export class StatusEffectService {
 		map.set(effectKey, runner);
 	}
 
-       public static RemoveEffect(player: Player, effectKey: StatusEffectKey) {
+	public static RemoveEffect(player: Player, effectKey: StatusEffectKey) {
 		const svc = this.Start();
 		const map = svc._effects.get(player);
 		if (!map) return;

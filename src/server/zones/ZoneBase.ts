@@ -9,19 +9,19 @@ export const ZoneBase = (
 	onPlayerEntered: (player: Player) => void,
 	onPlayerExited: (player: Player) => void,
 ): Zone => {
-        const zoneInstance = new Zone(container);
+	const zoneInstance = new Zone(container);
 	zoneInstance.playerEntered.Connect(onPlayerEntered);
 	zoneInstance.playerExited.Connect(onPlayerExited);
 	return zoneInstance;
 };
 
 export const EffectZone = (
-       container: Instance,
-       effectKey: StatusEffectKey,
-       OnPlayerEntered: (player: Player) => void,
-       OnPlayerExited: (player: Player) => void,
+	container: Instance,
+	effectKey: StatusEffectKey,
+	OnPlayerEntered: (player: Player) => void,
+	OnPlayerExited: (player: Player) => void,
 ) => {
-       const zoneInstance = new Zone(container);
+	const zoneInstance = new Zone(container);
 	zoneInstance.playerEntered.Connect(OnPlayerEntered);
 	zoneInstance.playerExited.Connect(OnPlayerExited);
 	return zoneInstance;
