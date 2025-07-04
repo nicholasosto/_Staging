@@ -46,9 +46,9 @@ warn("Testing network calls...");
 // Dispatch.UpdatePlayerSetting("musicEnabled", true);
 // Dispatch.UpdatePlayerSetting("nickname", "PlayerOne");
 // Dispatch.IncreaseAttribute("str", 10);
-// Dispatch.GetProfileData("Abilities").then((abilities) => {
-// 	print(`Player Abilities: ${abilities?.join(", ")}`);
-// });
+Dispatch.GetProfileData("Abilities").then((abilities) => {
+	print(`Player Abilities: ${abilities?.join(", ")}`);
+});
 // Dispatch.GetPlayerSettings().then((settings) => {
 // 	print(`Player Settings:`, settings);
 // });
