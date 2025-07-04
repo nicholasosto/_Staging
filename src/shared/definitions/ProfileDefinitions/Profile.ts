@@ -1,3 +1,12 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        Profile.ts
+ * @module      ProfileDefinitions
+ * @layer       Shared/Definitions/Profile
+ * @description Types for the top-level ProfileService structure.
+ */
+
 import { AbilityKey } from "..";
 import { AttributesDTO } from "./Attributes";
 

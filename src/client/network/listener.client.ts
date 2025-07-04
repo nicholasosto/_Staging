@@ -1,3 +1,12 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        listener.client.ts
+ * @module      NetworkClientListener
+ * @layer       Client/Network
+ * @description Hooks client-side events to update local state.
+ */
+
 import PlayerState from "client/states/PlayerState";
 import { ClientDispatch, Network, ServerDispatch } from "shared";
 

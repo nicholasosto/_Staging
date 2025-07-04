@@ -1,5 +1,5 @@
 /**
- * @file        src/client/network/ServerDispatch.ts
+ * @file        src/server/network/ServerDispatch.ts
  * @module      ServerDispatch
  * @layer       Server/Network
  * @description Handles server-side network dispatching for game events.
