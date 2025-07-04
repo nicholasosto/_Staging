@@ -1,5 +1,13 @@
 import { Players } from "@rbxts/services";
-import { AbilityKey, Network, SettingKey, PlayerSettings, ProfileDataKey, ProfileDataMap, ClientDispatch } from "shared";
+import {
+	AbilityKey,
+	Network,
+	SettingKey,
+	PlayerSettings,
+	ProfileDataKey,
+	ProfileDataMap,
+	ClientDispatch,
+} from "shared";
 
 /* Event Signals */
 const ActivateAbilitySignal = Network.Client.Get("ActivateAbility");
@@ -19,15 +27,13 @@ export function ActivateAbility(abilityKey: AbilityKey): void {
 }
 
 export async function GetPlayerSettings(): Promise<PlayerSettings> {
-        return await GetPlayerSettingsSignal.CallServerAsync(Players.LocalPlayer);
+	return await GetPlayerSettingsSignal.CallServerAsync(Players.LocalPlayer);
 }
 
 export function UpdatePlayerSetting(key: SettingKey, value: boolean | string): void {
-        UpdateSettingSignal.SendToServer(key, value);
+	UpdateSettingSignal.SendToServer(key, value);
 }
 
-export async function GetProfileData<K extends ProfileDataKey>(
-       key: K,
-): Promise<ProfileDataMap[K] | undefined> {
-       return await GetProfileDataSignal.CallServerAsync(key);
+export async function GetProfileData<K extends ProfileDataKey>(key: K): Promise<ProfileDataMap[K] | undefined> {
+	return (await GetProfileDataSignal.CallServerAsync(key)) as ProfileDataMap[K] | undefined;
 }

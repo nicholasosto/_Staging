@@ -37,9 +37,6 @@ export interface AbilityBarProps {
 }
 export function AbilityBar(props: AbilityBarProps) {
 	const abilities = Computed(() => props.abilities.get());
-	// const abilityButtons = abilities.get().map((ability) => {
-	// 	return AbilityButton({ abilityKey: ability });
-	// });
 
 	return GamePanel({
 		Name: "AbilityBar",
@@ -56,6 +53,6 @@ export function AbilityBar(props: AbilityBarProps) {
 	});
 }
 export const SoulPlayerAbilityBar = (player: Player) => {
-       const abilitiesState = PlayerState.getInstance().Abilities;
-       return AbilityBar({ abilities: abilitiesState });
+	const abilitiesState = PlayerState.getInstance().Abilities;
+	return AbilityBar({ abilities: abilitiesState });
 };

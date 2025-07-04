@@ -15,6 +15,8 @@ import { Players } from "@rbxts/services";
 import { SCREEN_KEYS } from "client/states";
 import { AdminBar } from "../organisms/ButtonBars/AdminBar";
 import { Value } from "@rbxts/fusion";
+import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
+import { StatusEffect } from "shared/definitions/StatusEffect";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -31,7 +33,7 @@ const HudProps = {
 	}),
 	CurrencyInfo: undefined, // Placeholder for future currency info
 };
-
+const statusEffects = Value<StatusEffect[]>([]);
 export const PlayerHUDScreen = () => {
 	/* Ability Bar */
 	const abilityBar = SoulPlayerAbilityBar(Players.LocalPlayer);
@@ -54,6 +56,7 @@ export const PlayerHUDScreen = () => {
 			}),
 			AbilityBar: abilityBar,
 			AdminBar: AdminBar(Value(true)), // Admin bar visibility controlled by a Value
+			StatusPanel: StatusPanel(statusEffects), // Status effects will be dynamically updated
 		},
 	});
 
