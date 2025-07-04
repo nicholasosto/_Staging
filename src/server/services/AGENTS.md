@@ -29,6 +29,10 @@ Spawns NPC instances and removes them. Mutation methods: `Spawn(key, cFrame)` an
 
 Handles activation of player abilities and manages cooldown timers. Primary mutation: `Activate(player, abilityKey)`.
 
+### AttributesService
+
+Increases and validates player attributes. Key mutation: `Increase(player, attributeKey, amount)` which updates the player's profile and recalculates resources.
+
 ### StatusEffectService
 
 Applies periodic status effects to players. Mutations include `AddEffect(player, effectKey)`, `RemoveEffect(player, effectKey)`, and `ClearEffects(player)`.

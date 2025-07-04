@@ -25,14 +25,14 @@ import { HttpService } from "@rbxts/services";
 import { ClientDispatch, Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
-import { BattleRoomService, SettingsService, NPCService, AbilityService, DataProfileController } from "server/services";
+import { BattleRoomService, SettingsService, NPCService, AbilityService, DataProfileController, AttributesService } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
 
 // Attibutes -----------------------------------------------------
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
-	//AttributeService.Increase(player, attributeKey, amount);
+        AttributesService.Increase(player, attributeKey, amount);
 });
 
 // Resources -----------------------------------------------------
@@ -82,11 +82,11 @@ TestNetwork.Server.OnEvent("SPAWN_NPC", (player, npcKey: NPCKey) => {
 });
 
 ClientDispatch.Server.Get("GetData").SetCallback((player, dataKey: ProfileDataKey) => {
-	const playerProfile = DataProfileController.GetProfile(player);
-	if (playerProfile === undefined) {
-		warn(`SoulPlayer not found for ${player.Name}`);
-		return undefined;
-	}
+        const playerProfile = DataProfileController.GetProfile(player);
+        if (playerProfile === undefined) {
+                warn(`Profile not found for ${player.Name}`);
+                return undefined;
+        }
 	if (playerProfile.Data[dataKey] === undefined) {
 		warn(`Profile data not found for ${player.Name}: ${dataKey}`);
 		return undefined;

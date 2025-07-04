@@ -51,8 +51,8 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/AbilityService.ts`|Under Construction|Handles ability activation and cooldowns|
 |Server|`server/services/StatusEffectService.ts`|Under Construction|Refactored to use StatusEffects|
 |Server|`server/services/ResourcesService.ts`|Under Construction|Tracks player resource values - bug fix for static call|
+|Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
-|Server|`server/entity/player/SoulPlayer.ts`|Usable|Player data container|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
 
 Keep this summary updated whenever modules are added or changed.
