@@ -20,7 +20,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion, { Children, New } from "@rbxts/fusion";
+import Fusion, { Children, New, OnEvent } from "@rbxts/fusion";
 import { GameButton, GamePanel } from "../atoms";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
@@ -56,17 +56,7 @@ export function GameWindow(props: GameWindowProps) {
 		Font: Enum.Font.SourceSansBold,
 		TextXAlignment: Enum.TextXAlignment.Center,
 		TextYAlignment: Enum.TextYAlignment.Center,
-		[Children]: {
-			CloseButton: GameButton({
-				Name: "CloseButton",
-				Size: UDim2.fromOffset(30, 30),
-				AnchorPoint: new Vector2(0.5, 0.5),
-				Position: UDim2.fromScale(1, 0),
-				BackgroundTransparency: 1,
-				Image: GameImages.Control.Close,
-				OnClick: () => ScreenState[props.ScreenKey].set(false),
-			}),
-		},
+		[Children]: {},
 	});
 
 	/* Window Content */
@@ -84,18 +74,27 @@ export function GameWindow(props: GameWindowProps) {
 	});
 
 	/* Window Container */
-	const windowContainer = GamePanel({
+	const windowContainer = New("Frame")({
 		Name: "WindowContainer",
 		Size: props.Size,
 		Position: props.Position,
 		AnchorPoint: props.AnchorPoint,
 		BackgroundTransparency: 0.2,
-		StyleChildren: New("UICorner")({
-			CornerRadius: new UDim(0, 8),
-		}),
-		Content: {
+		[Children]: {
+			Corner: New("UICorner")({
+				CornerRadius: new UDim(0, 5),
+			}),
 			TitleBar: titleBar,
 			WindowContent: windowContent,
+			CloseButton: New("ImageButton")({
+				Name: "CloseButton",
+				Size: UDim2.fromOffset(30, 30),
+				AnchorPoint: new Vector2(0.5, 0.5),
+				Position: UDim2.fromScale(1, 0),
+				BackgroundTransparency: 1,
+				Image: GameImages.Control.Close,
+				[OnEvent("Activated")]: () => ScreenState[props.ScreenKey].set(false),
+			}),
 		},
 	});
 

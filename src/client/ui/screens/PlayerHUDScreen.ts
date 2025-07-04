@@ -48,7 +48,7 @@ export const PlayerHUDScreen = () => {
 				Layout: Layout.VerticalScroll(5),
 				Name: "LeftPanel",
 				Size: new UDim2(0.5, 0, 1, 0),
-				BackgroundTransparency: 0.9,
+				BackgroundTransparency: 1,
 				Content: {
 					CharacterInfoCard: HudProps.CharacterInfoCard,
 					MenuBar: HudProps.HUDMenuBar,

@@ -19,7 +19,7 @@ import {
 	SETTING_KEYS,
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
-import { GetPlayerSettings } from "client/network/CallServer";
+import { GetPlayerSettings } from "client/network/ClientDispatch";
 
 export default class SettingsState {
 	private static instance: SettingsState;

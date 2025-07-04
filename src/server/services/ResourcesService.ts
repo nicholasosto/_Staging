@@ -24,7 +24,7 @@ import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shar
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataProfileController } from "./DataService";
 import { ResourceFormula } from "shared/calculations/ResourceCalculator";
-import { ServerDispatchEvents } from "shared/network/Definitions";
+import { ServerDispatch } from "shared/network/Definitions";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -57,7 +57,7 @@ export class ResourcesService {
 		const newCurrent = math.clamp(data.current + delta, 0, data.max);
 		if (newCurrent === data.current) return;
 		data.current = newCurrent;
-		ServerDispatchEvents.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+		ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
 	}
 
 	public static Recalculate(player: Player) {
@@ -81,7 +81,7 @@ export class ResourcesService {
 				data.current = max;
 			}
 			if (changed) {
-				ServerDispatchEvents.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+				ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
 			}
 		});
 	}

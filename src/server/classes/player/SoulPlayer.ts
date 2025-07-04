@@ -17,10 +17,19 @@
  * @lastUpdated  2025-06-25 by Trembus – Initial creation
  */
 
-import { AbilitiesMeta, AbilityKey, ProfileDataKey, ProfileDataMap, loadAnimation, playAnimation } from "shared";
+import {
+	AbilitiesMeta,
+	AbilityKey,
+	ProfileDataKey,
+	ProfileDataMap,
+	ServerDispatch,
+	loadAnimation,
+	playAnimation,
+} from "shared";
 import { DataProfileController } from "server/services/DataService";
 import { Profile } from "@rbxts/profileservice/globals";
 import { CodeSettings } from "shared/constants/CodeSettings";
+import { UpdateResource } from "server/network/ServerDispatch";
 
 /**
  * SoulPlayer class represents a base player entity in the game.
@@ -43,8 +52,8 @@ export default class SoulPlayer {
 	}
 
 	/* Instance Properties - Private */
-	private userId: number;
-	private readonly profile?: Profile<ProfileDataMap>;
+
+	//private readonly profile?: Profile<ProfileDataMap>;
 
 	/* Instance Properties - Public */
 	public readonly Player: Player;
@@ -53,21 +62,20 @@ export default class SoulPlayer {
 
 	/* Connections */
 	private HumanoidDiedConnection?: RBXScriptConnection; // Connection for humanoid death event
+	private HumanoidHealthChangedConnection?: RBXScriptConnection; // Connection for humanoid health change event
 	private CharacterAddedConnection?: RBXScriptConnection; // Connection for character added event
 
 	/* Constructor */
 	constructor(player: Player, character: Model) {
 		/* Set the Properties */
 		this.Player = player;
-		this.userId = player.UserId;
-		this.profile = DataProfileController.GetProfile(player); // Data profile for the player
-		this.UpdateCharacter(character);
+		//this.profile = DataProfileController.GetProfile(player); // Data profile for the player
+		this.InitializeConnections(character);
 		// Register the player in the registry
-		SoulPlayer.Binder.set(this.userId, this);
+		SoulPlayer.Binder.set(player.UserId, this);
 	}
 
-	public UpdateCharacter(character: Model) {
-		print(`Updating character for player ${this.Player.Name}.`, this.profile?.Data);
+	public InitializeConnections(character: Model) {
 		/* Set References */
 		this.CharacterModel = character;
 		this.Humanoid = character.FindFirstChildOfClass("Humanoid") as Humanoid;
@@ -80,84 +88,30 @@ export default class SoulPlayer {
 		this.HumanoidDiedConnection = this.Humanoid?.Died.Connect(() => {
 			this.died();
 		});
+
+		/* Connect Humanoid Health Changed Event */
+		this.HumanoidHealthChangedConnection = this.Humanoid?.HealthChanged.Connect((newHealth) => {
+			/* Update the player's health resource */
+			UpdateResource(this.Player, "Health", newHealth, this.Humanoid?.MaxHealth ?? 100);
+		});
 		/* Connect Character Added Event */
 		this.CharacterAddedConnection = this.Player.CharacterAdded.Connect((newCharacter) => {
-			DebugLog(`Character added for player ${this.Player.Name}.`);
-			this.UpdateCharacter(newCharacter);
+			this.InitializeConnections(newCharacter);
 		});
 		/* Load Animations */
-		this.loadAnimations();
-		DebugLog(`Character updated for player ${this.Player.Name}.`, this.CharacterModel);
+		//this.loadAnimations();
 	}
 
-	private loadAnimations() {
-		if (this.CharacterModel === undefined) {
-			warn(`Character model is undefined for player ${this.Player.Name}. Cannot load animations.`);
-			return;
-		}
-		// Load animations for the character
-		if (this.profile?.Data.Abilities === undefined) {
-			warn(`Abilities are undefined for player ${this.Player.Name}. Cannot load animations.`);
-			return;
-		}
-
-		this.profile.Data.Abilities.forEach((abilityKey: AbilityKey) => {
-			const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
-			const character = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
-			loadAnimation(character, animationKey);
-		});
-	}
-
-	public ActivateAbility(abilityKey: AbilityKey) {
-		const animationKey = AbilitiesMeta[abilityKey]?.animationKey;
-		const hasAbility = this.profile?.Data.Abilities?.includes(abilityKey);
-		if (!animationKey) {
-			warn(`Animation key for ability ${abilityKey} not found.`);
-			return;
-		}
-		if (!hasAbility) {
-			warn(`Player ${this.Player.Name} does not have ability ${abilityKey}.`);
-			return;
-		}
-		const character = this.Player.Character || this.Player.CharacterAdded.Wait()[0];
-		if (!character) {
-			warn(`Character not found for player ${this.Player.Name}. Cannot activate ability ${abilityKey}.`);
-			return;
-		}
-		//const track = loadAnimation(character, animationKey);
-		// if (!track) {
-		// 	warn(`Failed to load animation track for ${animationKey} on player ${this.Player.Name}.`);
-		// 	return;
-		// }
-		//track.Play();
-		playAnimation(character, animationKey);
-	}
-
-	/* Instance Methods */
-	/**
-	 * Increases the player's attribute by a specified amount.
-	 * @param attributeKey The key of the attribute to increase.
-	 * @param amount The amount to increase the attribute by.
-	 */
-	public IncreaseAttribute(attributeKey: string, amount: number) {
-		// Logic to increase the player's attribute
-		print(`Increasing attribute ${attributeKey} by ${amount} for player ${this.Player.Name}`);
-		// Here you would typically update the player's profile or stats
-	}
-
-	public GetAbilities(): AbilityKey[] | undefined {
-		// Return the player's abilities from their profile
-		if (this.profile) {
-			print(`Getting abilities for player ${this.Player.Name}:`, this.profile.Data.Abilities);
-			return this.profile.Data.Abilities;
+	public TakeDamage(amount: number) {
+		/* Check if Humanoid exists */
+		if (this.Humanoid) {
+			/* Apply damage to the Humanoid */
+			this.Humanoid.Health -= amount;
+			UpdateResource(this.Player, "Health", this.Humanoid.Health, this.Humanoid.MaxHealth);
+			/* Check if Humanoid is dead */
 		} else {
-			warn(`Profile not found for player ${this.Player.Name}`);
-			return undefined;
+			warn(`Humanoid not found for player ${this.Player.Name}. Cannot apply damage.`);
 		}
-	}
-
-	public GetData(dataKey: ProfileDataKey) {
-		return (this.profile?.Data[dataKey] as ProfileDataMap[ProfileDataKey]) || undefined;
 	}
 
 	/**

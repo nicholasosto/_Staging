@@ -99,7 +99,7 @@ export const GamePanel = (props: GamePanelProps) => {
 	props.Name = props.Name ?? "GamePanel";
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0, 0);
 	props.BackgroundColor3 = props.BackgroundColor3 ?? bg;
-	props.BackgroundTransparency = props.BackgroundTransparency ?? 0.2;
+	props.BackgroundTransparency = props.BackgroundTransparency ?? 1;
 	props.Position = props.Position ?? UDim2.fromScale(0, 0);
 	props.Size = props.Size ?? UDim2.fromScale(1, 1);
 	props.LayoutOrder = props.LayoutOrder ?? 1;

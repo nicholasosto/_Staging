@@ -30,7 +30,7 @@ type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMa
 /* =============================================== Network Definitions =============================================== */
 export const Network = Net.Definitions.Create({
 	// Get SoulPlayer
-	GetPlayerAbilities: Net.Definitions.ServerFunction<(player: Player) => AbilityKey[] | undefined>(),
+
 	// fire-and-forget from client → server
 	SpawnManifestation: Net.Definitions.ClientToServerEvent<[formId: string, abilityId: string, bonusId: string]>(),
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
@@ -62,7 +62,7 @@ export const ClientDispatch = Net.Definitions.Create({
 	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
 });
 
-export const ServerDispatchEvents = Net.Definitions.Create({
+export const ServerDispatch = Net.Definitions.Create({
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
 	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: AbilityKey[]]>(),
 });

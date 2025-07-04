@@ -18,9 +18,17 @@
  *   @rbxts/fusion ^0.4.0
  */
 /* =============================================== Imports =============================================== */
+import { ResourceKey } from "shared";
 import { Network } from "shared/network/Definitions";
-import { ServerDispatchEvents } from "shared/network/Definitions";
+import { ServerDispatch } from "shared/network/Definitions";
 
 /* ================================================ Events =============================================== */
 
-const ResourceUpdated = ServerDispatchEvents.Server.Get("ResourceUpdated");
+const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");
+
+/* ================================================ Dispatches =============================================== */
+
+export const UpdateResource = (player: Player, resourceKey: ResourceKey, current: number, max: number) => {
+	//print(`Updating resource for player ${player.Name}: ${resourceKey} - Current: ${current}, Max: ${max}`);
+	ResourceUpdated.SendToPlayer(player, resourceKey, current, max);
+};

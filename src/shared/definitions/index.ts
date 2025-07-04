@@ -9,6 +9,7 @@
 
 // Folders
 export * from "./ProfileDefinitions";
+export * from "./PanelSlots";
 
 // Modules
 export * from "./Animation";
@@ -17,3 +18,4 @@ export * from "./Loot";
 export * from "./NPC";
 export * from "./Rarity";
 export * from "./Resources";
+export * from "./StatusEffect";

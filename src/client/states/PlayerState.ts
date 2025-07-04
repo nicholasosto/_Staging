@@ -11,7 +11,7 @@ import {
 } from "shared/definitions";
 import { ResourceKey, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { StatusEffect } from "shared/definitions/StatusEffect";
-import { GetProfileData } from "client/network/CallServer";
+import { GetProfileData } from "client/network/ClientDispatch";
 
 /**
  * @file        src/client/states/PlayerState.ts
@@ -86,7 +86,7 @@ export default class PlayerState {
 		}
 
 		this.debugObserverInit();
-		this.fetchFromServer();
+		this.fetchFromServer(); // Fetch initial data from the server
 	}
 
 	private debugObserverInit() {

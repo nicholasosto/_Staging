@@ -25,7 +25,7 @@ import { HttpService } from "@rbxts/services";
 import { ClientDispatch, Network, TestNetwork } from "shared/network";
 
 /* Custom Services */
-import { BattleRoomService, SettingsService, NPCService, AbilityService } from "server/services";
+import { BattleRoomService, SettingsService, NPCService, AbilityService, DataProfileController } from "server/services";
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
@@ -48,9 +48,9 @@ Network.Server.OnEvent("ActivateAbility", (player: Player, abilityKey: AbilityKe
 	AbilityService.Activate(player, abilityKey);
 });
 
-Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
-	return AbilityService.GetAbilities(player);
-});
+// Network.Server.Get("GetPlayerAbilities").SetCallback((player) => {
+// 	return AbilityService.GetAbilities(player);
+// });
 
 // MATCHMAKING -----------------------------------------------------
 Network.Server.Get("CreateRoom").SetCallback((player) => {
@@ -88,10 +88,14 @@ TestNetwork.Server.OnEvent("SPAWN_NPC", (player, npcKey: NPCKey) => {
 });
 
 ClientDispatch.Server.Get("GetData").SetCallback((player, dataKey: ProfileDataKey) => {
-	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	if (soulPlayer === undefined) {
+	const playerProfile = DataProfileController.GetProfile(player);
+	if (playerProfile === undefined) {
 		warn(`SoulPlayer not found for ${player.Name}`);
 		return undefined;
 	}
-	return soulPlayer.GetData(dataKey);
+	if (playerProfile.Data[dataKey] === undefined) {
+		warn(`Profile data not found for ${player.Name}: ${dataKey}`);
+		return undefined;
+	}
+	return playerProfile.Data[dataKey];
 });

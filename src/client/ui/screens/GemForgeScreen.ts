@@ -20,14 +20,50 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+import Fusion, { Children } from "@rbxts/fusion";
 import { GameWindow } from "../molecules";
 import { ScreenKey } from "client/states";
+import { BorderImage, GamePanel } from "../atoms";
+import { Layout, Padding } from "../tokens";
+import { GemSlotKey } from "shared";
 const Key: ScreenKey = "GemForge";
+
+const GemSlot = (slotKey: GemSlotKey) => {
+	const container = GamePanel({
+		Name: `${Key}_${slotKey}Slot`,
+		Size: new UDim2(1, 0, 0, 100),
+		Padding: Padding(5),
+		Layout: Layout.HorizontalScroll(),
+		BackgroundTransparency: 0,
+		Content: [],
+	});
+
+	return container;
+};
+
+const GemSlotContainer = () => {
+	const SubPanel = GamePanel({
+		Name: `${Key}_SlotPanel`,
+		Size: new UDim2(0.5, 0, 1, 0),
+		Padding: Padding(5),
+		Layout: Layout.VerticalScroll(),
+		BackgroundTransparency: 0.5,
+		Content: {
+			FormSlot: GemSlot("FORM"),
+			AbilitySlot: GemSlot("ABILITY"),
+			PhysicalSlot: GemSlot("PHYSICAL"),
+			MagicalSlot: GemSlot("MAGICAL"),
+		},
+	});
+	return SubPanel;
+};
 
 export const GemForgeScreen = () => {
 	return GameWindow({
 		ScreenKey: Key,
 		Name: `${Key}Screen`,
-		Content: {},
+		Content: {
+			SlotContainer: GemSlotContainer(),
+		},
 	});
 };
