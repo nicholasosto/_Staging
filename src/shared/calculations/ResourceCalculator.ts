@@ -1,9 +1,15 @@
+/// <reference types="@rbxts/types" />
+
 /**
- * @file ResourceCalculator.ts
- * @module ResourceCalculator
- * @author Trembus
- * @layer Shared/Calculations
- * @description Contains utility functions for calculating resource values like health, mana, and stamina based on attributes.
+ * @file        ResourceCalculator.ts
+ * @module      ResourceCalculator
+ * @layer       Shared/Calculations
+ * @description Utility formulas for computing max resource values.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
  */
 
 import { AttributesDTO, ResourceKey } from "shared/definitions";

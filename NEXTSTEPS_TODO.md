@@ -7,4 +7,5 @@ This document captures potential improvements and follow-up tasks for the curren
 - Expand **ResourcesService** regeneration logic into configurable rates per resource.
 - Implement persistence for new data fields through **DataService**.
 - Review client state synchronization after service mutations.
+- Ensure all new folders maintain an `index.ts` barrel for exports.
 
