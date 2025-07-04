@@ -30,9 +30,9 @@ import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey) {
-	const playerState = PlayerState.getInstance();
+       const playerState = PlayerState.getInstance();
 
-	const state = playerState.PlayerResources[resourceKey];
+       const state = playerState.Resources[resourceKey];
 	const meta = ResourceMeta[resourceKey];
 	const resourceBarContainer = GamePanel({
 		Name: `${resourceKey}BarContainer`,
@@ -40,7 +40,7 @@ export function ResourceBar(resourceKey: ResourceKey) {
 		LayoutOrder: meta.layoutOrder,
 		Content: {
 			FillBar: BarMeter({
-				ProgressState: Computed(() => state.Current.get() / state.Max.get()),
+                               ProgressState: state.Percent,
 				MaxValue: state.Max,
 				Gradient: meta.gradient,
 				Size: UDim2.fromScale(1, 1),

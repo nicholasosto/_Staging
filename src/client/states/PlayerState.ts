@@ -1,8 +1,17 @@
-import Fusion, { Observer, Value } from "@rbxts/fusion";
-import { AbilityKey } from "shared/definitions";
-import { ResourceKey } from "shared/definitions/Resources";
-import { GetPlayerAbilities } from "client/network/CallServer";
+import Fusion, { Observer, Value, Computed } from "@rbxts/fusion";
+import {
+       AbilityKey,
+       AttributeKey,
+       ATTR_KEYS,
+       AttributesDTO,
+       DefaultAttributes,
+       CurrencyKey,
+       CURRENCY_KEY,
+       DefaultCurrency,
+} from "shared/definitions";
+import { ResourceKey, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { StatusEffect } from "shared/definitions/StatusEffect";
+import { GetProfileData } from "client/network/CallServer";
 
 /**
  * @file        src/client/states/PlayerState.ts
@@ -24,47 +33,90 @@ import { StatusEffect } from "shared/definitions/StatusEffect";
  *   @rbxts/fusion ^0.4.0
  */
 export type ResourceState = {
-	Current: Value<number>;
-	Max: Value<number>;
+       Current: Value<number>;
+       Max: Value<number>;
+       Percent: Computed<number>;
 };
 
 export default class PlayerState {
-	private static instance: PlayerState;
-	PlayerAbilities: Value<AbilityKey[]> = Value(["melee"]);
-	PlayerStatusEffects: Value<StatusEffect[]> = Value([]);
-	PlayerResources: Record<ResourceKey, ResourceState> = {
-		Health: {
-			Current: Value(100),
-			Max: Value(100),
-		},
-		Mana: {
-			Current: Value(100),
-			Max: Value(100),
-		},
-		Stamina: {
-			Current: Value(100),
-			Max: Value(100),
-		},
-	};
+       private static instance: PlayerState;
 
-	private constructor() {
-		// Initialize player state
-		PlayerState.instance = this;
-		this.debugObserverInit();
-	}
+       /** Ability list from the player's profile */
+       public Abilities = Value<AbilityKey[]>([]);
 
-	private debugObserverInit() {
-		const instance = PlayerState.getInstance();
-		Observer(instance.PlayerResources.Health.Current).onChange(() => {
-			print(`Player health changed: ${instance.PlayerResources.Health.Current.get()}`);
-		});
-		Observer(instance.PlayerResources.Mana.Current).onChange(() => {
-			print(`Player mana changed: ${instance.PlayerResources.Mana.Current.get()}`);
-		});
-		Observer(instance.PlayerResources.Stamina.Current).onChange(() => {
-			print(`Player stamina changed: ${instance.PlayerResources.Stamina.Current.get()}`);
-		});
-	}
+       /** Attribute values and point totals */
+       public Attributes: Record<AttributeKey, Value<number>> = {} as never;
+       public AttributeAvailable = Value(0);
+       public AttributeSpent = Value(0);
+
+       /** Currency amounts */
+       public Currency: Record<CurrencyKey, Value<number>> = {} as never;
+
+       /** Active status effects */
+       public StatusEffects = Value<StatusEffect[]>([]);
+
+       /** Player resource values */
+       public Resources: Record<ResourceKey, ResourceState> = {} as never;
+
+       private constructor() {
+               PlayerState.instance = this;
+
+               // initialize attribute values
+               for (const key of ATTR_KEYS) {
+                       this.Attributes[key] = Value(DefaultAttributes[key]);
+               }
+               this.AttributeAvailable.set(DefaultAttributes.AvailablePoints);
+               this.AttributeSpent.set(DefaultAttributes.SpentPoints);
+
+               // initialize currency
+               for (const key of CURRENCY_KEY) {
+                       this.Currency[key] = Value(DefaultCurrency[key]);
+               }
+
+               // initialize resources using defaults
+               for (const key of RESOURCE_KEYS) {
+                       const data = DEFAULT_RESOURCES[key];
+                       const current = Value(data.current);
+                       const max = Value(data.max);
+                       this.Resources[key] = {
+                               Current: current,
+                               Max: max,
+                               Percent: Computed(() => current.get() / math.max(max.get(), 1)),
+                       };
+               }
+
+               this.debugObserverInit();
+               this.fetchFromServer();
+       }
+
+       private debugObserverInit() {
+               const inst = PlayerState.getInstance();
+               const res = inst.Resources;
+               Observer(res.Health.Current).onChange(() => {
+                       print(`Health: ${res.Health.Current.get()}/${res.Health.Max.get()}`);
+               });
+               Observer(res.Mana.Current).onChange(() => {
+                       print(`Mana: ${res.Mana.Current.get()}/${res.Mana.Max.get()}`);
+               });
+               Observer(res.Stamina.Current).onChange(() => {
+                       print(`Stamina: ${res.Stamina.Current.get()}/${res.Stamina.Max.get()}`);
+               });
+       }
+
+       private async fetchFromServer() {
+               const abilities = await GetProfileData("Abilities");
+               if (abilities) this.Abilities.set(abilities as AbilityKey[]);
+
+               const attrs = await GetProfileData("Attributes");
+               if (attrs) {
+                       const data = attrs as AttributesDTO;
+                       for (const key of ATTR_KEYS) {
+                               this.Attributes[key].set(data[key]);
+                       }
+                       this.AttributeAvailable.set(data.AvailablePoints);
+                       this.AttributeSpent.set(data.SpentPoints);
+               }
+       }
 
 	public static getInstance(): PlayerState {
 		if (!PlayerState.instance) {

@@ -26,7 +26,6 @@
  */
 
 import { Computed, Value } from "@rbxts/fusion";
-import { GetPlayerAbilities } from "client/network/CallServer";
 import PlayerState from "client/states/PlayerState";
 import { GamePanel } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules";
@@ -57,6 +56,6 @@ export function AbilityBar(props: AbilityBarProps) {
 	});
 }
 export const SoulPlayerAbilityBar = (player: Player) => {
-	const abilitiesState = PlayerState.getInstance().PlayerAbilities;
-	return AbilityBar({ abilities: abilitiesState });
+       const abilitiesState = PlayerState.getInstance().Abilities;
+       return AbilityBar({ abilities: abilitiesState });
 };
