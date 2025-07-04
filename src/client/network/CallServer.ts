@@ -7,6 +7,7 @@ import {
 	ProfileDataKey,
 	ProfileDataMap,
 	ClientDispatch,
+	AttributeKey,
 } from "shared";
 
 /* Event Signals */
@@ -35,5 +36,11 @@ export function UpdatePlayerSetting(key: SettingKey, value: boolean | string): v
 }
 
 export async function GetProfileData<K extends ProfileDataKey>(key: K): Promise<ProfileDataMap[K] | undefined> {
+	print(`CallServer: GetProfileData(${key}) called.`);
 	return (await GetProfileDataSignal.CallServerAsync(key)) as ProfileDataMap[K] | undefined;
+}
+
+export async function IncreaseAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
+	print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
+	await ClientDispatch.Client.Get("IncreaseAttribute").SendToServer(attributeKey, amount);
 }

@@ -27,7 +27,7 @@ const StatusText = (display: Fusion.Computed<string>) =>
 
 const Badge = (count: Fusion.Computed<number>, toggle: () => void) =>
 	New("ImageButton")({
-		AnchorPoint: new Vector2(1, 0),
+		AnchorPoint: new Vector2(0.5, 0.5),
 		Position: UDim2.fromOffset(120, 0),
 		Size: UDim2.fromOffset(32, 24),
 		AutoButtonColor: true,
@@ -54,7 +54,8 @@ const StatusRow = (effect: StatusEffect) => {
 	);
 
 	return New("Frame")({
-		Size: UDim2.fromScale(1, 0),
+		Name: effect.meta.displayName,
+		Size: UDim2.fromScale(1, 0.2),
 		AutomaticSize: Enum.AutomaticSize.Y,
 		BackgroundColor3: Color3.fromRGB(242, 255, 161),
 		BackgroundTransparency: 0.7,
@@ -93,12 +94,16 @@ export const StatusPanel = (statusArray: Fusion.Value<StatusEffect[]>) => {
 
 	return New("Frame")({
 		Size: Computed(() => UDim2.fromOffset(120, height.get())),
+		AnchorPoint: new Vector2(1, 0),
+		Position: Computed(() => UDim2.fromScale(1, 0.5)),
+		Name: "StatusPanel",
 		BackgroundTransparency: 1,
 		ClipsDescendants: clipDescendants,
 
 		[Children]: [
 			// Scroll / list area
 			New("ScrollingFrame")({
+				Name: "StatusList",
 				Size: UDim2.fromScale(1, 1),
 				BackgroundTransparency: 1,
 				ScrollBarThickness: 4,

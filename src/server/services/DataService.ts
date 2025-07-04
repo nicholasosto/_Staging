@@ -82,9 +82,6 @@ export class DataProfileController {
 
 	/* On Player Joining */
 	private static async _onPlayerJoining(player: Player) {
-		if (CodeSettings.DEBUG_DATASERVICE) {
-			print(`DataProfileController._onPlayerJoining(${player.Name}) called.`);
-		}
 		/* Create Player Key */
 		const playerKey = player.Name + "_" + tostring(player.UserId);
 		try {
@@ -93,7 +90,7 @@ export class DataProfileController {
 
 			// Warn if the profile is nil
 			if (profile === undefined) {
-				warn(`Failed to load profile for player: ${player.Name}`);
+				warn(`ProfileService: (1) - Failed to load profile for player: ${player.Name}`);
 				return;
 			}
 
@@ -109,7 +106,10 @@ export class DataProfileController {
 				this._profileMap.delete(player); // Remove the profile from the map
 			});
 		} catch (err) {
-			warn(`Error loading profile for player ${player.Name}: ${err}`);
+			warn(`ProfileService: (2) - Error loading profile for player ${player.Name}: ${err}`);
+		}
+		if (CodeSettings.DEBUG_DATASERVICE) {
+			print(`DataProfileController._onPlayerJoining(${player.Name}) called.`, this._profileMap.get(player));
 		}
 	}
 

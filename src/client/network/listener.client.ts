@@ -1,5 +1,5 @@
 import PlayerState from "client/states/PlayerState";
-import { Network, ServerDispatchEvents } from "shared";
+import { ClientDispatch, Network, ServerDispatchEvents } from "shared";
 
 /* ------------------------------------ Network Listener ------------------------------------ */
 
