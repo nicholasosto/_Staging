@@ -17,7 +17,6 @@ import {
 	SettingsService,
 } from "./services";
 
-//import SoulPlayer from "./classes/player/SoulPlayer";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
@@ -26,17 +25,6 @@ BattleRoomService.Start();
 ResourcesService.Start();
 SettingsService.Start();
 //OrganismFood.SpawnResource(new CFrame(0, 10, 0));
-
-// /* ================== Player Joined Event ================== */
-// Players.PlayerAdded.Connect((player) => {
-// 	if (SoulPlayer.GetSoulPlayer(player)) {
-// 		warn(`SoulPlayer already exists for ${player.Name}.`);
-// 		return;
-// 	}
-// 	const character = player.Character || player.CharacterAdded.Wait()[0];
-// 	/* Create a new SoulPlayer instance */
-// 	new SoulPlayer(player, character);
-// });
 
 // task.spawn(() => {
 // 	while (Players.GetPlayers().size() >= 0) {
