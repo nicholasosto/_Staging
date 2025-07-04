@@ -5,8 +5,8 @@ import { Network, ServerDispatchEvents } from "shared";
 
 // PLAYER RESOURCE: Listen for resource updates from the server
 ServerDispatchEvents.Client.OnEvent("ResourceUpdated", (key, current, max) => {
-	const playerState = PlayerState.getInstance();
-	const resource = playerState.PlayerResources[key];
+       const playerState = PlayerState.getInstance();
+       const resource = playerState.Resources[key];
 	if (resource) {
 		resource.Current.set(current);
 		resource.Max.set(max);
