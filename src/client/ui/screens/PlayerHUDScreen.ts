@@ -8,7 +8,7 @@
  */
 
 import { GamePanel, GameScreen } from "../atoms";
-import { HUDMenuBar, SoulPlayerAbilityBar } from "client/ui/organisms";
+import { HUDMenuBar, AbilityBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { Players } from "@rbxts/services";
@@ -17,6 +17,7 @@ import { AdminBar } from "../organisms/ButtonBars/AdminBar";
 import { Value } from "@rbxts/fusion";
 import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
 import { StatusEffect } from "shared/definitions/StatusEffect";
+import PlayerState from "client/states/PlayerState";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -33,10 +34,7 @@ const HudProps = {
 	}),
 	CurrencyInfo: undefined, // Placeholder for future currency info
 };
-const statusEffects = Value<StatusEffect[]>([]);
 export const PlayerHUDScreen = () => {
-	/* Ability Bar */
-	const abilityBar = SoulPlayerAbilityBar(Players.LocalPlayer);
 	/* HUD Container */
 	const HUDContainer = GamePanel({
 		Name: "HUDContainer",
@@ -54,9 +52,11 @@ export const PlayerHUDScreen = () => {
 					MenuBar: HudProps.HUDMenuBar,
 				},
 			}),
-			AbilityBar: abilityBar,
-			AdminBar: AdminBar(Value(true)), // Admin bar visibility controlled by a Value
-			StatusPanel: StatusPanel(statusEffects), // Status effects will be dynamically updated
+			AbilityBar: AbilityBar({
+				PlayerStateAbilities: PlayerState.getInstance().Abilities,
+			}),
+			AdminBar: AdminBar(Value(false)), // Admin bar visibility controlled by a Value
+			StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 		},
 	});
 

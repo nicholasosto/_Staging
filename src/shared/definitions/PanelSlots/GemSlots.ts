@@ -18,11 +18,11 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-export const GEM_SLOT_KEYS = ["FORM", "ABILITY", "PHYSICAL", "MAGICAL"] as const;
+export const GEM_SLOT_KEYS = ["FORM", "ABILITY", "PHYSICAL", "SUMMON"] as const;
 export type GemSlotKey = (typeof GEM_SLOT_KEYS)[number];
 export const GEM_SLOT_META: Record<GemSlotKey, { displayName: string; iconId: string }> = {
-	FORM: { displayName: "Form Gem", iconId: "rbxassetid://12345678" },
-	ABILITY: { displayName: "Ability Gem", iconId: "rbxassetid://23456789" },
-	PHYSICAL: { displayName: "Physical Gem", iconId: "rbxassetid://34567890" },
-	MAGICAL: { displayName: "Magical Gem", iconId: "rbxassetid://45678901" },
+	FORM: { displayName: "Form Gem", iconId: "rbxassetid://132994920207160" },
+	ABILITY: { displayName: "Ability Gem", iconId: "rbxassetid://73537063487999" },
+	PHYSICAL: { displayName: "Physical Gem", iconId: "rbxassetid://107324366070907" },
+	SUMMON: { displayName: "Magical Gem", iconId: "rbxassetid://104883948460103" },
 };

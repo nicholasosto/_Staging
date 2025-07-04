@@ -29,7 +29,6 @@ export const TeleportScreen = () => {
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
-		Size: new UDim2(0.8, 0, 0.8, 0),
 		Content: {},
 	});
 };

@@ -33,10 +33,14 @@ import { Layout } from "client/ui/tokens";
 import { AbilityKey, ClientDispatch } from "shared";
 
 export interface AbilityBarProps {
-	abilities: Value<AbilityKey[]>;
+	PlayerStateAbilities: Value<AbilityKey>[];
 }
 export function AbilityBar(props: AbilityBarProps) {
-	const abilities = Computed(() => props.abilities.get());
+	const abilities = Computed(() => {
+		return props.PlayerStateAbilities.map((ability) => {
+			return ability.get();
+		});
+	});
 
 	return GamePanel({
 		Name: "AbilityBar",
@@ -52,7 +56,3 @@ export function AbilityBar(props: AbilityBarProps) {
 		},
 	});
 }
-export const SoulPlayerAbilityBar = (player: Player) => {
-	const abilitiesState = PlayerState.getInstance().Abilities;
-	return AbilityBar({ abilities: abilitiesState });
-};

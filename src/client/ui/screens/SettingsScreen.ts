@@ -45,7 +45,6 @@ export const SettingsScreen = () => {
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
-		Size: UDim2.fromOffset(400, 600),
 		Content: {
 			Layout: Layout.VerticalSet(2),
 			SettingItems: items,

@@ -19,7 +19,7 @@
  */
 
 /* =============================================== Imports ===================== */
-import { Players } from "@rbxts/services";
+import { Players, RunService } from "@rbxts/services";
 import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataProfileController } from "./DataService";
@@ -30,6 +30,8 @@ import { ServerDispatch } from "shared/network/Definitions";
 export class ResourcesService {
 	private static _instance: ResourcesService | undefined;
 	private readonly _map = new Map<Player, Record<ResourceKey, ResourceDTO>>();
+
+	private static heartbeat: RBXScriptConnection | undefined;
 
 	private constructor() {
 		print("ResourcesService initialized.");
@@ -91,6 +93,29 @@ export class ResourcesService {
 		Players.PlayerAdded.Connect((p) => this._onJoin(p));
 		Players.PlayerRemoving.Connect((p) => this._onLeave(p));
 		Players.GetPlayers().forEach((p) => this._onJoin(p));
+
+		/* Heartbeat Connection */
+		ResourcesService.heartbeat?.Disconnect();
+		let lastHeartbeat = tick();
+		ResourcesService.heartbeat = RunService.Heartbeat.Connect(() => {
+			if (tick() - lastHeartbeat < 1) return; // Prevent too frequent updates
+			lastHeartbeat = tick();
+			// Periodically recalculate resources for all players
+			Players.GetPlayers().forEach((player) => {
+				const resources = this._map.get(player);
+				if (!resources) return;
+
+				// Regenerate resources over time
+				(RESOURCE_KEYS as ReadonlyArray<ResourceKey>).forEach((key) => {
+					const data = resources[key];
+					if (data.current < data.max) {
+						data.current = math.min(data.current + 1, data.max); // Regenerate resources over time
+						ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+					}
+				});
+			});
+		});
+		print("ResourcesService heartbeat started.");
 	}
 
 	private _onJoin(player: Player) {

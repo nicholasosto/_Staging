@@ -9,49 +9,43 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import { ManifestationForgeService, DataProfileController, BattleRoomService } from "./services";
-import { OrganismFood } from "./classes/playground/OrganismFood";
-import SoulPlayer from "./classes/player/SoulPlayer";
+import {
+	ManifestationForgeService,
+	DataProfileController,
+	BattleRoomService,
+	ResourcesService,
+	SettingsService,
+} from "./services";
+
+//import SoulPlayer from "./classes/player/SoulPlayer";
 
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
 ManifestationForgeService.Start();
 BattleRoomService.Start();
-OrganismFood.SpawnResource(new CFrame(0, 10, 0));
+ResourcesService.Start();
+SettingsService.Start();
+//OrganismFood.SpawnResource(new CFrame(0, 10, 0));
 
-function CharacterAdded(player: Player, character: Model) {
-	/* Update the SoulPlayer instance with the new character */
-	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	if (soulPlayer) {
-		soulPlayer.InitializeConnections(character);
-	} else {
-		warn(`SoulPlayer not found for ${player.Name}.`);
-	}
-}
-/* ================== Player Joined Event ================== */
-Players.PlayerAdded.Connect((player) => {
-	if (SoulPlayer.GetSoulPlayer(player)) {
-		warn(`SoulPlayer already exists for ${player.Name}.`);
-		return;
-	}
-	const character = player.Character || player.CharacterAdded.Wait()[0];
-	/* Create a new SoulPlayer instance */
-	new SoulPlayer(player, character);
-});
+// /* ================== Player Joined Event ================== */
+// Players.PlayerAdded.Connect((player) => {
+// 	if (SoulPlayer.GetSoulPlayer(player)) {
+// 		warn(`SoulPlayer already exists for ${player.Name}.`);
+// 		return;
+// 	}
+// 	const character = player.Character || player.CharacterAdded.Wait()[0];
+// 	/* Create a new SoulPlayer instance */
+// 	new SoulPlayer(player, character);
+// });
 
-task.spawn(() => {
-	let countdown = 25;
-
-	while (countdown > 0) {
-		const players = Players.GetPlayers();
-		players.forEach((player) => {
-			const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-			soulPlayer?.TakeDamage(3);
-		});
-		print(`Server starting in ${countdown} seconds...`);
-		countdown -= 1;
-		task.wait(1);
-	}
-	print("Server is now running.");
-});
+// task.spawn(() => {
+// 	while (Players.GetPlayers().size() >= 0) {
+// 		Players.GetPlayers().forEach((player) => {
+// 			ResourcesService.ModifyResource(player, "Health", -1);
+// 		});
+// 		task.wait(1);
+// 		print("HB: Tick");
+// 	}
+// 	print("Server is now running.");
+// });
 print("Server main script initialized successfully.");

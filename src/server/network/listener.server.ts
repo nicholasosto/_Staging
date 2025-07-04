@@ -29,16 +29,10 @@ import { BattleRoomService, SettingsService, NPCService, AbilityService, DataPro
 
 /* Factories and Types */
 import { AttributeKey, AbilityKey, SettingKey, NPCKey, ProfileDataKey } from "shared/definitions";
-import SoulPlayer from "server/classes/player/SoulPlayer";
 
 // Attibutes -----------------------------------------------------
 Network.Server.OnEvent("IncreaseAttribute", (player, attributeKey: AttributeKey, amount: number) => {
-	const soulPlayer = SoulPlayer.GetSoulPlayer(player);
-	if (soulPlayer) {
-		//soulPlayer.IncreaseAttribute(attributeKey, amount);
-	} else {
-		warn(`SoulPlayer not found for ${player.Name}`);
-	}
+	//AttributeService.Increase(player, attributeKey, amount);
 });
 
 // Resources -----------------------------------------------------

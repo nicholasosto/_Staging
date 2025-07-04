@@ -52,7 +52,7 @@ const GemSlotContainer = () => {
 			FormSlot: GemSlot("FORM"),
 			AbilitySlot: GemSlot("ABILITY"),
 			PhysicalSlot: GemSlot("PHYSICAL"),
-			MagicalSlot: GemSlot("MAGICAL"),
+			SummonSlot: GemSlot("SUMMON"),
 		},
 	});
 	return SubPanel;
