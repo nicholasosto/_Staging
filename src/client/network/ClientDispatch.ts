@@ -1,3 +1,12 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ClientDispatch.ts
+ * @module      ClientDispatch
+ * @layer       Client/Network
+ * @description Thin wrappers around client network calls.
+ */
+
 import { Players } from "@rbxts/services";
 import {
 	AbilityKey,
