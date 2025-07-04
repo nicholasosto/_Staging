@@ -8,7 +8,8 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "sync": "rojo serve",
-    "test":  "npm run build && foreman run rojo build tests.project.json -o TestPlace.rbxlx && foreman run testez --place TestPlace.rbxlx --verbose"
+    "dunny": "foreman run-in-roblox --place TestPlace.rbxlx --verbose",
+    "test": "npm run build && npx rbxts/testez --place build/dunny.rbxlx --verbose"
   },
   "keywords": [],
   "author": "",
@@ -40,7 +41,9 @@
     "@rbxts/signal": "^1.1.1",
     "@rbxts/signals": "^1.0.5",
     "@rbxts/t": "^3.2.1",
+    "@rbxts/testEz": "npm:@rbxts/testez@^0.4.2-ts.0",
     "@rbxts/zone-plus": "^3.2.0",
-    "io-serve": "^1.1.2"
+    "io-serve": "^1.1.2",
+    "run-in-roblox": "^0.3.2"
   }
 }

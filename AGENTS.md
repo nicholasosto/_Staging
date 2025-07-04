@@ -87,6 +87,22 @@ import Fusion from "@rbxts/fusion";
 3. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
 4. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.
 
+## 7 CodexUtility Section
+
+A workspace-level folder named `codexUtility` houses automation scripts and utilities that operate on both the TypeScript source (`src/`) and the compiled Lua output (`out/`), as well as project configuration and packaging files.
+
+> **Location:** `/codexUtility`
+>
+> **Purpose:** Store CLI and Node.js scripts (e.g. build helpers, config updaters, packaging tools) to streamline development workflows.
+>
+> **Conventions:**
+> - Name scripts in camelCase (e.g. `syncConfig.js`, `generatePackageManifest.js`).
+> - Include a top-level JSDoc comment block in each script.
+> - Update this section when adding new utility scripts.
+
+> **Current scripts:**
+> - `runTests.js`: Builds the project and runs all spec.ts tests via `npm test`.
+
 ## Appendix A: Mermaid Flowchart
 
 ```mermaid

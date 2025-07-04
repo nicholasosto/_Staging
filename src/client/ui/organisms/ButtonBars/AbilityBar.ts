@@ -30,18 +30,57 @@ import PlayerState from "client/states/PlayerState";
 import { GamePanel } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules";
 import { Layout } from "client/ui/tokens";
-import { AbilityKey, ClientDispatch } from "shared";
+import { AbilityKey } from "shared";
 
-export interface AbilityBarProps {
-	PlayerStateAbilities: Value<AbilityKey>[];
+export class AbilityBarClass {
+	private Bar: Computed<Frame>;
+
+	private EquippedAbilities: Value<AbilityKey>[];
+
+	constructor() {
+		this.EquippedAbilities = PlayerState.getInstance().Abilities;
+
+		this.Bar = Computed(
+			() => {
+				print(
+					"Rendering AbilityBar:",
+					this.EquippedAbilities.map((ability) => ability.get()),
+				);
+				const abilities: AbilityKey[] = [];
+				this.EquippedAbilities.forEach((ability) => {
+					abilities.push(ability.get());
+				});
+				return AbilityBarComponent(abilities);
+			},
+			(x) => this.DestroyComponent(x),
+		);
+	}
+	public getBar(): Computed<Frame> {
+		return this.Bar;
+	}
+
+	public getAbilityArray(): AbilityKey[] {
+		return this.EquippedAbilities.map((ability) => ability.get());
+	}
+
+	public getAbilityStateArray(): Value<AbilityKey>[] {
+		return this.EquippedAbilities;
+	}
+	public activateAbility(abilityKey: AbilityKey): void {
+		// This method can be used to activate an ability when the button is clicked.
+		print(`Activating ability: ${abilityKey}`);
+		// Here you would typically trigger the ability's effect, such as spawning a manifestation or
+	}
+	public DestroyComponent = (x: Frame): void => {
+		print("Destroying AbilityBar component");
+		if (!x) {
+			print("Attempted to destroy a null AbilityBar component.");
+			return;
+		}
+		//x.Destroy();
+	};
 }
-export function AbilityBar(props: AbilityBarProps) {
-	const abilities = Computed(() => {
-		return props.PlayerStateAbilities.map((ability) => {
-			return ability.get();
-		});
-	});
-
+function AbilityBarComponent(abilityKeyArray: AbilityKey[]): Frame {
 	return GamePanel({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),
@@ -50,7 +89,7 @@ export function AbilityBar(props: AbilityBarProps) {
 		BackgroundTransparency: 0.5,
 		Layout: Layout.HorizontalSet(10),
 		Content: {
-			Buttons: abilities.get().map((ability) => {
+			Buttons: abilityKeyArray.map((ability) => {
 				return AbilityButton({ abilityKey: ability });
 			}),
 		},
