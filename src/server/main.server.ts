@@ -17,7 +17,6 @@ import {
 	SettingsService,
 } from "./services";
 
-
 /* =============================================== Initialization ========================================= */
 DataProfileController.Start();
 ManifestationForgeService.Start();

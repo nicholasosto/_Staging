@@ -7,7 +7,8 @@
     "watch": "rbxtsc -w",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
-    "sync": "rojo serve"
+    "sync": "rojo serve",
+    "test":  "npm run build && foreman run rojo build tests.project.json -o TestPlace.rbxlx && foreman run testez --place TestPlace.rbxlx --verbose"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
     "eslint-plugin-roblox-ts": "^0.0.36",
     "prettier": "^3.6.0",
     "roblox-ts": "^3.0.0",
+    "rojo": "^1.0.1",
     "typescript": "^5.8.3"
   },
   "dependencies": {
