@@ -1,0 +1,19 @@
+name: Render Task Board
+on:
+  push:
+    paths: ["tasks/**"]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm ci
+      - run: node scripts/render-board.js  # converts YAML → TASK_BOARD.md
+      - run: git config user.name "Task‑Bot"
+      - run: git config user.email "bot@example.com"
+      - run: |
+          if [[ `git status --porcelain` ]]; then
+            git add TASK_BOARD.md
+            git commit -m "ci: update task board"
+            git push
+          fi

@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+// @ts-nocheck
 import fs from "fs";
 import yaml from "js-yaml";
 import { Task, TaskStatus } from "../tasks/TaskTypes";

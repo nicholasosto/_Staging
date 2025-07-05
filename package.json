@@ -19,6 +19,8 @@
     "@rbxts/compiler-types": "^3.0.0-types.0",
     "@rbxts/testez": "^0.4.2-ts.0",
     "@rbxts/types": "^1.0.859",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.0.10",
     "@typescript-eslint/eslint-plugin": "^8.34.1",
     "@typescript-eslint/parser": "^8.34.1",
     "eslint": "^8.57.1",

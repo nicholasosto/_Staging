@@ -27,5 +27,9 @@
 	"exclude": [
 		"tasks",
 		"scripts",
-	]
+	],
+	"include": [
+		"src/**/*",
+		"scripts/*.js" // 👈 add this line
+, "scripts/render-board.ts"	]
 }
