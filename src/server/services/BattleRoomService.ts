@@ -20,7 +20,6 @@
 
 /* =============================================== Imports ================================== */
 import { HttpService, TeleportService } from "@rbxts/services";
-import { Network } from "shared/network";
 
 /* =============================================== Constants ================================= */
 const COUNTDOWN_TIME = 10; // seconds
@@ -95,7 +94,7 @@ export class BattleRoomService {
 		room.countdownTask = task.spawn(() => {
 			for (let remaining = COUNTDOWN_TIME; remaining > 0; remaining--) {
 				const players = this._collectPlayers(room);
-				Network.Server.Get("RoomCountdown").SendToPlayers(players, room.id, remaining);
+				//SendRoomCountdown(players, room.id, remaining);
 				print(`Countdown for room ${room.id}: ${remaining} seconds remaining`);
 				task.wait(1);
 			}

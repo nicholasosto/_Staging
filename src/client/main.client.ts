@@ -27,7 +27,7 @@ import { InventoryScreen } from "./ui/screens/InventoryScreen";
 import { SettingsScreen } from "./ui/screens/SettingsScreen";
 import { ShopScreen } from "./ui/screens/ShopScreen";
 import { TeleportScreen } from "./ui/screens/TeleportScreen";
-import * as Dispatch from "./network/ClientDispatch";
+//import * as Dispatch from "./network/ClientDispatch";
 
 /* =============================================== References ============================================= */
 
@@ -41,22 +41,4 @@ CharacterScreen();
 InventoryScreen();
 
 /* =============================================== Network Tests ============================================= */
-warn("Testing network calls...");
-// Dispatch.ActivateAbility("earthquake");
-// Dispatch.UpdatePlayerSetting("musicEnabled", true);
-// Dispatch.UpdatePlayerSetting("nickname", "PlayerOne");
-// Dispatch.IncreaseAttribute("str", 10);
-Dispatch.GetProfileData("Abilities").then((abilities) => {
-	print(`Player Abilities: ${abilities?.join(", ")}`);
-});
-// Dispatch.GetPlayerSettings().then((settings) => {
-// 	print(`Player Settings:`, settings);
-// });
-// Dispatch.GetProfileData("Abilities")
-// 	.then((abilities) => {
-// 		print(`Profile Abilities: ${abilities?.join(", ")}`);
-// 	})
-// 	.catch((err) => {
-// 		warn(`Error fetching profile data: ${err}`);
-// 	});
-warn("Network tests completed.");
+// Uncomment to test network calls

@@ -19,7 +19,7 @@ import {
 	SETTING_KEYS,
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
-import { GetPlayerSettings } from "client/network/ClientDispatch";
+import { GetProfileData } from "client/network/ClientDispatch";
 
 export default class SettingsState {
 	private static instance: SettingsState;
@@ -33,7 +33,18 @@ export default class SettingsState {
 	}
 
 	private async fetchFromServer() {
-		const data = await GetPlayerSettings();
+		const data = await GetProfileData("Settings")
+			.andThen((settings) => {
+				return settings as PlayerSettings | undefined;
+			})
+			.catch((err) => {
+				warn(`Failed to fetch settings from server: ${err}`);
+				return undefined;
+			})
+			.finally(() => {
+				// Ensure we always have a valid settings object
+				return DefaultSettings;
+			});
 		if (data !== undefined) {
 			for (const key of SETTING_KEYS) {
 				const val = data[key];

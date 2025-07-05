@@ -1,0 +1,17 @@
+- id: TSK‑0001
+  title: "Create CollapsibleEffectsPanel component"
+  status: "Under Construction"    # Not Ready | Ready | Under Construction | Draft | Completed
+  estimatedHours: 6
+  blockedBy: []                   # list of task ids
+  blocksTask: [TSK‑0003]
+  createdOn: 2025‑07‑05
+  updatedOn: 2025‑07‑05
+
+- id: TSK‑0002
+  title: "Write Jest tests for EffectsPanel"
+  status: "Ready"
+  estimatedHours: 3
+  blockedBy: [TSK‑0001]
+  blocksTask: []
+  createdOn: 2025‑07‑05
+  updatedOn: 2025‑07‑05

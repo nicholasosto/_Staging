@@ -20,6 +20,18 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+/**
+ * @file        index.ts
+ * @module      BarrelUI
+ * @layer       client/ui
+ * @description Barrel exports for all UI components.
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-05 by Luminesa – initial header add
+ */
+
 export * from "./helpers";
 export * from "./atoms";
 export * from "./molecules";

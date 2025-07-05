@@ -43,7 +43,9 @@
     "@rbxts/t": "^3.2.1",
     "@rbxts/testEz": "npm:@rbxts/testez@^0.4.2-ts.0",
     "@rbxts/zone-plus": "^3.2.0",
+    "fs": "^0.0.1-security",
     "io-serve": "^1.1.2",
+    "js-yaml": "^4.1.0",
     "run-in-roblox": "^0.3.2"
   }
 }

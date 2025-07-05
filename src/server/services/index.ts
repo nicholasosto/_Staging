@@ -20,6 +20,18 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+/**
+ * @file        index.ts
+ * @module      BarrelServices
+ * @layer       server/services
+ * @description Barrel exports for all Service modules.
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-05 by Luminesa – initial header add
+ */
+
 export * from "./DataService";
 export * from "./ManifestationForgeService";
 export * from "./BattleRoomService";

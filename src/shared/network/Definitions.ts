@@ -28,39 +28,48 @@ import {
 type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMap[K]>;
 
 /* =============================================== Network Definitions =============================================== */
-export const Network = Net.Definitions.Create({
-	// fire-and-forget from client → server
-	SpawnManifestation: Net.Definitions.ClientToServerEvent<[formId: string, abilityId: string, bonusId: string]>(),
-	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
-	AddGem: Net.Definitions.ClientToServerEvent<[gemid: string]>(),
-	JoinRoom: Net.Definitions.ClientToServerEvent<[roomId: string]>(),
-	SetActiveGem: Net.Definitions.ClientToServerEvent<[roomId: string, gemId: string]>(),
 
-	GetPlayerSettings: Net.Definitions.ServerFunction<(player: Player) => PlayerSettings>(),
-	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
-
-	// client → server function
-	CreateRoom: Net.Definitions.ServerFunction<() => string>(),
-
-	// server → client
-	ProfileChanged: Net.Definitions.ServerToClientEvent<[data: unknown]>(),
-	RoomCountdown: Net.Definitions.ServerToClientEvent<[roomId: string, remaining: number]>(),
-
-	/* Activate Ability */
-	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
-});
-
-export const TestNetwork = Net.Definitions.Create({
+export const AdminNet = Net.Definitions.Create({
 	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
 });
 
 export const ClientDispatch = Net.Definitions.Create({
+	/* --------------------------------------------- Gems ------------------------------------------------- */
+	AddGem: Net.Definitions.ClientToServerEvent<[gemId: string]>(),
+
+	/* --------------------------------------------- Battle Room ------------------------------------------------- */
+	CreateRoom: Net.Definitions.ClientToServerEvent<[]>(),
+	JoinRoom: Net.Definitions.ClientToServerEvent<[roomId: string]>(),
+
+	/* --------------------------------------------- Attributes --------------------------------------------- */
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
-	ActivateAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+
+	/* --------------------------------------------- Abilities ------------------------------------------------- */
+	ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
+
+	/* --------------------------------------------- Profile Data --------------------------------------------- */
 	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
+
+	/* --------------------------------------------- Settings ------------------------------------------------- */
+	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
 });
 
 export const ServerDispatch = Net.Definitions.Create({
+	/* --------------------------------------------- Battle Room ------------------------------------------------- */
+	RoomCountdown: Net.Definitions.ServerToClientEvent<[roomId: string, timeLeft: number]>(),
+
+	/* --------------------------------------------- Abilities ------------------------------------------------- */
+	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: ProfileDataMap["Abilities"]]>(),
+
+	/* --------------------------------------------- Progression ------------------------------------------------- */
+	ProgressionUpdated: Net.Definitions.ServerToClientEvent<[profileData: ProfileDataMap["Progression"]]>(),
+
+	/* --------------------------------------------- Attributes ------------------------------------------------- */
+	AttributesUpdated: Net.Definitions.ServerToClientEvent<[attributes: ProfileDataMap["Attributes"]]>(),
+
+	/* --------------------------------------------- Settings ------------------------------------------------- */
+	PlayerSettingsUpdated: Net.Definitions.ServerToClientEvent<[settings: ProfileDataMap["Settings"]]>(),
+
+	/* --------------------------------------------- Resources --------------------------------------------- */
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
-	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: AbilityKey[]]>(),
 });

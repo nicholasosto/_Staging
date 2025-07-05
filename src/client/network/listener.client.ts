@@ -8,7 +8,7 @@
  */
 
 import PlayerState from "client/states/PlayerState";
-import { ClientDispatch, Network, ServerDispatch } from "shared";
+import { ServerDispatch } from "shared";
 
 /* ------------------------------------ Network Listener ------------------------------------ */
 
@@ -23,8 +23,3 @@ ServerDispatch.Client.OnEvent("ResourceUpdated", (key, current, max) => {
 		warn(`Resource ${key} not found in PlayerState.`);
 	}
 });
-
-// // Profile Changed: Listen for profile changes from the server
-// Network.Client.OnEvent("ProfileChanged", (data) => {
-// 	print("Profile changed:", data);
-// });

@@ -29,8 +29,8 @@ export interface AbilityButtonProps {
 	//onActivate: () => void;
 }
 
-export function AbilityButton(props: AbilityButtonProps) {
-	const meta = AbilitiesMeta[props.abilityKey];
+export function AbilityButton(abilityKey: AbilityKey): Frame {
+	const meta = AbilitiesMeta[abilityKey];
 	const remaining = Value(0); // counts down each frame
 
 	/* Timer */
@@ -61,10 +61,9 @@ export function AbilityButton(props: AbilityButtonProps) {
 			}),
 		},
 		[OnEvent("Activated")]: () => {
-			if (cooldownTimer.Progress.get() <= 0) {
-				print(`Activating ability: ${props.abilityKey}`);
-				ActivateAbility(props.abilityKey);
-				cooldownTimer.start();
+			const activated = ActivateAbility(abilityKey);
+			if (cooldownTimer.Progress.get() <= 0 && activated === true) {
+				print(`Activated ability: ${abilityKey}`);
 			}
 		},
 	});

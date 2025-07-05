@@ -42,7 +42,7 @@ export default class PlayerState {
 	private static instance: PlayerState;
 
 	/** Ability list from the player's profile */
-	public Abilities: Value<AbilityKey>[] = [];
+	public Abilities: Value<AbilityKey[]> = Value([]);
 
 	/** Attribute values and point totals */
 	public Attributes: Record<AttributeKey, Value<number>> = {} as never;
@@ -104,14 +104,11 @@ export default class PlayerState {
 	}
 
 	private async fetchFromServer() {
-		const abilities = await GetProfileData("Abilities");
-		if (abilities) {
-			abilities.clear();
-			abilities.forEach((ability: AbilityKey) => {
-				const abilityValue = Value(ability);
-				this.Abilities.push(abilityValue);
-			});
-		}
+		GetProfileData("Abilities").then((abilities) => {
+			if (abilities) {
+				this.Abilities.set(abilities as AbilityKey[]);
+			}
+		});
 
 		const attrs = await GetProfileData("Attributes");
 		if (attrs) {

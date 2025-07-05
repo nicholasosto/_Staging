@@ -2,6 +2,16 @@
 
 The purpose of this document is to provide a concise overview of coding conventions, testing practices, and agent directives for the Soul Steel project. It serves as a quick reference for developers and LLM or AGI's to ensure consistency and quality in their contributions.
 
+## 0. Important Notes
+
+1. **Navigation FYI**: When searching for files and folders please note that the folder structure is deep. For example, the Progression.ts file is located at `src/shared/definitions/ProfileDefinitions/Progression.ts`. The `shared` folder is the root for all shared code, and the `src` folder is the root for all source code.
+
+2. **Design Patterns**. Example systems include:
+   - **Network -> Dispatch && Network -> Listener**: From `shared/network/Network.ts` for ClientDispatch and ServerDispatch represent Events and Functions that can be called from the client or server. Those events and functions are listened to by a single client or server listener, which is responsible for handling the events and functions. Events are dispatched using a single module for the client and server, which is responsible for dispatching the events and functions to their respective listeners.
+   - **State System**: The client listener listens for events and updates the `PlayerState` service and future state slices, which is a Fusion Value that holds the current state of the player. This service is used to store and manage the player's state, such as health, mana, and other attributes.
+   - **Shared - Keys Meta DTO Foundation**: For handling combat-related events and data.
+   - **Atomic Fusion State System**: For displaying resource bars in the UI.
+
 ## 1 Follow Coding Conventions
 
 1. Use PascalCase for FusionComponents.
@@ -9,7 +19,10 @@ The purpose of this document is to provide a concise overview of coding conventi
 
 ## 2 General Workflow
 
-1. **Follow coding conventions** in this guide.
+1. **Commenting Requirements**: Follow the commenting conventions outlined in the [Commenting Guide](./Documents/CommentingGuide.md). This includes using TSDoc comments for all public modules, classes, and functions, as well as documenting parameters, return values, and exceptions.
+   - Use `@file`, `@module`, and `@layer` tags to specify the file's purpose, module, and layer.
+    - Use `@author`, `@license`, and `@since` tags to provide author information, license details, and versioning.  
+    - Use `@dependencies` to list any external dependencies required by the module.
 2. **Barrel Modules**: Ensure folders contain barrel files for easy imports. Check existing folders and ensure barrel files are present and correctly exporting components. New folders added to this repo already include an `index.ts` barrel.
 3. **Asset Use and Management**: Use available assets from the `shared/assets` folder. If an asset is not available, create a placeholder asset and a #ASSETREQUEST comment in the code to request the asset from the art team.
 4. **Agent-Created Atoms**: If you identify a core (atomic) component that is missing, create a new file in the `src/atoms` folder and follow the coding conventions outlined in this guide. add a #AGENT_ATOM comment to the top of the file to indicate it is an agent-created atom.
@@ -83,9 +96,12 @@ import Fusion from "@rbxts/fusion";
 ## 6 Additional References
 
 1. [AGENTS_DEVELOPMENT_SUMMARY.md](./src/AGENTS_DEVELOPMENT_SUMMARY.md) – for tracking module status and updates.
-2. [Organism Structure Guide](./Documents/OrganismStructure.md) – for understanding the structure and conventions of Fusion organisms and commenting examples.
-3. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
-4. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.
+2. [Commenting Guide](./Documents/CommentingGuide.md) – for understanding the commenting conventions and TSDoc style rules.
+3. [Organism Structure Guide](./Documents/OrganismStructure.md) – for understanding the structure and conventions of Fusion organisms and commenting examples.
+4. [Fusion Event Guide](./Documents/FusionEventGuide.md) – for understanding event handling and syntax.
+5. [AGENTS_TODO.md](./src/AGENTS_TODO.md) – for tracking tasks and components to be created by agents.
+6. [AGENTS_TASK_TEMPLATE.md](./src/AGENTS_TASK_TEMPLATE.md) – for creating new tasks and components.
+7. [Tasks Folder](./tasks) – for storing tasks and components created by agents. and using the new task system.
 
 ## 7 CodexUtility Section
 
@@ -96,11 +112,13 @@ A workspace-level folder named `codexUtility` houses automation scripts and util
 > **Purpose:** Store CLI and Node.js scripts (e.g. build helpers, config updaters, packaging tools) to streamline development workflows.
 >
 > **Conventions:**
+>
 > - Name scripts in camelCase (e.g. `syncConfig.js`, `generatePackageManifest.js`).
 > - Include a top-level JSDoc comment block in each script.
 > - Update this section when adding new utility scripts.
 
 > **Current scripts:**
+>
 > - `runTests.js`: Builds the project and runs all spec.ts tests via `npm test`.
 
 ## Appendix A: Mermaid Flowchart
@@ -140,4 +158,3 @@ graph TD
   Registry -. validate .-> PlayerState
   Registry -. style .-> ResourceBar
 ```
-

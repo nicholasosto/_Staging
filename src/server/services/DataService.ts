@@ -22,8 +22,9 @@ import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AbilityKey, AttributesDTO, DefaultAttributes, ProfileDataMap } from "shared/definitions";
+import { AbilityKey, DefaultAttributes, DefaultSettings, ProfileDataMap } from "shared/definitions";
 import { CodeSettings } from "shared/constants/CodeSettings";
+import { DefaultProgression } from "shared/definitions/ProfileDefinitions/Progression";
 
 /* ========================================== Profile Store Setup =============================================== */
 
@@ -34,6 +35,8 @@ const DefaultProfileData: ProfileDataMap = {
 	// Player Profile Data
 	Abilities: ["earthquake", "fireball", "ice_shard"] as AbilityKey[], // Default abilities
 	Attributes: DefaultAttributes, // Player attributes
+	Progression: DefaultProgression, // Player progression data
+	Settings: DefaultSettings,
 };
 
 /* Data Profile Controller */

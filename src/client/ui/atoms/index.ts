@@ -20,6 +20,18 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+/**
+ * @file        index.ts
+ * @module      BarrelAtoms
+ * @layer       client/ui/atoms
+ * @description Barrel exports for all Atoms UI components.
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-05 by Luminesa – initial header add
+ */
+
 export * from "./Button";
 export * from "./Container";
 export * from "./DragDetector";

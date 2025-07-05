@@ -20,6 +20,18 @@
  *   @rbxts/fusion ^0.4.0
  */
 
+/**
+ * @file        index.ts
+ * @module      BarrelTokens
+ * @layer       client/ui/tokens
+ * @description Barrel exports for all Tokens UI components.
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-05 by Luminesa – initial header add
+ */
+
 export * from "../../../shared/assets/gradients";
 export * from "./layouts";
 export * from "./padding";

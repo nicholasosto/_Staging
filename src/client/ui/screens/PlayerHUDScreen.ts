@@ -8,15 +8,12 @@
  */
 
 import { GamePanel, GameScreen } from "../atoms";
-import { HUDMenuBar, AbilityBarClass } from "client/ui/organisms";
+import { HUDMenuBar, AbilityBarComponent } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
-import { Players } from "@rbxts/services";
 import { SCREEN_KEYS } from "client/states";
-import { AdminBar } from "../organisms/ButtonBars/AdminBar";
 import { Value } from "@rbxts/fusion";
 import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
-import { StatusEffect } from "shared/definitions/StatusEffect";
 import PlayerState from "client/states/PlayerState";
 
 /* =============================================== Player HUD Screen ============================================= */
@@ -52,8 +49,8 @@ export const PlayerHUDScreen = () => {
 					MenuBar: HudProps.HUDMenuBar,
 				},
 			}),
-			AbilityBar: new AbilityBarClass().getBar(), // Ability bar dynamically generated from PlayerState
-			AdminBar: AdminBar(Value(false)), // Admin bar visibility controlled by a Value
+			AbilityBar: AbilityBarComponent(),
+			//AdminBar: AdminBar(Value(false)), // Admin bar visibility controlled by a Value
 			StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 		},
 	});

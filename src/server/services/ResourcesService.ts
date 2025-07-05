@@ -50,16 +50,29 @@ export class ResourcesService {
 		return this.Start()._map.get(player);
 	}
 
-	public static ModifyResource(player: Player, key: ResourceKey, delta: number) {
+	public static ModifyResource(player: Player, key: ResourceKey, delta: number): boolean {
+		print(`Modifying resource for player ${player.Name}: ${key} by ${delta}`);
 		const svc = this.Start();
 		const resources = svc._map.get(player);
-		if (!resources) return;
-		const data = resources[key];
-		if (!data) return;
-		const newCurrent = math.clamp(data.current + delta, 0, data.max);
-		if (newCurrent === data.current) return;
-		data.current = newCurrent;
-		ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+
+		// Check if the player has resources initialized
+		if (!resources) return false;
+
+		// Check if the resource key is valid
+		const resourceData = resources[key];
+		if (!resourceData) return false;
+
+		// Check if the delta is zero or negative
+		if (delta + resourceData.current < 0) return false;
+
+		// Update the resource value
+		const newResourceCurrent = math.clamp(resourceData.current + delta, 0, resourceData.max);
+
+		resourceData.current = newResourceCurrent;
+
+		// Send updated resource data to the player
+		ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, resourceData.current, resourceData.max);
+		return true;
 	}
 
 	public static Recalculate(player: Player) {

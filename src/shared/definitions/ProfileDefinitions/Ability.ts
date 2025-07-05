@@ -62,11 +62,11 @@ export const AbilitiesMeta = {
 		iconId: GameImages.Ability.Ice_Shard,
 		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Launches a shard of ice that pierces through enemies.",
-		cooldown: 6,
+		cooldown: 0.31,
 		basePower: 40,
 		cost: {
-			mana: 15, // Example mana cost
-			stamina: 5, // Example stamina cost
+			mana: 25, // Example mana cost
+			stamina: 25, // Example stamina cost
 		},
 	},
 	lightning_bolt: {
