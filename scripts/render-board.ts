@@ -1,5 +1,14 @@
 //@ts-nocheck
 // scripts/render-board.ts
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        render-board.ts
+ * @module      RenderBoard
+ * @layer       scripts
+ * @description Generates TASK_BOARD.md from tasks.yaml.
+ */
+
 //
 // Usage:
 //   ts-node scripts/render-board.ts         # writes TASK_BOARD.md at project root
