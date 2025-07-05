@@ -1,4 +1,13 @@
 // @ts-nocheck
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        task-cli.ts
+ * @module      TaskCLI
+ * @layer       scripts
+ * @description CLI to manage tasks.yaml.
+ */
+
 import fs from "fs";
 import yaml from "js-yaml";
 import { Task, TaskStatus } from "../tasks/TaskTypes";

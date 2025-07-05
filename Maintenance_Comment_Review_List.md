@@ -2,192 +2,158 @@
 
 ## How to Use
 This checklist tracks comment updates for each file.
-At the start of a session, clear all checkboxes except the final `runstart?` entry which should remain checked.
-Mark each file as completed after updating its comments. When all files are checked, remove the `runstart?` item and record the current date and time.
 
-- [ ] **[.eslintrc](./.eslintrc)**
-- [ ] **[.github/workflows/render-tasks.yml](./.github/workflows/render-tasks.yml)**
-- [ ] **[.gitignore](./.gitignore)**
-- [ ] **[.prettierrc](./.prettierrc)**
-- [ ] **[.vscode/extensions.json](./.vscode/extensions.json)**
-- [ ] **[.vscode/settings.json](./.vscode/settings.json)**
-- [ ] **[AGENTS.md](./AGENTS.md)**
-- [ ] **[Documents/CommentingGuide.md](./Documents/CommentingGuide.md)**
-- [ ] **[Documents/FusionEventGuide.md](./Documents/FusionEventGuide.md)**
-- [ ] **[Documents/OrganismList.md](./Documents/OrganismList.md)**
-- [ ] **[Documents/OrganismStructure.md](./Documents/OrganismStructure.md)**
-- [ ] **[Documents/PlayerJourney.md](./Documents/PlayerJourney.md)**
-- [ ] **[NEXTSTEPS_TODO.md](./NEXTSTEPS_TODO.md)**
-- [ ] **[_Staging.code-workspace](./_Staging.code-workspace)**
-- [ ] **[aftman.toml](./aftman.toml)**
-- [ ] **[build/dunny.rbxlx](./build/dunny.rbxlx)**
-- [ ] **[codexUtility/README.md](./codexUtility/README.md)**
-- [ ] **[codexUtility/runTests.js](./codexUtility/runTests.js)**
-- [ ] **[default.project.json](./default.project.json)**
-- [ ] **[eslintrc.cjs](./eslintrc.cjs)**
-- [ ] **[foreman.toml](./foreman.toml)**
-- [ ] **[package-lock.json](./package-lock.json)**
-- [ ] **[package.json](./package.json)**
-- [ ] **[scripts/RunTests.server.lua](./scripts/RunTests.server.lua)**
-- [ ] **[scripts/render-board.ts](./scripts/render-board.ts)**
-- [ ] **[scripts/task-cli.ts](./scripts/task-cli.ts)**
-- [ ] **[src/AGENTS_DEVELOPMENT_SUMMARY.md](./src/AGENTS_DEVELOPMENT_SUMMARY.md)**
-- [ ] **[src/AGENTS_TASK_TEMPLATE.md](./src/AGENTS_TASK_TEMPLATE.md)**
-- [ ] **[src/client/index.ts](./src/client/index.ts)**
-- [ ] **[src/client/main.client.ts](./src/client/main.client.ts)**
-- [ ] **[src/client/network/ClientNetworkService.ts](./src/client/network/ClientNetworkService.ts)**
-- [ ] **[src/client/network/index.ts](./src/client/network/index.ts)**
-- [ ] **[src/client/network/listener.client.ts](./src/client/network/listener.client.ts)**
-- [ ] **[src/client/states/PlayerState.ts](./src/client/states/PlayerState.ts)**
-- [ ] **[src/client/states/ScreenState.ts](./src/client/states/ScreenState.ts)**
-- [ ] **[src/client/states/SettingsState.ts](./src/client/states/SettingsState.ts)**
-- [ ] **[src/client/states/ThemeState.ts](./src/client/states/ThemeState.ts)**
-- [ ] **[src/client/states/index.ts](./src/client/states/index.ts)**
-- [ ] **[src/client/states/state.client.ts](./src/client/states/state.client.ts)**
-- [ ] **[src/client/ui/atoms/Button/DraggableButton.ts](./src/client/ui/atoms/Button/DraggableButton.ts)**
-- [ ] **[src/client/ui/atoms/Button/GameButton.ts](./src/client/ui/atoms/Button/GameButton.ts)**
-- [ ] **[src/client/ui/atoms/Button/IconButton.ts](./src/client/ui/atoms/Button/IconButton.ts)**
-- [ ] **[src/client/ui/atoms/Button/ItemButton.ts](./src/client/ui/atoms/Button/ItemButton.ts)**
-- [ ] **[src/client/ui/atoms/Button/UIButton.ts](./src/client/ui/atoms/Button/UIButton.ts)**
-- [ ] **[src/client/ui/atoms/Button/index.ts](./src/client/ui/atoms/Button/index.ts)**
-- [ ] **[src/client/ui/atoms/Container/BaseContainer.ts](./src/client/ui/atoms/Container/BaseContainer.ts)**
-- [ ] **[src/client/ui/atoms/Container/GamePanel.ts](./src/client/ui/atoms/Container/GamePanel.ts)**
-- [ ] **[src/client/ui/atoms/Container/GridContainer.ts](./src/client/ui/atoms/Container/GridContainer.ts)**
-- [ ] **[src/client/ui/atoms/Container/HorizontalContainer.ts](./src/client/ui/atoms/Container/HorizontalContainer.ts)**
-- [ ] **[src/client/ui/atoms/Container/VerticalContainer.ts](./src/client/ui/atoms/Container/VerticalContainer.ts)**
-- [ ] **[src/client/ui/atoms/Container/index.ts](./src/client/ui/atoms/Container/index.ts)**
-- [ ] **[src/client/ui/atoms/DragDetector/DragDetector.ts](./src/client/ui/atoms/DragDetector/DragDetector.ts)**
-- [ ] **[src/client/ui/atoms/DragDetector/index.ts](./src/client/ui/atoms/DragDetector/index.ts)**
-- [ ] **[src/client/ui/atoms/Gem/GemSlot.ts](./src/client/ui/atoms/Gem/GemSlot.ts)**
-- [ ] **[src/client/ui/atoms/Gem/RingSlot.ts](./src/client/ui/atoms/Gem/RingSlot.ts)**
-- [ ] **[src/client/ui/atoms/Gem/index.ts](./src/client/ui/atoms/Gem/index.ts)**
-- [ ] **[src/client/ui/atoms/Image/BorderImage.ts](./src/client/ui/atoms/Image/BorderImage.ts)**
-- [ ] **[src/client/ui/atoms/Image/GameImage.ts](./src/client/ui/atoms/Image/GameImage.ts)**
-- [ ] **[src/client/ui/atoms/Image/index.ts](./src/client/ui/atoms/Image/index.ts)**
-- [ ] **[src/client/ui/atoms/Screen/GameScreen.ts](./src/client/ui/atoms/Screen/GameScreen.ts)**
-- [ ] **[src/client/ui/atoms/Screen/index.ts](./src/client/ui/atoms/Screen/index.ts)**
-- [ ] **[src/client/ui/atoms/Text/GameText.ts](./src/client/ui/atoms/Text/GameText.ts)**
-- [ ] **[src/client/ui/atoms/Text/index.ts](./src/client/ui/atoms/Text/index.ts)**
-- [ ] **[src/client/ui/atoms/index.ts](./src/client/ui/atoms/index.ts)**
-- [ ] **[src/client/ui/helpers/dragHelpers.ts](./src/client/ui/helpers/dragHelpers.ts)**
-- [ ] **[src/client/ui/helpers/index.ts](./src/client/ui/helpers/index.ts)**
-- [ ] **[src/client/ui/index.ts](./src/client/ui/index.ts)**
-- [ ] **[src/client/ui/molecules/AbilityInfoPanel.ts](./src/client/ui/molecules/AbilityInfoPanel.ts)**
-- [ ] **[src/client/ui/molecules/AvatarBust.ts](./src/client/ui/molecules/AvatarBust.ts)**
-- [ ] **[src/client/ui/molecules/Button/AbilityButton.ts](./src/client/ui/molecules/Button/AbilityButton.ts)**
-- [ ] **[src/client/ui/molecules/Button/HUDMenuButton.ts](./src/client/ui/molecules/Button/HUDMenuButton.ts)**
-- [ ] **[src/client/ui/molecules/Button/PanelSelector.ts](./src/client/ui/molecules/Button/PanelSelector.ts)**
-- [ ] **[src/client/ui/molecules/Button/index.ts](./src/client/ui/molecules/Button/index.ts)**
-- [ ] **[src/client/ui/molecules/Container/InventoryGrid.ts](./src/client/ui/molecules/Container/InventoryGrid.ts)**
-- [ ] **[src/client/ui/molecules/CountdownTimer.ts](./src/client/ui/molecules/CountdownTimer.ts)**
-- [ ] **[src/client/ui/molecules/FillBar/BarMeter.ts](./src/client/ui/molecules/FillBar/BarMeter.ts)**
-- [ ] **[src/client/ui/molecules/FillBar/index.ts](./src/client/ui/molecules/FillBar/index.ts)**
-- [ ] **[src/client/ui/molecules/GameWindow.ts](./src/client/ui/molecules/GameWindow.ts)**
-- [ ] **[src/client/ui/molecules/SettingListItem.ts](./src/client/ui/molecules/SettingListItem.ts)**
-- [ ] **[src/client/ui/molecules/index.ts](./src/client/ui/molecules/index.ts)**
-- [ ] **[src/client/ui/organisms/ButtonBars/AbilityBar.ts](./src/client/ui/organisms/ButtonBars/AbilityBar.ts)**
-- [ ] **[src/client/ui/organisms/ButtonBars/HUDMenuBar.ts](./src/client/ui/organisms/ButtonBars/HUDMenuBar.ts)**
-- [ ] **[src/client/ui/organisms/ButtonBars/StatusPanel.ts](./src/client/ui/organisms/ButtonBars/StatusPanel.ts)**
-- [ ] **[src/client/ui/organisms/ButtonBars/index.ts](./src/client/ui/organisms/ButtonBars/index.ts)**
-- [ ] **[src/client/ui/organisms/CharacterInfoCard.ts](./src/client/ui/organisms/CharacterInfoCard.ts)**
-- [ ] **[src/client/ui/organisms/CollapsibleStatusPanel.ts](./src/client/ui/organisms/CollapsibleStatusPanel.ts)**
-- [ ] **[src/client/ui/organisms/ResourceBar.ts](./src/client/ui/organisms/ResourceBar.ts)**
-- [ ] **[src/client/ui/organisms/index.ts](./src/client/ui/organisms/index.ts)**
-- [ ] **[src/client/ui/screens/CharacterScreen.ts](./src/client/ui/screens/CharacterScreen.ts)**
-- [ ] **[src/client/ui/screens/GemForgeScreen.ts](./src/client/ui/screens/GemForgeScreen.ts)**
-- [ ] **[src/client/ui/screens/InventoryScreen.ts](./src/client/ui/screens/InventoryScreen.ts)**
-- [ ] **[src/client/ui/screens/PlayerHUDScreen.ts](./src/client/ui/screens/PlayerHUDScreen.ts)**
-- [ ] **[src/client/ui/screens/QuestsScreen.ts](./src/client/ui/screens/QuestsScreen.ts)**
-- [ ] **[src/client/ui/screens/SettingsScreen.ts](./src/client/ui/screens/SettingsScreen.ts)**
-- [ ] **[src/client/ui/screens/ShopScreen.ts](./src/client/ui/screens/ShopScreen.ts)**
-- [ ] **[src/client/ui/screens/TeleportScreen.ts](./src/client/ui/screens/TeleportScreen.ts)**
-- [ ] **[src/client/ui/screens/index.ts](./src/client/ui/screens/index.ts)**
-- [ ] **[src/client/ui/tokens/audio.ts](./src/client/ui/tokens/audio.ts)**
-- [ ] **[src/client/ui/tokens/color.ts](./src/client/ui/tokens/color.ts)**
-- [ ] **[src/client/ui/tokens/image.ts](./src/client/ui/tokens/image.ts)**
-- [ ] **[src/client/ui/tokens/index.ts](./src/client/ui/tokens/index.ts)**
-- [ ] **[src/client/ui/tokens/layouts.ts](./src/client/ui/tokens/layouts.ts)**
-- [ ] **[src/client/ui/tokens/padding.ts](./src/client/ui/tokens/padding.ts)**
-- [ ] **[src/client/ui/tokens/stroke.ts](./src/client/ui/tokens/stroke.ts)**
-- [ ] **[src/client/ui/tokens/text.ts](./src/client/ui/tokens/text.ts)**
-- [ ] **[src/constants/Sizes.ts](./src/constants/Sizes.ts)**
-- [ ] **[src/constants/index.ts](./src/constants/index.ts)**
-- [ ] **[src/server/classes/EnvironmentEffects/Hazard.ts](./src/server/classes/EnvironmentEffects/Hazard.ts)**
-- [ ] **[src/server/classes/EnvironmentEffects/index.ts](./src/server/classes/EnvironmentEffects/index.ts)**
-- [ ] **[src/server/classes/components/HazardComponent.ts](./src/server/classes/components/HazardComponent.ts)**
-- [ ] **[src/server/classes/components/index.ts](./src/server/classes/components/index.ts)**
-- [ ] **[src/server/classes/index.ts](./src/server/classes/index.ts)**
-- [ ] **[src/server/classes/npc/NPC.ts](./src/server/classes/npc/NPC.ts)**
-- [ ] **[src/server/classes/npc/index.ts](./src/server/classes/npc/index.ts)**
-- [ ] **[src/server/classes/playground/AlienBob.ts](./src/server/classes/playground/AlienBob.ts)**
-- [ ] **[src/server/classes/playground/AlienOrganism.ts](./src/server/classes/playground/AlienOrganism.ts)**
-- [ ] **[src/server/classes/playground/Manifestation.ts](./src/server/classes/playground/Manifestation.ts)**
-- [ ] **[src/server/classes/playground/OrganismFood.ts](./src/server/classes/playground/OrganismFood.ts)**
-- [ ] **[src/server/classes/playground/index.ts](./src/server/classes/playground/index.ts)**
-- [ ] **[src/server/index.ts](./src/server/index.ts)**
-- [ ] **[src/server/main.server.ts](./src/server/main.server.ts)**
-- [ ] **[src/server/network/ServerNetwork.ts](./src/server/network/ServerNetwork.ts)**
-- [ ] **[src/server/network/index.ts](./src/server/network/index.ts)**
-- [ ] **[src/server/services/AGENTS.md](./src/server/services/AGENTS.md)**
-- [ ] **[src/server/services/AbilityService.ts](./src/server/services/AbilityService.ts)**
-- [ ] **[src/server/services/AttributesService.ts](./src/server/services/AttributesService.ts)**
-- [ ] **[src/server/services/BattleRoomService.ts](./src/server/services/BattleRoomService.ts)**
-- [ ] **[src/server/services/DataService.ts](./src/server/services/DataService.ts)**
-- [ ] **[src/server/services/ManifestationForgeService.ts](./src/server/services/ManifestationForgeService.ts)**
-- [ ] **[src/server/services/NPCService.ts](./src/server/services/NPCService.ts)**
-- [ ] **[src/server/services/ResourcesService.ts](./src/server/services/ResourcesService.ts)**
-- [ ] **[src/server/services/SettingsService.ts](./src/server/services/SettingsService.ts)**
-- [ ] **[src/server/services/StatusEffectService.ts](./src/server/services/StatusEffectService.ts)**
-- [ ] **[src/server/services/index.ts](./src/server/services/index.ts)**
-- [ ] **[src/server/zones/LobbyZone.ts](./src/server/zones/LobbyZone.ts)**
-- [ ] **[src/server/zones/ZoneBase.ts](./src/server/zones/ZoneBase.ts)**
-- [ ] **[src/server/zones/index.ts](./src/server/zones/index.ts)**
-- [ ] **[src/server/zones/zone.server.ts](./src/server/zones/zone.server.ts)**
-- [ ] **[src/shared/AGENTS.md](./src/shared/AGENTS.md)**
-- [ ] **[src/shared/assets/audio.ts](./src/shared/assets/audio.ts)**
-- [ ] **[src/shared/assets/gradients.ts](./src/shared/assets/gradients.ts)**
-- [ ] **[src/shared/assets/image.ts](./src/shared/assets/image.ts)**
-- [ ] **[src/shared/assets/index.ts](./src/shared/assets/index.ts)**
-- [ ] **[src/shared/calculations/ResourceCalculator.ts](./src/shared/calculations/ResourceCalculator.ts)**
-- [ ] **[src/shared/calculations/index.ts](./src/shared/calculations/index.ts)**
-- [ ] **[src/shared/classes/CooldownTimer.ts](./src/shared/classes/CooldownTimer.ts)**
-- [ ] **[src/shared/classes/index.ts](./src/shared/classes/index.ts)**
-- [ ] **[src/shared/constants/CodeSettings.ts](./src/shared/constants/CodeSettings.ts)**
-- [ ] **[src/shared/constants/index.ts](./src/shared/constants/index.ts)**
-- [ ] **[src/shared/constants/sizes.ts](./src/shared/constants/sizes.ts)**
-- [ ] **[src/shared/definitions/Animation.ts](./src/shared/definitions/Animation.ts)**
-- [ ] **[src/shared/definitions/Codon.ts](./src/shared/definitions/Codon.ts)**
-- [ ] **[src/shared/definitions/Loot.ts](./src/shared/definitions/Loot.ts)**
-- [ ] **[src/shared/definitions/NPC.ts](./src/shared/definitions/NPC.ts)**
-- [ ] **[src/shared/definitions/PanelSlots/Equipment.ts](./src/shared/definitions/PanelSlots/Equipment.ts)**
-- [ ] **[src/shared/definitions/PanelSlots/GemSlots.ts](./src/shared/definitions/PanelSlots/GemSlots.ts)**
-- [ ] **[src/shared/definitions/PanelSlots/index.ts](./src/shared/definitions/PanelSlots/index.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Ability.ts](./src/shared/definitions/ProfileDefinitions/Ability.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Attributes.ts](./src/shared/definitions/ProfileDefinitions/Attributes.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Currency.ts](./src/shared/definitions/ProfileDefinitions/Currency.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Profile.ts](./src/shared/definitions/ProfileDefinitions/Profile.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Progression.ts](./src/shared/definitions/ProfileDefinitions/Progression.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/Settings.ts](./src/shared/definitions/ProfileDefinitions/Settings.ts)**
-- [ ] **[src/shared/definitions/ProfileDefinitions/index.ts](./src/shared/definitions/ProfileDefinitions/index.ts)**
-- [ ] **[src/shared/definitions/Rarity.ts](./src/shared/definitions/Rarity.ts)**
-- [ ] **[src/shared/definitions/Resources.ts](./src/shared/definitions/Resources.ts)**
-- [ ] **[src/shared/definitions/StatusEffect.ts](./src/shared/definitions/StatusEffect.ts)**
-- [ ] **[src/shared/definitions/index.ts](./src/shared/definitions/index.ts)**
-- [ ] **[src/shared/index.ts](./src/shared/index.ts)**
-- [ ] **[src/shared/network/Definitions.ts](./src/shared/network/Definitions.ts)**
-- [ ] **[src/shared/network/index.ts](./src/shared/network/index.ts)**
-- [ ] **[src/theme/ThemeKey.ts](./src/theme/ThemeKey.ts)**
-- [ ] **[src/theme/hooks.ts](./src/theme/hooks.ts)**
-- [ ] **[src/theme/index.ts](./src/theme/index.ts)**
-- [ ] **[src/theme/tokens/base.ts](./src/theme/tokens/base.ts)**
-- [ ] **[src/theme/tokens/cyberGothic.ts](./src/theme/tokens/cyberGothic.ts)**
-- [ ] **[src/theme/tokens/index.ts](./src/theme/tokens/index.ts)**
-- [ ] **[src/theme/tokens/solarDrift.ts](./src/theme/tokens/solarDrift.ts)**
-- [ ] **[src/theme/types.ts](./src/theme/types.ts)**
-- [ ] **[tasks/TaskTypes.ts](./tasks/TaskTypes.ts)**
-- [ ] **[tasks/Task_StatusEffectComponent.md](./tasks/Task_StatusEffectComponent.md)**
-- [ ] **[tasks/task-cli.ts](./tasks/task-cli.ts)**
-- [ ] **[tasks/tasks.yaml](./tasks/tasks.yaml)**
-- [ ] **[tsconfig.json](./tsconfig.json)**
-- [ ] **[tsconfig.scripts.json](./tsconfig.scripts.json)**
-- [x] **runstart?**
+- [x] **[scripts/render-board.ts](./scripts/render-board.ts)**
+- [x] **[scripts/task-cli.ts](./scripts/task-cli.ts)**
+- [x] **[src/client/index.ts](./src/client/index.ts)**
+- [x] **[src/client/main.client.ts](./src/client/main.client.ts)**
+- [x] **[src/client/network/ClientNetworkService.ts](./src/client/network/ClientNetworkService.ts)**
+- [x] **[src/client/network/index.ts](./src/client/network/index.ts)**
+- [x] **[src/client/network/listener.client.ts](./src/client/network/listener.client.ts)**
+- [x] **[src/client/states/PlayerState.ts](./src/client/states/PlayerState.ts)**
+- [x] **[src/client/states/ScreenState.ts](./src/client/states/ScreenState.ts)**
+- [x] **[src/client/states/SettingsState.ts](./src/client/states/SettingsState.ts)**
+- [x] **[src/client/states/ThemeState.ts](./src/client/states/ThemeState.ts)**
+- [x] **[src/client/states/index.ts](./src/client/states/index.ts)**
+- [x] **[src/client/states/state.client.ts](./src/client/states/state.client.ts)**
+- [x] **[src/client/ui/atoms/Button/DraggableButton.ts](./src/client/ui/atoms/Button/DraggableButton.ts)**
+- [x] **[src/client/ui/atoms/Button/GameButton.ts](./src/client/ui/atoms/Button/GameButton.ts)**
+- [x] **[src/client/ui/atoms/Button/IconButton.ts](./src/client/ui/atoms/Button/IconButton.ts)**
+- [x] **[src/client/ui/atoms/Button/ItemButton.ts](./src/client/ui/atoms/Button/ItemButton.ts)**
+- [x] **[src/client/ui/atoms/Button/UIButton.ts](./src/client/ui/atoms/Button/UIButton.ts)**
+- [x] **[src/client/ui/atoms/Button/index.ts](./src/client/ui/atoms/Button/index.ts)**
+- [x] **[src/client/ui/atoms/Container/BaseContainer.ts](./src/client/ui/atoms/Container/BaseContainer.ts)**
+- [x] **[src/client/ui/atoms/Container/GamePanel.ts](./src/client/ui/atoms/Container/GamePanel.ts)**
+- [x] **[src/client/ui/atoms/Container/GridContainer.ts](./src/client/ui/atoms/Container/GridContainer.ts)**
+- [x] **[src/client/ui/atoms/Container/HorizontalContainer.ts](./src/client/ui/atoms/Container/HorizontalContainer.ts)**
+- [x] **[src/client/ui/atoms/Container/VerticalContainer.ts](./src/client/ui/atoms/Container/VerticalContainer.ts)**
+- [x] **[src/client/ui/atoms/Container/index.ts](./src/client/ui/atoms/Container/index.ts)**
+- [x] **[src/client/ui/atoms/DragDetector/DragDetector.ts](./src/client/ui/atoms/DragDetector/DragDetector.ts)**
+- [x] **[src/client/ui/atoms/DragDetector/index.ts](./src/client/ui/atoms/DragDetector/index.ts)**
+- [x] **[src/client/ui/atoms/Gem/GemSlot.ts](./src/client/ui/atoms/Gem/GemSlot.ts)**
+- [x] **[src/client/ui/atoms/Gem/RingSlot.ts](./src/client/ui/atoms/Gem/RingSlot.ts)**
+- [x] **[src/client/ui/atoms/Gem/index.ts](./src/client/ui/atoms/Gem/index.ts)**
+- [x] **[src/client/ui/atoms/Image/BorderImage.ts](./src/client/ui/atoms/Image/BorderImage.ts)**
+- [x] **[src/client/ui/atoms/Image/GameImage.ts](./src/client/ui/atoms/Image/GameImage.ts)**
+- [x] **[src/client/ui/atoms/Image/index.ts](./src/client/ui/atoms/Image/index.ts)**
+- [x] **[src/client/ui/atoms/Screen/GameScreen.ts](./src/client/ui/atoms/Screen/GameScreen.ts)**
+- [x] **[src/client/ui/atoms/Screen/index.ts](./src/client/ui/atoms/Screen/index.ts)**
+- [x] **[src/client/ui/atoms/Text/GameText.ts](./src/client/ui/atoms/Text/GameText.ts)**
+- [x] **[src/client/ui/atoms/Text/index.ts](./src/client/ui/atoms/Text/index.ts)**
+- [x] **[src/client/ui/atoms/index.ts](./src/client/ui/atoms/index.ts)**
+- [x] **[src/client/ui/helpers/dragHelpers.ts](./src/client/ui/helpers/dragHelpers.ts)**
+- [x] **[src/client/ui/helpers/index.ts](./src/client/ui/helpers/index.ts)**
+- [x] **[src/client/ui/index.ts](./src/client/ui/index.ts)**
+- [x] **[src/client/ui/molecules/AbilityInfoPanel.ts](./src/client/ui/molecules/AbilityInfoPanel.ts)**
+- [x] **[src/client/ui/molecules/AvatarBust.ts](./src/client/ui/molecules/AvatarBust.ts)**
+- [x] **[src/client/ui/molecules/Button/AbilityButton.ts](./src/client/ui/molecules/Button/AbilityButton.ts)**
+- [x] **[src/client/ui/molecules/Button/HUDMenuButton.ts](./src/client/ui/molecules/Button/HUDMenuButton.ts)**
+- [x] **[src/client/ui/molecules/Button/PanelSelector.ts](./src/client/ui/molecules/Button/PanelSelector.ts)**
+- [x] **[src/client/ui/molecules/Button/index.ts](./src/client/ui/molecules/Button/index.ts)**
+- [x] **[src/client/ui/molecules/Container/InventoryGrid.ts](./src/client/ui/molecules/Container/InventoryGrid.ts)**
+- [x] **[src/client/ui/molecules/CountdownTimer.ts](./src/client/ui/molecules/CountdownTimer.ts)**
+- [x] **[src/client/ui/molecules/FillBar/BarMeter.ts](./src/client/ui/molecules/FillBar/BarMeter.ts)**
+- [x] **[src/client/ui/molecules/FillBar/index.ts](./src/client/ui/molecules/FillBar/index.ts)**
+- [x] **[src/client/ui/molecules/GameWindow.ts](./src/client/ui/molecules/GameWindow.ts)**
+- [x] **[src/client/ui/molecules/SettingListItem.ts](./src/client/ui/molecules/SettingListItem.ts)**
+- [x] **[src/client/ui/molecules/index.ts](./src/client/ui/molecules/index.ts)**
+- [x] **[src/client/ui/organisms/ButtonBars/AbilityBar.ts](./src/client/ui/organisms/ButtonBars/AbilityBar.ts)**
+- [x] **[src/client/ui/organisms/ButtonBars/HUDMenuBar.ts](./src/client/ui/organisms/ButtonBars/HUDMenuBar.ts)**
+- [x] **[src/client/ui/organisms/ButtonBars/StatusPanel.ts](./src/client/ui/organisms/ButtonBars/StatusPanel.ts)**
+- [x] **[src/client/ui/organisms/ButtonBars/index.ts](./src/client/ui/organisms/ButtonBars/index.ts)**
+- [x] **[src/client/ui/organisms/CharacterInfoCard.ts](./src/client/ui/organisms/CharacterInfoCard.ts)**
+- [x] **[src/client/ui/organisms/CollapsibleStatusPanel.ts](./src/client/ui/organisms/CollapsibleStatusPanel.ts)**
+- [x] **[src/client/ui/organisms/ResourceBar.ts](./src/client/ui/organisms/ResourceBar.ts)**
+- [x] **[src/client/ui/organisms/index.ts](./src/client/ui/organisms/index.ts)**
+- [x] **[src/client/ui/screens/CharacterScreen.ts](./src/client/ui/screens/CharacterScreen.ts)**
+- [x] **[src/client/ui/screens/GemForgeScreen.ts](./src/client/ui/screens/GemForgeScreen.ts)**
+- [x] **[src/client/ui/screens/InventoryScreen.ts](./src/client/ui/screens/InventoryScreen.ts)**
+- [x] **[src/client/ui/screens/PlayerHUDScreen.ts](./src/client/ui/screens/PlayerHUDScreen.ts)**
+- [x] **[src/client/ui/screens/QuestsScreen.ts](./src/client/ui/screens/QuestsScreen.ts)**
+- [x] **[src/client/ui/screens/SettingsScreen.ts](./src/client/ui/screens/SettingsScreen.ts)**
+- [x] **[src/client/ui/screens/ShopScreen.ts](./src/client/ui/screens/ShopScreen.ts)**
+- [x] **[src/client/ui/screens/TeleportScreen.ts](./src/client/ui/screens/TeleportScreen.ts)**
+- [x] **[src/client/ui/screens/index.ts](./src/client/ui/screens/index.ts)**
+- [x] **[src/client/ui/tokens/audio.ts](./src/client/ui/tokens/audio.ts)**
+- [x] **[src/client/ui/tokens/color.ts](./src/client/ui/tokens/color.ts)**
+- [x] **[src/client/ui/tokens/image.ts](./src/client/ui/tokens/image.ts)**
+- [x] **[src/client/ui/tokens/index.ts](./src/client/ui/tokens/index.ts)**
+- [x] **[src/client/ui/tokens/layouts.ts](./src/client/ui/tokens/layouts.ts)**
+- [x] **[src/client/ui/tokens/padding.ts](./src/client/ui/tokens/padding.ts)**
+- [x] **[src/client/ui/tokens/stroke.ts](./src/client/ui/tokens/stroke.ts)**
+- [x] **[src/client/ui/tokens/text.ts](./src/client/ui/tokens/text.ts)**
+- [x] **[src/constants/Sizes.ts](./src/constants/Sizes.ts)**
+- [x] **[src/constants/index.ts](./src/constants/index.ts)**
+- [x] **[src/server/classes/EnvironmentEffects/Hazard.ts](./src/server/classes/EnvironmentEffects/Hazard.ts)**
+- [x] **[src/server/classes/EnvironmentEffects/index.ts](./src/server/classes/EnvironmentEffects/index.ts)**
+- [x] **[src/server/classes/components/HazardComponent.ts](./src/server/classes/components/HazardComponent.ts)**
+- [x] **[src/server/classes/components/index.ts](./src/server/classes/components/index.ts)**
+- [x] **[src/server/classes/index.ts](./src/server/classes/index.ts)**
+- [x] **[src/server/classes/npc/NPC.ts](./src/server/classes/npc/NPC.ts)**
+- [x] **[src/server/classes/npc/index.ts](./src/server/classes/npc/index.ts)**
+- [x] **[src/server/classes/playground/AlienBob.ts](./src/server/classes/playground/AlienBob.ts)**
+- [x] **[src/server/classes/playground/AlienOrganism.ts](./src/server/classes/playground/AlienOrganism.ts)**
+- [x] **[src/server/classes/playground/Manifestation.ts](./src/server/classes/playground/Manifestation.ts)**
+- [x] **[src/server/classes/playground/OrganismFood.ts](./src/server/classes/playground/OrganismFood.ts)**
+- [x] **[src/server/classes/playground/index.ts](./src/server/classes/playground/index.ts)**
+- [x] **[src/server/index.ts](./src/server/index.ts)**
+- [x] **[src/server/main.server.ts](./src/server/main.server.ts)**
+- [x] **[src/server/network/ServerNetwork.ts](./src/server/network/ServerNetwork.ts)**
+- [x] **[src/server/network/index.ts](./src/server/network/index.ts)**
+- [x] **[src/server/services/AbilityService.ts](./src/server/services/AbilityService.ts)**
+- [x] **[src/server/services/AttributesService.ts](./src/server/services/AttributesService.ts)**
+- [x] **[src/server/services/BattleRoomService.ts](./src/server/services/BattleRoomService.ts)**
+- [x] **[src/server/services/DataService.ts](./src/server/services/DataService.ts)**
+- [x] **[src/server/services/ManifestationForgeService.ts](./src/server/services/ManifestationForgeService.ts)**
+- [x] **[src/server/services/NPCService.ts](./src/server/services/NPCService.ts)**
+- [x] **[src/server/services/ResourcesService.ts](./src/server/services/ResourcesService.ts)**
+- [x] **[src/server/services/SettingsService.ts](./src/server/services/SettingsService.ts)**
+- [x] **[src/server/services/StatusEffectService.ts](./src/server/services/StatusEffectService.ts)**
+- [x] **[src/server/services/index.ts](./src/server/services/index.ts)**
+- [x] **[src/server/zones/LobbyZone.ts](./src/server/zones/LobbyZone.ts)**
+- [x] **[src/server/zones/ZoneBase.ts](./src/server/zones/ZoneBase.ts)**
+- [x] **[src/server/zones/index.ts](./src/server/zones/index.ts)**
+- [x] **[src/server/zones/zone.server.ts](./src/server/zones/zone.server.ts)**
+- [x] **[src/shared/assets/audio.ts](./src/shared/assets/audio.ts)**
+- [x] **[src/shared/assets/gradients.ts](./src/shared/assets/gradients.ts)**
+- [x] **[src/shared/assets/image.ts](./src/shared/assets/image.ts)**
+- [x] **[src/shared/assets/index.ts](./src/shared/assets/index.ts)**
+- [x] **[src/shared/calculations/ResourceCalculator.ts](./src/shared/calculations/ResourceCalculator.ts)**
+- [x] **[src/shared/calculations/index.ts](./src/shared/calculations/index.ts)**
+- [x] **[src/shared/classes/CooldownTimer.ts](./src/shared/classes/CooldownTimer.ts)**
+- [x] **[src/shared/classes/index.ts](./src/shared/classes/index.ts)**
+- [x] **[src/shared/constants/CodeSettings.ts](./src/shared/constants/CodeSettings.ts)**
+- [x] **[src/shared/constants/index.ts](./src/shared/constants/index.ts)**
+- [x] **[src/shared/constants/sizes.ts](./src/shared/constants/sizes.ts)**
+- [x] **[src/shared/definitions/Animation.ts](./src/shared/definitions/Animation.ts)**
+- [x] **[src/shared/definitions/Codon.ts](./src/shared/definitions/Codon.ts)**
+- [x] **[src/shared/definitions/Loot.ts](./src/shared/definitions/Loot.ts)**
+- [x] **[src/shared/definitions/NPC.ts](./src/shared/definitions/NPC.ts)**
+- [x] **[src/shared/definitions/PanelSlots/Equipment.ts](./src/shared/definitions/PanelSlots/Equipment.ts)**
+- [x] **[src/shared/definitions/PanelSlots/GemSlots.ts](./src/shared/definitions/PanelSlots/GemSlots.ts)**
+- [x] **[src/shared/definitions/PanelSlots/index.ts](./src/shared/definitions/PanelSlots/index.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Ability.ts](./src/shared/definitions/ProfileDefinitions/Ability.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Attributes.ts](./src/shared/definitions/ProfileDefinitions/Attributes.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Currency.ts](./src/shared/definitions/ProfileDefinitions/Currency.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Profile.ts](./src/shared/definitions/ProfileDefinitions/Profile.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Progression.ts](./src/shared/definitions/ProfileDefinitions/Progression.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/Settings.ts](./src/shared/definitions/ProfileDefinitions/Settings.ts)**
+- [x] **[src/shared/definitions/ProfileDefinitions/index.ts](./src/shared/definitions/ProfileDefinitions/index.ts)**
+- [x] **[src/shared/definitions/Rarity.ts](./src/shared/definitions/Rarity.ts)**
+- [x] **[src/shared/definitions/Resources.ts](./src/shared/definitions/Resources.ts)**
+- [x] **[src/shared/definitions/StatusEffect.ts](./src/shared/definitions/StatusEffect.ts)**
+- [x] **[src/shared/definitions/index.ts](./src/shared/definitions/index.ts)**
+- [x] **[src/shared/index.ts](./src/shared/index.ts)**
+- [x] **[src/shared/network/Definitions.ts](./src/shared/network/Definitions.ts)**
+- [x] **[src/shared/network/index.ts](./src/shared/network/index.ts)**
+- [x] **[src/theme/ThemeKey.ts](./src/theme/ThemeKey.ts)**
+- [x] **[src/theme/hooks.ts](./src/theme/hooks.ts)**
+- [x] **[src/theme/index.ts](./src/theme/index.ts)**
+- [x] **[src/theme/tokens/base.ts](./src/theme/tokens/base.ts)**
+- [x] **[src/theme/tokens/cyberGothic.ts](./src/theme/tokens/cyberGothic.ts)**
+- [x] **[src/theme/tokens/index.ts](./src/theme/tokens/index.ts)**
+- [x] **[src/theme/tokens/solarDrift.ts](./src/theme/tokens/solarDrift.ts)**
+- [x] **[src/theme/types.ts](./src/theme/types.ts)**
+- [x] **[tasks/TaskTypes.ts](./tasks/TaskTypes.ts)**
+- [x] **[tasks/task-cli.ts](./tasks/task-cli.ts)**
+\nCompleted on 2025-07-05 16:06 UTC
