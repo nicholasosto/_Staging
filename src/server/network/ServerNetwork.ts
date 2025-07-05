@@ -18,7 +18,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 /* =============================================== Imports =============================================== */
-import { AbilityKey, ResourceKey, AttributeKey, NPCKey, ProfileDataKey } from "shared";
+import { AbilityKey, ResourceKey, AttributeKey, NPCKey, ProfileDataKey, SettingKey } from "shared";
 import {
 	DataProfileController,
 	AttributesService,
@@ -43,11 +43,16 @@ const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
 /* Attributes */
 const IncreaseAttributeSignal = ClientDispatch.Server.Get("IncreaseAttribute");
 const CreateRoomSignal = ClientDispatch.Server.Get("CreateRoom");
+const JoinRoomSignal = ClientDispatch.Server.Get("JoinRoom");
+const AddGemSignal = ClientDispatch.Server.Get("AddGem");
+const UpdateSettingSignal = ClientDispatch.Server.Get("UpdatePlayerSetting");
 const SpawnNPCSignal = AdminNet.Server.Get("SPAWN_NPC");
 const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");
 const RoomCountdown = ServerDispatch.Server.Get("RoomCountdown");
 
 const AttributesUpdated = ServerDispatch.Server.Get("AttributesUpdated");
+const PlayerSettingsUpdated = ServerDispatch.Server.Get("PlayerSettingsUpdated");
+const ProgressionUpdated = ServerDispatch.Server.Get("ProgressionUpdated");
 
 /* ================================================ Dispatches =============================================== */
 
@@ -104,6 +109,28 @@ export const SendAttributesUpdated = (player: Player) => {
 	AttributesUpdated.SendToPlayer(player, playerAttributes);
 };
 
+/**
+ * @function SendPlayerSettingsUpdated
+ * @description Sends updated settings to a player.
+ * @param player - The player whose settings have changed.
+ */
+export const SendPlayerSettingsUpdated = (player: Player) => {
+	const settings = SettingsService.GetSettings(player);
+	PlayerSettingsUpdated.SendToPlayer(player, settings);
+};
+
+/**
+ * @function SendProgressionUpdated
+ * @description Sends updated progression data to a player.
+ * @param player - The player whose progression has changed.
+ */
+export const SendProgressionUpdated = (player: Player) => {
+	const progression = DataProfileController.GetProfile(player)?.Data.Progression;
+	if (progression) {
+		ProgressionUpdated.SendToPlayer(player, progression);
+	}
+};
+
 /* Function Handlers: ==================================================================== */
 /**
  * @function ActivateAbilitySignal
@@ -139,6 +166,39 @@ IncreaseAttributeSignal.Connect((player: Player, attributeKey: AttributeKey, amo
 CreateRoomSignal.Connect((player: Player) => {
 	//print(`Creating battle room for player: ${player.Name}`);
 	return BattleRoomService.CreateRoom(player);
+});
+
+/**
+ * @function JoinRoomSignal
+ * @description Allows a player to join an existing battle room.
+ * @param player - The player joining the room.
+ * @param roomId - The ID of the room to join.
+ */
+JoinRoomSignal.Connect((player: Player, roomId: string) => {
+	BattleRoomService.JoinRoom(player, roomId);
+});
+
+/**
+ * @function AddGemSignal
+ * @description Handles requests to add a gem to the player's profile. Placeholder until forge logic is complete.
+ * @param player - The player requesting the gem addition.
+ * @param gemId - The gem identifier.
+ */
+AddGemSignal.Connect((player: Player, gemId: string) => {
+	print(`AddGemSignal received from ${player.Name} for gem ${gemId}`);
+	// TODO: integrate with ManifestationForgeService when ready
+});
+
+/**
+ * @function UpdateSettingSignal
+ * @description Updates a player's setting and notifies them of the change.
+ * @param player - The player updating a setting.
+ * @param key - The setting key to update.
+ * @param value - The new value for the setting.
+ */
+UpdateSettingSignal.Connect((player: Player, key: SettingKey, value: boolean | string) => {
+	SettingsService.SetSettings(player, key, value);
+	SendPlayerSettingsUpdated(player);
 });
 
 /**
