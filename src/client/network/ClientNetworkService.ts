@@ -5,6 +5,19 @@
  * @module      ClientNetworkService
  * @layer       Client/Network
  * @description Thin wrappers around client network calls.
+ *
+ * ╭──────────────────────────────╮
+ * │  Soul Steel · Coding Guide   │
+ * │  Fusion v4 · Strict TS · ECS │
+ * ╰──────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-06-10 by Trembus
+ *
+ * @dependencies
+ *   shared
  */
 
 import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch, AttributeKey } from "shared";

@@ -16,6 +16,14 @@
  * @license      MIT
  * @since        0.2.0
  * @lastUpdated  2025-07-03 by Codex – Initial creation
+ *
+ * @dependencies
+ *   @rbxts/services
+ *   shared/definitions/Resources
+ *   shared/definitions/ProfileDefinitions/Attributes
+ *   ./DataService
+ *   shared/calculations/ResourceCalculator
+ *   shared/network/Definitions
  */
 
 /* =============================================== Imports ===================== */

@@ -4,6 +4,7 @@
  * @file        ResourceData.ts
  * @module      ResourceData
  * @author      Trembus
+ * @license     MIT
  * @layer       Constants
  * @description Canonical list of character Resources, their metadata,
  *
@@ -14,6 +15,9 @@
  *
  * @since        0.1.0
  * @lastUpdated  2025-06-10 by Trembus
+ *
+ * @dependencies
+ *   shared/assets
  */
 
 import { GameImages, GlassGradient, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
