@@ -1,23 +1,13 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        ClientDispatch.ts
- * @module      ClientDispatch
+ * @file        ClientNetworkService.ts
+ * @module      ClientNetworkService
  * @layer       Client/Network
  * @description Thin wrappers around client network calls.
  */
 
-import Net from "@rbxts/net";
-import { Players } from "@rbxts/services";
-import {
-	AbilityKey,
-	SettingKey,
-	PlayerSettings,
-	ProfileDataKey,
-	ProfileDataMap,
-	ClientDispatch,
-	AttributeKey,
-} from "shared";
+import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch, AttributeKey } from "shared";
 
 /* Event Signals */
 const ActivateAbilitySignal = ClientDispatch.Client.Get("ActivateAbility");

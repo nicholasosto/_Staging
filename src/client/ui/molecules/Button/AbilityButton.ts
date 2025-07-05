@@ -22,7 +22,7 @@ import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { GameImages } from "shared";
-import { ActivateAbility } from "client/network/ClientDispatch";
+import { ActivateAbility } from "client/network/ClientNetworkService";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;

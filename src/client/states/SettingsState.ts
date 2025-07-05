@@ -19,7 +19,7 @@ import {
 	SETTING_KEYS,
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
-import { GetProfileData } from "client/network/ClientDispatch";
+import { GetProfileData } from "client/network/ClientNetworkService";
 
 export default class SettingsState {
 	private static instance: SettingsState;

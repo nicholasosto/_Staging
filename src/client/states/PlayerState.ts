@@ -11,7 +11,7 @@ import {
 } from "shared/definitions";
 import { ResourceKey, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { StatusEffect } from "shared/definitions/StatusEffect";
-import { GetProfileData } from "client/network/ClientDispatch";
+import { GetProfileData } from "client/network/ClientNetworkService";
 
 /**
  * @file        src/client/states/PlayerState.ts

@@ -31,7 +31,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
 |Client|`client/ui/molecules/SettingListItem.ts`|Usable|Displays and edits a single setting|
 |Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
-|Client|`client/network/CallServer.ts`|Usable|Client RPC helpers|
+|Client|`client/network/ClientNetworkService.ts`|Usable|Client RPC helpers|
 |Client|`client/network/listener.client.ts`|Usable|Receives server events|
 |Client|`client/ui/screens`|Under Construction|Gem forge, character, inventory, shop, settings, teleport and HUD screens|
 |Client|`client/ui/screens/DragDropScreen.ts`|Usable|Drag and drop demo|

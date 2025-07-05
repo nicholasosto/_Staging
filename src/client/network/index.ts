@@ -10,4 +10,4 @@
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
 
-export * from "./ClientDispatch";
+export * from "./ClientNetworkService";
