@@ -25,6 +25,7 @@ import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch,
 /* Event Signals */
 const ActivateAbilitySignal = ClientDispatch.Client.Get("ActivateAbility");
 const IncreaseAttributeSignal = ClientDispatch.Client.Get("IncreaseAttribute");
+const AddExperienceSignal = ClientDispatch.Client.Get("AddExperience");
 const UpdateSettingSignal = ClientDispatch.Client.Get("UpdatePlayerSetting");
 
 /* Function Signals */
@@ -42,9 +43,13 @@ export function UpdatePlayerSetting(key: SettingKey, value: boolean | string): v
 }
 
 export function ActivateAbility(abilityKey: AbilityKey): boolean {
-	return ActivateAbilitySignal.CallServer(abilityKey);
+        return ActivateAbilitySignal.CallServer(abilityKey);
 }
 export async function IncreaseAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
-	print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
-	await IncreaseAttributeSignal.SendToServer(attributeKey, amount);
+        print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
+        await IncreaseAttributeSignal.SendToServer(attributeKey, amount);
+}
+
+export function AddExperience(amount: number): void {
+        AddExperienceSignal.SendToServer(amount);
 }
