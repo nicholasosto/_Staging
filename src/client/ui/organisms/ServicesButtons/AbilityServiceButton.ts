@@ -11,12 +11,12 @@ import { GameButton } from "client/ui/atoms";
 import { ActivateAbility } from "client/network/ClientNetworkService";
 
 export const AbilityServiceButton = () =>
-        GameButton({
-                Name: "AbilityServiceButton",
-                Size: new UDim2(0, 120, 0, 40),
-                Image: "rbxassetid://8672979592",
-                Label: "Use Fireball",
-                OnClick: () => {
-                        ActivateAbility("fireball");
-                },
-        });
+	GameButton({
+		Name: "AbilityServiceButton",
+		Size: new UDim2(0, 120, 0, 40),
+		Image: "rbxassetid://8672979592",
+		Label: "Use Fireball",
+		OnClick: () => {
+			ActivateAbility("fireball");
+		},
+	});

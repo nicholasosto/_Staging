@@ -15,6 +15,7 @@ import {
 	BattleRoomService,
 	ResourcesService,
 	SettingsService,
+	WeaponService,
 } from "./services";
 
 /* =============================================== Initialization ========================================= */
@@ -23,6 +24,7 @@ ManifestationForgeService.Start();
 BattleRoomService.Start();
 ResourcesService.Start();
 SettingsService.Start();
+WeaponService.Start();
 //OrganismFood.SpawnResource(new CFrame(0, 10, 0));
 
 // task.spawn(() => {

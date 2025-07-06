@@ -25,37 +25,36 @@ import { SendProgressionUpdated } from "server/network/ServerNetwork";
 
 /* =============================================== Service ================================== */
 export class ProgressionService {
-        private static _instance: ProgressionService | undefined;
+	private static _instance: ProgressionService | undefined;
 
-        private constructor() {
-                print("ProgressionService initialized.");
-        }
+	private constructor() {
+		print("ProgressionService initialized.");
+	}
 
-        public static Start(): ProgressionService {
-                if (!this._instance) {
-                        this._instance = new ProgressionService();
-                }
-                return this._instance;
-        }
+	public static Start(): ProgressionService {
+		if (!this._instance) {
+			this._instance = new ProgressionService();
+		}
+		return this._instance;
+	}
 
-        /* ------------------------------- Public API ---------------------------------------- */
-        public static AddExperience(player: Player, amount: number) {
-                const profile = DataProfileController.GetProfile(player);
-                if (!profile) return;
+	/* ------------------------------- Public API ---------------------------------------- */
+	public static AddExperience(player: Player, amount: number) {
+		const profile = DataProfileController.GetProfile(player);
+		if (!profile) return;
 
-                const progression = profile.Data.Progression;
-                progression.Experience += amount;
-                while (progression.Experience >= progression.NextLevelExperience) {
-                        progression.Experience -= progression.NextLevelExperience;
-                        progression.Level += 1;
-                        progression.NextLevelExperience = getNextLevelExperience(progression.Level);
-                }
-                SendProgressionUpdated(player);
-        }
+		const progression = profile.Data.Progression;
+		progression.Experience += amount;
+		while (progression.Experience >= progression.NextLevelExperience) {
+			progression.Experience -= progression.NextLevelExperience;
+			progression.Level += 1;
+			progression.NextLevelExperience = getNextLevelExperience(progression.Level);
+		}
+	}
 
-        public static Get(player: Player) {
-                return DataProfileController.GetProfile(player)?.Data.Progression;
-        }
+	public static Get(player: Player) {
+		return DataProfileController.GetProfile(player)?.Data.Progression;
+	}
 }
 
 // Auto-start on import

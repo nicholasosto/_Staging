@@ -13,6 +13,7 @@
  */
 
 export const ANIMATION_KEY = [
+	"WhipAttack",
 	"Dodge",
 	"GodLike",
 	"HallowHold",
@@ -48,6 +49,7 @@ export const GetTrack = (model: Model, key: AnimationKey): AnimationTrack | unde
 };
 
 export const AnimationAssets: Record<AnimationKey, string> = {
+	WhipAttack: "rbxassetid://125608150014654", // Replace with actual asset
 	Dodge: "rbxassetid://15487656295", // Replace with actual asset
 	GodLike: "rbxassetid://140479956568725", // Replace with actual asset
 	HallowHold: "rbxassetid://125099220628366", // Replace with actual asset

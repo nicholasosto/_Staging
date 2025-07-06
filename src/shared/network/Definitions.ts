@@ -31,6 +31,7 @@ type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMa
 
 export const AdminNet = Net.Definitions.Create({
 	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
+	SPAWN_WEAPON: Net.Definitions.ServerAsyncFunction<() => void>(),
 });
 
 export const ClientDispatch = Net.Definitions.Create({
@@ -44,8 +45,8 @@ export const ClientDispatch = Net.Definitions.Create({
 	/* --------------------------------------------- Attributes --------------------------------------------- */
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 
-        /* --------------------------------------------- Progression -------------------------------------- */
-        AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
+	/* --------------------------------------------- Progression -------------------------------------- */
+	AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
 
 	/* --------------------------------------------- Abilities ------------------------------------------------- */
 	ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),

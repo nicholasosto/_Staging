@@ -25,36 +25,50 @@ import {
 	NPCService,
 	ManifestationForgeService,
 	ResourcesService,
-        BattleRoomService,
-        SettingsService,
-        AbilityService,
-        StatusEffectService,
-        ProgressionService,
+	BattleRoomService,
+	SettingsService,
+	AbilityService,
+	StatusEffectService,
+	ProgressionService,
+	WeaponService,
 } from "server/services";
 import { AdminNet, ClientDispatch, ServerDispatch } from "shared/network/Definitions";
 
 /* ================================================ Events =============================================== */
 
+/* Profile Data */
+const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
+
 /* Abilities */
 const ActivateAbilitySignal = ClientDispatch.Server.Get("ActivateAbility");
 const AbilitiesUpdated = ServerDispatch.Server.Get("AbilitiesUpdated");
 
-/* Profile Data */
-const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
 /* Attributes */
 const IncreaseAttributeSignal = ClientDispatch.Server.Get("IncreaseAttribute");
+const AttributesUpdated = ServerDispatch.Server.Get("AttributesUpdated");
+
+/* Progression */
 const AddExperienceSignal = ClientDispatch.Server.Get("AddExperience");
+const ProgressionUpdated = ServerDispatch.Server.Get("ProgressionUpdated");
+
+/* Battle Rooms */
 const CreateRoomSignal = ClientDispatch.Server.Get("CreateRoom");
 const JoinRoomSignal = ClientDispatch.Server.Get("JoinRoom");
-const AddGemSignal = ClientDispatch.Server.Get("AddGem");
-const UpdateSettingSignal = ClientDispatch.Server.Get("UpdatePlayerSetting");
-const SpawnNPCSignal = AdminNet.Server.Get("SPAWN_NPC");
-const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");
 const RoomCountdown = ServerDispatch.Server.Get("RoomCountdown");
 
-const AttributesUpdated = ServerDispatch.Server.Get("AttributesUpdated");
+/* Gems */
+const AddGemSignal = ClientDispatch.Server.Get("AddGem");
+
+/* Settings */
+const UpdateSettingSignal = ClientDispatch.Server.Get("UpdatePlayerSetting");
 const PlayerSettingsUpdated = ServerDispatch.Server.Get("PlayerSettingsUpdated");
-const ProgressionUpdated = ServerDispatch.Server.Get("ProgressionUpdated");
+
+/* Resources */
+const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");
+
+/* Admin Network Events */
+const SpawnNPCSignal = AdminNet.Server.Get("SPAWN_NPC");
+const SpawnWeaponSignal = AdminNet.Server.Get("SPAWN_WEAPON");
 
 /* ================================================ Dispatches =============================================== */
 
@@ -154,9 +168,9 @@ ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
  * @param amount - The amount to increase the attribute by.
  */
 IncreaseAttributeSignal.Connect((player: Player, attributeKey: AttributeKey, amount: number) => {
-        //print(`Increasing attribute for player ${player.Name}: ${attributeKey} by ${amount}`);
-        AttributesService.Increase(player, attributeKey, amount);
-        SendAttributesUpdated(player);
+	//print(`Increasing attribute for player ${player.Name}: ${attributeKey} by ${amount}`);
+	AttributesService.Increase(player, attributeKey, amount);
+	SendAttributesUpdated(player);
 });
 
 /**
@@ -166,7 +180,8 @@ IncreaseAttributeSignal.Connect((player: Player, attributeKey: AttributeKey, amo
  * @param amount - Amount of experience to add.
  */
 AddExperienceSignal.Connect((player: Player, amount: number) => {
-        ProgressionService.AddExperience(player, amount);
+	ProgressionService.AddExperience(player, amount);
+	SendProgressionUpdated(player);
 });
 
 /**
@@ -250,4 +265,20 @@ GetProfileDataSignal.SetCallback((player: Player, dataKey: ProfileDataKey) => {
 		return undefined;
 	}
 	return playerProfile.Data[dataKey];
+});
+
+/**
+ * @function SpawnWeaponSignal
+ * @description Spawns a weapon for the player based on the provided weapon ID.
+ * @param player - The player requesting the weapon spawn.
+ * @param weaponId - The ID of the weapon to spawn.
+ */
+SpawnWeaponSignal.SetCallback((player: Player) => {
+	//print(`Player ${player.Name} requesting weapon spawn: ${weaponId}`);
+	const character = player.Character || player.CharacterAdded.Wait()[0];
+	if (character === undefined) {
+		warn(`Character not found for player ${player.Name}`);
+		return;
+	}
+	WeaponService.SpawnWeapon(character);
 });

@@ -85,7 +85,7 @@ export default class PlayerState {
 			};
 		}
 
-		this.debugObserverInit();
+		//this.debugObserverInit();
 		this.fetchFromServer(); // Fetch initial data from the server
 	}
 

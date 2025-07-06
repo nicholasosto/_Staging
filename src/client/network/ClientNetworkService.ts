@@ -20,7 +20,7 @@
  *   shared
  */
 
-import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch, AttributeKey } from "shared";
+import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch, AttributeKey, AdminNet } from "shared";
 
 /* Event Signals */
 const ActivateAbilitySignal = ClientDispatch.Client.Get("ActivateAbility");
@@ -30,7 +30,7 @@ const UpdateSettingSignal = ClientDispatch.Client.Get("UpdatePlayerSetting");
 
 /* Function Signals */
 const GetProfileDataSignal = ClientDispatch.Client.Get("GetData");
-
+const SpawnWeaponSignal = AdminNet.Client.Get("SPAWN_WEAPON");
 /* ============================================= Client Get Data ==================================================== */
 export async function GetProfileData<K extends ProfileDataKey>(key: K): Promise<ProfileDataMap[K] | undefined> {
 	print(`CallServer: GetProfileData(${key}) called.`);
@@ -43,13 +43,18 @@ export function UpdatePlayerSetting(key: SettingKey, value: boolean | string): v
 }
 
 export function ActivateAbility(abilityKey: AbilityKey): boolean {
-        return ActivateAbilitySignal.CallServer(abilityKey);
+	return ActivateAbilitySignal.CallServer(abilityKey);
 }
 export async function IncreaseAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
-        print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
-        await IncreaseAttributeSignal.SendToServer(attributeKey, amount);
+	print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
+	await IncreaseAttributeSignal.SendToServer(attributeKey, amount);
 }
 
 export function AddExperience(amount: number): void {
-        AddExperienceSignal.SendToServer(amount);
+	AddExperienceSignal.SendToServer(amount);
+}
+
+export function SpawnWeapon(character: Model): void {
+	print(`CallServer: SpawnWeapon called.`);
+	const weapon = SpawnWeaponSignal.CallServerAsync();
 }
