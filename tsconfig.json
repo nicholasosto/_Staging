@@ -24,12 +24,6 @@
 		"incremental": true,
 		"tsBuildInfoFile": "out/tsconfig.tsbuildinfo"
 	},
-	"exclude": [
-		"tasks",
-		"scripts",
-	],
-	"include": [
-		"src/**/*",
-		"scripts/*.js" // 👈 add this line
-, "scripts/render-board.ts"	]
+	"exclude": ["tasks", "scripts", "src/Server", "src/Client", "src/Shared"],
+	"include": ["src/**/*", "scripts/*.js", "scripts/render-board.ts"]
 }
