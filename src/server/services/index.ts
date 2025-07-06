@@ -41,3 +41,4 @@ export * from "./AbilityService";
 export * from "./StatusEffectService";
 export * from "./ResourcesService";
 export * from "./AttributesService";
+export * from "./ProgressionService";

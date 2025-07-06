@@ -44,6 +44,9 @@ export const ClientDispatch = Net.Definitions.Create({
 	/* --------------------------------------------- Attributes --------------------------------------------- */
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 
+        /* --------------------------------------------- Progression -------------------------------------- */
+        AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
+
 	/* --------------------------------------------- Abilities ------------------------------------------------- */
 	ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
 

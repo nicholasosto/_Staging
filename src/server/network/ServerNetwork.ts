@@ -25,10 +25,11 @@ import {
 	NPCService,
 	ManifestationForgeService,
 	ResourcesService,
-	BattleRoomService,
-	SettingsService,
-	AbilityService,
-	StatusEffectService,
+        BattleRoomService,
+        SettingsService,
+        AbilityService,
+        StatusEffectService,
+        ProgressionService,
 } from "server/services";
 import { AdminNet, ClientDispatch, ServerDispatch } from "shared/network/Definitions";
 
@@ -42,6 +43,7 @@ const AbilitiesUpdated = ServerDispatch.Server.Get("AbilitiesUpdated");
 const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
 /* Attributes */
 const IncreaseAttributeSignal = ClientDispatch.Server.Get("IncreaseAttribute");
+const AddExperienceSignal = ClientDispatch.Server.Get("AddExperience");
 const CreateRoomSignal = ClientDispatch.Server.Get("CreateRoom");
 const JoinRoomSignal = ClientDispatch.Server.Get("JoinRoom");
 const AddGemSignal = ClientDispatch.Server.Get("AddGem");
@@ -152,9 +154,19 @@ ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
  * @param amount - The amount to increase the attribute by.
  */
 IncreaseAttributeSignal.Connect((player: Player, attributeKey: AttributeKey, amount: number) => {
-	//print(`Increasing attribute for player ${player.Name}: ${attributeKey} by ${amount}`);
-	AttributesService.Increase(player, attributeKey, amount);
-	SendAttributesUpdated(player);
+        //print(`Increasing attribute for player ${player.Name}: ${attributeKey} by ${amount}`);
+        AttributesService.Increase(player, attributeKey, amount);
+        SendAttributesUpdated(player);
+});
+
+/**
+ * @function AddExperienceSignal
+ * @description Adds experience points to a player's progression.
+ * @param player - The player gaining experience.
+ * @param amount - Amount of experience to add.
+ */
+AddExperienceSignal.Connect((player: Player, amount: number) => {
+        ProgressionService.AddExperience(player, amount);
 });
 
 /**

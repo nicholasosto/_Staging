@@ -8,7 +8,7 @@
  */
 
 import { GamePanel, GameScreen } from "../atoms";
-import { HUDMenuBar, AbilityBarComponent } from "client/ui/organisms";
+import { HUDMenuBar, AbilityBarComponent, AdminButtonBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { SCREEN_KEYS } from "client/states";
@@ -44,14 +44,13 @@ export const PlayerHUDScreen = () => {
 				Name: "LeftPanel",
 				Size: new UDim2(0.5, 0, 1, 0),
 				BackgroundTransparency: 1,
-				Content: {
-					CharacterInfoCard: HudProps.CharacterInfoCard,
-					MenuBar: HudProps.HUDMenuBar,
-				},
-			}),
-			AbilityBar: AbilityBarComponent(),
-			//AdminBar: AdminBar(Value(false)), // Admin bar visibility controlled by a Value
-			StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
+                                Content: {
+                                        CharacterInfoCard: HudProps.CharacterInfoCard,
+                                        MenuBar: HudProps.HUDMenuBar,
+                                        AdminBar: AdminButtonBar(),
+                                },
+                        }),
+			AbilityBar: AbilityBarComponent(),			StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 		},
 	});
 

@@ -40,6 +40,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/screens/ShopScreen.ts`|Stub|Item shop window|
 |Client|`client/ui/screens/SettingsScreen.ts`|Stub|Settings window|
 |Client|`client/ui/screens/TeleportScreen.ts`|Stub|Teleport locations window|
+|Client|`client/ui/organisms/ButtonBars/AdminButtonBar.ts`|Under Construction|Admin service test buttons|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/listener.server.ts`|Usable|Server network handlers|
 |Server|`server/services/DataService.ts`|Usable|Loads player profiles|
@@ -52,6 +53,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/StatusEffectService.ts`|Under Construction|Refactored to use StatusEffects|
 |Server|`server/services/ResourcesService.ts`|Under Construction|Tracks player resource values - bug fix for static call|
 |Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
+|Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
 
