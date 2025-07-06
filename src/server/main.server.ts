@@ -9,7 +9,7 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import { loadProfile } from "./services";
+import { loadProfile } from "./servicesz";
 
 /* ================== Player Joined Event ================== */
 Players.PlayerAdded.Connect((player) => {
