@@ -21,12 +21,16 @@
  */
 
 /* =============================================== External Imports ============================================= */
-import { GemForgeScreen, PlayerHUDScreen, QuestsScreen } from "./ui/screens";
-import { CharacterScreen } from "./ui/screens/CharacterScreen";
-import { InventoryScreen } from "./ui/screens/InventoryScreen";
-import { SettingsScreen } from "./ui/screens/SettingsScreen";
-import { ShopScreen } from "./ui/screens/ShopScreen";
-import { TeleportScreen } from "./ui/screens/TeleportScreen";
+import {
+	GemForgeScreen,
+	PlayerHUDScreen,
+	QuestsScreen,
+	CharacterScreen,
+	SettingsScreen,
+	TeleportScreen,
+	ShopScreen,
+	InventoryScreen,
+} from "./ui/screens";
 //import * as Dispatch from "./network/ClientDispatch";
 
 /* =============================================== References ============================================= */
