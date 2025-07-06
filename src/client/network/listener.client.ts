@@ -23,4 +23,3 @@ ServerDispatch.Client.OnEvent("ResourceUpdated", (key, current, max) => {
 		warn(`Resource ${key} not found in PlayerState.`);
 	}
 });
-

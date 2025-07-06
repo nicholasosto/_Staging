@@ -20,7 +20,7 @@ export const SpawnWeaponButton = () =>
 		OnClick: () => {
 			const weaponId = "Whip"; // Replace with actual weapon ID logic
 			const character = Players.LocalPlayer.Character || Players.LocalPlayer.CharacterAdded.Wait()[0];
-			
+
 			print(`Spawned weapon: ${weaponId}`);
 		},
 	});
