@@ -28,7 +28,7 @@
 import { Computed, Value } from "@rbxts/fusion";
 import PlayerState from "client/states/PlayerState";
 import { GamePanel } from "client/ui/atoms";
-import { AbilityButton } from "client/ui/molecules";
+import { AbilityButton } from "client/ui/molecules/Button/AbilityButton";
 import { Layout } from "client/ui/tokens";
 import { AbilityKey } from "shared";
 
