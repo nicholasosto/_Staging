@@ -17,7 +17,7 @@
 import { RunService } from "@rbxts/services";
 import { New, Value, OnChange, OnEvent, Computed, Children } from "@rbxts/fusion";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
-import { GameButton, GamePanel, GameText, UIButton } from "client/ui/atoms";
+import { GameButton, GamePanel, GameText, IconButton, UIButton } from "client/ui/atoms";
 import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
@@ -54,11 +54,12 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 		BackgroundTransparency: 1,
 		[Children]: {
 			/* Ability Icon */
-			Icon: New("ImageLabel")({
-				Size: UDim2.fromScale(0.8, 0.8),
-				Position: UDim2.fromScale(0.1, 0.1),
+			Icon: IconButton({
+				Icon: meta.iconId,
+				Size: UDim2.fromOffset(48, 48),
 				BackgroundTransparency: 1,
-				Image: meta.iconId,
+				AnchorPoint: new Vector2(0.5, 0.5),
+				Position: UDim2.fromScale(0.5, 0.5),
 			}),
 		},
 		OnClick: () => {

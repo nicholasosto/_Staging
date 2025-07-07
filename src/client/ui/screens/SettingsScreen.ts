@@ -30,7 +30,7 @@ const Key: ScreenKey = "Settings";
 export const SettingsScreen = () => {
 	const state = SettingsState.getInstance();
 	const keys = [...SETTING_KEYS] as SettingKey[];
-	const items = ForPairs(keys, (index, key: SettingKey) =>
+	const items = keys.map((key, index) =>
 		$tuple(
 			key,
 			SettingListItem({
@@ -47,7 +47,9 @@ export const SettingsScreen = () => {
 		ScreenKey: Key,
 		Content: {
 			Layout: Layout.VerticalSet(2),
-			SettingItems: items,
+			SettingItems: items["map"]((item) => {
+				return item[1];
+			}),
 		},
 	});
 };

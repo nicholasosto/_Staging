@@ -59,6 +59,8 @@ export interface UIButtonProps extends PropertyTable<ImageButton> {
 	Draggable?: boolean;
 	Selected?: boolean;
 
+	/* Content */
+
 	/* Event handlers */
 	OnClick?: () => void;
 	OnDragStart?: (pos: Vector2) => void;
@@ -74,7 +76,7 @@ export const UIButton = (props: UIButtonProps) => {
 	const borderColour = useToken("panelBorder");
 
 	const background = Computed(() => (selected.get() ? borderColour.get() : bg.get()));
-	const borderTransparency = Computed(() => (selected.get() ? 0 : 1));
+	//const borderTransparency = Computed(() => (selected.get() ? 0 : 1));
 
 	const drag = props.Draggable
 		? New("UIDragDetector")({
@@ -124,6 +126,7 @@ export const UIButton = (props: UIButtonProps) => {
 					})()
 				: undefined,
 			Drag: variant === "flat" ? drag : undefined,
+			Content: props[Children] ?? undefined,
 		},
 	});
 

@@ -1,7 +1,7 @@
 import Fusion, { ForValues } from "@rbxts/fusion";
 import { Padding } from "client/ui/tokens";
 import { StatusEffect } from "shared/definitions/StatusEffect";
-const { New, Children, Value, Computed, Spring, ForPairs, OnEvent } = Fusion;
+const { New, Children, Value, Computed, Spring, OnEvent } = Fusion;
 
 // ==== Atoms ================================================================
 const StatusIcon = (icon: string) =>
