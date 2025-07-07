@@ -32,7 +32,7 @@ export class AttributesService {
 	}
 
 	public static Start(): AttributesService {
-		if (!this._instance) {
+		if (this._instance === undefined) {
 			this._instance = new AttributesService();
 		}
 		return this._instance;

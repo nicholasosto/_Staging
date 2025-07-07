@@ -3,11 +3,8 @@ import {
 	AbilityService,
 	ProgressionService,
 	BattleRoomService,
-	NPCService,
 	ResourcesService,
 	SettingsService,
-	WeaponService,
-	ManifestationForgeService,
 	AttributesService,
 } from "./services";
 

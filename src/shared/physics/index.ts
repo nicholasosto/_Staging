@@ -12,5 +12,5 @@
  * ╰──────────────────────────────╯
  */
 
-export * from "./Physics";
-export * from "./physics.types";
+export * from "./ConstraintUtils";
+export * from "./ForceUtils";

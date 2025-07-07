@@ -23,7 +23,6 @@ import {
 	DataProfileController,
 	AttributesService,
 	NPCService,
-	ManifestationForgeService,
 	ResourcesService,
 	BattleRoomService,
 	SettingsService,
@@ -296,7 +295,6 @@ SpawnWeaponSignal.SetCallback((player: Player) => {
 export const StartServerNetwork = () => {
 	// Initialize all services that require network dispatching
 	DataProfileController.Start();
-	ManifestationForgeService.Start();
 	BattleRoomService.Start();
 	ResourcesService.Start();
 	SettingsService.Start();
