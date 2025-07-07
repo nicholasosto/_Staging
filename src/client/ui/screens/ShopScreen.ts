@@ -20,14 +20,27 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { GameWindow } from "../molecules";
+import { GameImages } from "shared";
+import { IconButton } from "client/ui/atoms";
+import { GameWindow } from "client/ui/molecules";
 import { ScreenKey } from "client/states";
+import { AnimationButtons } from "../organisms";
 
 const Key: ScreenKey = "Shop";
 export const ShopScreen = () => {
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
-		Content: {},
+		Content: {
+			AnimationButtons: AnimationButtons(),
+			IconButton: IconButton({
+				Rarity: "Epic",
+				Icon: GameImages.Currency.Coins,
+				Size: new UDim2(0, 100, 0, 100),
+				OnClick: () => {
+					print("Shop Icon Clicked");
+				},
+			}),
+		},
 	});
 };

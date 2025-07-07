@@ -8,33 +8,9 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { Players } from "@rbxts/services";
-import {
-	ManifestationForgeService,
-	DataProfileController,
-	BattleRoomService,
-	ResourcesService,
-	SettingsService,
-	WeaponService,
-} from "./services";
+import { StartServerNetwork } from "./network";
 
 /* =============================================== Initialization ========================================= */
-DataProfileController.Start();
-ManifestationForgeService.Start();
-BattleRoomService.Start();
-ResourcesService.Start();
-SettingsService.Start();
-WeaponService.Start();
-//OrganismFood.SpawnResource(new CFrame(0, 10, 0));
+StartServerNetwork();
 
-// task.spawn(() => {
-// 	while (Players.GetPlayers().size() >= 0) {
-// 		Players.GetPlayers().forEach((player) => {
-// 			ResourcesService.ModifyResource(player, "Health", -1);
-// 		});
-// 		task.wait(1);
-// 		print("HB: Tick");
-// 	}
-// 	print("Server is now running.");
-// });
 print("Server main script initialized successfully.");

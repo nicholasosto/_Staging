@@ -17,7 +17,7 @@
 import { RunService } from "@rbxts/services";
 import { New, Value, OnChange, OnEvent, Computed, Children } from "@rbxts/fusion";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
-import { GamePanel, GameText } from "client/ui/atoms";
+import { GameButton, GamePanel, GameText, UIButton } from "client/ui/atoms";
 import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
@@ -35,6 +35,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 
 	/* Timer */
 	const cooldownTimer = new CooldownTimer(meta.cooldown);
+	print(`Creating cooldown timer for ${meta.displayName} with duration ${meta.cooldown} seconds`);
 
 	/* Cooldown Bar */
 	const cooldownBar = BarMeter({
@@ -47,7 +48,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 	});
 
 	/* Image Button */
-	const button = New("ImageButton")({
+	const button = GameButton({
 		Size: UDim2.fromOffset(64, 64),
 		Image: GameImages.Ability.Background, // Background image for the button
 		BackgroundTransparency: 1,
@@ -60,7 +61,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 				Image: meta.iconId,
 			}),
 		},
-		[OnEvent("Activated")]: () => {
+		OnClick: () => {
 			const activated = ActivateAbility(abilityKey);
 			if (cooldownTimer.Progress.get() <= 0 && activated === true) {
 				print(`Activated ability: ${abilityKey}`);

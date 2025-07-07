@@ -7,8 +7,8 @@
  * @description Primary heads-up display shown during gameplay.
  */
 
-import { GamePanel, GameScreen } from "../atoms";
-import { HUDMenuBar, AbilityBarComponent, AdminButtonBar, AnimationButtons } from "client/ui/organisms";
+import { GamePanel, GameScreen, VerticalContainer } from "../atoms";
+import { HUDMenuBar, AbilityBarComponent, AdminButtonBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { SCREEN_KEYS } from "client/states";
@@ -39,16 +39,14 @@ export const PlayerHUDScreen = () => {
 		BackgroundTransparency: 1,
 		Padding: Padding(10),
 		Content: {
-			LeftPanel: GamePanel({
-				Layout: Layout.VerticalScroll(5),
+			LeftPanel: VerticalContainer({
 				Name: "LeftPanel",
 				Size: new UDim2(0.5, 0, 1, 0),
 				BackgroundTransparency: 1,
 				Content: {
 					CharacterInfoCard: HudProps.CharacterInfoCard,
 					MenuBar: HudProps.HUDMenuBar,
-					AdminBar: AdminButtonBar(),
-					AnimationButtons: AnimationButtons(),
+					StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 				},
 			}),
 			AbilityBar: AbilityBarComponent(),

@@ -25,23 +25,21 @@
  *  abilities during gameplay.
  */
 
-import { Computed, Value } from "@rbxts/fusion";
+import { Computed } from "@rbxts/fusion";
 import PlayerState from "client/states/PlayerState";
-import { GamePanel } from "client/ui/atoms";
+import { HorizontalContainer } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules/Button/AbilityButton";
-import { Layout } from "client/ui/tokens";
-import { AbilityKey } from "shared";
+import { ABILITY_KEYS, AbilityKey } from "shared";
 
 export function AbilityBarComponent(): Frame {
 	const playerState = PlayerState.getInstance();
-	const abilities = playerState.Abilities.get();
-	return GamePanel({
+	const abilities = ABILITY_KEYS;
+	return HorizontalContainer({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),
 		AnchorPoint: new Vector2(0.5, 1),
 		Position: new UDim2(0.5, 0, 1, -10),
 		BackgroundTransparency: 0.5,
-		Layout: Layout.HorizontalSet(10),
 		Content: {
 			Buttons: Computed(() => {
 				return abilities.map((ability) => {

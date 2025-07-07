@@ -26,8 +26,8 @@ export const BaseContainer = (props: BaseContainerProps) => {
 
 	return New("Frame")({
 		Name: props.Name ?? "BaseContainer",
-		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
-		Position: props.Position ?? UDim2.fromScale(0.5, 0.5),
+		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
+		Position: props.Position ?? UDim2.fromScale(0, 0),
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		BackgroundColor3: props.BackgroundColor3 ?? bg,
 		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,

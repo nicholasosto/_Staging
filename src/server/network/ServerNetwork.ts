@@ -282,3 +282,16 @@ SpawnWeaponSignal.SetCallback((player: Player) => {
 	}
 	WeaponService.SpawnWeapon(character);
 });
+
+export const StartServerNetwork = () => {
+	// Initialize all services that require network dispatching
+	DataProfileController.Start();
+	ManifestationForgeService.Start();
+	BattleRoomService.Start();
+	ResourcesService.Start();
+	SettingsService.Start();
+	WeaponService.Start();
+	StatusEffectService.Start();
+
+	print("Server network initialized successfully.");
+};

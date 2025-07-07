@@ -8,7 +8,7 @@
  */
 import { ForValues } from "@rbxts/fusion";
 import { Layout } from "client/ui/tokens";
-import { GamePanel } from "client/ui/atoms";
+import { GamePanel, HorizontalContainer } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules/Button/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
 import { ScreenKey, ScreenOrder } from "client/states";
@@ -26,11 +26,10 @@ export const HUDMenuBar = (props: HudMenuBarProps) => {
 			Image: MenuButtonImageMap[value] ?? GameImages.MenuButtonImage,
 		});
 	});
-	const container = GamePanel({
+	const container = HorizontalContainer({
 		Name: "HUDMenuBar",
 		Size: new UDim2(0, 380, 0, 56),
 		BackgroundTransparency: 0.5,
-		Layout: Layout.HorizontalSet(5),
 		Content: {
 			Buttons: HUDMenuButtons,
 		},

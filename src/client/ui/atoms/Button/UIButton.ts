@@ -117,8 +117,8 @@ export const UIButton = (props: UIButtonProps) => {
 							b.AnchorPoint = new Vector2(0.5, 0.5);
 							b.Position = UDim2.fromScale(0.5, 0.5);
 							b.Size = UDim2.fromScale(1, 1);
-							(b as unknown as ImageLabel & { ImageTransparency: number }).ImageTransparency =
-								borderTransparency as unknown as number;
+							// (b as unknown as ImageLabel & { ImageTransparency: number }).ImageTransparency =
+							// 	borderTransparency as unknown as number;
 						}
 						return b;
 					})()

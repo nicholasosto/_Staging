@@ -1,6 +1,6 @@
 import { AnimationKey, GameImages, loadAnimation, playAnimation } from "shared";
 
-import { GameButton, GamePanel } from "client/ui/atoms";
+import { GameButton, GamePanel, HorizontalContainer, IconButton, VerticalContainer } from "client/ui/atoms";
 import { Players } from "@rbxts/services";
 
 import Fusion from "@rbxts/fusion";
@@ -50,13 +50,25 @@ export const PlayAnimationButton = (animationKey: AnimationKey) => {
 export const AnimationButtons = () => {
 	const animationKeys: AnimationKey[] = ["WhipAttack", "Dodge", "GodLike", "HallowHold", "WhipAttack"]; // Add more keys as needed
 
-	const Container = GamePanel({
+	const Container = HorizontalContainer({
 		Name: "AnimationButtonsContainer",
-		Size: UDim2.fromScale(1, 0.2),
-		BackgroundColor3: Color3.fromRGB(50, 50, 50),
-		Layout: Layout.VerticalSet(),
+		Size: new UDim2(1, 0, 0, 100),
+		Gap: 10,
 		Content: animationKeys.map((key) => {
-			return PlayAnimationButton(key);
+			return IconButton({
+				Name: `AnimationButton_${key}`,
+				Icon: GameImages.Ability.Fireball,
+				Size: new UDim2(0, 50, 0, 50),
+				BackgroundColor3: Color3.fromRGB(100, 100, 255),
+				OnClick: () => {
+					const player = Players.LocalPlayer;
+					const character = player.Character || player.CharacterAdded.Wait()[0];
+					if (character) {
+						loadAnimation(character, key);
+						playAnimation(character, key);
+					}
+				},
+			});
 		}),
 	});
 	return Container;
