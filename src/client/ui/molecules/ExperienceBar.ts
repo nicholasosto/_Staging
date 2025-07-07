@@ -39,8 +39,22 @@ export function ExperienceBar() {
 	const sound = createAudio("RobotTheme", "LevelUp");
 	sound.Parent = bar;
 
+	/* -- Level Change Observer -- */
 	Observer(level).onChange(() => {
 		sound.Play();
+		if (stroke) {
+			stroke.Transparency = 1;
+			const t = TweenService.Create(stroke, glowTweenInfo, { Transparency: 0 });
+			t.Play();
+			t.Completed.Once(() => {
+				TweenService.Create(stroke, glowTweenInfo, { Transparency: 1 }).Play();
+			});
+		}
+	});
+
+	/* -- Experience Change Observer -- */
+	Observer(experience).onChange(() => {
+		print("Experience changed to", experience.get());
 		if (stroke) {
 			stroke.Transparency = 1;
 			const t = TweenService.Create(stroke, glowTweenInfo, { Transparency: 0 });

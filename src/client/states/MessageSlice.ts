@@ -25,27 +25,27 @@ import Fusion from "@rbxts/fusion";
 const { Value } = Fusion;
 
 export default class MessageSlice {
-        private static instance: MessageSlice;
+	private static instance: MessageSlice;
 
-        public readonly Text = Value("");
-        public readonly Visible = Value(false);
-        public readonly IsError = Value(false);
+	public readonly Text = Value("");
+	public readonly Visible = Value(false);
+	public readonly IsError = Value(false);
 
-        private constructor() {}
+	private constructor() {}
 
-        public show(text: string, isError = false, duration = 2) {
-                this.Text.set(text);
-                this.IsError.set(isError);
-                this.Visible.set(true);
-                task.delay(duration, () => {
-                        this.Visible.set(false);
-                });
-        }
+	public show(text: string, isError = false, duration = 2) {
+		this.Text.set(text);
+		this.IsError.set(isError);
+		this.Visible.set(true);
+		task.delay(duration, () => {
+			this.Visible.set(false);
+		});
+	}
 
-        public static getInstance(): MessageSlice {
-                if (!this.instance) {
-                        this.instance = new MessageSlice();
-                }
-                return this.instance;
-        }
+	public static getInstance(): MessageSlice {
+		if (!this.instance) {
+			this.instance = new MessageSlice();
+		}
+		return this.instance;
+	}
 }

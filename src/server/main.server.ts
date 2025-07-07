@@ -9,8 +9,13 @@
 
 /* =============================================== Imports =============================================== */
 import { Players } from "@rbxts/services";
-import { StartServerNetwork } from "./network";
-import { ProgressionService } from "./services";
+import { SendProgressionUpdated, StartServerNetwork } from "./network";
+import { ServiceWrapper } from "./ServiceWrapper";
+
+const ServiceWrapperInstance = ServiceWrapper.GetInstance();
+
+const { AbilityService, ProgressionService, BattleRoomService, ResourcesService, SettingsService, AttributesService } =
+	ServiceWrapper;
 
 /* =============================================== Initialization ========================================= */
 StartServerNetwork();
@@ -31,8 +36,8 @@ task.spawn(() => {
 			lastUpdate = currentTime;
 			// Perform periodic server tasks here, e.g., updating game state, handling events, etc.
 			Players.GetPlayers().forEach((player) => {
-				// Example: Update player progression or send data
-				ProgressionService.AddExperience(player, 10); // Add 10 XP to each player every second
+				ProgressionService.AddExperience(player, 10); // Example: Add 10 experience points every second
+				SendProgressionUpdated(player);
 			});
 		}
 

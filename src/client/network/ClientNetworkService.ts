@@ -45,35 +45,40 @@ function UpdatePlayerSetting(key: SettingKey, value: boolean | string): void {
 	UpdateSettingSignal.SendToServer(key, value);
 }
 
-// export function ActivateAbility(abilityKey: AbilityKey): boolean {
-// 	return ActivateAbilitySignal.CallServer(abilityKey);
-// }
+/* ============================================= Client Attribute Requests ==================================================== */
 async function IncreaseAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
 	print(`CallServer: IncreaseAttribute(${attributeKey}, ${amount}) called.`);
 	await IncreaseAttributeSignal.SendToServer(attributeKey, amount);
 }
 
+/* ============================================= Client Progression Requests ==================================================== */
 function AddExperience(amount: number): void {
 	AddExperienceSignal.SendToServer(amount);
 }
 
+/* ============================================= Client Abilities Requests ==================================================== */
+/* -- Get Abilities -- */
 async function GetAbilities(): Promise<AbilityKey[] | undefined> {
 	return (await GetAbilitiesSignal.CallServerAsync()) as AbilityKey[] | undefined;
 }
 
+/* -- Set Abilities -- */
 function SetAbilities(abilities: AbilityKey[]): void {
 	SetAbilitiesSignal.SendToServer(abilities);
 }
 
+/* -- Cast Ability -- */
 function CastAbility(abilityKey: AbilityKey): void {
 	CastRequestSignal.SendToServer(abilityKey);
 }
 
+/* ============================================= Client Equipment Requests ==================================================== */
 function SpawnWeapon(): void {
 	print(`CallServer: SpawnWeapon called.`);
 	const weapon = SpawnWeaponSignal.CallServerAsync();
 }
 
+/* ============================================= Exported Client Network Service ==================================================== */
 export const CNet = {
 	/* - Profile Data - */
 	GetProfileData,

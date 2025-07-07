@@ -151,19 +151,12 @@ export const SendProgressionUpdated = (player: Player) => {
 	}
 };
 
-// /* Function Handlers: ==================================================================== */
-// /**
-//  * @function ActivateAbilitySignal
-//  * @description Handles the activation of abilities by players.
-//  * @param player - The player activating the ability.
-//  * @param abilityKey - The key of the ability being activated.
-//  * @returns A boolean indicating success or failure of the ability activation.
-//  */
-// ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
-// 	//print(`Player ${player.Name} activating ability: ${abilityKey}`);
-// 	return AbilityService.Activate(player, abilityKey);
-// });
-
+/**
+ * @function CastRequestSignal
+ * @description Handles a player's request to cast an ability.
+ * @param player - The player casting the ability.
+ * @param abilityKey - The key of the ability being cast.
+ */
 CastRequestSignal.Connect((player: Player, abilityKey: AbilityKey) => {
 	AbilityService.Activate(player, abilityKey);
 });

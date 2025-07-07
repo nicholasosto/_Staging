@@ -32,7 +32,7 @@ export class ProgressionService {
 	}
 
 	public static Start(): ProgressionService {
-		if (!this._instance) {
+		if (this._instance === undefined) {
 			this._instance = new ProgressionService();
 		}
 		return this._instance;
@@ -50,6 +50,7 @@ export class ProgressionService {
 			progression.Level += 1;
 			progression.NextLevelExperience = getNextLevelExperience(progression.Level);
 		}
+		return progression;
 	}
 
 	public static Get(player: Player) {

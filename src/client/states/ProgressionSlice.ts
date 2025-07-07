@@ -47,6 +47,7 @@ export default class ProgressionSlice {
 
 	private setupListeners() {
 		ServerDispatch.Client.Get("ProgressionUpdated").Connect((progress) => {
+			print("Progression updated:", progress);
 			for (const key of PROGRESSION_KEYS) {
 				this.Progression[key].set(progress[key]);
 			}
