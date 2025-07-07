@@ -16,3 +16,5 @@ export * from "./AbilityInfoPanel";
 export * from "./CountdownTimer";
 export * from "./GameWindow";
 export * from "./SettingListItem";
+export * from "./ExperienceBar";
+export * from "./LevelGem";

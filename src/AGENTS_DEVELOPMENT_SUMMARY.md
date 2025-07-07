@@ -30,6 +30,8 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
 |Client|`client/ui/molecules/SettingListItem.ts`|Usable|Displays and edits a single setting|
+|Client|`client/ui/molecules/ExperienceBar.ts`|Usable|Displays experience progress|
+|Client|`client/ui/molecules/LevelGem.ts`|Usable|Shows current level|
 |Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
 |Client|`client/network/ClientNetworkService.ts`|Usable|Client RPC helpers|
 |Client|`client/network/listener.client.ts`|Usable|Receives server events|
@@ -42,11 +44,12 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/screens/TeleportScreen.ts`|Stub|Teleport locations window|
 |Client|`client/ui/organisms/ButtonBars/AdminButtonBar.ts`|Under Construction|Admin service test buttons|
 |Client|`client/ui/molecules/Button/AbilityButton.ts`|Usable|Ability icon with cooldown|
+|Client|`client/ui/organisms/ProgressionCard.ts`|Usable|Level and experience UI|
 |Client|`client/ui/organisms/ButtonBars/AbilityBar.ts`|Under Construction|Displays equipped abilities|
 |Client|`client/states/AbilitySlice.ts`|Under Construction|Ability list and actions|
 |Client|`client/states/AttributesSlice.ts`|Under Construction|Attribute values and points|
 |Client|`client/states/ResourceSlice.ts`|Under Construction|Player resource values|
-|Client|`client/states/ProgressionSlice.ts`|Under Construction|Level and experience|
+|Client|`client/states/ProgressionSlice.ts`|Usable|Level and experience slice|
 |Client|`client/states/CurrencySlice.ts`|Stub|Currency amounts|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/listener.server.ts`|Usable|Server network handlers|
