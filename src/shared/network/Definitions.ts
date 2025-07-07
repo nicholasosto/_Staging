@@ -49,7 +49,7 @@ export const ClientDispatch = Net.Definitions.Create({
 	AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
 
 	/* --------------------------------------------- Abilities ------------------------------------------------- */
-	ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
+	//ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
 	CastRequest: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
 	GetAbilities: Net.Definitions.ServerFunction<() => AbilityKey[] | undefined>(),
 	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),

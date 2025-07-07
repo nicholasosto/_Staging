@@ -11,7 +11,7 @@ import {
 } from "shared/definitions";
 import { ResourceKey, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { StatusEffect } from "shared/definitions/StatusEffect";
-import { GetProfileData } from "client/network/ClientNetworkService";
+import { CNet } from "client/network/ClientNetworkService";
 
 /**
  * @file        src/client/states/PlayerState.ts
@@ -104,13 +104,9 @@ export default class PlayerState {
 	}
 
 	private async fetchFromServer() {
-		GetProfileData("Abilities").then((abilities) => {
-			if (abilities) {
-				this.Abilities.set(abilities as AbilityKey[]);
-			}
-		});
+		this.Abilities.set((await CNet.GetAbilities()) ?? []);
 
-		const attrs = await GetProfileData("Attributes");
+		const attrs = await CNet.GetProfileData("Attributes");
 		if (attrs) {
 			const data = attrs as AttributesDTO;
 			for (const key of ATTR_KEYS) {

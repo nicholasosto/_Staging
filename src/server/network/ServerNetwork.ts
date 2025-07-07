@@ -40,7 +40,7 @@ import { AdminNet, ClientDispatch, ServerDispatch } from "shared/network/Definit
 const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
 
 /* Abilities */
-const ActivateAbilitySignal = ClientDispatch.Server.Get("ActivateAbility");
+//const ActivateAbilitySignal = ClientDispatch.Server.Get("ActivateAbility");
 const AbilitiesUpdated = ServerDispatch.Server.Get("AbilitiesUpdated");
 const AbilityBarUpdated = ServerDispatch.Server.Get("AbilityBarUpdated");
 const CastRequestSignal = ClientDispatch.Server.Get("CastRequest");
@@ -151,18 +151,18 @@ export const SendProgressionUpdated = (player: Player) => {
 	}
 };
 
-/* Function Handlers: ==================================================================== */
-/**
- * @function ActivateAbilitySignal
- * @description Handles the activation of abilities by players.
- * @param player - The player activating the ability.
- * @param abilityKey - The key of the ability being activated.
- * @returns A boolean indicating success or failure of the ability activation.
- */
-ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
-	//print(`Player ${player.Name} activating ability: ${abilityKey}`);
-	return AbilityService.Activate(player, abilityKey);
-});
+// /* Function Handlers: ==================================================================== */
+// /**
+//  * @function ActivateAbilitySignal
+//  * @description Handles the activation of abilities by players.
+//  * @param player - The player activating the ability.
+//  * @param abilityKey - The key of the ability being activated.
+//  * @returns A boolean indicating success or failure of the ability activation.
+//  */
+// ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
+// 	//print(`Player ${player.Name} activating ability: ${abilityKey}`);
+// 	return AbilityService.Activate(player, abilityKey);
+// });
 
 CastRequestSignal.Connect((player: Player, abilityKey: AbilityKey) => {
 	AbilityService.Activate(player, abilityKey);

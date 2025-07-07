@@ -14,7 +14,7 @@
 
 import { Value } from "@rbxts/fusion";
 import { AbilityKey } from "shared/definitions";
-import { GetAbilities, SetAbilities, CastAbility } from "client/network/ClientNetworkService";
+import { CNet } from "client/network/ClientNetworkService";
 
 export default class AbilitySlice {
 	private static instance: AbilitySlice;
@@ -27,7 +27,7 @@ export default class AbilitySlice {
 	}
 
 	private async fetchFromServer() {
-		const data = await GetAbilities();
+		const data = await CNet.GetAbilities();
 		if (data) {
 			this.Abilities.set(data);
 		}
@@ -43,11 +43,11 @@ export default class AbilitySlice {
 	/** Replace the ability list and notify the server */
 	public setAbilities(list: AbilityKey[]) {
 		this.Abilities.set(list);
-		SetAbilities(list);
+		CNet.SetAbilities(list);
 	}
 
 	/** Trigger an ability cast request on the server */
 	public useAbility(key: AbilityKey) {
-		CastAbility(key);
+		CNet.CastAbility(key);
 	}
 }

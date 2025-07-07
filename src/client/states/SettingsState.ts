@@ -19,7 +19,7 @@ import {
 	SETTING_KEYS,
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
-import { GetProfileData } from "client/network/ClientNetworkService";
+import { CNet } from "client/network/ClientNetworkService";
 
 export default class SettingsState {
 	private static instance: SettingsState;
@@ -33,7 +33,7 @@ export default class SettingsState {
 	}
 
 	private async fetchFromServer() {
-		const data = await GetProfileData("Settings")
+		const data = await CNet.GetProfileData("Settings")
 			.andThen((settings) => {
 				return settings as PlayerSettings | undefined;
 			})
