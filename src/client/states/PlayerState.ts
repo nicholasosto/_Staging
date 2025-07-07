@@ -16,23 +16,23 @@ import CurrencySlice from "./CurrencySlice";
 import { StatusEffect } from "shared/definitions/StatusEffect";
 
 export default class PlayerState {
-    private static instance: PlayerState;
+	private static instance: PlayerState;
 
-    public readonly Abilities = AbilitySlice.getInstance();
-    public readonly Resources = ResourceSlice.getInstance();
-    public readonly Attributes = AttributesSlice.getInstance();
-    public readonly Progression = ProgressionSlice.getInstance();
-    public readonly Currency = CurrencySlice.getInstance();
+	public readonly Abilities = AbilitySlice.getInstance();
+	public readonly Resources = ResourceSlice.getInstance();
+	public readonly Attributes = AttributesSlice.getInstance();
+	public readonly Progression = ProgressionSlice.getInstance();
+	public readonly Currency = CurrencySlice.getInstance();
 
-    /** Active status effects */
-    public StatusEffects = Value<StatusEffect[]>([]);
+	/** Active status effects */
+	public StatusEffects = Value<StatusEffect[]>([]);
 
-    private constructor() {}
+	private constructor() {}
 
-    public static getInstance(): PlayerState {
-        if (!this.instance) {
-            this.instance = new PlayerState();
-        }
-        return this.instance;
-    }
+	public static getInstance(): PlayerState {
+		if (!this.instance) {
+			this.instance = new PlayerState();
+		}
+		return this.instance;
+	}
 }

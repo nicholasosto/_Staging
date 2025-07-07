@@ -9,48 +9,48 @@
 
 import { Value } from "@rbxts/fusion";
 import {
-    PROGRESSION_KEYS,
-    ProgressionKey,
-    ProgressionDTO,
-    DefaultProgression,
+	PROGRESSION_KEYS,
+	ProgressionKey,
+	ProgressionDTO,
+	DefaultProgression,
 } from "shared/definitions/ProfileDefinitions/Progression";
 import { CNet } from "client/network/ClientNetworkService";
 import { ServerDispatch } from "shared/network/Definitions";
 
 export default class ProgressionSlice {
-    private static instance: ProgressionSlice;
+	private static instance: ProgressionSlice;
 
-    public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
+	public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
 
-    private constructor() {
-        for (const key of PROGRESSION_KEYS) {
-            this.Progression[key] = Value(DefaultProgression[key]);
-        }
-        this.fetchFromServer();
-        this.setupListeners();
-    }
+	private constructor() {
+		for (const key of PROGRESSION_KEYS) {
+			this.Progression[key] = Value(DefaultProgression[key]);
+		}
+		this.fetchFromServer();
+		this.setupListeners();
+	}
 
-    private async fetchFromServer() {
-        const data = (await CNet.GetProfileData("Progression")) as ProgressionDTO | undefined;
-        if (data) {
-            for (const key of PROGRESSION_KEYS) {
-                this.Progression[key].set(data[key]);
-            }
-        }
-    }
+	private async fetchFromServer() {
+		const data = (await CNet.GetProfileData("Progression")) as ProgressionDTO | undefined;
+		if (data) {
+			for (const key of PROGRESSION_KEYS) {
+				this.Progression[key].set(data[key]);
+			}
+		}
+	}
 
-    private setupListeners() {
-        ServerDispatch.Client.Get("ProgressionUpdated").Connect((progress) => {
-            for (const key of PROGRESSION_KEYS) {
-                this.Progression[key].set(progress[key]);
-            }
-        });
-    }
+	private setupListeners() {
+		ServerDispatch.Client.Get("ProgressionUpdated").Connect((progress) => {
+			for (const key of PROGRESSION_KEYS) {
+				this.Progression[key].set(progress[key]);
+			}
+		});
+	}
 
-    public static getInstance(): ProgressionSlice {
-        if (!this.instance) {
-            this.instance = new ProgressionSlice();
-        }
-        return this.instance;
-    }
+	public static getInstance(): ProgressionSlice {
+		if (!this.instance) {
+			this.instance = new ProgressionSlice();
+		}
+		return this.instance;
+	}
 }

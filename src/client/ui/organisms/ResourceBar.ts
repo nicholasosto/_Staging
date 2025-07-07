@@ -30,7 +30,7 @@ import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey) {
-    const state = ResourceSlice.getInstance().Resources[resourceKey];
+	const state = ResourceSlice.getInstance().Resources[resourceKey];
 	const meta = ResourceMeta[resourceKey];
 	const resourceBarContainer = GamePanel({
 		Name: `${resourceKey}BarContainer`,
