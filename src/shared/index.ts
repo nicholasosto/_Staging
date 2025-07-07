@@ -19,3 +19,4 @@ export * from "./classes";
 export * from "./constants";
 export * from "./definitions";
 export * from "./network";
+export * from "./physics";
