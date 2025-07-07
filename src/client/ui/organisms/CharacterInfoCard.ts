@@ -4,7 +4,7 @@ import { Layout } from "../tokens";
 import { Players } from "@rbxts/services";
 import { AvatarBust } from "../molecules/AvatarBust";
 
-export const CharacterInfoCard = () => {
+export const CharacterInfoCard = (layoutOrder?: number) => {
 	/* Avatar Bust */
 	const Avatar = AvatarBust(Players.LocalPlayer.UserId);
 	const AvatarWidth = Avatar.Size.X.Offset;
@@ -31,7 +31,7 @@ export const CharacterInfoCard = () => {
 		BackgroundTransparency: 0.5,
 		BorderSizePixel: 0,
 		Layout: Layout.HorizontalSet(0),
-		LayoutOrder: 0,
+		LayoutOrder: layoutOrder ?? 1,
 		Content: {
 			Avatar: AvatarBust(Players.LocalPlayer.UserId),
 			ResourceBars: ResourceBarContainer,

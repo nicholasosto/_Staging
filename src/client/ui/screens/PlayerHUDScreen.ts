@@ -20,6 +20,18 @@ import { CNet } from "client/network";
 
 /* =============================================== Player HUD Screen ============================================= */
 
+const SpawnModelButton = UIButton({
+	Icon: GameImages.Ability.Spirit_Circles,
+	OnClick: () => {
+		CNet.SpawnWeapon();
+	},
+	Size: new UDim2(0, 64, 0, 64),
+	Position: new UDim2(0, 0, 1, -74),
+	AnchorPoint: new Vector2(0, 1),
+	BackgroundTransparency: 1,
+	Label: "Spawn Weapon",
+});
+
 interface PlayerHUDScreenProps {
 	CharacterInfoCard?: Frame;
 	HUDMenuBar?: Frame;
@@ -49,18 +61,8 @@ export const PlayerHUDScreen = () => {
 					CharacterInfoCard: HudProps.CharacterInfoCard,
 					MenuBar: HudProps.HUDMenuBar,
 					CurrencyInfo: HudProps.CurrencyInfo,
-					ProgressionCard: ProgressionCard(),
-					SpawnModel: UIButton({
-						Icon: GameImages.Ability.Spirit_Circles,
-						OnClick: () => {
-							CNet.SpawnWeapon();
-						},
-						Size: new UDim2(0, 64, 0, 64),
-						Position: new UDim2(0, 0, 1, -74),
-						AnchorPoint: new Vector2(0, 1),
-						BackgroundTransparency: 1,
-						Label: "Spawn Weapon",
-					}),
+					ProgressionCard: ProgressionCard(3),
+					SpawnModel: SpawnModelButton,
 				},
 			}),
 			AbilityBar: AbilityBarComponent(),

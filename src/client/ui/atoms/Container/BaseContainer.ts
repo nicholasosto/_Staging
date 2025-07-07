@@ -31,6 +31,7 @@ export const BaseContainer = (props: BaseContainerProps) => {
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		BackgroundColor3: props.BackgroundColor3 ?? bg,
 		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,
+		LayoutOrder: props.LayoutOrder ?? 0,
 		[Children]: {
 			Padding: props.Padding,
 			BorderImage: props.BorderImage,

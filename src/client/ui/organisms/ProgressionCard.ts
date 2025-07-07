@@ -12,11 +12,12 @@ import { Layout } from "../tokens";
 import { LevelGem } from "../molecules/LevelGem";
 import { ExperienceBar } from "../molecules/ExperienceBar";
 
-export const ProgressionCard = () => {
+export const ProgressionCard = (layoutOrder?: number) => {
 	return GamePanel({
 		Name: "ProgressionCard",
 		Size: new UDim2(0, 250, 0, 70),
 		Layout: Layout.HorizontalSet(5),
+		LayoutOrder: layoutOrder,
 		BackgroundTransparency: 0.5,
 		Content: {
 			Level: LevelGem(),
