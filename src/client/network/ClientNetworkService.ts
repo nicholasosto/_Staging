@@ -24,6 +24,9 @@ import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch,
 
 /* Event Signals */
 const ActivateAbilitySignal = ClientDispatch.Client.Get("ActivateAbility");
+const CastRequestSignal = ClientDispatch.Client.Get("CastRequest");
+const GetAbilitiesSignal = ClientDispatch.Client.Get("GetAbilities");
+const SetAbilitiesSignal = ClientDispatch.Client.Get("SetAbilities");
 const IncreaseAttributeSignal = ClientDispatch.Client.Get("IncreaseAttribute");
 const AddExperienceSignal = ClientDispatch.Client.Get("AddExperience");
 const UpdateSettingSignal = ClientDispatch.Client.Get("UpdatePlayerSetting");
@@ -52,6 +55,18 @@ export async function IncreaseAttribute(attributeKey: AttributeKey, amount: numb
 
 export function AddExperience(amount: number): void {
 	AddExperienceSignal.SendToServer(amount);
+}
+
+export async function GetAbilities(): Promise<AbilityKey[] | undefined> {
+	return (await GetAbilitiesSignal.CallServerAsync()) as AbilityKey[] | undefined;
+}
+
+export function SetAbilities(abilities: AbilityKey[]): void {
+	SetAbilitiesSignal.SendToServer(abilities);
+}
+
+export function CastAbility(abilityKey: AbilityKey): void {
+	CastRequestSignal.SendToServer(abilityKey);
 }
 
 export function SpawnWeapon(character: Model): void {

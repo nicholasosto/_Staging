@@ -50,6 +50,9 @@ export const ClientDispatch = Net.Definitions.Create({
 
 	/* --------------------------------------------- Abilities ------------------------------------------------- */
 	ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
+	CastRequest: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+	GetAbilities: Net.Definitions.ServerFunction<() => AbilityKey[] | undefined>(),
+	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),
 
 	/* --------------------------------------------- Profile Data --------------------------------------------- */
 	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
@@ -64,6 +67,7 @@ export const ServerDispatch = Net.Definitions.Create({
 
 	/* --------------------------------------------- Abilities ------------------------------------------------- */
 	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: ProfileDataMap["Abilities"]]>(),
+	AbilityBarUpdated: Net.Definitions.ServerToClientEvent<[abilities: AbilityKey[]]>(),
 
 	/* --------------------------------------------- Progression ------------------------------------------------- */
 	ProgressionUpdated: Net.Definitions.ServerToClientEvent<[profileData: ProfileDataMap["Progression"]]>(),

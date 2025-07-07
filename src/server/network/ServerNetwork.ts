@@ -42,6 +42,10 @@ const GetProfileDataSignal = ClientDispatch.Server.Get("GetData");
 /* Abilities */
 const ActivateAbilitySignal = ClientDispatch.Server.Get("ActivateAbility");
 const AbilitiesUpdated = ServerDispatch.Server.Get("AbilitiesUpdated");
+const AbilityBarUpdated = ServerDispatch.Server.Get("AbilityBarUpdated");
+const CastRequestSignal = ClientDispatch.Server.Get("CastRequest");
+const GetAbilitiesSignal = ClientDispatch.Server.Get("GetAbilities");
+const SetAbilitiesSignal = ClientDispatch.Server.Get("SetAbilities");
 
 /* Attributes */
 const IncreaseAttributeSignal = ClientDispatch.Server.Get("IncreaseAttribute");
@@ -158,6 +162,19 @@ export const SendProgressionUpdated = (player: Player) => {
 ActivateAbilitySignal.SetCallback((player: Player, abilityKey: AbilityKey) => {
 	//print(`Player ${player.Name} activating ability: ${abilityKey}`);
 	return AbilityService.Activate(player, abilityKey);
+});
+
+CastRequestSignal.Connect((player: Player, abilityKey: AbilityKey) => {
+	AbilityService.Activate(player, abilityKey);
+});
+
+GetAbilitiesSignal.SetCallback((player: Player) => {
+	return AbilityService.GetAbilities(player);
+});
+
+SetAbilitiesSignal.Connect((player: Player, abilities: AbilityKey[]) => {
+	AbilityService.SetAbilities(player, abilities);
+	AbilityBarUpdated.SendToPlayer(player, abilities);
 });
 
 /**

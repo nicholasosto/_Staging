@@ -26,3 +26,4 @@ export * from "./PlayerState";
 export * from "./ScreenState";
 export * from "./ThemeState";
 export { default as SettingsState } from "./SettingsState";
+export { default as AbilitySlice } from "./AbilitySlice";

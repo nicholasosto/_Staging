@@ -26,14 +26,12 @@
  */
 
 import { Computed } from "@rbxts/fusion";
-import PlayerState from "client/states/PlayerState";
+import AbilitySlice from "client/states/AbilitySlice";
 import { HorizontalContainer } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules/Button/AbilityButton";
-import { ABILITY_KEYS, AbilityKey } from "shared";
 
 export function AbilityBarComponent(): Frame {
-	const playerState = PlayerState.getInstance();
-	const abilities = ABILITY_KEYS;
+	const abilitySlice = AbilitySlice.getInstance();
 	return HorizontalContainer({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),
@@ -42,9 +40,8 @@ export function AbilityBarComponent(): Frame {
 		BackgroundTransparency: 0.5,
 		Content: {
 			Buttons: Computed(() => {
-				return abilities.map((ability) => {
-					return AbilityButton(ability);
-				});
+				const list = abilitySlice.Abilities.get();
+				return list.map((ability) => AbilityButton(ability));
 			}),
 		},
 	});

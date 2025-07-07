@@ -22,7 +22,7 @@ import { Layout } from "client/ui/tokens";
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { GameImages } from "shared";
-import { ActivateAbility } from "client/network/ClientNetworkService";
+import AbilitySlice from "client/states/AbilitySlice";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
@@ -35,7 +35,6 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 
 	/* Timer */
 	const cooldownTimer = new CooldownTimer(meta.cooldown);
-	print(`Creating cooldown timer for ${meta.displayName} with duration ${meta.cooldown} seconds`);
 
 	/* Cooldown Bar */
 	const cooldownBar = BarMeter({
@@ -63,10 +62,9 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 			}),
 		},
 		OnClick: () => {
-			print(`Clicked ability button: ${abilityKey}`);
-			const activated = ActivateAbility(abilityKey);
-			if (cooldownTimer.Progress.get() <= 0 && activated === true) {
-				print(`Activated ability: ${abilityKey}`);
+			if (cooldownTimer.Progress.get() <= 0) {
+				AbilitySlice.getInstance().useAbility(abilityKey);
+				cooldownTimer.start();
 			}
 		},
 	});
