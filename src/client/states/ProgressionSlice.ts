@@ -20,20 +20,19 @@ import { ServerDispatch } from "shared/network/Definitions";
 export default class ProgressionSlice {
 	private static instance: ProgressionSlice;
 
-        public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
-        public readonly NextLevelExperience = Value(DefaultProgression.NextLevelExperience);
-        public readonly ExperiencePercent!: Computed<number>;
+	public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
+	public readonly NextLevelExperience = Value(DefaultProgression.NextLevelExperience);
+	public readonly ExperiencePercent!: Computed<number>;
 
 	private constructor() {
-                for (const key of PROGRESSION_KEYS) {
-                        this.Progression[key] = Value(DefaultProgression[key]);
-                }
-                this.ExperiencePercent = Computed(() =>
-                        this.Progression.Experience.get() /
-                        math.max(this.NextLevelExperience.get(), 1),
-                );
-                this.fetchFromServer();
-                this.setupListeners();
+		for (const key of PROGRESSION_KEYS) {
+			this.Progression[key] = Value(DefaultProgression[key]);
+		}
+		this.ExperiencePercent = Computed(
+			() => this.Progression.Experience.get() / math.max(this.NextLevelExperience.get(), 1),
+		);
+		this.fetchFromServer();
+		this.setupListeners();
 	}
 
 	private async fetchFromServer() {
