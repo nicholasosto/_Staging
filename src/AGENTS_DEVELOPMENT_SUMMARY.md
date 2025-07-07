@@ -44,6 +44,10 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/Button/AbilityButton.ts`|Usable|Ability icon with cooldown|
 |Client|`client/ui/organisms/ButtonBars/AbilityBar.ts`|Under Construction|Displays equipped abilities|
 |Client|`client/states/AbilitySlice.ts`|Under Construction|Ability list and actions|
+|Client|`client/states/AttributesSlice.ts`|Under Construction|Attribute values and points|
+|Client|`client/states/ResourceSlice.ts`|Under Construction|Player resource values|
+|Client|`client/states/ProgressionSlice.ts`|Under Construction|Level and experience|
+|Client|`client/states/CurrencySlice.ts`|Stub|Currency amounts|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/listener.server.ts`|Usable|Server network handlers|
 |Server|`server/services/DataService.ts`|Usable|Loads player profiles|

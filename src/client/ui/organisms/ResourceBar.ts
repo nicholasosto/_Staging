@@ -24,15 +24,13 @@
 // -------------- Imports ----------------------------------------------------- //
 import { GamePanel } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules/FillBar/BarMeter";
-import PlayerState from "client/states/PlayerState";
+import ResourceSlice from "client/states/ResourceSlice";
 import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
 import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey) {
-	const playerState = PlayerState.getInstance();
-
-	const state = playerState.Resources[resourceKey];
+    const state = ResourceSlice.getInstance().Resources[resourceKey];
 	const meta = ResourceMeta[resourceKey];
 	const resourceBarContainer = GamePanel({
 		Name: `${resourceKey}BarContainer`,
