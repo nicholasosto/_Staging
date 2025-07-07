@@ -23,7 +23,7 @@
 
 // -------------- Imports ----------------------------------------------------- //
 import { GamePanel } from "client/ui/atoms"; // absolute alias
-import { BarMeter } from "client/ui/molecules";
+import { BarMeter } from "client/ui/molecules/FillBar/BarMeter";
 import PlayerState from "client/states/PlayerState";
 import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
 import { Computed } from "@rbxts/fusion";
