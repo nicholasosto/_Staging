@@ -12,6 +12,8 @@ The purpose of this document is to provide a concise overview of coding conventi
    - **Shared - Keys Meta DTO Foundation**: For handling combat-related events and data.
    - **Atomic Fusion State System**: For displaying resource bars in the UI.
 
+  3. **Tasks** for codex are listed in [Tasks](./src/tasks/)
+
 ## 1 Follow Coding Conventions
 
 1. Use PascalCase for FusionComponents.
