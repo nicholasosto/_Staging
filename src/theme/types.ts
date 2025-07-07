@@ -15,10 +15,15 @@
 /* =============================================== Token Groups ============================ */
 
 export interface ColourTokens {
-	panelBg: Color3;
-	panelBorder: Color3;
-	textPrimary: Color3;
-	textSecondary: Color3;
+        panelBg: Color3;
+        panelBgHover: Color3;
+        panelBorder: Color3;
+        textPrimary: Color3;
+        textSecondary: Color3;
+        textDisabled: Color3;
+        healthFill: Color3;
+        manaFill: Color3;
+        staminaFill: Color3;
 }
 
 export interface FontTokens {

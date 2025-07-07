@@ -16,6 +16,7 @@ import Fusion from "@rbxts/fusion";
 import { ThemeKey, DEFAULT_THEME } from "../../theme/ThemeKey";
 import { cyberGothic } from "../../theme/tokens/cyberGothic";
 import { solarDrift } from "../../theme/tokens/solarDrift";
+import { fateless } from "../../theme/tokens/fateless";
 import { ThemeTokens } from "../../theme/types";
 
 const { Value, Computed } = Fusion;
@@ -23,8 +24,9 @@ const { Value, Computed } = Fusion;
 const themeKey = Value<ThemeKey>(DEFAULT_THEME);
 
 const themeMap: Record<ThemeKey, ThemeTokens> = {
-	[ThemeKey.CyberGothic]: cyberGothic,
-	[ThemeKey.SolarDrift]: solarDrift,
+        [ThemeKey.CyberGothic]: cyberGothic,
+        [ThemeKey.SolarDrift]: solarDrift,
+        [ThemeKey.Fateless]: fateless,
 };
 
 const currentTokens = Computed(() => themeMap[themeKey.get()]);
