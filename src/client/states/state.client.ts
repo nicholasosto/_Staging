@@ -7,7 +7,7 @@
  * @description Bootstraps singleton state objects for the client.
  */
 
-import PlayerState from "./PlayerState";
+// import PlayerState from "./PlayerState";
 
-const playerState = PlayerState.getInstance();
-print(playerState);
+// const playerState = PlayerState.getInstance();
+// print(playerState);

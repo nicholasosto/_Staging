@@ -106,28 +106,28 @@ export const GlassGradient = () =>
  * @since 0.2.0
  * 	*/
 export const LavaGradient = () =>
-        New("UIGradient")({
-                Name: "LavaGradient",
-                Color: new ColorSequence([
-                        new ColorSequenceKeypoint(0, Color3.fromRGB(255, 85, 0)),
-                        new ColorSequenceKeypoint(0.5, Color3.fromRGB(255, 122, 0)),
-                        new ColorSequenceKeypoint(1, Color3.fromRGB(255, 0, 0)),
-                ]),
-                Transparency: new NumberSequence(0),
-                Rotation: 90,
-        });
+	New("UIGradient")({
+		Name: "LavaGradient",
+		Color: new ColorSequence([
+			new ColorSequenceKeypoint(0, Color3.fromRGB(255, 85, 0)),
+			new ColorSequenceKeypoint(0.5, Color3.fromRGB(255, 122, 0)),
+			new ColorSequenceKeypoint(1, Color3.fromRGB(255, 0, 0)),
+		]),
+		Transparency: new NumberSequence(0),
+		Rotation: 90,
+	});
 
 /**
  * Purple-blue gradient used for the experience bar.
  */
 export const ExperienceGradient = () =>
-        New("UIGradient")({
-                Name: "ExperienceGradient",
-                Color: new ColorSequence([
-                        new ColorSequenceKeypoint(0, Color3.fromRGB(94, 0, 255)),
-                        new ColorSequenceKeypoint(0.5, Color3.fromRGB(170, 0, 255)),
-                        new ColorSequenceKeypoint(1, Color3.fromRGB(255, 128, 255)),
-                ]),
-                Transparency: new NumberSequence(0),
-                Rotation: 90,
-        });
+	New("UIGradient")({
+		Name: "ExperienceGradient",
+		Color: new ColorSequence([
+			new ColorSequenceKeypoint(0, Color3.fromRGB(94, 0, 255)),
+			new ColorSequenceKeypoint(0.5, Color3.fromRGB(170, 0, 255)),
+			new ColorSequenceKeypoint(1, Color3.fromRGB(255, 128, 255)),
+		]),
+		Transparency: new NumberSequence(0),
+		Rotation: 90,
+	});

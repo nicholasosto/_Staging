@@ -16,40 +16,40 @@ import { createAudio } from "shared/assets/audio";
 import { TweenService } from "@rbxts/services";
 
 export function ExperienceBar() {
-        const slice = ProgressionSlice.getInstance();
-        const level = slice.Progression.Level;
-        const experience = slice.Progression.Experience;
+	const slice = ProgressionSlice.getInstance();
+	const level = slice.Progression.Level;
+	const experience = slice.Progression.Experience;
 
-        const percent = Computed(() => {
-                const lvl = level.get();
-                const exp = experience.get();
-                const nextExp = getNextLevelExperience(lvl);
-                slice.NextLevelExperience.set(nextExp);
-                return exp / math.max(nextExp, 1);
-        });
+	const percent = Computed(() => {
+		const lvl = level.get();
+		const exp = experience.get();
+		const nextExp = getNextLevelExperience(lvl);
+		slice.NextLevelExperience.set(nextExp);
+		return exp / math.max(nextExp, 1);
+	});
 
-        const bar = BarMeter({
-                ProgressState: percent,
-                Gradient: ExperienceGradient(),
-                Text: "Experience",
-        });
+	const bar = BarMeter({
+		ProgressState: percent,
+		Gradient: ExperienceGradient(),
+		Text: "Experience",
+	});
 
-        const glowTweenInfo = new TweenInfo(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);
-        const stroke = bar.FindFirstChildWhichIsA("UIStroke");
-        const sound = createAudio("RobotTheme", "LevelUp");
-        sound.Parent = bar;
+	const glowTweenInfo = new TweenInfo(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);
+	const stroke = bar.FindFirstChildWhichIsA("UIStroke");
+	const sound = createAudio("RobotTheme", "LevelUp");
+	sound.Parent = bar;
 
-        Observer(level).onChange(() => {
-                sound.Play();
-                if (stroke) {
-                        stroke.Transparency = 1;
-                        const t = TweenService.Create(stroke, glowTweenInfo, { Transparency: 0 });
-                        t.Play();
-                        t.Completed.Once(() => {
-                                TweenService.Create(stroke, glowTweenInfo, { Transparency: 1 }).Play();
-                        });
-                }
-        });
+	Observer(level).onChange(() => {
+		sound.Play();
+		if (stroke) {
+			stroke.Transparency = 1;
+			const t = TweenService.Create(stroke, glowTweenInfo, { Transparency: 0 });
+			t.Play();
+			t.Completed.Once(() => {
+				TweenService.Create(stroke, glowTweenInfo, { Transparency: 1 }).Play();
+			});
+		}
+	});
 
-        return bar;
+	return bar;
 }
