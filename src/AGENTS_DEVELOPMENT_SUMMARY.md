@@ -16,7 +16,7 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/data/RigData.ts`|Usable|Rig template references|
 |Shared|`shared/assets`|Usable|Image asset constants|
 |Shared|`shared/states`|Usable|Signal-based shared state|
-|Shared|`theme`|Usable|Fusion theme store|
+|Shared|`theme`|Usable|Fusion theme store with Fateless theme|
 |Shared|`constants`|Rock Solid|Sizes and asset ids|
 |Client|`client/main.client.ts`|Usable|Entry point and UI bootstrap|
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
