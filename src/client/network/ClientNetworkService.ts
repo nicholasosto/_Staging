@@ -69,7 +69,7 @@ function CastAbility(abilityKey: AbilityKey): void {
 	CastRequestSignal.SendToServer(abilityKey);
 }
 
-function SpawnWeapon(character: Model): void {
+function SpawnWeapon(): void {
 	print(`CallServer: SpawnWeapon called.`);
 	const weapon = SpawnWeaponSignal.CallServerAsync();
 }

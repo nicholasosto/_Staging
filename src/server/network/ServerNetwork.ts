@@ -297,7 +297,7 @@ SpawnWeaponSignal.SetCallback((player: Player) => {
 		warn(`Character not found for player ${player.Name}`);
 		return;
 	}
-	WeaponService.SpawnWeapon(character);
+	WeaponService.SpawnWeapon(character.GetPivot().Position.add(new Vector3(0, -5, 0))); // Spawn below the character
 });
 
 export const StartServerNetwork = () => {

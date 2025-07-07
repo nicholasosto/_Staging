@@ -19,6 +19,9 @@
  * This service handles the creation and management of weapon instances, allowing players to spawn and equip weapons.
  */
 
+import { Workspace } from "@rbxts/services";
+import { SpawnModel } from "shared";
+
 class Whip {
 	public Character: Model;
 	private defaultSegments: number = 10; // Default number of segments for the whip
@@ -111,15 +114,15 @@ export class WeaponService {
 	}
 
 	/* ------------------------------- Public API ---------------------------------------- */
-	public static SpawnWeapon(character: Model): void {
-		print(`SpawnWeapon called for character: ${character.Name}`);
-		if (character === undefined) {
-			print(`Character not found. Cannot spawn weapon`);
-			return;
-		}
-		const whip = new Whip(character);
-		whip.OnEquip();
-		whip.OnAttack(character); // Simulate an attack for testing
-		print(`Weapon spawned for character: ${character.Name}`);
+	public static SpawnWeapon(position: Vector3): void {
+		print("Spawning weapon...");
+		const newWeapon = new SpawnModel("Whip", position);
+		newWeapon.Model.Parent = Workspace;
+		//newWeapon.GrowModel(1.5); // Example scale factor
+		task.delay(1, () => {
+			newWeapon.GrowModel(1.5);
+			newWeapon.SetPosition(position.add(new Vector3(0, 150, 0))); // Spawn above the ground
+		});
+		//newWeapon.SetPosition(position.add(new Vector3(0, 55, 0))); // Spawn above the ground
 	}
 }

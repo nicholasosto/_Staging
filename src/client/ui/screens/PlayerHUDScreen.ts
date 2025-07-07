@@ -7,7 +7,7 @@
  * @description Primary heads-up display shown during gameplay.
  */
 
-import { GamePanel, GameScreen, VerticalContainer } from "../atoms";
+import { GamePanel, GameScreen, UIButton, VerticalContainer } from "../atoms";
 import { HUDMenuBar, AbilityBarComponent, AdminButtonBar } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
@@ -15,6 +15,8 @@ import { SCREEN_KEYS } from "client/states";
 import { Value } from "@rbxts/fusion";
 import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
 import PlayerState from "client/states/PlayerState";
+import { GameImages } from "shared";
+import { CNet } from "client/network";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -46,7 +48,17 @@ export const PlayerHUDScreen = () => {
 				Content: {
 					CharacterInfoCard: HudProps.CharacterInfoCard,
 					MenuBar: HudProps.HUDMenuBar,
-					StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
+					SpawnModel: UIButton({
+						Icon: GameImages.Ability.Spirit_Circles,
+						OnClick: () => {
+							CNet.SpawnWeapon();
+						},
+						Size: new UDim2(0, 64, 0, 64),
+						Position: new UDim2(0, 0, 1, -74),
+						AnchorPoint: new Vector2(0, 1),
+						BackgroundTransparency: 1,
+						Label: "Spawn Weapon",
+					}),
 				},
 			}),
 			AbilityBar: AbilityBarComponent(),

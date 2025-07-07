@@ -13,5 +13,5 @@
  * @license      MIT
  * @since        0.1.0
  */
-
 export * from "./CooldownTimer";
+export * from "./SpawnModel";
