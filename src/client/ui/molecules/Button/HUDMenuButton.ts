@@ -16,7 +16,7 @@
  */
 
 import Fusion, { Children, Computed, New, OnEvent, Value } from "@rbxts/fusion";
-import { GameImage } from "client/ui/atoms";
+import { GameImage, UIButton } from "client/ui/atoms";
 import { GameImages, MenuButtonImageMap } from "shared";
 import { ScreenKey, ShowScreen, ScreenState } from "client/states";
 

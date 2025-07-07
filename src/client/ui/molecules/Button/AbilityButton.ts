@@ -14,14 +14,21 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-import { RunService } from "@rbxts/services";
-import { New, Value, OnChange, OnEvent, Computed, Children } from "@rbxts/fusion";
+import { Computed, Children } from "@rbxts/fusion";
+import { GameImages } from "shared";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
-import { GameButton, GameImage, GamePanel, GameText, IconButton, UIButton } from "client/ui/atoms";
+
+/*--- Tokens ---*/
 import { Layout } from "client/ui/tokens";
+
+/*-- Atoms --*/
+import { GameButton, GameImage, GamePanel, VerticalContainer } from "client/ui/atoms";
+
+/*-- Molecules --*/
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
-import { GameImages } from "shared";
+
+/*-- State Slice --*/
 import AbilitySlice from "client/states/AbilitySlice";
 
 export interface AbilityButtonProps {
@@ -54,8 +61,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 			/* Ability Icon */
 			Icon: GameImage({
 				Image: meta.iconId,
-				Size: UDim2.fromScale(1, 1),
-				BackgroundTransparency: 1,
+				Size: UDim2.fromScale(0.6, 0.6),
 			}),
 		},
 		OnClick: () => {
@@ -68,9 +74,9 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 
 	// tick down timer using RunService or similar
 
-	return GamePanel({
+	return VerticalContainer({
 		Size: UDim2.fromOffset(80, 90),
-		Layout: Layout.VerticalSet(2),
+		//Layout: Layout.VerticalSet(2),
 		Content: {
 			ButtonIcon: button,
 			CooldownBar: cooldownBar,
