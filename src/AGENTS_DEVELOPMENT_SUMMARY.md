@@ -18,6 +18,7 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/states`|Usable|Signal-based shared state|
 |Shared|`theme`|Usable|Fusion theme store with Fateless theme|
 |Shared|`constants`|Rock Solid|Sizes and asset ids|
+|Shared|`shared/physics`|Usable|Utility forces and ropes|
 |Client|`client/main.client.ts`|Usable|Entry point and UI bootstrap|
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
 |Client|`client/ui/atoms`|Usable|Core UI atoms (buttons, panels)|
