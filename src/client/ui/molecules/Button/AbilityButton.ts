@@ -63,6 +63,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 			}),
 		},
 		OnClick: () => {
+			print(`Clicked ability button: ${abilityKey}`);
 			const activated = ActivateAbility(abilityKey);
 			if (cooldownTimer.Progress.get() <= 0 && activated === true) {
 				print(`Activated ability: ${abilityKey}`);
