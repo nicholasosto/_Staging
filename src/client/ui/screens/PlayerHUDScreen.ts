@@ -17,6 +17,7 @@ import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
 import PlayerState from "client/states/PlayerState";
 import { GameImages } from "shared";
 import { CNet } from "client/network";
+import { ThemeSwitcher } from "../organisms/ButtonBars/ThemeSwitcher";
 
 /* =============================================== Player HUD Screen ============================================= */
 
@@ -65,6 +66,7 @@ export const PlayerHUDScreen = () => {
 					SpawnModel: SpawnModelButton,
 				},
 			}),
+			ThemeSwitcher: ThemeSwitcher(),
 			AbilityBar: AbilityBarComponent(),
 			//StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 		},
