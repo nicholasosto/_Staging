@@ -41,6 +41,9 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/screens/SettingsScreen.ts`|Stub|Settings window|
 |Client|`client/ui/screens/TeleportScreen.ts`|Stub|Teleport locations window|
 |Client|`client/ui/organisms/ButtonBars/AdminButtonBar.ts`|Under Construction|Admin service test buttons|
+|Client|`client/ui/molecules/Button/AbilityButton.ts`|Usable|Ability icon with cooldown|
+|Client|`client/ui/organisms/ButtonBars/AbilityBar.ts`|Under Construction|Displays equipped abilities|
+|Client|`client/states/AbilitySlice.ts`|Under Construction|Ability list and actions|
 |Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
 |Server|`server/network/listener.server.ts`|Usable|Server network handlers|
 |Server|`server/services/DataService.ts`|Usable|Loads player profiles|

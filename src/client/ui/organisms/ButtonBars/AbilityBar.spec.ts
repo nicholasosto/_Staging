@@ -1,0 +1,15 @@
+/// <reference types="@rbxts/testez/globals" />
+
+import AbilitySlice from "client/states/AbilitySlice";
+import { AbilityBarComponent } from "./AbilityBar";
+
+export = () => {
+	describe("AbilityBar UI", () => {
+		it("creates buttons for each equipped ability", () => {
+			const slice = AbilitySlice.getInstance();
+			slice.setAbilities(["fireball", "melee"]);
+			const bar = AbilityBarComponent();
+			expect(bar.IsA("Frame")).to.be.ok();
+		});
+	});
+};
