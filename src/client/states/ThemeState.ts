@@ -24,9 +24,9 @@ const { Value, Computed } = Fusion;
 const themeKey = Value<ThemeKey>(DEFAULT_THEME);
 
 const themeMap: Record<ThemeKey, ThemeTokens> = {
-        [ThemeKey.CyberGothic]: cyberGothic,
-        [ThemeKey.SolarDrift]: solarDrift,
-        [ThemeKey.Fateless]: fateless,
+	[ThemeKey.CyberGothic]: cyberGothic,
+	[ThemeKey.SolarDrift]: solarDrift,
+	[ThemeKey.Fateless]: fateless,
 };
 
 const currentTokens = Computed(() => themeMap[themeKey.get()]);
