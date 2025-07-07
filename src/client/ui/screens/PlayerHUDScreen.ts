@@ -8,7 +8,7 @@
  */
 
 import { GamePanel, GameScreen, UIButton, VerticalContainer } from "../atoms";
-import { HUDMenuBar, AbilityBarComponent, AdminButtonBar } from "client/ui/organisms";
+import { HUDMenuBar, AbilityBarComponent, AdminButtonBar, ProgressionCard } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Layout, Padding } from "../tokens";
 import { SCREEN_KEYS } from "client/states";
@@ -48,6 +48,8 @@ export const PlayerHUDScreen = () => {
 				Content: {
 					CharacterInfoCard: HudProps.CharacterInfoCard,
 					MenuBar: HudProps.HUDMenuBar,
+					CurrencyInfo: HudProps.CurrencyInfo,
+					ProgressionCard: ProgressionCard(),
 					SpawnModel: UIButton({
 						Icon: GameImages.Ability.Spirit_Circles,
 						OnClick: () => {
@@ -62,7 +64,7 @@ export const PlayerHUDScreen = () => {
 				},
 			}),
 			AbilityBar: AbilityBarComponent(),
-			StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
+			//StatusPanel: StatusPanel(PlayerState.getInstance().StatusEffects), // Status effects will be dynamically updated
 		},
 	});
 
