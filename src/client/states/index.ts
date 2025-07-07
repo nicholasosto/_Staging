@@ -16,3 +16,4 @@ export { default as ResourceSlice } from "./ResourceSlice";
 export { default as AttributesSlice } from "./AttributesSlice";
 export { default as ProgressionSlice } from "./ProgressionSlice";
 export { default as CurrencySlice } from "./CurrencySlice";
+export { default as MessageSlice } from "./MessageSlice";
