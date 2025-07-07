@@ -18,3 +18,4 @@ export * from "./GameWindow";
 export * from "./SettingListItem";
 export * from "./ExperienceBar";
 export * from "./LevelGem";
+export * from "./UserMessage";
