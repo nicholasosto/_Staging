@@ -1,7 +1,6 @@
 import { AbilitiesMeta, AbilityKey } from "shared/definitions/ProfileDefinitions/Ability";
-import { GamePanel, GameImage, GameText } from "../atoms";
+import { BaseContainer, ListContainer, GameImage, GameText } from "../atoms";
 import { New, Value } from "@rbxts/fusion";
-import { Layout } from "../tokens";
 
 export interface AbilityInfoPanelProps {
 	abilityKey: AbilityKey;
@@ -42,25 +41,28 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 		Size: UDim2.fromScale(1, 0.3),
 	});
 
-	return GamePanel({
-		Name: `AbilityInfoPanel-${abilityKey}`,
-		Size: UDim2.fromOffset(300, 200),
-		Layout: Layout.VerticalSet(2),
+       return ListContainer({
+               Name: `AbilityInfoPanel-${abilityKey}`,
+               Size: UDim2.fromOffset(300, 200),
+               LayoutOrientation: "vertical",
+               Gap: 2,
 
 		Content: {
-			TopRow: GamePanel({
-				Name: `TopRow-${abilityKey}`,
-				Layout: Layout.HorizontalSet(2),
-				Size: UDim2.fromScale(1, 0.3),
+                       TopRow: ListContainer({
+                               Name: `TopRow-${abilityKey}`,
+                               LayoutOrientation: "horizontal",
+                               Gap: 2,
+                               Size: UDim2.fromScale(1, 0.3),
 				Content: {
 					AbilityIcon: abilityIcon,
 					AbilityName: abilityName,
 				},
 			}),
-			BottomRow: GamePanel({
-				Name: `BottomRow-${abilityKey}`,
-				Layout: Layout.VerticalSet(2),
-				Size: UDim2.fromScale(1, 0.7),
+                       BottomRow: ListContainer({
+                               Name: `BottomRow-${abilityKey}`,
+                               LayoutOrientation: "vertical",
+                               Gap: 2,
+                               Size: UDim2.fromScale(1, 0.7),
 				Content: {
 					AbilityDescription: abilityDescription,
 					AbilityCooldown: abilityCooldown,

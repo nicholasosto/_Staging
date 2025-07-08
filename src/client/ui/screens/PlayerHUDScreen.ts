@@ -7,7 +7,7 @@
  * @description Primary heads-up display shown during gameplay.
  */
 
-import { GamePanel, GameScreen, ListContainer } from "../atoms";
+import { BaseContainer, GameScreen, ListContainer } from "../atoms";
 import { HUDMenuBar, AbilityBarComponent, ProgressionCard } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
 import { Padding } from "../tokens";
@@ -23,7 +23,7 @@ export const PlayerHUDScreen = () => {
 		layoutOrder: 2,
 	});
 	/* HUD Container */
-	const HUDContainer = GamePanel({
+       const HUDContainer = BaseContainer({
 		Name: "HUDContainer",
 		Size: new UDim2(1, 0, 1, 0),
 		BackgroundTransparency: 1,

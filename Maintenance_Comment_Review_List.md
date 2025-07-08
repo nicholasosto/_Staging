@@ -23,7 +23,7 @@ This checklist tracks comment updates for each file.
 - [x] **[src/client/ui/atoms/Button/UIButton.ts](./src/client/ui/atoms/Button/UIButton.ts)**
 - [x] **[src/client/ui/atoms/Button/index.ts](./src/client/ui/atoms/Button/index.ts)**
 - [x] **[src/client/ui/atoms/Container/BaseContainer.ts](./src/client/ui/atoms/Container/BaseContainer.ts)**
-- [x] **[src/client/ui/atoms/Container/GamePanel.ts](./src/client/ui/atoms/Container/GamePanel.ts)**
+- [x] ~~**[src/client/ui/atoms/Container/GamePanel.ts](./src/client/ui/atoms/Container/GamePanel.ts)**~~ (deprecated)
 - [x] **[src/client/ui/atoms/Container/GridContainer.ts](./src/client/ui/atoms/Container/GridContainer.ts)**
 - [x] **[src/client/ui/atoms/Container/HorizontalContainer.ts](./src/client/ui/atoms/Container/HorizontalContainer.ts)**
 - [x] **[src/client/ui/atoms/Container/VerticalContainer.ts](./src/client/ui/atoms/Container/VerticalContainer.ts)**

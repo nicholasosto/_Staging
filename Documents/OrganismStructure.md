@@ -35,7 +35,7 @@ management. To maintain clarity and consistency, we recommend the following stru
 
 // -------------- Imports ----------------------------------------------------- //
 import Fusion, { New } from "@rbxts/fusion";
-import { GamePanel, GameButton } from "client/atoms";        // absolute alias
+import { BaseContainer, ListContainer, GameButton } from "client/atoms";        // absolute alias
 import { BarMeter } from "client/molecules";
 import { PlayerHealth, PlayerMana, PlayerStamina } from "shared/states/PlayerState";
 import { Layout, Padding } from "client/style";
@@ -72,12 +72,13 @@ const DEBUG = {
  */
 export const ResourceBars = (debug = false) => {
  /* ---------- Dev-only controls ----------------------------------------- */
- const DebugPanel = debug
-  ? GamePanel({
+const DebugPanel = debug
+  ? ListContainer({
     Name: "ResourceBarsDebug",
     Size: DEBUG.CONTAINER_SIZE,
     Position: UDim2.fromScale(0, 1),
-    Layout: Layout.HorizontalSet(5),
+    LayoutOrientation: "horizontal",
+    Gap: 5,
     Padding: Padding(2),
     Children: {
      HealthDown:   makeDrainButton(GameImages.Attributes.Vitality,  PlayerHealth.Current),
@@ -88,9 +89,10 @@ export const ResourceBars = (debug = false) => {
   : undefined; // ← Nothing is created if debug === false
 
  /* ---------- Resource bar stack ---------------------------------------- */
- const Bars = GamePanel({
+const Bars = ListContainer({
   Name: "ResourceBarsStack",
-  Layout: Layout.VerticalSet(5),
+  LayoutOrientation: "vertical",
+  Gap: 5,
   Children: {
    Health:  makeBar(PlayerHealth,  COLORS.HEALTH),
    Mana:    makeBar(PlayerMana,    COLORS.MANA),
@@ -99,7 +101,7 @@ export const ResourceBars = (debug = false) => {
  });
 
  /* ---------- Final organism root --------------------------------------- */
- return GamePanel({
+ return BaseContainer({
   Name: "ResourceBarsOrganism",
   Size: ORG.SIZE,
   Position: ORG.POSITION,
