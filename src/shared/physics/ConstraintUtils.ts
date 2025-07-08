@@ -42,13 +42,15 @@ export function createRope(source: BasePart, parent: BasePart, opts: Partial<Rop
 	rope.Length = length;
 	rope.Restitution = elasticity;
 	rope.Parent = source;
+	rope.Visible = true; // For debugging, remove in production
 
-	if (winchPower && winchPower !== 0) {
+	if (winchPower > 0) {
 		rope.WinchEnabled = true;
 		rope.WinchForce = winchPower;
-		rope.WinchResponsiveness = 100;
+		rope.WinchResponsiveness = opts.winchResponsiveness ?? 0.1; // Default responsiveness
+		rope.WinchTarget = opts.length ?? length; // Default to initial length if not specified
+		rope.WinchSpeed = opts.winchSpeed ?? 1; // Default winch speed
 	}
-
 	register(rope, duration);
 	register(a0, duration);
 	register(a1, duration);

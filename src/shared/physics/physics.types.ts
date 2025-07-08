@@ -25,6 +25,8 @@ export interface RopeOptions {
 	length: number;
 	elasticity?: number;
 	winchPower?: number;
+	winchSpeed?: number;
+	winchResponsiveness?: number;
 	/** Auto-destroy after this many seconds */
 	duration?: number;
 }
