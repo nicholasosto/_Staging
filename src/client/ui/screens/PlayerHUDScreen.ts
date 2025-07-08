@@ -30,7 +30,6 @@ const SpawnModelButton = UIButton({
 	Label: "Spawn Weapon",
 });
 
-
 export const PlayerHUDScreen = () => {
 	const HudMenuBar = HUDMenuBar({
 		ScreenStateKeys: [...SCREEN_KEYS],

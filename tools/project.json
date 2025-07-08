@@ -1,0 +1,19 @@
+{
+  "targets": {
+    "hello": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/hello-world.js"
+      }
+    },
+    "game": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "rbxtsc --project tsconfig.json"
+      },
+      "outputs": ["out/**"]
+    },
+    "lint":  { "executor": "nx:run-commands", "options": { "command": "biome lint ." } },
+"format":{ "executor": "nx:run-commands", "options": { "command": "biome format --write ." } }
+  }
+}

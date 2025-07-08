@@ -35,7 +35,9 @@ export default class PlayerState {
 	/** Active status effects */
 	public StatusEffects = Value<StatusEffect[]>([]);
 
-	private constructor() {}
+	private constructor() {
+		warn("PlayerState:", PlayerState);
+	}
 
 	public static getInstance(): PlayerState {
 		if (!this.instance) {
