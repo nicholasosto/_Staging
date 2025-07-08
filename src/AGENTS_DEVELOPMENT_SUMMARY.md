@@ -13,6 +13,7 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/data/PlayerData.ts`|Stub|Player profile template|
 |Shared|`shared/data/RarityData.ts`|Rock Solid|Rarity metadata|
 |Shared|`shared/data/ResourceData.ts`|Rock Solid|Resource metadata|
+|Shared|`shared/definitions/Resources.ts`|Usable|Resource state helpers|
 |Shared|`shared/data/RigData.ts`|Usable|Rig template references|
 |Shared|`shared/assets`|Usable|Image asset constants|
 |Shared|`shared/states`|Usable|Signal-based shared state|
