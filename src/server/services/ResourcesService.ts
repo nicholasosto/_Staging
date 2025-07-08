@@ -32,7 +32,7 @@ import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shar
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataProfileController } from "./DataService";
 import { ResourceFormula } from "shared/calculations/ResourceCalculator";
-import { ServerDispatch } from "shared/network/Definitions";
+import { ServerSend } from "server/network";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -79,7 +79,7 @@ export class ResourcesService {
 		resourceData.current = newResourceCurrent;
 
 		// Send updated resource data to the player
-		ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, resourceData.current, resourceData.max);
+		ServerSend.ResourceUpdated(player, key, resourceData);
 		return true;
 	}
 
@@ -104,7 +104,7 @@ export class ResourcesService {
 				data.current = max;
 			}
 			if (changed) {
-				ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+				ServerSend.ResourceUpdated(player, key, data);
 			}
 		});
 	}
@@ -131,7 +131,7 @@ export class ResourcesService {
 					const data = resources[key];
 					if (data.current < data.max) {
 						data.current = math.min(data.current + 1, data.max); // Regenerate resources over time
-						ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, key, data.current, data.max);
+						ServerSend.ResourceUpdated(player, key, data);
 					}
 				});
 			});

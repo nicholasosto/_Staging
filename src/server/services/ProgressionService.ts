@@ -21,7 +21,6 @@
 /* =============================================== Imports ================================== */
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
 import { DataProfileController } from "./DataService";
-import { SendProgressionUpdated } from "server/network/ServerNetwork";
 
 /* =============================================== Service ================================== */
 export class ProgressionService {

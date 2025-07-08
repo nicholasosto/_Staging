@@ -30,29 +30,19 @@ export default class AttributesSlice {
 		}
 		this.Available.set(DefaultAttributes.AvailablePoints);
 		this.Spent.set(DefaultAttributes.SpentPoints);
-		this.fetchFromServer();
-		this.setupListeners();
 	}
 
-	private async fetchFromServer() {
-		const attrs = (await CNet.GetProfileData("Attributes")) as AttributesDTO | undefined;
-		if (attrs) {
-			for (const key of ATTR_KEYS) {
-				this.Attributes[key].set(attrs[key]);
+	public UpdateAttributes(attributes: AttributesDTO) {
+		for (const key of ATTR_KEYS) {
+			const attr = this.Attributes[key];
+			if (attr && attributes[key] !== undefined) {
+				attr.set(attributes[key]);
+			} else {
+				warn(`Attribute ${key} not found in AttributesSlice or provided attributes.`);
 			}
-			this.Available.set(attrs.AvailablePoints);
-			this.Spent.set(attrs.SpentPoints);
 		}
-	}
-
-	private setupListeners() {
-		ServerDispatch.Client.Get("AttributesUpdated").Connect((data) => {
-			for (const key of ATTR_KEYS) {
-				this.Attributes[key].set(data[key]);
-			}
-			this.Available.set(data.AvailablePoints);
-			this.Spent.set(data.SpentPoints);
-		});
+		this.Available.set(attributes.AvailablePoints);
+		this.Spent.set(attributes.SpentPoints);
 	}
 
 	public static getInstance(): AttributesSlice {

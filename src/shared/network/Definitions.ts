@@ -18,6 +18,7 @@ import {
 	NPCKey,
 	ProfileDataMap,
 	ProfileDataKey,
+	ResourceDTO,
 } from "shared/definitions";
 
 /*
@@ -35,49 +36,38 @@ export const AdminNet = Net.Definitions.Create({
 });
 
 export const ClientDispatch = Net.Definitions.Create({
-	/* --------------------------------------------- Gems ------------------------------------------------- */
+	/* -- Gems -- */
 	AddGem: Net.Definitions.ClientToServerEvent<[gemId: string]>(),
 
-	/* --------------------------------------------- Battle Room ------------------------------------------------- */
+	/* -- Battle Room -- */
 	CreateRoom: Net.Definitions.ClientToServerEvent<[]>(),
 	JoinRoom: Net.Definitions.ClientToServerEvent<[roomId: string]>(),
 
-	/* --------------------------------------------- Attributes --------------------------------------------- */
+	/* -- Attributes -- */
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 
-	/* --------------------------------------------- Progression -------------------------------------- */
+	/* -- Progression -- */
 	AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
 
-	/* --------------------------------------------- Abilities ------------------------------------------------- */
+	/* -- Abilities -- */
 	//ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
 	CastRequest: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
 	GetAbilities: Net.Definitions.ServerFunction<() => AbilityKey[] | undefined>(),
 	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),
 
-	/* --------------------------------------------- Profile Data --------------------------------------------- */
+	/* -- Profile Data -- */
 	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
 
-	/* --------------------------------------------- Settings ------------------------------------------------- */
+	/* -- Settings -- */
 	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
 });
 
 export const ServerDispatch = Net.Definitions.Create({
-	/* --------------------------------------------- Battle Room ------------------------------------------------- */
+	/* -- Data Profile -- */
+	ProfileData: Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
+	/* -- Battle Room -- */
 	RoomCountdown: Net.Definitions.ServerToClientEvent<[roomId: string, timeLeft: number]>(),
 
-	/* --------------------------------------------- Abilities ------------------------------------------------- */
-	AbilitiesUpdated: Net.Definitions.ServerToClientEvent<[abilities: ProfileDataMap["Abilities"]]>(),
-	AbilityBarUpdated: Net.Definitions.ServerToClientEvent<[abilities: AbilityKey[]]>(),
-
-	/* --------------------------------------------- Progression ------------------------------------------------- */
-	ProgressionUpdated: Net.Definitions.ServerToClientEvent<[profileData: ProfileDataMap["Progression"]]>(),
-
-	/* --------------------------------------------- Attributes ------------------------------------------------- */
-	AttributesUpdated: Net.Definitions.ServerToClientEvent<[attributes: ProfileDataMap["Attributes"]]>(),
-
-	/* --------------------------------------------- Settings ------------------------------------------------- */
-	PlayerSettingsUpdated: Net.Definitions.ServerToClientEvent<[settings: ProfileDataMap["Settings"]]>(),
-
-	/* --------------------------------------------- Resources --------------------------------------------- */
-	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, current: number, max: number]>(),
+	/* -- Resources -- */
+	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, data: ResourceDTO]>(),
 });

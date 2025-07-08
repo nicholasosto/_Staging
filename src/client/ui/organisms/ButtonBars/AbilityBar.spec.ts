@@ -7,7 +7,7 @@ export = () => {
 	describe("AbilityBar UI", () => {
 		it("creates buttons for each equipped ability", () => {
 			const slice = AbilitySlice.getInstance();
-			slice.setAbilities(["fireball", "melee"]);
+			slice.UpdateAbilities(["fireball", "melee"]);
 			const bar = AbilityBarComponent();
 			expect(bar.IsA("Frame")).to.be.ok();
 		});

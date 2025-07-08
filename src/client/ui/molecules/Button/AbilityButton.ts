@@ -30,6 +30,7 @@ import { CooldownTimer } from "shared/classes/CooldownTimer";
 
 /*-- State Slice --*/
 import AbilitySlice from "client/states/AbilitySlice";
+import { CNet } from "client/network";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
@@ -66,7 +67,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 		},
 		OnClick: () => {
 			if (cooldownTimer.Progress.get() <= 0) {
-				AbilitySlice.getInstance().useAbility(abilityKey);
+				CNet.CastAbility(abilityKey);
 				cooldownTimer.start();
 			}
 		},

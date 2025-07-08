@@ -20,6 +20,7 @@
  *   shared/assets
  */
 
+import { Computed, Value } from "@rbxts/fusion";
 import { GameImages, GlassGradient, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
 
 // Resource Keys
@@ -66,7 +67,41 @@ export interface ResourceDTO {
 	// timestamp for last regen tick, status flags, etc.
 }
 
-export const DEFAULT_RESOURCES: Record<ResourceKey, ResourceDTO> = {
+export type ResourceDataMap = {
+	[Key in ResourceKey]: ResourceDTO;
+};
+
+export type ResourceStateMap = {
+	[Key in ResourceKey]: {
+		current: Value<number>;
+		max: Value<number>;
+		regenPerSecond?: Value<number>;
+		percent: Computed<number>;
+	};
+};
+
+export function createResourceState(key: ResourceKey, initialData?: ResourceDTO) {
+	const data = initialData || { current: 0, max: 100 };
+	return {
+		current: Value(data.current),
+		max: Value(data.max),
+		regenPerSecond: data.regenPerSecond !== undefined ? Value(data.regenPerSecond) : undefined,
+		percent: Computed(() => {
+			const current = data.current;
+			const max = data.max;
+			return max > 0 ? current / max : 0;
+		}),
+	};
+}
+
+export function createStateResources(initialData?: ResourceDataMap) {
+	return RESOURCE_KEYS.reduce((acc, key) => {
+		acc[key] = createResourceState(key, initialData?.[key]);
+		return acc;
+	}, {} as ResourceStateMap);
+}
+
+export const DEFAULT_RESOURCES: ResourceDataMap = {
 	Health: { current: 100, max: 100 },
 	Mana: { current: 50, max: 50, regenPerSecond: 5 },
 	Stamina: { current: 75, max: 75, regenPerSecond: 10 },

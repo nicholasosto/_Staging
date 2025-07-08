@@ -14,8 +14,6 @@ import {
 	ProgressionDTO,
 	DefaultProgression,
 } from "shared/definitions/ProfileDefinitions/Progression";
-import { CNet } from "client/network/ClientNetworkService";
-import { ServerDispatch } from "shared/network/Definitions";
 
 export default class ProgressionSlice {
 	private static instance: ProgressionSlice;
@@ -31,28 +29,17 @@ export default class ProgressionSlice {
 		this.ExperiencePercent = Computed(
 			() => this.Progression.Experience.get() / math.max(this.NextLevelExperience.get(), 1),
 		);
-		this.fetchFromServer();
-		this.setupListeners();
 	}
 
-	private async fetchFromServer() {
-		const data = (await CNet.GetProfileData("Progression")) as ProgressionDTO | undefined;
-		if (data) {
-			for (const key of PROGRESSION_KEYS) {
+	public UpdateProgression(data: ProgressionDTO) {
+		for (const key of PROGRESSION_KEYS) {
+			if (data[key] !== undefined) {
 				this.Progression[key].set(data[key]);
+			} else {
+				warn(`Progression key ${key} not found in provided data.`);
 			}
-			this.NextLevelExperience.set(data.NextLevelExperience);
 		}
-	}
-
-	private setupListeners() {
-		ServerDispatch.Client.Get("ProgressionUpdated").Connect((progress) => {
-			print("Progression updated:", progress);
-			for (const key of PROGRESSION_KEYS) {
-				this.Progression[key].set(progress[key]);
-			}
-			this.NextLevelExperience.set(progress.NextLevelExperience);
-		});
+		this.NextLevelExperience.set(data.NextLevelExperience ?? DefaultProgression.NextLevelExperience);
 	}
 
 	public static getInstance(): ProgressionSlice {

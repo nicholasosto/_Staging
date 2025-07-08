@@ -7,41 +7,35 @@
  * @description Reactive container for player resources like health and mana.
  */
 
-import { Value, Computed } from "@rbxts/fusion";
-import { ResourceKey, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
-import { ServerDispatch } from "shared/network/Definitions";
-
-export type ResourceState = {
-	Current: Value<number>;
-	Max: Value<number>;
-	Percent: Computed<number>;
-};
+import {
+	ResourceKey,
+	RESOURCE_KEYS,
+	DEFAULT_RESOURCES,
+	ResourceDTO,
+	createResourceState,
+	ResourceStateMap,
+} from "shared/definitions/Resources";
 
 export default class ResourceSlice {
 	private static instance: ResourceSlice;
 
-	public readonly Resources: Record<ResourceKey, ResourceState> = {} as never;
+	public readonly Resources: ResourceStateMap = {} as ResourceStateMap;
 
 	private constructor() {
-		for (const key of RESOURCE_KEYS) {
-			const data = DEFAULT_RESOURCES[key];
-			const current = Value(data.current);
-			const max = Value(data.max);
-			this.Resources[key] = {
-				Current: current,
-				Max: max,
-				Percent: Computed(() => current.get() / math.max(max.get(), 1)),
-			};
-		}
-		this.setupListeners();
+		this.UpdateResources(DEFAULT_RESOURCES);
 	}
 
-	private setupListeners() {
-		ServerDispatch.Client.Get("ResourceUpdated").Connect((key, current, max) => {
-			const res = this.Resources[key];
-			if (res) {
-				res.Current.set(current);
-				res.Max.set(max);
+	public UpdateResource(key: ResourceKey, data: ResourceDTO) {
+		this.Resources[key] = createResourceState(key, data);
+	}
+
+	public UpdateResources(resources: Record<ResourceKey, { current: number; max: number }>) {
+		RESOURCE_KEYS.forEach((key) => {
+			if (resources[key]) {
+				this.Resources[key] = createResourceState(key, resources[key]);
+			} else {
+				warn(`Resource ${key} not found in provided resources.`);
+				this.Resources[key] = createResourceState(key, { current: 0, max: 0 });
 			}
 		});
 	}

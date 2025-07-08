@@ -38,8 +38,8 @@ export function ResourceBar(resourceKey: ResourceKey) {
 		LayoutOrder: meta.layoutOrder,
 		Content: {
 			FillBar: BarMeter({
-				ProgressState: state.Percent,
-				MaxValue: state.Max,
+				ProgressState: state.percent,
+				MaxValue: state.max,
 				Gradient: meta.gradient,
 				Size: UDim2.fromScale(1, 1),
 				Text: meta.displayName,

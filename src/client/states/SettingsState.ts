@@ -53,6 +53,17 @@ export default class SettingsState {
 		}
 	}
 
+	public UpdateSettings(settings: PlayerSettings) {
+		for (const key of SETTING_KEYS) {
+			const setting = this.Settings[key];
+			if (setting && settings[key] !== undefined) {
+				setting.set(settings[key]);
+			} else {
+				warn(`Setting ${key} not found in SettingsState or provided settings.`);
+			}
+		}
+	}
+
 	public static getInstance(): SettingsState {
 		if (!this.instance) {
 			this.instance = new SettingsState();

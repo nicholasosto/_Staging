@@ -14,6 +14,7 @@ import AttributesSlice from "./AttributesSlice";
 import ProgressionSlice from "./ProgressionSlice";
 import CurrencySlice from "./CurrencySlice";
 import { StatusEffect } from "shared/definitions/StatusEffect";
+import { AbilityKey, ResourceDTO } from "shared";
 
 export default class PlayerState {
 	private static instance: PlayerState;
@@ -35,4 +36,9 @@ export default class PlayerState {
 		}
 		return this.instance;
 	}
+
+	public static updateAbilities(abilities: AbilityKey[]): void {
+		this.getInstance().Abilities.Abilities.set(abilities);
+	}
+	public static updateResources(resources: ResourceDTO): void {}
 }
