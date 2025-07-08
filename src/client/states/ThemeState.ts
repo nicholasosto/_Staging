@@ -12,6 +12,13 @@
  * ╰───────────────────────────────╯
  */
 
+/**
+ * @author       Codex
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ */
+
 import Fusion from "@rbxts/fusion";
 import { ThemeKey, DEFAULT_THEME } from "../../theme/ThemeKey";
 import { cyberGothic } from "../../theme/tokens/cyberGothic";

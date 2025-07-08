@@ -1,7 +1,7 @@
 /**
- * @file        ScreenState.ts
+ * @file        src/client/states/ScreenState.ts
  * @module      ScreenState
- * @layer       shared/states
+ * @layer       Client/State
  * @description Manages the visibility state of various game screens.
  *
  * ╭──────────────────────────────╮
@@ -10,7 +10,9 @@
  * ╰──────────────────────────────╯
  *
  * @since        0.1.0
- * @lastUpdated  2025-06-10 by Trembus
+ * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ * @author       Codex
+ * @license      MIT
  */
 
 import { Value } from "@rbxts/fusion";

@@ -7,6 +7,13 @@
  * @description Reactive container for player attribute values.
  */
 
+/**
+ * @author       Codex
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ */
+
 import { Value } from "@rbxts/fusion";
 import {
 	ATTR_KEYS,
