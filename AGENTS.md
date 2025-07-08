@@ -84,6 +84,8 @@ import Fusion from "@rbxts/fusion";
 5. [AGENTS_TASK_TEMPLATE.md](./src/AGENTS_TASK_TEMPLATE.md) – for creating new tasks and components.
 6. [Tasks Folder](./tasks) – for storing tasks and components created by agents. and using the new task system.
 
+7. [Nx Agents Guide](./Documents/NxAgentsGuide.md) – how to run Nx targets and maintain the toolchain.
+
 ## 7 CodexUtility Section
 
 A workspace-level folder named `codexUtility` houses automation scripts and utilities that operate on both the TypeScript source (`src/`) and the compiled Lua output (`out/`), as well as project configuration and packaging files.
