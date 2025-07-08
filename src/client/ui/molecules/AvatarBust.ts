@@ -15,10 +15,10 @@ export const AvatarBust = (userId: number, layoutOrder?: number) => {
 		)[0] as string, // Get the first image URL
 	});
 
-       return BaseContainer({
-               Name: "AvatarBust",
-               Size: new UDim2(0, 100, 0, 100),
-               BackgroundTransparency: 1,
+	return BaseContainer({
+		Name: "AvatarBust",
+		Size: new UDim2(0, 100, 0, 100),
+		BackgroundTransparency: 1,
 		BorderImage: BorderImage.GothicMetal(),
 		Content: {
 			Image: avatarImage,

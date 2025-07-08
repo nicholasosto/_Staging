@@ -19,8 +19,8 @@ export function LevelGem() {
 		labelValue.set(`Lv ${level.get()}`);
 	});
 
-       return BaseContainer({
-               Name: "LevelGem",
+	return BaseContainer({
+		Name: "LevelGem",
 		Size: new UDim2(0, 60, 0, 60),
 		BackgroundTransparency: 1,
 		Content: {

@@ -28,26 +28,26 @@ import { GemSlotKey } from "shared";
 const Key: ScreenKey = "GemForge";
 
 const GemSlot = (slotKey: GemSlotKey) => {
-       const container = ListContainer({
-               Name: `${Key}_${slotKey}Slot`,
-               Size: new UDim2(1, 0, 0, 100),
-               Padding: Padding(5),
-               LayoutOrientation: "horizontal",
-               BackgroundTransparency: 0,
-               Content: [],
-       });
+	const container = ListContainer({
+		Name: `${Key}_${slotKey}Slot`,
+		Size: new UDim2(1, 0, 0, 100),
+		Padding: Padding(5),
+		LayoutOrientation: "horizontal",
+		BackgroundTransparency: 0,
+		Content: [],
+	});
 
 	return container;
 };
 
 const GemSlotContainer = () => {
-       const SubPanel = ListContainer({
-               Name: `${Key}_SlotPanel`,
-               Size: new UDim2(0.5, 0, 1, 0),
-               Padding: Padding(5),
-               LayoutOrientation: "vertical",
-               BackgroundTransparency: 0.5,
-               Content: {
+	const SubPanel = ListContainer({
+		Name: `${Key}_SlotPanel`,
+		Size: new UDim2(0.5, 0, 1, 0),
+		Padding: Padding(5),
+		LayoutOrientation: "vertical",
+		BackgroundTransparency: 0.5,
+		Content: {
 			FormSlot: GemSlot("FORM"),
 			AbilitySlot: GemSlot("ABILITY"),
 			PhysicalSlot: GemSlot("PHYSICAL"),

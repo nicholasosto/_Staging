@@ -60,9 +60,9 @@ export function BarMeter(props: BarMeterProps) {
 	});
 
 	/* Container */
-       const container = BaseContainer({
-               Name: "BarMeter",
-               Size: props.Size ?? ComponentSizes.ResourceBar,
+	const container = BaseContainer({
+		Name: "BarMeter",
+		Size: props.Size ?? ComponentSizes.ResourceBar,
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
 		Position: props.Position ?? new UDim2(0.5, 0, 0.5, 0),
 		BorderImage: BorderImage.GothicMetal(),

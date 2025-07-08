@@ -41,28 +41,28 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 		Size: UDim2.fromScale(1, 0.3),
 	});
 
-       return ListContainer({
-               Name: `AbilityInfoPanel-${abilityKey}`,
-               Size: UDim2.fromOffset(300, 200),
-               LayoutOrientation: "vertical",
-               Gap: 2,
+	return ListContainer({
+		Name: `AbilityInfoPanel-${abilityKey}`,
+		Size: UDim2.fromOffset(300, 200),
+		LayoutOrientation: "vertical",
+		Gap: 2,
 
 		Content: {
-                       TopRow: ListContainer({
-                               Name: `TopRow-${abilityKey}`,
-                               LayoutOrientation: "horizontal",
-                               Gap: 2,
-                               Size: UDim2.fromScale(1, 0.3),
+			TopRow: ListContainer({
+				Name: `TopRow-${abilityKey}`,
+				LayoutOrientation: "horizontal",
+				Gap: 2,
+				Size: UDim2.fromScale(1, 0.3),
 				Content: {
 					AbilityIcon: abilityIcon,
 					AbilityName: abilityName,
 				},
 			}),
-                       BottomRow: ListContainer({
-                               Name: `BottomRow-${abilityKey}`,
-                               LayoutOrientation: "vertical",
-                               Gap: 2,
-                               Size: UDim2.fromScale(1, 0.7),
+			BottomRow: ListContainer({
+				Name: `BottomRow-${abilityKey}`,
+				LayoutOrientation: "vertical",
+				Gap: 2,
+				Size: UDim2.fromScale(1, 0.7),
 				Content: {
 					AbilityDescription: abilityDescription,
 					AbilityCooldown: abilityCooldown,

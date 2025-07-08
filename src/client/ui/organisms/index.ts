@@ -14,3 +14,4 @@ export * from "./ResourceBar";
 export * from "./CharacterInfoCard";
 export * from "./ButtonBars";
 export * from "./ProgressionCard";
+export * from "./AttributeControls";

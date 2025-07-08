@@ -32,8 +32,8 @@ import { Computed } from "@rbxts/fusion";
 export function ResourceBar(resourceKey: ResourceKey) {
 	const state = ResourceSlice.getInstance().Resources[resourceKey];
 	const meta = ResourceMeta[resourceKey];
-       const resourceBarContainer = BaseContainer({
-               Name: `${resourceKey}BarContainer`,
+	const resourceBarContainer = BaseContainer({
+		Name: `${resourceKey}BarContainer`,
 		Size: UDim2.fromScale(1, 0.3),
 		LayoutOrder: meta.layoutOrder,
 		Content: {
