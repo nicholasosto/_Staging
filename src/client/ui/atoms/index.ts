@@ -32,9 +32,9 @@
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
 
-export * from "./Button";
+export * from "./UIButton";
 export * from "./Container";
-export * from "./DragDetector";
-export * from "./Image";
-export * from "./Text";
-export * from "./Screen";
+export * from "./GameImage";
+export * from "./BorderImage";
+export * from "./GameText";
+export * from "./GameScreen";

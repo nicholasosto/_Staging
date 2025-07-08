@@ -13,7 +13,7 @@
  */
 
 import Fusion from "@rbxts/fusion";
-import { BaseContainer, BaseContainerProps } from "./BaseContainer";
+import { BaseContainer, BaseContainerProps } from "../BaseContainer";
 import { Layout } from "../../tokens";
 
 export interface GridContainerProps extends Partial<BaseContainerProps> {

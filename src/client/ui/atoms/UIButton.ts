@@ -14,9 +14,9 @@
 
 // -------------- Imports ------------- //
 import Fusion, { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
-import { GamePanel } from "../Container";
-import { GameText } from "../Text";
-import { BorderImage } from "../Image";
+import { GamePanel } from "./Container";
+import { GameText } from "./GameText";
+import { BorderImage } from "./BorderImage";
 import { GameImages } from "shared/assets";
 import { RarityKey } from "shared/definitions/Rarity";
 import { ButtonSizes } from "shared/constants/sizes";

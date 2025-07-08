@@ -3,7 +3,6 @@
 import { Value } from "@rbxts/fusion";
 import { BorderImage } from "../atoms";
 import { createAudio } from "shared/assets/audio";
-import { ImageTokens } from "./image";
 import { FillbarColors, PanelBackgroundColors, TextColors } from "./color";
 
 /**
@@ -129,7 +128,7 @@ export const createTheme = (theme: ThemeKey): ThemeProps => {
 		},
 
 		ResourceBars: {
-			BorderImage: Value(isZombie ? ImageTokens.ZombieTheme.BorderImage : ImageTokens.RobotTheme.BorderImage),
+			BorderImage: Value(isZombie ? BorderImage.GothicMetal() : BorderImage.RedThick()),
 			HealthBarColor: Value(isZombie ? FillbarColors.ZombieTheme.Health : FillbarColors.RobotTheme.Health),
 			ManaBarColor: Value(isZombie ? FillbarColors.ZombieTheme.Mana : FillbarColors.RobotTheme.Mana),
 			StaminaBarColor: Value(isZombie ? FillbarColors.ZombieTheme.Stamina : FillbarColors.RobotTheme.Stamina),

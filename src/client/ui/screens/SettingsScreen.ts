@@ -19,9 +19,7 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-
-import Fusion, { ForPairs } from "@rbxts/fusion";
-import { GameWindow, SettingListItem } from "../molecules";
+import { GameWindow } from "../molecules";
 import { ScreenKey, SettingsState } from "client/states";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";
@@ -30,26 +28,13 @@ const Key: ScreenKey = "Settings";
 export const SettingsScreen = () => {
 	const state = SettingsState.getInstance();
 	const keys = [...SETTING_KEYS] as SettingKey[];
-	const items = keys.map((key, index) =>
-		$tuple(
-			key,
-			SettingListItem({
-				SettingKey: key,
-				Size: new UDim2(1, 0, 0, 50),
-				Value: state.Settings[key],
-				LayoutOrder: index,
-				OnChanged: (val) => state.set(key, val),
-			}),
-		),
-	);
+
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
 		Content: {
 			Layout: Layout.VerticalSet(2),
-			SettingItems: items["map"]((item) => {
-				return item[1];
-			}),
+			SettingItems: {},
 		},
 	});
 };

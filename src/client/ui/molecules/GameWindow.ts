@@ -21,7 +21,7 @@
  */
 
 import Fusion, { Children, New, OnEvent } from "@rbxts/fusion";
-import { GameButton, GamePanel } from "../atoms";
+import { BaseContainer, GamePanel } from "../atoms";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
 import { ScreenKey, ScreenState } from "client/states";
@@ -60,7 +60,7 @@ export function GameWindow(props: GameWindowProps) {
 	});
 
 	/* Window Content */
-	const windowContent = GamePanel({
+	const windowContent = BaseContainer({
 		Name: "WindowContent",
 		Size: UDim2.fromScale(1, 0.9),
 		Position: UDim2.fromScale(0, 0.1),

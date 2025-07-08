@@ -19,7 +19,7 @@ import { GameImages } from "shared";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 
 /*-- Atoms --*/
-import { GameButton, GameImage, VerticalContainer } from "client/ui/atoms";
+import { UIButton, GameImage, VerticalContainer } from "client/ui/atoms";
 
 /*-- Molecules --*/
 import { BarMeter } from "client/ui/molecules/FillBar";
@@ -50,7 +50,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 	});
 
 	/* Image Button */
-	const button = GameButton({
+	const button = UIButton({
 		Size: UDim2.fromOffset(64, 64),
 		Image: GameImages.Ability.Background, // Background image for the button
 		BackgroundTransparency: 1,

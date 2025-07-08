@@ -32,7 +32,6 @@
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
 
-export * from "./helpers";
 export * from "./atoms";
 export * from "./molecules";
 export * from "./organisms";
