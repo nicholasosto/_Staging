@@ -35,6 +35,7 @@ const UpdateSettingSignal = ClientDispatch.Client.Get("UpdatePlayerSetting");
 /* Function Signals */
 const GetProfileDataSignal = ClientDispatch.Client.Get("GetData");
 
+/* Spawn Weapon Signal */
 const SpawnWeaponSignal = AdminNet.Client.Get("SPAWN_WEAPON");
 
 /* -- Abilities Functions -- */

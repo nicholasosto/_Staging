@@ -24,7 +24,7 @@ import { ServerDispatch } from "shared";
 /* ================================================ Events =============================================== */
 
 /* Profile Data */
-const ProfileData = ServerDispatch.Server.Get("ProfileData");
+const ProfileData = ServerDispatch.Server.Get("ProfileDataUpdated");
 
 /* Resources */
 const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");

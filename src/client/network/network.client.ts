@@ -4,12 +4,13 @@ import { ProgressionDTO } from "shared/definitions/ProfileDefinitions/Progressio
 
 const Events = {
 	/* -- Profile Data -- */
-	GetProfileData: ServerDispatch.Client.Get("ProfileData"),
+	ProfileDataUpdated: ServerDispatch.Client.Get("ProfileDataUpdated"),
 	ResourceUpdated: ServerDispatch.Client.Get("ResourceUpdated"),
 };
 
 /* --- Listeners --- */
-Events.GetProfileData.Connect((dataKey, data) => {
+Events.ProfileDataUpdated.Connect((dataKey, data) => {
+	print(`Client Listener: ProfileDataUpdated(${dataKey}) called.`, data);
 	switch (dataKey) {
 		case "Abilities":
 			AbilitySlice.getInstance().UpdateAbilities(data as AbilityKey[]);
@@ -26,5 +27,6 @@ Events.GetProfileData.Connect((dataKey, data) => {
 	}
 });
 Events.ResourceUpdated.Connect((key, data) => {
+	print(`Client Listener: ResourceUpdated(${key}) called.`, data);
 	ResourceSlice.getInstance().UpdateResource(key, data);
 });
