@@ -54,7 +54,8 @@ export const ClientDispatch = Net.Definitions.Create({
 
 export const ServerDispatch = Net.Definitions.Create({
 	/* -- Data Profile -- */
-	ProfileDataUpdated: Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
+	ProfileDataUpdated:
+		Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
 	/* -- Resources -- */
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, data: ResourceDTO]>(),
 });
