@@ -19,7 +19,7 @@ import { GameImages } from "shared";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 
 /*-- Atoms --*/
-import { UIButton, GameImage, VerticalContainer } from "client/ui/atoms";
+import { UIButton, GameImage, ListContainer } from "client/ui/atoms";
 
 /*-- Molecules --*/
 import { BarMeter } from "client/ui/molecules/FillBar";
@@ -71,9 +71,9 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 
 	// tick down timer using RunService or similar
 
-	return VerticalContainer({
+	return ListContainer({
 		Size: UDim2.fromOffset(80, 90),
-		//Layout: Layout.VerticalSet(2),
+		LayoutOrientation: "vertical",
 		Content: {
 			ButtonIcon: button,
 			CooldownBar: cooldownBar,

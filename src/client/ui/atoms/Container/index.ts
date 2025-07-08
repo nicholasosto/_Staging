@@ -8,7 +8,5 @@
  */
 
 export * from "../BaseContainer";
-export * from "./VerticalContainer";
-export * from "./HorizontalContainer";
-export * from "./GridContainer";
+export * from "./ListContainer";
 export * from "./GamePanel";

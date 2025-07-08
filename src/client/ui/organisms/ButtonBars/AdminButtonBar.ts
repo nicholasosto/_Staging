@@ -7,13 +7,13 @@
  * @description Horizontal bar of service test buttons for administrators.
  */
 
-import { HorizontalContainer } from "client/ui/atoms";
+import { ListContainer } from "client/ui/atoms";
 
 export const AdminButtonBar = () => {
-	const Component = HorizontalContainer({
+	const Component = ListContainer({
 		Name: "AdminButtonBar",
 		Size: UDim2.fromOffset(380, 50),
-		BackgroundTransparency: 0.5,
+		LayoutOrientation: "horizontal",
 		Gap: 5,
 		Content: {},
 	});

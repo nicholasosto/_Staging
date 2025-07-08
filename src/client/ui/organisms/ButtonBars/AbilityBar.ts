@@ -27,17 +27,17 @@
 
 import { Computed } from "@rbxts/fusion";
 import AbilitySlice from "client/states/AbilitySlice";
-import { HorizontalContainer } from "client/ui/atoms";
+import { ListContainer } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules/Button/AbilityButton";
 
 export function AbilityBarComponent(): Frame {
 	const abilitySlice = AbilitySlice.getInstance();
-	return HorizontalContainer({
+	return ListContainer({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),
 		AnchorPoint: new Vector2(0.5, 1),
 		Position: new UDim2(0.5, 0, 1, -10),
-		BackgroundTransparency: 0.5,
+		LayoutOrientation: "horizontal",
 		Content: {
 			Buttons: Computed(() => {
 				const list = abilitySlice.Abilities.get();

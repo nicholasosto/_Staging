@@ -6,8 +6,7 @@
  * @layer       Client/Organisms
  * @description Horizontal container of HUD menu buttons.
  */
-import { ForValues } from "@rbxts/fusion";
-import { HorizontalContainer } from "client/ui/atoms";
+import { ListContainer } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules/Button/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
 import { ScreenKey, ScreenOrder } from "client/states";
@@ -18,10 +17,12 @@ export interface HudMenuBarProps {
 }
 
 export const HUDMenuBar = (props: HudMenuBarProps) => {
-	const container = HorizontalContainer({
+	const container = ListContainer({
 		Name: "HUDMenuBar",
 		Size: new UDim2(0, 380, 0, 56),
 		Gap: 5,
+		LayoutOrientation: "horizontal",
+		BackgroundTransparency: 1,
 		LayoutOrder: props.layoutOrder ?? 0,
 		Content: props.ScreenStateKeys.map((value) => {
 			return HUDMenuButton({

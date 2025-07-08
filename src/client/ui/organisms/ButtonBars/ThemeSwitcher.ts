@@ -22,7 +22,7 @@
 import Fusion from "@rbxts/fusion";
 import { ThemeState } from "client/states/ThemeState";
 import { ThemeKey } from "theme";
-import { HorizontalContainer, UIButton } from "client/ui/atoms";
+import { ListContainer, UIButton } from "client/ui/atoms";
 
 const { Value, Computed } = Fusion;
 
@@ -54,9 +54,9 @@ const themeButtons = {
 };
 
 export const ThemeSwitcher = () => {
-	const component = HorizontalContainer({
+	const component = ListContainer({
 		Size: new UDim2(1, 0, 0.1, 0),
-		LayoutOrder: 1,
+		LayoutOrientation: "horizontal",
 		Gap: 10,
 		Content: {
 			CyberGothic: themeButtons[ThemeKey.CyberGothic](),

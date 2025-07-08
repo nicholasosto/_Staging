@@ -8,7 +8,7 @@
  */
 
 import Fusion, { Computed, Value } from "@rbxts/fusion";
-import { GameText, HorizontalContainer, UIButton } from "client/ui/atoms";
+import { GameText, ListContainer, UIButton } from "client/ui/atoms";
 import { GameImages } from "shared";
 
 /* ----------------------------- Incrementor Component ----------------------------- */
@@ -77,9 +77,10 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 	});
 	const DecrementButton = Decrementor({ value, amount, OnDecrement, LayoutOrder: 0 });
 
-	const container = HorizontalContainer({
+	const container = ListContainer({
+		Name: "CombinedAdjustor",
+		LayoutOrientation: "horizontal",
 		Size: new UDim2(0, 100, 0, 50),
-		LayoutOrder: props.LayoutOrder,
 		Gap: 10,
 		Content: {
 			Incrementor: IncrementButton,

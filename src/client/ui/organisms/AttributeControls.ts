@@ -1,7 +1,7 @@
 import { ATTR_KEYS, AttributeKey, AttributesMeta } from "shared";
 import { CombinedAdjustor, CombinedAdjustorProps } from "../molecules/Controls";
 import PlayerState from "client/states/PlayerState";
-import { GameImage, GameText, HorizontalContainer, VerticalContainer } from "../atoms";
+import { GameImage, GameText, ListContainer } from "../atoms";
 import { Value } from "@rbxts/fusion";
 
 interface AttributeControlsProps {
@@ -25,16 +25,21 @@ function AttributeControl(props: AttributeControlsProps) {
 		amount: 1,
 	});
 
-	const container = HorizontalContainer({
-		Name: `AttributeControl-${props.attributeKey}`,
-		Size: new UDim2(1, 0, 0, 50),
-		BackgroundTransparency: 1,
+	const container = ListContainer({
 		Gap: 10,
+		LayoutOrientation: "horizontal",
+		AlignmentType: Enum.HorizontalAlignment.Center,
 		Content: {
 			Icon: icon,
-			Text: displayText,
+			DisplayText: displayText,
 			Controller: controller,
 		},
+		Size: new UDim2(1, 0, 0, 50),
+		BackgroundTransparency: 1,
+		AnchorPoint: new Vector2(0.5, 0.5),
+		Position: new UDim2(0.5, 0, 0, 0),
+		Name: `AttributeControl_${props.attributeKey}`,
+		LayoutOrder: 0,
 	});
 	return container;
 }
@@ -44,16 +49,17 @@ export function AttributeControls() {
 		return AttributeControl({ attributeKey: key });
 	});
 
-	const container = VerticalContainer({
-		Name: "AttributeControls",
-		Size: new UDim2(0, 200, 0, 300),
+	const container = ListContainer({
+		Gap: 10,
+		LayoutOrientation: "vertical",
+		AlignmentType: Enum.VerticalAlignment.Center,
+		Content: controls,
+		Size: new UDim2(1, 0, 1, 0),
+		BackgroundTransparency: 1,
 		AnchorPoint: new Vector2(0.5, 0.5),
 		Position: new UDim2(0.5, 0, 0.5, 0),
-		LayoutOrder: 1,
-		BackgroundTransparency: 1,
-		Gap: 10,
-		Content: [...controls],
+		Name: "AttributeControlsContainer",
+		LayoutOrder: 0,
 	});
-
 	return container;
 }

@@ -14,7 +14,7 @@
 
 // -------------- Imports ------------- //
 import Fusion, { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
-import { GamePanel } from "./Container";
+import { BaseContainer, GamePanel } from "./Container";
 import { GameText } from "./GameText";
 import { BorderImage } from "./BorderImage";
 import { GameImages } from "shared/assets";
@@ -134,7 +134,7 @@ export const UIButton = (props: UIButtonProps) => {
 	});
 
 	if (variant === "panel") {
-		return GamePanel({
+		return BaseContainer({
 			Name: `${props.Name ?? "UIButton"}Panel`,
 			Size: props.Size ?? ButtonSizes.Icon(),
 			BackgroundTransparency: 0.2,
