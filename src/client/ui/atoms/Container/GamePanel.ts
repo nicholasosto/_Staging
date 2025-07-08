@@ -19,6 +19,7 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  *
+ * @deprecated Use BaseContainer or ListContainer instead.
  */
 
 import Fusion, { New, Children, Computed, Value, OnEvent, PropertyTable } from "@rbxts/fusion";

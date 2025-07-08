@@ -13,16 +13,19 @@
  */
 
 import Fusion, { Children } from "@rbxts/fusion";
+import { useToken } from "theme/hooks";
 
 export interface ListContainerProps extends Partial<Fusion.PropertyTable<Frame>> {
-	Gap?: number;
-	LayoutOrientation: "vertical" | "horizontal";
-	Content?: Fusion.ChildrenValue;
-	AlignmentType?: Enum.HorizontalAlignment | Enum.VerticalAlignment;
+        Gap?: number;
+        LayoutOrientation: "vertical" | "horizontal";
+        Content?: Fusion.ChildrenValue;
+        AlignmentType?: Enum.HorizontalAlignment | Enum.VerticalAlignment;
+       Padding?: UIPadding;
 }
 
 export const ListContainer = (props: ListContainerProps) => {
-	const uiListLayout = Fusion.New("UIListLayout")({
+       const bg = useToken("panelBg");
+       const uiListLayout = Fusion.New("UIListLayout")({
 		SortOrder: Enum.SortOrder.LayoutOrder,
 		FillDirection:
 			props.LayoutOrientation === "horizontal" ? Enum.FillDirection.Horizontal : Enum.FillDirection.Vertical,
@@ -41,12 +44,14 @@ export const ListContainer = (props: ListContainerProps) => {
 		Name: "ListContainer",
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		Position: props.Position ?? UDim2.fromScale(0, 0),
-		BackgroundTransparency: props.BackgroundTransparency ?? 1,
+               BackgroundColor3: props.BackgroundColor3 ?? bg,
+               BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
-		[Children]: {
-			Layout: uiListLayout,
-			...props.Content,
-		},
+               [Children]: {
+                       Layout: uiListLayout,
+                       Padding: props.Padding,
+                       ...props.Content,
+               },
 	});
 
 	return Component;

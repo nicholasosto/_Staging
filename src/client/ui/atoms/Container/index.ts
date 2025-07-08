@@ -9,4 +9,3 @@
 
 export * from "../BaseContainer";
 export * from "./ListContainer";
-export * from "./GamePanel";

@@ -22,7 +22,7 @@
  */
 
 // -------------- Imports ----------------------------------------------------- //
-import { GamePanel } from "client/ui/atoms"; // absolute alias
+import { BaseContainer } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules/FillBar/BarMeter";
 import ResourceSlice from "client/states/ResourceSlice";
 import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
@@ -32,8 +32,8 @@ import { Computed } from "@rbxts/fusion";
 export function ResourceBar(resourceKey: ResourceKey) {
 	const state = ResourceSlice.getInstance().Resources[resourceKey];
 	const meta = ResourceMeta[resourceKey];
-	const resourceBarContainer = GamePanel({
-		Name: `${resourceKey}BarContainer`,
+       const resourceBarContainer = BaseContainer({
+               Name: `${resourceKey}BarContainer`,
 		Size: UDim2.fromScale(1, 0.3),
 		LayoutOrder: meta.layoutOrder,
 		Content: {

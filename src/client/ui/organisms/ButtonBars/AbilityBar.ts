@@ -19,7 +19,7 @@
  *  The buttons are dynamically generated based on the abilities available to the player.
  *  The component uses Fusion for reactive UI updates and layout management.
  *  It is designed to be flexible and easily extendable for future abilities.
- *  The component is styled using the GamePanel atom for consistent UI appearance.
+ *  The component is styled using the ListContainer atom for consistent UI appearance.
  *  The buttons are arranged horizontally with a set layout and spacing.
  *  The component is intended to be used within the player HUD screen, providing quick access to
  *  abilities during gameplay.

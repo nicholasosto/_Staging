@@ -7,7 +7,7 @@
  * @description Displays the player's current level as a gem icon.
  */
 
-import { GameImage, GamePanel, GameText } from "../atoms";
+import { GameImage, BaseContainer, GameText } from "../atoms";
 import { GameImages } from "shared/assets";
 import { Value, Observer } from "@rbxts/fusion";
 import ProgressionSlice from "client/states/ProgressionSlice";
@@ -19,8 +19,8 @@ export function LevelGem() {
 		labelValue.set(`Lv ${level.get()}`);
 	});
 
-	return GamePanel({
-		Name: "LevelGem",
+       return BaseContainer({
+               Name: "LevelGem",
 		Size: new UDim2(0, 60, 0, 60),
 		BackgroundTransparency: 1,
 		Content: {

@@ -14,7 +14,7 @@
 
 // -------------- Imports ------------- //
 import Fusion, { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
-import { BaseContainer, GamePanel } from "./Container";
+import { BaseContainer } from "./Container";
 import { GameText } from "./GameText";
 import { BorderImage } from "./BorderImage";
 import { GameImages } from "shared/assets";
