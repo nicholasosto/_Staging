@@ -12,23 +12,10 @@ import { HUDMenuBar, AbilityBarComponent, AdminButtonBar, ProgressionCard } from
 import { CharacterInfoCard } from "../organisms";
 import { Padding } from "../tokens";
 import { SCREEN_KEYS } from "client/states";
-import { GameImages } from "shared";
-import { ClientSend } from "client/network";
 import { ThemeSwitcher } from "../organisms/ButtonBars/ThemeSwitcher";
+import { AttributeControls } from "../organisms/AttributeControls";
 
 /* =============================================== Player HUD Screen ============================================= */
-
-const SpawnModelButton = UIButton({
-	Icon: GameImages.Ability.Spirit_Circles,
-	OnClick: () => {
-		ClientSend.SpawnWeapon();
-	},
-	Size: new UDim2(0, 64, 0, 64),
-	Position: new UDim2(0, 0, 1, -74),
-	AnchorPoint: new Vector2(0, 1),
-	BackgroundTransparency: 1,
-	Label: "Spawn Weapon",
-});
 
 export const PlayerHUDScreen = () => {
 	const HudMenuBar = HUDMenuBar({
@@ -50,7 +37,7 @@ export const PlayerHUDScreen = () => {
 					CharacterInfoCard: CharacterInfoCard(0),
 					MenuBar: HudMenuBar,
 					ProgressionCard: ProgressionCard(1),
-					SpawnModel: SpawnModelButton,
+					AttributeControls: AttributeControls(),
 				},
 			}),
 			ThemeSwitcher: ThemeSwitcher(),

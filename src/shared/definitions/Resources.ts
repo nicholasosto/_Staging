@@ -108,8 +108,8 @@ export function createStateResources(initialData?: ResourceDataMap) {
 
 export const DEFAULT_RESOURCES: ResourceDataMap = {
 	Health: { current: 100, max: 100 },
-	Mana: { current: 50, max: 50, regenPerSecond: 5 },
-	Stamina: { current: 75, max: 75, regenPerSecond: 10 },
+	Mana: { current: 90, max: 90, regenPerSecond: 5 },
+	Stamina: { current: 15, max: 95, regenPerSecond: 10 },
 } as const;
 
 /** Type-safe lookup: returns meta & dto bundled for convenience */

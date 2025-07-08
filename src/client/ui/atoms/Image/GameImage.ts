@@ -43,6 +43,7 @@ export function GameImage(props: GameImageProps): ImageLabel {
 		SliceCenter: props.SliceCenter ?? new Rect(0, 0, 0, 0),
 		ImageRectOffset: props.ImageRectOffset ?? new Vector2(0, 0),
 		ImageRectSize: props.ImageRectSize ?? new Vector2(0, 0),
+		LayoutOrder: props.LayoutOrder ?? 0,
 		[Children]: {
 			RatioConstraint: props.RatioConstraint
 				? New("UIAspectRatioConstraint")({

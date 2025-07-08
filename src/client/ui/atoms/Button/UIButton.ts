@@ -59,6 +59,8 @@ export interface UIButtonProps extends PropertyTable<ImageButton> {
 	Draggable?: boolean;
 	Selected?: boolean;
 
+	LayoutOrder?: number;
+
 	/* Content */
 
 	/* Event handlers */
@@ -95,6 +97,7 @@ export const UIButton = (props: UIButtonProps) => {
 		Size: props.Size ?? ButtonSizes.Icon(),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
 		Position: props.Position ?? UDim2.fromScale(0.5, 0.5),
+		LayoutOrder: props.LayoutOrder,
 		BackgroundTransparency: variant === "flat" ? 1 : (props.BackgroundTransparency ?? 0),
 		BackgroundColor3: variant === "panel" ? background : (props.BackgroundColor3 ?? new Color3(1, 1, 1)),
 		Image: resolveIcon(props.Icon),

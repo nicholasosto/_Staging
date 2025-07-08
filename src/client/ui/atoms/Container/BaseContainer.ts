@@ -17,6 +17,7 @@ import { useToken } from "theme/hooks";
 
 export interface BaseContainerProps extends PropertyTable<Frame> {
 	Padding?: UIPadding;
+	LayoutOrder?: number;
 	BorderImage?: ImageLabel;
 	Content?: Fusion.ChildrenValue;
 }
@@ -32,6 +33,7 @@ export const BaseContainer = (props: BaseContainerProps) => {
 		BackgroundColor3: props.BackgroundColor3 ?? bg,
 		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,
 		LayoutOrder: props.LayoutOrder ?? 0,
+		ZIndex: props.ZIndex ?? 1,
 		[Children]: {
 			Padding: props.Padding,
 			BorderImage: props.BorderImage,
