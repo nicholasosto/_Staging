@@ -11,9 +11,27 @@
       "options": {
         "command": "rbxtsc --project tsconfig.json"
       },
-      "outputs": ["out/**"]
+      "outputs": [
+        "out/**"
+      ]
     },
-    "lint":  { "executor": "nx:run-commands", "options": { "command": "biome lint ." } },
-"format":{ "executor": "nx:run-commands", "options": { "command": "biome format --write ." } }
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome lint ."
+      }
+    },
+    "format": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "biome format --write ."
+      }
+    },
+    "generate-script": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node tools/script-template.js"
+      }
+    }
   }
 }
