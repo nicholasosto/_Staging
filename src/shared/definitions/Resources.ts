@@ -81,17 +81,23 @@ export type ResourceStateMap = {
 };
 
 export function createResourceState(key: ResourceKey, initialData?: ResourceDTO) {
-	const data = initialData || { current: 0, max: 100 };
-	return {
-		current: Value(data.current),
-		max: Value(data.max),
-		regenPerSecond: data.regenPerSecond !== undefined ? Value(data.regenPerSecond) : undefined,
-		percent: Computed(() => {
-			const current = data.current;
-			const max = data.max;
-			return max > 0 ? current / max : 0;
-		}),
-	};
+        const data = initialData || { current: 0, max: 100 };
+
+        const currentValue = Value(data.current);
+        const maxValue = Value(data.max);
+        const regenValue =
+                data.regenPerSecond !== undefined ? Value(data.regenPerSecond) : undefined;
+
+        return {
+                current: currentValue,
+                max: maxValue,
+                regenPerSecond: regenValue,
+                percent: Computed(() => {
+                        const current = currentValue.get();
+                        const max = maxValue.get();
+                        return max > 0 ? current / max : 0;
+                }),
+        };
 }
 
 export function createStateResources(initialData?: ResourceDataMap) {
