@@ -7,6 +7,13 @@
  * @description Lightweight wrapper exposing client state slices.
  */
 
+/**
+ * @author       Codex
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ */
+
 import { Value } from "@rbxts/fusion";
 import AbilitySlice from "./AbilitySlice";
 import ResourceSlice from "./ResourceSlice";

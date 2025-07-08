@@ -7,6 +7,13 @@
  * @description Reactive container for player resources like health and mana.
  */
 
+/**
+ * @author       Codex
+ * @license      MIT
+ * @since        0.1.0
+ * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ */
+
 import {
 	ResourceKey,
 	RESOURCE_KEYS,

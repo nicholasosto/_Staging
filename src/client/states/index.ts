@@ -1,9 +1,9 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        src/shared/states/index.ts
+ * @file        src/client/states/index.ts
  * @module      states
- * @layer       Shared
+ * @layer       Client/State
  * @description Barrel index file for the shared states module, exporting all state management utilities.
  */
 
