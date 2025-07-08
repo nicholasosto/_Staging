@@ -18,19 +18,15 @@ import { Computed, Children } from "@rbxts/fusion";
 import { GameImages } from "shared";
 import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 
-/*--- Tokens ---*/
-import { Layout } from "client/ui/tokens";
-
 /*-- Atoms --*/
-import { GameButton, GameImage, GamePanel, VerticalContainer } from "client/ui/atoms";
+import { GameButton, GameImage, VerticalContainer } from "client/ui/atoms";
 
 /*-- Molecules --*/
 import { BarMeter } from "client/ui/molecules/FillBar";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 
 /*-- State Slice --*/
-import AbilitySlice from "client/states/AbilitySlice";
-import { CNet } from "client/network";
+import { ClientSend } from "client/network";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
@@ -67,7 +63,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 		},
 		OnClick: () => {
 			if (cooldownTimer.Progress.get() <= 0) {
-				CNet.CastAbility(abilityKey);
+				ClientSend.UseAbility(abilityKey);
 				cooldownTimer.start();
 			}
 		},

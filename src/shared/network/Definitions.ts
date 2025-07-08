@@ -36,38 +36,25 @@ export const AdminNet = Net.Definitions.Create({
 });
 
 export const ClientDispatch = Net.Definitions.Create({
-	/* -- Gems -- */
-	AddGem: Net.Definitions.ClientToServerEvent<[gemId: string]>(),
-
-	/* -- Battle Room -- */
-	CreateRoom: Net.Definitions.ClientToServerEvent<[]>(),
-	JoinRoom: Net.Definitions.ClientToServerEvent<[roomId: string]>(),
-
 	/* -- Attributes -- */
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 
-	/* -- Progression -- */
-	AddExperience: Net.Definitions.ClientToServerEvent<[amount: number]>(),
-
 	/* -- Abilities -- */
-	//ActivateAbility: Net.Definitions.ServerFunction<(abilityKey: AbilityKey) => boolean>(),
-	CastRequest: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
-	GetAbilities: Net.Definitions.ServerFunction<() => AbilityKey[] | undefined>(),
+	UseAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+	AddAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
 	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),
 
 	/* -- Profile Data -- */
 	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
 
-	/* -- Settings -- */
+	/* -- Update Data -- */
 	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
+	ModifyAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 });
 
 export const ServerDispatch = Net.Definitions.Create({
 	/* -- Data Profile -- */
 	ProfileData: Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
-	/* -- Battle Room -- */
-	RoomCountdown: Net.Definitions.ServerToClientEvent<[roomId: string, timeLeft: number]>(),
-
 	/* -- Resources -- */
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, data: ResourceDTO]>(),
 });

@@ -26,9 +26,6 @@ import { ServerDispatch } from "shared";
 /* Profile Data */
 const ProfileData = ServerDispatch.Server.Get("ProfileData");
 
-/* Battle Rooms */
-const RoomCountdown = ServerDispatch.Server.Get("RoomCountdown");
-
 /* Resources */
 const ResourceUpdated = ServerDispatch.Server.Get("ResourceUpdated");
 
@@ -38,8 +35,5 @@ export const ServerSend = {
 	},
 	ResourceUpdated: (player: Player, key: ResourceKey, data: ResourceDTO) => {
 		ResourceUpdated.SendToPlayer(player, key, data);
-	},
-	RoomCountdown: (roomId: string, timeLeft: number) => {
-		RoomCountdown.SendToAllPlayers(roomId, timeLeft);
 	},
 };

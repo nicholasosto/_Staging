@@ -10,13 +10,10 @@
 import { GamePanel, GameScreen, UIButton, VerticalContainer } from "../atoms";
 import { HUDMenuBar, AbilityBarComponent, AdminButtonBar, ProgressionCard } from "client/ui/organisms";
 import { CharacterInfoCard } from "../organisms";
-import { Layout, Padding } from "../tokens";
+import { Padding } from "../tokens";
 import { SCREEN_KEYS } from "client/states";
-import { Value } from "@rbxts/fusion";
-import { StatusPanel } from "../organisms/ButtonBars/StatusPanel";
-import PlayerState from "client/states/PlayerState";
 import { GameImages } from "shared";
-import { CNet } from "client/network";
+import { ClientSend } from "client/network";
 import { ThemeSwitcher } from "../organisms/ButtonBars/ThemeSwitcher";
 
 /* =============================================== Player HUD Screen ============================================= */
@@ -24,7 +21,7 @@ import { ThemeSwitcher } from "../organisms/ButtonBars/ThemeSwitcher";
 const SpawnModelButton = UIButton({
 	Icon: GameImages.Ability.Spirit_Circles,
 	OnClick: () => {
-		CNet.SpawnWeapon();
+		ClientSend.SpawnWeapon();
 	},
 	Size: new UDim2(0, 64, 0, 64),
 	Position: new UDim2(0, 0, 1, -74),
@@ -33,20 +30,12 @@ const SpawnModelButton = UIButton({
 	Label: "Spawn Weapon",
 });
 
-interface PlayerHUDScreenProps {
-	CharacterInfoCard?: Frame;
-	HUDMenuBar?: Frame;
-	CurrencyInfo?: Frame;
-}
 
-const HudProps = {
-	CharacterInfoCard: CharacterInfoCard(),
-	HUDMenuBar: HUDMenuBar({
-		ScreenStateKeys: [...SCREEN_KEYS],
-	}),
-	CurrencyInfo: undefined, // Placeholder for future currency info
-};
 export const PlayerHUDScreen = () => {
+	const HudMenuBar = HUDMenuBar({
+		ScreenStateKeys: [...SCREEN_KEYS],
+		layoutOrder: 2,
+	});
 	/* HUD Container */
 	const HUDContainer = GamePanel({
 		Name: "HUDContainer",
@@ -59,10 +48,9 @@ export const PlayerHUDScreen = () => {
 				Size: new UDim2(0.5, 0, 1, 0),
 				BackgroundTransparency: 1,
 				Content: {
-					CharacterInfoCard: HudProps.CharacterInfoCard,
-					MenuBar: HudProps.HUDMenuBar,
-					CurrencyInfo: HudProps.CurrencyInfo,
-					ProgressionCard: ProgressionCard(3),
+					CharacterInfoCard: CharacterInfoCard(0),
+					MenuBar: HudMenuBar,
+					ProgressionCard: ProgressionCard(1),
 					SpawnModel: SpawnModelButton,
 				},
 			}),

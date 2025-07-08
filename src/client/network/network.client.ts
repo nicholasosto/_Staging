@@ -6,7 +6,6 @@ const Events = {
 	/* -- Profile Data -- */
 	GetProfileData: ServerDispatch.Client.Get("ProfileData"),
 	ResourceUpdated: ServerDispatch.Client.Get("ResourceUpdated"),
-	RoomCountdown: ServerDispatch.Client.Get("RoomCountdown"),
 };
 
 /* --- Listeners --- */
@@ -28,8 +27,4 @@ Events.GetProfileData.Connect((dataKey, data) => {
 });
 Events.ResourceUpdated.Connect((key, data) => {
 	ResourceSlice.getInstance().UpdateResource(key, data);
-});
-Events.RoomCountdown.Connect((roomId, timeLeft) => {
-	// Handle room countdown updates
-	print(`Room ${roomId} countdown: ${timeLeft} seconds left`);
 });

@@ -14,6 +14,7 @@ import { ScreenKey, ScreenOrder } from "client/states";
 
 export interface HudMenuBarProps {
 	ScreenStateKeys: ScreenKey[];
+	layoutOrder?: number;
 }
 
 export const HUDMenuBar = (props: HudMenuBarProps) => {
@@ -21,6 +22,7 @@ export const HUDMenuBar = (props: HudMenuBarProps) => {
 		Name: "HUDMenuBar",
 		Size: new UDim2(0, 380, 0, 56),
 		Gap: 5,
+		LayoutOrder: props.layoutOrder ?? 0,
 		Content: props.ScreenStateKeys.map((value) => {
 			return HUDMenuButton({
 				ScreenKey: value,

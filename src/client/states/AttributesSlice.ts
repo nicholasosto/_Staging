@@ -14,8 +14,6 @@ import {
 	AttributesDTO,
 	DefaultAttributes,
 } from "shared/definitions/ProfileDefinitions/Attributes";
-import { ServerDispatch } from "shared/network/Definitions";
-import { CNet } from "client/network/ClientNetworkService";
 
 export default class AttributesSlice {
 	private static instance: AttributesSlice;

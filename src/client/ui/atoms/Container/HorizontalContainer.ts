@@ -18,6 +18,7 @@ import { Layout } from "../../tokens";
 
 export interface HorizontalContainerProps extends Partial<BaseContainerProps> {
 	Gap?: number;
+	LayoutOrder?: number;
 }
 
 export const HorizontalContainer = (props: HorizontalContainerProps) => {
@@ -28,6 +29,7 @@ export const HorizontalContainer = (props: HorizontalContainerProps) => {
 
 	return BaseContainer({
 		...props,
+		LayoutOrder: props.LayoutOrder ?? 0,
 		Content: content,
 	});
 };

@@ -12,14 +12,13 @@
  * ╰───────────────────────────────╯
  */
 
-import Fusion, { Value } from "@rbxts/fusion";
+import { Value } from "@rbxts/fusion";
 import {
 	DefaultSettings,
 	PlayerSettings,
 	SETTING_KEYS,
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
-import { CNet } from "client/network/ClientNetworkService";
 
 export default class SettingsState {
 	private static instance: SettingsState;
@@ -28,28 +27,6 @@ export default class SettingsState {
 	private constructor() {
 		for (const key of SETTING_KEYS) {
 			this.Settings[key] = Value(DefaultSettings[key]);
-		}
-		this.fetchFromServer();
-	}
-
-	private async fetchFromServer() {
-		const data = await CNet.GetProfileData("Settings")
-			.andThen((settings) => {
-				return settings as PlayerSettings | undefined;
-			})
-			.catch((err) => {
-				warn(`Failed to fetch settings from server: ${err}`);
-				return undefined;
-			})
-			.finally(() => {
-				// Ensure we always have a valid settings object
-				return DefaultSettings;
-			});
-		if (data !== undefined) {
-			for (const key of SETTING_KEYS) {
-				const val = data[key];
-				this.Settings[key].set(val);
-			}
 		}
 	}
 
