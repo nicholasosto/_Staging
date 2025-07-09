@@ -1,5 +1,27 @@
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        GameText.ts
+ * @module      GameText
+ * @layer       Client/UI/Atoms
+ * @description Styled text label with hover-state bolding.
+ *
+ * ╭───────────────────────────────╮
+ * │  Soul Steel · Coding Guide    │
+ * │  Fusion v4 · Strict TS · ECS  │
+ * ╰───────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.0
+ * @lastUpdated  2025-07-08 by Codex – Header added
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import Fusion, { Computed, OnEvent, Value } from "@rbxts/fusion";
-import { useToken, useFont } from "theme/hooks";
+import { useToken } from "theme/hooks";
 
 export interface GameTextProps extends Fusion.PropertyTable<TextLabel> {
 	ShadowBox?: boolean;
@@ -8,7 +30,6 @@ export interface GameTextProps extends Fusion.PropertyTable<TextLabel> {
 }
 
 export function GameText(props: GameTextProps): TextLabel {
-	print("GameText Component Rendered", props.Size, props.TextStateValue.get());
 	const HoveredState = Value(false);
 	const colour = useToken("textPrimary");
 	const regularFont = new Font("SourceSans", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
