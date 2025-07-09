@@ -24,21 +24,22 @@
 // -------------- Imports ----------------------------------------------------- //
 import { BaseContainer, ListContainer } from "client/ui/atoms"; // absolute alias
 import { ResourceKey, ResourceMeta, ResourceState } from "shared/definitions/Resources";
-import { ProgressBar } from "../molecules";
+import { BarMeter } from "../molecules/FillBar";
 import { ResourceSlice } from "client/states";
+import Fusion from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
 	const state = resourceState;
 	const meta = ResourceMeta[resourceKey];
+	const { Spring, Computed } = Fusion;
 
-	/* ProgressBar Instance */
-	const ProgressBarInstance = ProgressBar({
-		Name: `${resourceKey}_ProgressBar`,
-		Progress: state.percent,
-		GradientColor: meta.gradient,
-		Size: UDim2.fromScale(1, 1),
-		Label: meta.displayName,
+	const progress = Computed(() => Spring(state.percent, 40, 1).get());
+
+	const ProgressBarInstance = BarMeter({
+		ProgressState: progress,
+		Gradient: meta.gradient,
+		Text: meta.displayName,
 	});
 
 	const resourceBarContainer = BaseContainer({
@@ -53,33 +54,15 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 }
 
 export const ResourceBars = () => {
-	const size = new UDim2(1, 0, 0, 100);
-	const healthBar = ProgressBar({
-		Label: "Health",
-		GradientColor: ResourceMeta.Health.gradient,
-		Progress: ResourceSlice.getInstance().Health.percent,
-		Size: size,
-	});
-	const manaBar = ProgressBar({
-		Label: "Mana",
-		GradientColor: ResourceMeta.Mana.gradient,
-		Progress: ResourceSlice.getInstance().Mana.percent,
-		Size: size,
-	});
-	const staminaBar = ProgressBar({
-		Label: "Stamina",
-		GradientColor: ResourceMeta.Stamina.gradient,
-		Progress: ResourceSlice.getInstance().Stamina.percent,
-		Size: size,
-	});
+	const slice = ResourceSlice.getInstance();
 	const resourceBars = ListContainer({
 		Name: "ResourceBars",
 		Size: new UDim2(1, 0, 1, 0),
 		LayoutOrientation: "vertical",
 		Content: {
-			HealthBar: healthBar,
-			ManaBar: manaBar,
-			StaminaBar: staminaBar,
+			HealthBar: ResourceBar("Health", slice.Health),
+			ManaBar: ResourceBar("Mana", slice.Mana),
+			StaminaBar: ResourceBar("Stamina", slice.Stamina),
 		},
 	});
 	return resourceBars;

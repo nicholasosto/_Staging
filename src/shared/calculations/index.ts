@@ -15,3 +15,4 @@
  */
 
 export * from "./ResourceCalculator";
+export * from "./calculateResources";
