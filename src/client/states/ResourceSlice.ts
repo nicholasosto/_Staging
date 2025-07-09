@@ -39,15 +39,22 @@ export default class ResourceSlice {
 		this.Stamina = states.Stamina;
 	}
 
+	/**
+	 * Apply a full resource snapshot to the local state.
+	 * @param data - Map of resource data keyed by resource name.
+	 */
 	public UpdateResources(data: ResourceDataMap): void {
-		print("Updating resources with data:", data);
 		(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
 			this.UpdateResource(key, data[key]);
 		});
 	}
 
+	/**
+	 * Update a single resource entry in place.
+	 * @param key - Resource identifier.
+	 * @param data - New resource values.
+	 */
 	public UpdateResource(key: ResourceKey, data: ResourceDTO): void {
-		print(`Updating resource ${key} with data:`, data);
 		switch (key) {
 			case "Health":
 				this._assign(this.Health, data);
