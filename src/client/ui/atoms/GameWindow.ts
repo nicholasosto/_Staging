@@ -21,12 +21,12 @@
  */
 
 import Fusion, { Children, New, OnEvent } from "@rbxts/fusion";
-import { BaseContainer } from "../atoms";
+import { BaseContainer } from ".";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
 import { ScreenKey, ScreenState } from "client/states";
 import { Padding } from "../tokens";
-import { ComponentSizes, Sizes } from "constants";
+import { ComponentSizes } from "constants";
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 	Title?: string;

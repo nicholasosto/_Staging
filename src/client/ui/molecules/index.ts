@@ -14,7 +14,7 @@ export * from "./Button";
 export * from "./FillBar";
 export * from "./AbilityInfoPanel";
 export * from "./CountdownTimer";
-export * from "./GameWindow";
+export * from "../atoms/GameWindow";
 export * from "./ExperienceBar";
 export * from "./LevelGem";
 export * from "./UserMessage";

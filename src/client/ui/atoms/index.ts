@@ -37,6 +37,7 @@ export * from "./BaseContainer";
 export * from "./BorderImage";
 export * from "./GameImage";
 export * from "./GameScreen";
+export * from "./GameWindow";
 export * from "./GameText";
 export * from "./ListContainer";
 export * from "./UIButton";

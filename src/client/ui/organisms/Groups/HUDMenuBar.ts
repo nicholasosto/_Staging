@@ -7,7 +7,7 @@
  * @description Horizontal container of HUD menu buttons.
  */
 import { ListContainer } from "client/ui/atoms";
-import { HUDMenuButton } from "client/ui/molecules/Button/HUDMenuButton";
+import { HUDMenuButton } from "client/ui/molecules/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
 import { SCREEN_KEYS, ScreenKey, ScreenOrder } from "client/states";
 import { Badge } from "client/ui/atoms/Badge";
@@ -21,7 +21,6 @@ export interface HudMenuBarProps {
 }
 
 export const HUDMenuBar = (props: HudMenuBarProps) => {
-
 	const container = ListContainer({
 		Name: "HUDMenuBar",
 		Size: props.Size ?? new UDim2(0, 380, 0, 56),

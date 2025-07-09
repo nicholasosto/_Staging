@@ -8,7 +8,7 @@
  */
 
 import Fusion, { Computed, Observer } from "@rbxts/fusion";
-import { BarMeter } from "./FillBar";
+import { BarMeter } from "./BarMeter";
 import ProgressionSlice from "client/states/ProgressionSlice";
 import { Gradients } from "shared/constants/gradients";
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";

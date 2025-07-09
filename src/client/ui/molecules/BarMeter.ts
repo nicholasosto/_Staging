@@ -21,7 +21,7 @@
  */
 
 import Fusion, { Children, New, Value, Computed, OnChange } from "@rbxts/fusion";
-import { BorderImage, BaseContainer, GameText } from "../../atoms";
+import { BorderImage, BaseContainer, GameText } from "../atoms";
 import { ComponentSizes } from "constants";
 
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {

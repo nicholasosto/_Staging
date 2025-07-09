@@ -28,7 +28,7 @@
 import { Computed } from "@rbxts/fusion";
 import AbilitySlice from "client/states/AbilitySlice";
 import { ListContainer } from "client/ui/atoms";
-import { AbilityButton } from "client/ui/molecules/Button/AbilityButton";
+import { AbilityButton } from "client/ui/molecules/AbilityButton";
 
 export function AbilityBarComponent(): Frame {
 	const abilitySlice = AbilitySlice.getInstance();

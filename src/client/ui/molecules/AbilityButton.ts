@@ -15,18 +15,11 @@
  *   @rbxts/fusion ^0.4.0
  */
 import { Computed, Children } from "@rbxts/fusion";
-import { GameImages } from "shared";
-import { AbilityKey, AbilitiesMeta } from "shared/definitions";
 
-/*-- Atoms --*/
 import { UIButton, GameImage, ListContainer } from "client/ui/atoms";
-
-/*-- Molecules --*/
-import { BarMeter } from "client/ui/molecules/FillBar";
-import { CooldownTimer } from "shared/classes/CooldownTimer";
-
-/*-- State Slice --*/
+import { BarMeter } from "./BarMeter";
 import { ClientSend } from "client/network";
+import { AbilityKey, AbilitiesMeta, CooldownTimer, GameImages } from "shared";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
