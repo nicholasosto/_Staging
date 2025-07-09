@@ -18,4 +18,3 @@
 export * from "../definitions/Animation";
 export * from "./audio";
 export * from "./image";
-export * from "./gradients";

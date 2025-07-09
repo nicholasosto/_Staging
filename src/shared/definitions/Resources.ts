@@ -21,10 +21,12 @@
  */
 
 import { Computed, Value } from "@rbxts/fusion";
-import { GameImages, GlassGradient, LavaGradient, OceanGradient, ShadowGradient } from "shared/assets";
+import { GameImages } from "shared/assets";
+import { Gradients } from "shared/constants/gradients";
 
 // Resource Keys
 export const RESOURCE_KEYS = ["Health", "Mana", "Stamina"] as const;
+const { HealthGradient, OceanGradient, GlassGradient } = Gradients;
 
 // Resource Types
 export type ResourceKey = (typeof RESOURCE_KEYS)[number];
@@ -42,7 +44,7 @@ export const ResourceMeta: Record<ResourceKey, ResourceMeta> = {
 	Health: {
 		displayName: "Health",
 		iconId: GameImages.Attributes.Vitality, // Use the Vitality icon for Health
-		gradient: LavaGradient(), // Use the LavaGradient for Health
+		gradient: HealthGradient(), // Use the HealthGradient for Health
 		layoutOrder: 1,
 	},
 	Mana: {

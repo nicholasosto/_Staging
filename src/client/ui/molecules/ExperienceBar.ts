@@ -10,7 +10,7 @@
 import Fusion, { Computed, Observer } from "@rbxts/fusion";
 import { BarMeter } from "./FillBar";
 import ProgressionSlice from "client/states/ProgressionSlice";
-import { ExperienceGradient } from "shared/assets";
+import { Gradients } from "shared/constants/gradients";
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
 import { createAudio } from "shared/assets/audio";
 import { TweenService } from "@rbxts/services";
@@ -30,7 +30,7 @@ export function ExperienceBar() {
 
 	const bar = BarMeter({
 		ProgressState: percent,
-		Gradient: ExperienceGradient(),
+		Gradient: Gradients.ExperienceGradient(),
 		Text: "Experience",
 	});
 

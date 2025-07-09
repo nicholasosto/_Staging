@@ -32,7 +32,7 @@
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
 
-export * from "../../../shared/assets/gradients";
+export * from "../../../shared/constants/gradients";
 export * from "./layouts";
 export * from "./padding";
 export * from "../../../shared/constants/sizes";

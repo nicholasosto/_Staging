@@ -1,37 +1,34 @@
-import { ListContainer } from "../atoms";
-import { ProgressBar } from "../molecules";
+/// <reference types="@rbxts/types" />
+
+/**
+ * @file        ResourceBars.ts                     ◄────── must match filename
+ * @module      ResourceBars                        ◄────── public import name
+ * @layer       Client/Organisms
+ * @description Composite organism that shows the
+ *              player's Health, Mana & Stamina.
+ *
+ * ╭───────────────────────────────────────────────╮
+ * │  Soul Steel · Coding Guide                   │
+ * │  Fusion v4 · Strict TS · ECS                 │
+ * ╰───────────────────────────────────────────────╯
+ *
+ * @author       Trembus
+ * @license      MIT
+ * @since        0.2.1
+ * @lastUpdated  2025-06-25 by Luminesa – Comment revamp
+ *
+ * @dependencies
+ *   @rbxts/fusion ^0.4.0
+ */
+
 import { Players } from "@rbxts/services";
+import { ListContainer } from "../atoms";
 import { AvatarBust } from "../molecules";
-import { ResourceSlice } from "client/states";
+import { ResourceBars } from "./ResourceBar";
 
 export const CharacterInfoCard = (layoutOrder?: number) => {
 	/* Avatar Bust */
 	const Avatar = AvatarBust(Players.LocalPlayer.UserId);
-	const AvatarWidth = Avatar.Size.X.Offset;
-
-	/* Resource Bars */
-	const ResourceBarContainer = ListContainer({
-		Name: "ResourceBars",
-		Size: new UDim2(1, -AvatarWidth, 1, 0),
-		LayoutOrientation: "vertical",
-		LayoutOrder: 2,
-		Content: {
-			HealthBar: ProgressBar({
-				Name: "Health",
-				Progress: ResourceSlice.getInstance().Health.percent,
-			}),
-			ManaBar: ProgressBar({
-				Name: "Mana",
-				Progress: ResourceSlice.getInstance().Mana.percent,
-			}),
-			StaminaBar: ProgressBar({
-				Name: "Stamina",
-				Progress: ResourceSlice.getInstance().Stamina.percent,
-			}),
-		},
-		BackgroundColor3: Color3.fromRGB(30, 30, 30),
-		BorderSizePixel: 0,
-	});
 
 	/* Organism */
 	const organism = ListContainer({
@@ -43,7 +40,7 @@ export const CharacterInfoCard = (layoutOrder?: number) => {
 		LayoutOrder: layoutOrder ?? 1,
 		Content: {
 			Avatar: AvatarBust(Players.LocalPlayer.UserId),
-			ResourceBars: ResourceBarContainer,
+			ResourceBars: ResourceBars(),
 		},
 	});
 

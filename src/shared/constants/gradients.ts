@@ -22,7 +22,24 @@
 
 import { New } from "@rbxts/fusion";
 
-export const ShadowGradient = () =>
+const HealthGradient = () =>
+	New("UIGradient")({
+		Name: "UIGradient",
+		Color: new ColorSequence([
+			new ColorSequenceKeypoint(0, Color3.fromRGB(225, 0, 4)),
+			new ColorSequenceKeypoint(0.953287, Color3.fromRGB(220, 0, 4)),
+			new ColorSequenceKeypoint(1, new Color3()),
+		]),
+		Rotation: 6,
+		Transparency: new NumberSequence([
+			new NumberSequenceKeypoint(0, 0),
+			new NumberSequenceKeypoint(0.746883, 0.00624996, 0.00624996),
+			new NumberSequenceKeypoint(0.916459, 0.33125, 0.0275246),
+			new NumberSequenceKeypoint(1, 0.9625, 0.0375),
+		]),
+	});
+
+const ShadowGradient = () =>
 	New("UIGradient")({
 		Name: "ShadowGradient",
 		Color: new ColorSequence([
@@ -39,7 +56,7 @@ export const ShadowGradient = () =>
 		Offset: new Vector2(0, 0.5),
 	});
 
-export const OldShadowGradient = () =>
+const OldShadowGradient = () =>
 	New("UIGradient")({
 		Name: "ContainerGradientTransparent",
 		Color: new ColorSequence([
@@ -56,7 +73,7 @@ export const OldShadowGradient = () =>
 /**
  * Warm sunrise style gradient.
  */
-export const SunriseGradient = () =>
+const SunriseGradient = () =>
 	New("UIGradient")({
 		Name: "SunriseGradient",
 		Color: new ColorSequence([
@@ -71,7 +88,7 @@ export const SunriseGradient = () =>
 /**
  * Simple blue gradient useful for backgrounds.
  */
-export const OceanGradient = () =>
+const OceanGradient = () =>
 	New("UIGradient")({
 		Name: "OceanGradient",
 		Color: new ColorSequence([
@@ -84,7 +101,7 @@ export const OceanGradient = () =>
 /**
  * Glass-like glow with transparent center.
  */
-export const GlassGradient = () =>
+const GlassGradient = () =>
 	New("UIGradient")({
 		Name: "GlassGradient",
 		Color: new ColorSequence([
@@ -105,7 +122,7 @@ export const GlassGradient = () =>
  * @returns {UIGradient} The lava gradient.
  * @since 0.2.0
  * 	*/
-export const LavaGradient = () =>
+const LavaGradient = () =>
 	New("UIGradient")({
 		Name: "LavaGradient",
 		Color: new ColorSequence([
@@ -120,7 +137,7 @@ export const LavaGradient = () =>
 /**
  * Purple-blue gradient used for the experience bar.
  */
-export const ExperienceGradient = () =>
+const ExperienceGradient = () =>
 	New("UIGradient")({
 		Name: "ExperienceGradient",
 		Color: new ColorSequence([
@@ -131,3 +148,14 @@ export const ExperienceGradient = () =>
 		Transparency: new NumberSequence(0),
 		Rotation: 90,
 	});
+
+export const Gradients = {
+	HealthGradient,
+	ShadowGradient,
+	OldShadowGradient,
+	SunriseGradient,
+	OceanGradient,
+	GlassGradient,
+	LavaGradient,
+	ExperienceGradient,
+};

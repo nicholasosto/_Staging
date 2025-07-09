@@ -15,3 +15,4 @@
  */
 
 export * from "./sizes";
+export * from "./gradients";
