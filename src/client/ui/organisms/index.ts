@@ -14,3 +14,4 @@ export * from "./Groups";
 export * from "./AttributeControls";
 export * from "./ProgressionCard";
 export * from "./ResourceBar";
+export * from "./HUDMenuButton";

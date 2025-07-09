@@ -7,7 +7,7 @@
  * @description Horizontal container of HUD menu buttons.
  */
 import { ListContainer } from "client/ui/atoms";
-import { HUDMenuButton } from "client/ui/molecules/HUDMenuButton";
+import { HUDMenuButton } from "client/ui/organisms/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
 import { SCREEN_KEYS, ScreenKey, ScreenOrder } from "client/states";
 import { Badge } from "client/ui/atoms/Badge";

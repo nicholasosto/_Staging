@@ -3,7 +3,7 @@
 /**
  * @file        HUDMenuButton.ts
  * @module      HUDMenuButton
- * @layer       Client/UI/Molecules/Button
+ * @layer       Client/UI/Organisms
  * @description Toggle button used in the HUD menu bar to show or hide screens.
  *
  * ╭───────────────────────────────╮
