@@ -26,7 +26,7 @@ import { BaseContainer, ListContainer } from "client/ui/atoms"; // absolute alia
 import { ResourceKey, ResourceMeta, ResourceState } from "shared/definitions/Resources";
 import { BarMeter } from "../molecules/FillBar";
 import { ResourceSlice } from "client/states";
-import Fusion from "@rbxts/fusion";
+import Fusion, { Observer, OnChange } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
@@ -35,6 +35,10 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 	const { Spring, Computed } = Fusion;
 
 	const progress = Computed(() => Spring(state.percent, 40, 1).get());
+
+	Observer(progress).onChange(() => {
+		warn(`Observer: ${resourceKey} progress changed to ${progress.get()}`);
+	});
 
 	const ProgressBarInstance = BarMeter({
 		ProgressState: progress,
@@ -53,12 +57,15 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 	return resourceBarContainer;
 }
 
-export const ResourceBars = () => {
+export const ResourceBars = (layoutOrder?: number) => {
 	const slice = ResourceSlice.getInstance();
 	const resourceBars = ListContainer({
 		Name: "ResourceBars",
 		Size: new UDim2(1, 0, 1, 0),
 		LayoutOrientation: "vertical",
+		LayoutOrder: layoutOrder ?? 1,
+		FlexMode: "Shrink",
+		Gap: 1.5,
 		Content: {
 			HealthBar: ResourceBar("Health", slice.Health),
 			ManaBar: ResourceBar("Mana", slice.Mana),

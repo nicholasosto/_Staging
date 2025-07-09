@@ -1,3 +1,3 @@
-export * from "./AbilityBar";
-export * from "./HUDMenuBar";
-export * from "./AdminButtonBar";
+export * from "../Groups/AbilityBar";
+export * from "../Groups/HUDMenuBar";
+export * from "../Groups/AdminButtonBar";

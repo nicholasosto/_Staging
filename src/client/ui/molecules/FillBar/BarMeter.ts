@@ -20,7 +20,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion, { Children, New, Value, Computed } from "@rbxts/fusion";
+import Fusion, { Children, New, Value, Computed, OnChange } from "@rbxts/fusion";
 import { BorderImage, BaseContainer, GameText } from "../../atoms";
 import { ComponentSizes } from "constants";
 
@@ -37,14 +37,18 @@ export function BarMeter(props: BarMeterProps) {
 
 	/* Fill Bar */
 	const fillBar = New("Frame")({
-		Name: "FillBar",
+		Name: "FillBar2",
 		Size: Computed(() => {
-			const progress = props.ProgressState?.get() ?? 0;
-			return new UDim2(progress, 0, 1, 0);
+			const size = UDim2.fromScale(props.ProgressState?.get() ?? 0, 1);
+			return size;
 		}),
 		ZIndex: 90,
 		[Children]: {
 			Gradient: props.Gradient ?? {},
+		},
+		[OnChange("Size")]: (newSize: UDim2) => {
+			// Debugging output to track size changes
+			print(`FillBar size changed to: ${newSize}`);
 		},
 	});
 

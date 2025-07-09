@@ -22,25 +22,29 @@
  */
 
 import { Players } from "@rbxts/services";
-import { ListContainer } from "../atoms";
-import { AvatarBust } from "../molecules";
-import { ResourceBars } from "./ResourceBar";
-import { Badge } from "../atoms";
-import { Value } from "@rbxts/fusion";
+import { ListContainer, AvatarBust } from "client/ui/atoms";
+import { ResourceBars } from "../ResourceBar";
 
-export const CharacterInfoCard = (layoutOrder?: number) => {
+export interface CharacterInfoCardProps {
+	Size?: UDim2;
+	Position?: UDim2;
+	AnchorPoint?: Vector2;
+	LayoutOrder?: number;
+}
+
+export const CharacterInfoCard = (props: CharacterInfoCardProps) => {
 	/* Organism */
 	const organism = ListContainer({
 		Name: "CharacterInfoCard",
-		Size: new UDim2(0, 300, 0, 105),
-		BackgroundTransparency: 0.5,
+		Size: props.Size ?? new UDim2(0, 300, 0, 105),
+		Position: props.Position ?? new UDim2(0, 10, 0, 10),
+		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		BorderSizePixel: 0,
 		LayoutOrientation: "horizontal",
-		LayoutOrder: layoutOrder ?? 1,
+		LayoutOrder: props.LayoutOrder ?? 1,
 		Content: {
-			Avatar: AvatarBust(Players.LocalPlayer.UserId),
-			ResourceBars: ResourceBars(),
-			
+			Avatar: AvatarBust(Players.LocalPlayer.UserId, 0),
+			ResourceBars: ResourceBars(1),
 		},
 	});
 

@@ -15,7 +15,8 @@
 
 import { Players } from "@rbxts/services";
 import { New } from "@rbxts/fusion";
-import { BorderImage, BaseContainer } from "../atoms";
+import { BaseContainer } from "./BaseContainer";
+import { BorderImage } from "./BorderImage";
 
 export const AvatarBust = (userId: number, layoutOrder?: number) => {
 	/* -- Avatar Bust Image -- */
@@ -23,7 +24,7 @@ export const AvatarBust = (userId: number, layoutOrder?: number) => {
 		Name: "AvatarImage",
 		Size: new UDim2(1, 0, 1, 0),
 		BackgroundTransparency: 1,
-		LayoutOrder: layoutOrder ?? 0,
+
 		Image: Players.GetUserThumbnailAsync(
 			userId,
 			Enum.ThumbnailType.HeadShot,
@@ -36,6 +37,7 @@ export const AvatarBust = (userId: number, layoutOrder?: number) => {
 		Name: "AvatarBust",
 		Size: new UDim2(0, 100, 0, 100),
 		BackgroundTransparency: 1,
+		LayoutOrder: layoutOrder ?? 0,
 		BorderImage: BorderImage.GothicMetal(),
 		Content: {
 			Image: avatarImage,

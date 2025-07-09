@@ -23,7 +23,7 @@ import {
 	ResourceStateMap,
 	ResourceDataMap,
 } from "shared/definitions/Resources";
-import { Value } from "@rbxts/fusion";
+import { Computed, Value } from "@rbxts/fusion";
 
 export default class ResourceSlice {
 	private static instance: ResourceSlice;
@@ -37,6 +37,22 @@ export default class ResourceSlice {
 		this.Health = states.Health;
 		this.Mana = states.Mana;
 		this.Stamina = states.Stamina;
+
+		this.Health.percent = Computed(() => {
+			const current = this.Health.current.get();
+			const max = this.Health.max.get();
+			return max > 0 ? current / max : 0;
+		});
+		this.Mana.percent = Computed(() => {
+			const current = this.Mana.current.get();
+			const max = this.Mana.max.get();
+			return max > 0 ? current / max : 0;
+		});
+		this.Stamina.percent = Computed(() => {
+			const current = this.Stamina.current.get();
+			const max = this.Stamina.max.get();
+			return max > 0 ? current / max : 0;
+		});
 	}
 
 	/**

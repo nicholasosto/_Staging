@@ -7,54 +7,46 @@
  * @description Primary heads-up display shown during gameplay.
  */
 
-import { BaseContainer, GameScreen, ListContainer, UIButton } from "../atoms";
-import { HUDMenuBar, ProgressionCard } from "client/ui/organisms";
-import { CharacterInfoCard } from "../organisms";
-import { GameImages } from "shared";
-import { ProgressBar } from "../molecules/ProgressBar";
-import PlayerState from "client/states/PlayerState";
-import { Computed } from "@rbxts/fusion";
-import { ResourceSlice } from "client/states";
+import { SpacialInterface } from "shared";
+import { GameScreen } from "../atoms";
+import { AdminButtonBar, HUDMenuBar } from "../organisms";
+import { CharacterInfoCard } from "../organisms/Groups/CharacterInfoCard";
 
 /* =============================================== Player HUD Screen ============================================= */
+const Offset = 10; // Offset for positioning elements
+const CharacterInfoCardProps = {
+	Size: new UDim2(0, 300, 0, 105),
+	Position: new UDim2(0, Offset, 0, Offset),
+	LayoutOrder: 1,
+};
+
+const HudMenuBarProps = {
+	Size: new UDim2(0, 380, 0, 56),
+	Position: new UDim2(0, Offset, 0, 2 * Offset + CharacterInfoCardProps.Size.Y.Offset),
+	AnchorPoint: new Vector2(0, 0),
+	LayoutOrder: 2,
+};
+
+const AdminButtonBarProps = {
+	Size: new UDim2(0, 200, 0, 56),
+	Position: new UDim2(
+		0,
+		Offset,
+		0,
+		3 * Offset + CharacterInfoCardProps.Size.Y.Offset + HudMenuBarProps.Size.Y.Offset,
+	),
+	AnchorPoint: new Vector2(0, 0),
+	LayoutOrder: 3,
+};
 
 export const PlayerHUDScreen = () => {
 	/* Screen */
 	return GameScreen({
 		Name: "PlayerHUDScreen",
 		Content: {
-			Testing: BaseContainer({
-				Name: "Testing",
-				Size: new UDim2(1, 0, 1, 0),
-				BackgroundTransparency: 1,
-				Content: {
-					Item1: UIButton({
-						Icon: GameImages.SlotImage.Accessory,
-						Size: new UDim2(0, 100, 0, 100),
-						Position: new UDim2(0, 100, 0, 100),
-						AnchorPoint: new Vector2(0.5, 0.5),
-					}),
-					Item2: ProgressBar({
-						Progress: ResourceSlice.getInstance().Health.percent,
-						Size: new UDim2(0, 200, 0, 20),
-					}),
-				},
-			}),
-			LeftSide: ListContainer({
-				Visible: false, // Initially hidden, can be toggled by game state
-				Name: "LeftSide",
-				Size: new UDim2(0, 250, 1, 0),
-				Gap: 5,
-				LayoutOrientation: "vertical",
-				AlignmentType: Enum.VerticalAlignment.Top,
-				Content: {
-					CharacterInfoCard: CharacterInfoCard(0),
-					ProgressionCard: ProgressionCard(1),
-					MenuBar: HUDMenuBar({
-						ScreenStateKeys: ["Character", "Inventory", "Teleport", "Settings"],
-					}),
-				},
-			}),
+			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
+			HUDMenuBar: HUDMenuBar(HudMenuBarProps),
+			AdminButtonBar: AdminButtonBar(AdminButtonBarProps),
 		},
 	});
 };

@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/testez/globals" />
 
 import AbilitySlice from "client/states/AbilitySlice";
-import { AbilityBarComponent } from "./AbilityBar";
+import { AbilityBarComponent } from "../Groups/AbilityBar";
 
 export = () => {
 	describe("AbilityBar UI", () => {

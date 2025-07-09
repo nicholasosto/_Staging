@@ -14,6 +14,7 @@ export * from "./PanelSlots";
 // Modules
 export * from "./Animation";
 export * from "./Codon";
+export * from "./GenericUIInterfaces";
 export * from "./Loot";
 export * from "./NPC";
 export * from "./Rarity";

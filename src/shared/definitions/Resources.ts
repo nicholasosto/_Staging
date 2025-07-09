@@ -95,6 +95,7 @@ export function createResourceState(resourceDTO?: ResourceDTO) {
 		max: maxValue,
 		regenPerSecond: regenValue,
 		percent: Computed(() => {
+			print(`createResourceState: Calculating percent for ${data.current}/${data.max}`);
 			const current = currentValue.get();
 			const max = maxValue.get();
 			return max > 0 ? current / max : 0;
