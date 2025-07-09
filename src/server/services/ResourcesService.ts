@@ -33,8 +33,6 @@ import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefi
 import { DataProfileController } from "./DataService";
 import { ResourceFormula } from "shared/calculations/ResourceCalculator";
 import { ServerSend } from "server/network";
-import { PlayerHelpers } from "shared/helpers/PlayerCharacter";
-import { ServerDispatch } from "shared";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -146,20 +144,23 @@ export class ResourcesService {
 			const character = player.Character || player.CharacterAdded.Wait()[0];
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 
-			humanoid.HealthChanged.Connect((newHealth) => {
-				print(`Health changed for player ${player.Name}: ${newHealth}`);
-				const resources = this._map.get(player);
-				if (!resources) return;
+			ResourcesService.Recalculate(player);
+			const resources = this._map.get(player) ?? { ...DEFAULT_RESOURCES };
+			this._map.set(player, resources);
 
-				const healthData = resources["Health"];
-				if (healthData) {
-					healthData.current = newHealth;
-					ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, "Health", {
-						current: healthData.current,
-						max: healthData.max,
-						regenPerSecond: 0, // Assuming no regen for this example
-					});
-				}
+			humanoid.MaxHealth = resources.Health.max;
+			humanoid.Health = resources.Health.current;
+
+			(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
+				ServerSend.ResourceUpdated(player, key, resources[key]);
+			});
+
+			humanoid.HealthChanged.Connect((newHealth) => {
+				const res = this._map.get(player);
+				if (!res) return;
+				const healthData = res["Health"];
+				healthData.current = newHealth;
+				ServerSend.ResourceUpdated(player, "Health", healthData);
 			});
 		});
 	}

@@ -48,10 +48,11 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/organisms/ButtonBars/AdminButtonBar.ts`|Under Construction|Admin service test buttons|
 |Client|`client/ui/molecules/Button/AbilityButton.ts`|Usable|Ability icon with cooldown|
 |Client|`client/ui/organisms/ProgressionCard.ts`|Usable|Level and experience UI|
+|Client|`client/ui/organisms/ResourceBar.ts`|Usable|Displays health, mana and stamina|
 |Client|`client/ui/organisms/ButtonBars/AbilityBar.ts`|Under Construction|Displays equipped abilities|
 |Client|`client/states/AbilitySlice.ts`|Under Construction|Ability list and actions|
 |Client|`client/states/AttributesSlice.ts`|Under Construction|Attribute values and points|
-|Client|`client/states/ResourceSlice.ts`|Under Construction|Player resource values|
+|Client|`client/states/ResourceSlice.ts`|Usable|Reactive resource values|
 |Client|`client/states/ProgressionSlice.ts`|Usable|Level and experience slice|
 |Client|`client/states/MessageSlice.ts`|Usable|Transient user messages|
 |Client|`client/states/CurrencySlice.ts`|Stub|Currency amounts|
@@ -65,7 +66,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/NPCService.ts`|Usable|Spawns NPCs from definitions|
 |Server|`server/services/AbilityService.ts`|Under Construction|Handles ability activation and cooldowns|
 |Server|`server/services/StatusEffectService.ts`|Under Construction|Refactored to use StatusEffects|
-|Server|`server/services/ResourcesService.ts`|Under Construction|Tracks player resource values - bug fix for static call|
+|Server|`server/services/ResourcesService.ts`|Usable|Calculates resources from attributes|
 |Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
 |Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
