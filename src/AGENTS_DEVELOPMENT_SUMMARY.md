@@ -39,7 +39,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/molecules/BarMeter.ts`|Usable|Tokenized bar meter|
 |Client|`client/ui/molecules/HUDMenuButton.ts`|Usable|HUD toggle button|
 |Client|`client/ui/molecules/AbilityInfoPanel.ts`|Usable|Ability description panel|
-|Client|`client/ui/molecules/UserMessage.ts`|Usable|Center-screen popup messages|
+|Client|`client/ui/organisms/UserMessage.ts`|Usable|Center-screen popup messages|
 |Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
 |Client|`client/network/ClientNetworkService.ts`|Usable|Client RPC helpers|
 |Client|`client/network/listener.client.ts`|Usable|Receives server events|
