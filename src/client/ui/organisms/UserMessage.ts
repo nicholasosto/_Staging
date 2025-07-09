@@ -3,7 +3,7 @@
 /**
  * @file        UserMessage.ts
  * @module      UserMessage
- * @layer       Client/UI/Molecules
+ * @layer       Client/Organisms
  * @description Center-screen popup for transient user messages.
  *
  * ╭───────────────────────────────╮
@@ -14,7 +14,7 @@
  * @author       Codex
  * @license      MIT
  * @since        0.2.1
- * @lastUpdated  2025-07-10 by Codex – Tokenized error colour
+ * @lastUpdated  2025-07-11 by Codex – Moved to organism layer
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
