@@ -22,7 +22,6 @@
 
 import Fusion, { Children, New, Value, Computed, OnChange } from "@rbxts/fusion";
 import { BorderImage, BaseContainer, GameText } from "../atoms";
-import { ComponentSizes } from "constants";
 
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
 	ProgressState?: Computed<number>;
@@ -66,7 +65,7 @@ export function BarMeter(props: BarMeterProps) {
 	/* Container */
 	const container = BaseContainer({
 		Name: "BarMeter",
-		Size: props.Size ?? ComponentSizes.ResourceBar,
+		Size: props.Size ?? UDim2.fromScale(1, 0.1),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
 		Position: props.Position ?? new UDim2(0.5, 0, 0.5, 0),
 		BorderImage: BorderImage.GothicMetal(),

@@ -19,7 +19,7 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-import { GameWindow } from "../molecules";
+import { GameWindow } from "client/ui/atoms";
 import { ScreenKey, SettingsState } from "client/states";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";

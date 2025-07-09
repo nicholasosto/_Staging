@@ -21,7 +21,7 @@
  */
 
 import { ScreenKey } from "client/states";
-import { GameWindow } from "../molecules";
+import { GameWindow } from "client/ui/atoms";
 
 const Key: ScreenKey = "Teleport";
 

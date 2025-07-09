@@ -26,7 +26,8 @@ import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
 import { ScreenKey, ScreenState } from "client/states";
 import { Padding } from "../tokens";
-import { ComponentSizes } from "constants";
+
+const DEFAULT_WINDOW_SIZE = new UDim2(0.5, 0, 0.5, 0);
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 	Title?: string;
@@ -36,7 +37,7 @@ export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
 
 export function GameWindow(props: GameWindowProps) {
 	props.Name = props.Name ?? "GameWindow";
-	props.Size = props.Size ?? ComponentSizes.HUDPanel;
+	props.Size = props.Size ?? DEFAULT_WINDOW_SIZE;
 	props.Title = props.Title ?? `${props.ScreenKey} Window`;
 	props.AnchorPoint = props.AnchorPoint ?? new Vector2(0.5, 0.5);
 	props.Position = props.Position ?? UDim2.fromScale(0.5, 0.5);

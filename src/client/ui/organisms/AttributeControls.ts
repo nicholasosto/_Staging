@@ -1,7 +1,8 @@
 import { ATTR_KEYS, AttributeKey, AttributesMeta } from "shared";
-import { CombinedAdjustor, CombinedAdjustorProps } from "../molecules/Controls";
-import PlayerState from "client/states/PlayerState";
 import { GameImage, GameText, ListContainer } from "../atoms";
+import { CombinedAdjustor } from "../molecules";
+import PlayerState from "client/states/PlayerState";
+
 import { Value } from "@rbxts/fusion";
 
 interface AttributeControlsProps {

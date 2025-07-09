@@ -13,7 +13,6 @@
  */
 
 import { ThemeTokens } from "../types";
-import { Sizes } from "../../constants/Sizes";
 
 /* =============================================== Token Table ============================= */
 

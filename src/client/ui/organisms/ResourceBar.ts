@@ -24,7 +24,7 @@
 // -------------- Imports ----------------------------------------------------- //
 import { BaseContainer, ListContainer } from "client/ui/atoms"; // absolute alias
 import { ResourceKey, ResourceMeta, ResourceState } from "shared/definitions/Resources";
-import { BarMeter } from "../molecules/FillBar";
+import { BarMeter } from "client/ui/molecules";
 import { ResourceSlice } from "client/states";
 import Fusion, { Observer, OnChange } from "@rbxts/fusion";
 

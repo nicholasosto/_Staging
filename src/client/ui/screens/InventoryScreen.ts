@@ -19,8 +19,7 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-
-import { GameWindow } from "../molecules";
+import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
 const Key: ScreenKey = "Inventory";
 

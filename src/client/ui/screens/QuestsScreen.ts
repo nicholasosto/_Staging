@@ -1,4 +1,4 @@
-import { GameWindow } from "../molecules";
+import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
 
 const Key: ScreenKey = "Quests";

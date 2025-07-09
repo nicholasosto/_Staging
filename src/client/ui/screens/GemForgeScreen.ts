@@ -20,9 +20,9 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { GameWindow } from "../molecules";
+import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
-import { ListContainer } from "../atoms";
+import { ListContainer } from "client/ui/atoms";
 import { Padding } from "../tokens";
 import { GemSlotKey } from "shared";
 const Key: ScreenKey = "GemForge";
