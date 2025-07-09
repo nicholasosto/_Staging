@@ -14,6 +14,7 @@
 
 import Fusion, { Children } from "@rbxts/fusion";
 import { useToken } from "theme/hooks";
+import { Dragger } from "../tokens/dragger";
 
 export interface ListContainerProps extends Partial<Fusion.PropertyTable<Frame>> {
 	Gap?: number;
@@ -48,6 +49,11 @@ export const ListContainer = (props: ListContainerProps) => {
 		BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		[Children]: {
+			Dragger: Dragger({
+				DragStart: () => {
+					uiListLayout.Destroy();
+				},
+			}),
 			Layout: uiListLayout,
 			Padding: props.Padding,
 			...props.Content,

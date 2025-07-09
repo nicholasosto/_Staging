@@ -21,30 +21,45 @@ import {
 	ResourceDTO,
 	createResourceState,
 	ResourceStateMap,
+	ResourceDataMap,
 } from "shared/definitions/Resources";
 
 export default class ResourceSlice {
 	private static instance: ResourceSlice;
 
-	public readonly Resources: ResourceStateMap = {} as ResourceStateMap;
+	public Health: ResourceStateMap["Health"];
+	public Mana: ResourceStateMap["Mana"];
+	public Stamina: ResourceStateMap["Stamina"];
 
 	private constructor() {
-		this.UpdateResources(DEFAULT_RESOURCES);
+		this.Health = createResourceState(DEFAULT_RESOURCES.Health);
+		this.Mana = createResourceState(DEFAULT_RESOURCES.Mana);
+		this.Stamina = createResourceState(DEFAULT_RESOURCES.Stamina);
 	}
 
-	public UpdateResource(key: ResourceKey, data: ResourceDTO) {
-		this.Resources[key] = createResourceState(key, data);
+	public UpdateResources(data: ResourceDataMap): void {
+		print("Updating resources with data:", data);
+		this.Health = createResourceState(data.Health);
+		this.Mana = createResourceState(data.Mana);
+		this.Stamina = createResourceState(data.Stamina);
 	}
 
-	public UpdateResources(resources: Record<ResourceKey, { current: number; max: number }>) {
-		RESOURCE_KEYS.forEach((key) => {
-			if (resources[key]) {
-				this.Resources[key] = createResourceState(key, resources[key]);
-			} else {
-				warn(`Resource ${key} not found in provided resources.`);
-				this.Resources[key] = createResourceState(key, { current: 0, max: 0 });
-			}
-		});
+	public UpdateResource(key: ResourceKey, data: ResourceDTO): void {
+		print(`Updating resource ${key} with data:`, data);
+		switch (key) {
+			case "Health":
+				this.Health = createResourceState(data);
+				break;
+			case "Mana":
+				this.Mana = createResourceState(data);
+				break;
+			case "Stamina":
+				this.Stamina = createResourceState(data);
+				break;
+			default:
+				print(`Unknown resource key: ${key}`);
+				break;
+		}
 	}
 
 	public static getInstance(): ResourceSlice {

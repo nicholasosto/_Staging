@@ -25,12 +25,12 @@
 import { BaseContainer } from "client/ui/atoms"; // absolute alias
 import { BarMeter } from "client/ui/molecules/FillBar/BarMeter";
 import ResourceSlice from "client/states/ResourceSlice";
-import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
+import { ResourceKey, ResourceMeta, ResourceState } from "shared/definitions/Resources";
 import { Computed } from "@rbxts/fusion";
 
 // -------------- Local helpers --------------------------------------------- //
-export function ResourceBar(resourceKey: ResourceKey) {
-	const state = ResourceSlice.getInstance().Resources[resourceKey];
+export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
+	const state = resourceState;
 	const meta = ResourceMeta[resourceKey];
 	const resourceBarContainer = BaseContainer({
 		Name: `${resourceKey}BarContainer`,

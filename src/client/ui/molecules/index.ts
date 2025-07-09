@@ -18,3 +18,5 @@ export * from "./GameWindow";
 export * from "./ExperienceBar";
 export * from "./LevelGem";
 export * from "./UserMessage";
+export * from "./AvatarBust";
+export * from "./ProgressBar";

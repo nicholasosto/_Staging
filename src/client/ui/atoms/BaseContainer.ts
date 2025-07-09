@@ -17,7 +17,6 @@ import { useToken } from "theme/hooks";
 
 export interface BaseContainerProps extends PropertyTable<Frame> {
 	Padding?: UIPadding;
-	LayoutOrder?: number;
 	BorderImage?: ImageLabel;
 	Content?: Fusion.ChildrenValue;
 }

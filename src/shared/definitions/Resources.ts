@@ -71,18 +71,19 @@ export type ResourceDataMap = {
 	[Key in ResourceKey]: ResourceDTO;
 };
 
-export type ResourceStateMap = {
-	[Key in ResourceKey]: {
-		current: Value<number>;
-		max: Value<number>;
-		regenPerSecond?: Value<number>;
-		percent: Computed<number>;
-	};
+export type ResourceState = {
+	current: Value<number>;
+	max: Value<number>;
+	regenPerSecond?: Value<number>;
+	percent: Computed<number>;
 };
 
-export function createResourceState(key: ResourceKey, initialData?: ResourceDTO) {
-	const data = initialData || { current: 0, max: 100 };
+export type ResourceStateMap = {
+	[Key in ResourceKey]: ResourceState;
+};
 
+export function createResourceState(resourceDTO?: ResourceDTO) {
+	const data = resourceDTO || { current: 0, max: 100 };
 	const currentValue = Value(data.current);
 	const maxValue = Value(data.max);
 	const regenValue = data.regenPerSecond !== undefined ? Value(data.regenPerSecond) : undefined;
@@ -101,15 +102,15 @@ export function createResourceState(key: ResourceKey, initialData?: ResourceDTO)
 
 export function createStateResources(initialData?: ResourceDataMap) {
 	return RESOURCE_KEYS.reduce((acc, key) => {
-		acc[key] = createResourceState(key, initialData?.[key]);
+		acc[key] = createResourceState(initialData?.[key]);
 		return acc;
 	}, {} as ResourceStateMap);
 }
 
 export const DEFAULT_RESOURCES: ResourceDataMap = {
-	Health: { current: 100, max: 100 },
+	Health: { current: 100, max: 100, regenPerSecond: 2 },
 	Mana: { current: 90, max: 90, regenPerSecond: 5 },
-	Stamina: { current: 15, max: 95, regenPerSecond: 10 },
+	Stamina: { current: 95, max: 95, regenPerSecond: 10 },
 } as const;
 
 /** Type-safe lookup: returns meta & dto bundled for convenience */

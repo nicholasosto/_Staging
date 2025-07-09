@@ -13,7 +13,7 @@
  */
 
 // -------------- Imports ------------- //
-import Fusion, { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
+import { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
 import { BaseContainer } from "./BaseContainer";
 import { GameText } from "./GameText";
 import { BorderImage } from "./BorderImage";

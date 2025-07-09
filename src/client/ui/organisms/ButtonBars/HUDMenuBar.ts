@@ -10,6 +10,8 @@ import { ListContainer } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules/Button/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
 import { ScreenKey, ScreenOrder } from "client/states";
+import { Badge } from "client/ui/atoms/Badge";
+import { Value } from "@rbxts/fusion";
 
 export interface HudMenuBarProps {
 	ScreenStateKeys: ScreenKey[];
@@ -17,6 +19,12 @@ export interface HudMenuBarProps {
 }
 
 export const HUDMenuBar = (props: HudMenuBarProps) => {
+	const tempBadge = Badge({
+		Name: "TempBadge",
+		TextValue: Value("14"),
+		Corner: "TopRight",
+	});
+
 	const container = ListContainer({
 		Name: "HUDMenuBar",
 		Size: new UDim2(0, 380, 0, 56),
@@ -33,5 +41,6 @@ export const HUDMenuBar = (props: HudMenuBarProps) => {
 			});
 		}),
 	});
+
 	return container;
 };
