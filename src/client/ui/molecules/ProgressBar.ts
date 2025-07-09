@@ -14,7 +14,7 @@
  * @author       Trembus
  * @license      MIT
  * @since        0.2.1
- * @lastUpdated  2025-07-09 by Trembus – Initial creation
+ * @lastUpdated  2025-07-10 by Codex – Tokenized background color
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
@@ -22,6 +22,7 @@
 
 import Fusion, { Children, Computed, New, PropertyTable, Value } from "@rbxts/fusion";
 import { GameText } from "../atoms";
+import { useToken } from "theme/hooks";
 
 export interface ProgressBarProps extends Partial<PropertyTable<Frame>> {
 	Progress: Computed<number>; // Value between 0 and 1 representing progress
@@ -60,7 +61,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		Position: props.Position ?? UDim2.fromScale(0, 0),
-		BackgroundColor3: new Color3(0.03, 0.02, 0.02),
+                BackgroundColor3: props.BackgroundColor3 ?? useToken("panelBg"),
 		LayoutOrder: props.LayoutOrder ?? 0,
 		[Children]: {
 			Fill: fillBar,

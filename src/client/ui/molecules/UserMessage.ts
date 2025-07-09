@@ -14,7 +14,7 @@
  * @author       Codex
  * @license      MIT
  * @since        0.2.1
- * @lastUpdated  2025-07-06 by Codex – Initial creation
+ * @lastUpdated  2025-07-10 by Codex – Tokenized error colour
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
@@ -30,7 +30,8 @@ const slice = MessageSlice.getInstance();
 export function UserMessage() {
 	const textColor = useToken("textPrimary");
 
-	const colour = Computed(() => (slice.IsError.get() ? Color3.fromRGB(255, 80, 80) : textColor.get()));
+        const errorColor = useToken("healthFill");
+        const colour = Computed(() => (slice.IsError.get() ? errorColor.get() : textColor.get()));
 
 	const label = New("TextLabel")({
 		Name: "MessageLabel",

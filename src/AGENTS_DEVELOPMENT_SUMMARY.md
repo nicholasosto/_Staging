@@ -30,11 +30,15 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/ui/atoms/Button/UIButton.ts`|Usable|Unified button primitive|
 |Client|`client/ui/atoms/Button/DraggableButton.ts`|Usable|Wrapper preset for draggable buttons|
 |Client|`client/ui/molecules/CountdownTimer.ts`|Usable|Displays battle countdown|
-|Client|`client/ui/molecules/GameWindow.ts`|Usable|Panel window with title bar|
+|Client|`client/ui/atoms/GameWindow.ts`|Usable|Panel window with title bar|
 |Client|`client/ui/molecules/TitleBar.ts`|Usable|Window title bar component|
 |Client|`client/ui/molecules/SettingListItem.ts`|Usable|Displays and edits a single setting|
 |Client|`client/ui/molecules/ExperienceBar.ts`|Usable|Displays experience progress|
 |Client|`client/ui/molecules/LevelGem.ts`|Usable|Shows current level|
+|Client|`client/ui/molecules/ProgressBar.ts`|Usable|Basic progress bar|
+|Client|`client/ui/molecules/BarMeter.ts`|Usable|Tokenized bar meter|
+|Client|`client/ui/molecules/HUDMenuButton.ts`|Usable|HUD toggle button|
+|Client|`client/ui/molecules/AbilityInfoPanel.ts`|Usable|Ability description panel|
 |Client|`client/ui/molecules/UserMessage.ts`|Usable|Center-screen popup messages|
 |Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
 |Client|`client/network/ClientNetworkService.ts`|Usable|Client RPC helpers|

@@ -14,13 +14,14 @@
  * @author       Trembus
  * @license      MIT
  * @since        0.2.0
- * @lastUpdated  2025-07-09 by Trembus – Initial creation
+ * @lastUpdated  2025-07-10 by Codex – Tokenized colours
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
 
 import { Children, Computed, New, PropertyTable, Value } from "@rbxts/fusion";
+import { useToken } from "theme/hooks";
 
 export interface BadgeProps extends PropertyTable<TextButton> {
 	TextValue: Value<string>; // Text displayed on the badge
@@ -41,25 +42,28 @@ export const Badge = (props: BadgeProps) => {
 		}
 	});
 
-	// Create the badge button with an icon and text
+        // Create the badge button with an icon and text
+        const bg = props.BackgroundColor3 ?? useToken("panelBorder");
+        const text = props.TextColor3 ?? useToken("textPrimary");
+        const stroke = props.TextStrokeColor3 ?? useToken("textSecondary");
 
-	const button = New("TextButton")({
-		Name: props.Name ?? "Badge",
-		AnchorPoint: new Vector2(0.5, 0.5), // Center the badge
-		Position: Position,
-		Size: props.Size ?? UDim2.fromOffset(34, 34),
-		BackgroundTransparency: 0,
-		BackgroundColor3: props.BackgroundColor3 ?? new Color3(1, 0, 0), // Default red background
-		Text: Computed(() => props.TextValue.get()),
-		ZIndex: props.ZIndex ?? 10000,
-		LayoutOrder: props.LayoutOrder ?? 0,
-		TextColor3: props.TextColor3 ?? new Color3(1, 1, 1), // Default white text
-		TextStrokeColor3: props.TextStrokeColor3 ?? new Color3(0, 0, 0), // Default black stroke
-		TextStrokeTransparency: props.TextStrokeTransparency ?? 0.5, // Default stroke transparency
-		TextSize: props.TextSize ?? 14,
-		[Children]: {
-			Corner: New("UICorner")({
-				CornerRadius: new UDim(0, 8), // Rounded corners
+        const button = New("TextButton")({
+                Name: props.Name ?? "Badge",
+                AnchorPoint: new Vector2(0.5, 0.5), // Center the badge
+                Position: Position,
+                Size: props.Size ?? UDim2.fromOffset(34, 34),
+                BackgroundTransparency: 0,
+                BackgroundColor3: bg,
+                Text: Computed(() => props.TextValue.get()),
+                ZIndex: props.ZIndex ?? 10000,
+                LayoutOrder: props.LayoutOrder ?? 0,
+                TextColor3: text,
+                TextStrokeColor3: stroke,
+                TextStrokeTransparency: props.TextStrokeTransparency ?? 0.5, // Default stroke transparency
+                TextSize: props.TextSize ?? 14,
+                [Children]: {
+                        Corner: New("UICorner")({
+                                CornerRadius: new UDim(0, 8), // Rounded corners
 			}),
 		},
 	});
