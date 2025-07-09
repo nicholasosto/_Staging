@@ -78,7 +78,6 @@ export const UIButton = (props: UIButtonProps) => {
 	const borderColour = useToken("panelBorder");
 
 	const background = Computed(() => (selected.get() ? borderColour.get() : bg.get()));
-	//const borderTransparency = Computed(() => (selected.get() ? 0 : 1));
 
 	const drag = props.Draggable
 		? New("UIDragDetector")({
@@ -122,8 +121,6 @@ export const UIButton = (props: UIButtonProps) => {
 							b.AnchorPoint = new Vector2(0.5, 0.5);
 							b.Position = UDim2.fromScale(0.5, 0.5);
 							b.Size = UDim2.fromScale(1, 1);
-							// (b as unknown as ImageLabel & { ImageTransparency: number }).ImageTransparency =
-							// 	borderTransparency as unknown as number;
 						}
 						return b;
 					})()

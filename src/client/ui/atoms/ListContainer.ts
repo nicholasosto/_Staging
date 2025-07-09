@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        VerticalContainer.ts
- * @module      VerticalContainer
+ * @file        ListContainer.ts
+ * @module      ListContainer
  * @layer       Client/UI/Atoms
  * @description Wrapper that stacks children vertically.
  *

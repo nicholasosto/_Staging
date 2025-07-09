@@ -3,7 +3,7 @@
 /**
  * @file        GameImage.ts
  * @module      GameImage
- * @layer       Client/Atom
+ * @layer       Client/UI/Atoms
  * @description Lightweight wrapper around `ImageLabel`.
  *
  * ╭───────────────────────────────╮
