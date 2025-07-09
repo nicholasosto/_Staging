@@ -14,7 +14,7 @@
  * @author       Codex
  * @license      MIT
  * @since        0.2.1
- * @lastUpdated  2025-07-01 by Codex – Initial creation
+ * @lastUpdated  2025-07-10 by Codex – Tokenized text color
  *
  * @dependencies
  *   @rbxts/fusion ^0.4.0
@@ -22,13 +22,15 @@
 
 import Fusion, { Children, New, Value, Computed, OnChange } from "@rbxts/fusion";
 import { BorderImage, BaseContainer, GameText } from "../atoms";
+import { useToken } from "theme/hooks";
 
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
-	ProgressState?: Computed<number>;
-	CurrentValue?: Value<number>;
-	MaxValue?: Value<number>;
-	Gradient?: UIGradient;
-	Text?: string;
+        ProgressState?: Computed<number>;
+        CurrentValue?: Value<number>;
+        MaxValue?: Value<number>;
+        Gradient?: UIGradient;
+        Text?: string;
+        TextColor3?: Color3 | Fusion.Computed<Color3>;
 }
 
 export function BarMeter(props: BarMeterProps) {
@@ -52,15 +54,17 @@ export function BarMeter(props: BarMeterProps) {
 	});
 
 	/* Text Label */
-	const TextLabel = GameText({
-		TextStateValue: TextValue,
-		Size: UDim2.fromScale(0.9, 0.9),
-		AnchorPoint: new Vector2(0.5, 0.5),
-		Position: new UDim2(0.5, 0, 0.5, 0),
-		TextScaled: true,
-		TextColor3: Color3.fromRGB(255, 255, 255),
-		ZIndex: 100,
-	});
+        const textColour = props.TextColor3 ?? useToken("textPrimary");
+
+        const TextLabel = GameText({
+                TextStateValue: TextValue,
+                Size: UDim2.fromScale(0.9, 0.9),
+                AnchorPoint: new Vector2(0.5, 0.5),
+                Position: new UDim2(0.5, 0, 0.5, 0),
+                TextScaled: true,
+                TextColor3: textColour,
+                ZIndex: 100,
+        });
 
 	/* Container */
 	const container = BaseContainer({
