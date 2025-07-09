@@ -15,3 +15,12 @@
   blocksTask: []
   createdOn: 2025‑07‑05
   updatedOn: 2025‑07‑05
+
+- id: TSK‑0003
+  title: "Implement Force and Constraint codon expressions"
+  status: "Draft"
+  estimatedHours: 4
+  blockedBy: []
+  blocksTask: []
+  createdOn: 2025‑07‑09
+  updatedOn: 2025‑07‑09

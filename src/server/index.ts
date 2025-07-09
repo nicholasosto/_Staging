@@ -14,3 +14,5 @@ export * from "./services";
 export * from "./network";
 export * from "./zones";
 export * from "./classes";
+export * from "./genetics";
+export * from "./entity";
