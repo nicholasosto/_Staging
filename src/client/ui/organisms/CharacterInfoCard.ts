@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        ResourceBars.ts                     ◄────── must match filename
- * @module      ResourceBars                        ◄────── public import name
+ * @file        CharacterInfoCard.ts                     ◄────── must match filename
+ * @module      CharacterInfoCard                        ◄────── public import name
  * @layer       Client/Organisms
  * @description Composite organism that shows the
  *              player's Health, Mana & Stamina.
@@ -25,11 +25,10 @@ import { Players } from "@rbxts/services";
 import { ListContainer } from "../atoms";
 import { AvatarBust } from "../molecules";
 import { ResourceBars } from "./ResourceBar";
+import { Badge } from "../atoms";
+import { Value } from "@rbxts/fusion";
 
 export const CharacterInfoCard = (layoutOrder?: number) => {
-	/* Avatar Bust */
-	const Avatar = AvatarBust(Players.LocalPlayer.UserId);
-
 	/* Organism */
 	const organism = ListContainer({
 		Name: "CharacterInfoCard",
@@ -41,6 +40,7 @@ export const CharacterInfoCard = (layoutOrder?: number) => {
 		Content: {
 			Avatar: AvatarBust(Players.LocalPlayer.UserId),
 			ResourceBars: ResourceBars(),
+			
 		},
 	});
 
