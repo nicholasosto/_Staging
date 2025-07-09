@@ -31,18 +31,18 @@ import { Players, RunService } from "@rbxts/services";
 import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataProfileController } from "./DataService";
-import { ResourceFormula } from "shared/calculations/ResourceCalculator";
+import { calculateResources } from "shared/calculations";
 import { ServerSend } from "server/network";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
 	private static _instance: ResourcesService | undefined;
 	private readonly _map = new Map<Player, Record<ResourceKey, ResourceDTO>>();
+	private readonly _lastSend = new Map<Player, Map<ResourceKey, number>>();
 
 	private static heartbeat: RBXScriptConnection | undefined;
 
 	private constructor() {
-		print("ResourcesService initialized.");
 		this._setupConnections();
 	}
 
@@ -59,7 +59,6 @@ export class ResourcesService {
 	}
 
 	public static ModifyResource(player: Player, key: ResourceKey, delta: number): boolean {
-		print(`Modifying resource for player ${player.Name}: ${key} by ${delta}`);
 		const svc = this.Start();
 		const resources = svc._map.get(player);
 
@@ -79,7 +78,7 @@ export class ResourcesService {
 		resourceData.current = newResourceCurrent;
 
 		// Send updated resource data to the player
-		ServerSend.ResourceUpdated(player, key, resourceData);
+		svc._send(player, key, resourceData);
 		return true;
 	}
 
@@ -89,23 +88,12 @@ export class ResourcesService {
 		const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
 		const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
 
-		let resources = svc._map.get(player);
-		if (!resources) {
-			resources = { ...DEFAULT_RESOURCES };
-			svc._map.set(player, resources);
-		}
+		const current = svc._map.get(player);
+		const snapshot = calculateResources(attrs, level, current);
+		svc._map.set(player, snapshot);
 
-		(RESOURCE_KEYS as ReadonlyArray<ResourceKey>).forEach((key) => {
-			const max = ResourceFormula[key](attrs, level);
-			const data = resources![key];
-			const changed = data.max !== max;
-			data.max = max;
-			if (data.current > max) {
-				data.current = max;
-			}
-			if (changed) {
-				ServerSend.ResourceUpdated(player, key, data);
-			}
+		(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
+			svc._send(player, key, snapshot[key]);
 		});
 	}
 
@@ -121,22 +109,32 @@ export class ResourcesService {
 		ResourcesService.heartbeat = RunService.Heartbeat.Connect(() => {
 			if (tick() - lastHeartbeat < 1) return; // Prevent too frequent updates
 			lastHeartbeat = tick();
-			// Periodically recalculate resources for all players
+			// Periodically sync and regenerate resources for all players
 			Players.GetPlayers().forEach((player) => {
 				const resources = this._map.get(player);
 				if (!resources) return;
+				const character = player.Character;
+				const humanoid = character?.FindFirstChildOfClass("Humanoid") as Humanoid | undefined;
+				if (humanoid) {
+					if (humanoid.Health !== resources.Health.current) {
+						humanoid.Health = resources.Health.current;
+					}
+					if (humanoid.MaxHealth !== resources.Health.max) {
+						humanoid.MaxHealth = resources.Health.max;
+					}
+				}
 
 				// Regenerate resources over time
 				(RESOURCE_KEYS as ReadonlyArray<ResourceKey>).forEach((key) => {
 					const data = resources[key];
 					if (data.current < data.max) {
 						data.current = math.min(data.current + 1, data.max); // Regenerate resources over time
-						ServerSend.ResourceUpdated(player, key, data);
+						this._send(player, key, data);
 					}
 				});
 			});
 		});
-		print("ResourcesService heartbeat started.");
+		// heartbeat ready
 	}
 
 	private _onJoin(player: Player) {
@@ -144,15 +142,18 @@ export class ResourcesService {
 			const character = player.Character || player.CharacterAdded.Wait()[0];
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 
-			ResourcesService.Recalculate(player);
-			const resources = this._map.get(player) ?? { ...DEFAULT_RESOURCES };
+			const profile = DataProfileController.GetProfile(player);
+			const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
+			const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
+
+			const resources = calculateResources(attrs, level);
 			this._map.set(player, resources);
 
 			humanoid.MaxHealth = resources.Health.max;
 			humanoid.Health = resources.Health.current;
 
 			(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
-				ServerSend.ResourceUpdated(player, key, resources[key]);
+				this._send(player, key, resources[key]);
 			});
 
 			humanoid.HealthChanged.Connect((newHealth) => {
@@ -160,13 +161,34 @@ export class ResourcesService {
 				if (!res) return;
 				const healthData = res["Health"];
 				healthData.current = newHealth;
-				ServerSend.ResourceUpdated(player, "Health", healthData);
+				this._send(player, "Health", healthData);
 			});
 		});
 	}
 
 	private _onLeave(player: Player) {
 		this._map.delete(player);
+		this._lastSend.delete(player);
+	}
+
+	/**
+	 * Send a throttled ResourceUpdated event to the client.
+	 * @param player - Target player.
+	 * @param key - Resource identifier.
+	 * @param data - Resource snapshot to send.
+	 */
+	private _send(player: Player, key: ResourceKey, data: ResourceDTO) {
+		const now = tick();
+		let map = this._lastSend.get(player);
+		if (!map) {
+			map = new Map<ResourceKey, number>();
+			this._lastSend.set(player, map);
+		}
+		const last = map.get(key) ?? 0;
+		if (now - last >= 0.1) {
+			map.set(key, now);
+			ServerSend.ResourceUpdated(player, key, data);
+		}
 	}
 }
 
