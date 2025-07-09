@@ -20,3 +20,4 @@ export * from "./constants";
 export * from "./definitions";
 export * from "./network";
 export * from "./physics";
+export * from "./genetics";

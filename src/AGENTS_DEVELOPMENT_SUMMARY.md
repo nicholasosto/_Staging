@@ -21,6 +21,8 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`constants`|Rock Solid|Sizes and asset ids|
 |Shared|`shared/physics`|Usable|Utility forces and ropes|
 |Shared|`shared/calculations/calculateResources.ts`|Usable|Derives resources from attributes|
+|Shared|`shared/genetics/GeneticTypes.ts`|Usable|Core genetic types|
+|Shared|`shared/genetics/Mutations.ts`|Usable|Chromosome mutation helpers|
 |Client|`client/main.client.ts`|Usable|Entry point and UI bootstrap|
 |Client|`client/stylesheet.client.ts`|Under Construction|StyleSheet prototype|
 |Client|`client/ui/atoms`|Usable|Core UI atoms (buttons, panels)|
@@ -72,5 +74,8 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
+|Server|`server/entity/EvolvingOrganism.ts`|Under Construction|DNA‑driven organism|
+|Server|`server/genetics/CodonExpressions.ts`|Usable|Codon to instance mapping|
+|Server|`server/services/OrganismService.ts`|Under Construction|Updates active organisms|
 
 Keep this summary updated whenever modules are added or changed.
