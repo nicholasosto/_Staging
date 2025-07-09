@@ -30,3 +30,4 @@ Events.ResourceUpdated.Connect((key, data) => {
 	print(`Client Listener: ResourceUpdated(${key}) called.`, data);
 	ResourceSlice.getInstance().UpdateResource(key, data);
 });
+warn("Client network initialized successfully.");

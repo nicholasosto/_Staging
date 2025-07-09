@@ -30,17 +30,10 @@ task.spawn(() => {
 		// Run for 60 seconds
 		const currentTime = tick();
 		if (currentTime - lastUpdate >= 1) {
-			print(`Server loop iteration: ${loopCount + 1}`);
 			loopCount++;
 			lastUpdate = currentTime;
 			// Perform periodic server tasks here, e.g., updating game state, handling events, etc.
-			Players.GetPlayers().forEach((player) => {
-				const progressionDTO = ProgressionService.AddExperience(player, 10); // Example: Add 10 experience points every second
-				if (progressionDTO === undefined) {
-					return; // Skip if no progression data is returned
-				}
-				ServerSend.ProfileData(player, "Progression", progressionDTO);
-			});
+			Players.GetPlayers().forEach((player) => {});
 		}
 
 		task.wait(0.1); // Adjust the wait time as needed for performance

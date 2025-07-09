@@ -13,6 +13,9 @@
  * * @lastUpdated  2025-07-10 by Trembus – Added metadata header
  */
 
+import { Players } from "@rbxts/services";
+import { ServerDispatch } from "shared/network";
+
 /**
  * Get the Humanoid object from a touched part.
  * @param touchedPart The part that was touched.
@@ -48,6 +51,7 @@ function modifyHumanoidHealth(touchedPart: BasePart, amount: number): void {
 	if (humanoid) {
 		print(`modifyHumanoidHealth: Modifying health by ${amount}`);
 		humanoid.Health = math.clamp(humanoid.Health + amount, 0, humanoid.MaxHealth);
+		
 	} else {
 		warn("modifyHumanoidHealth: Humanoid not found.");
 	}

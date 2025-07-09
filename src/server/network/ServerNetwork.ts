@@ -34,6 +34,7 @@ export const ServerSend = {
 		ProfileData.SendToPlayer(player, dataKey, data);
 	},
 	ResourceUpdated: (player: Player, key: ResourceKey, data: ResourceDTO) => {
+		warn(`Server Network: ResourceUpdated(${key}) called.`);
 		ResourceUpdated.SendToPlayer(player, key, data);
 	},
 };

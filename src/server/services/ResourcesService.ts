@@ -33,6 +33,8 @@ import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefi
 import { DataProfileController } from "./DataService";
 import { ResourceFormula } from "shared/calculations/ResourceCalculator";
 import { ServerSend } from "server/network";
+import { PlayerHelpers } from "shared/helpers/PlayerCharacter";
+import { ServerDispatch } from "shared";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -141,7 +143,24 @@ export class ResourcesService {
 
 	private _onJoin(player: Player) {
 		task.defer(() => {
-			ResourcesService.Recalculate(player);
+			const character = player.Character || player.CharacterAdded.Wait()[0];
+			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
+
+			humanoid.HealthChanged.Connect((newHealth) => {
+				print(`Health changed for player ${player.Name}: ${newHealth}`);
+				const resources = this._map.get(player);
+				if (!resources) return;
+
+				const healthData = resources["Health"];
+				if (healthData) {
+					healthData.current = newHealth;
+					ServerDispatch.Server.Get("ResourceUpdated").SendToPlayer(player, "Health", {
+						current: healthData.current,
+						max: healthData.max,
+						regenPerSecond: 0, // Assuming no regen for this example
+					});
+				}
+			});
 		});
 	}
 
