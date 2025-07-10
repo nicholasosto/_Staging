@@ -72,6 +72,7 @@ export const GameImages = {
 		Decrement: "rbxassetid://78091115085992",
 		Close: "rbxassetid://91437543746962",
 		TripleArrow: "rbxassetid://136693752293641",
+		Play: "rbxassetid://138751166365431",
 	},
 	Currency: {
 		Coins: "rbxassetid://127745571044516",
@@ -97,6 +98,9 @@ export const GameImages = {
 		BoneDoily: "rbxassetid://108018297611555",
 		Mystical: "rbxassetid://108018297611556",
 		WavyMetal: "rbxassetid://99123505462124",
+	},
+	Screens: {
+		Loading: "rbxassetid://70565375536693",
 	},
 } as const;
 

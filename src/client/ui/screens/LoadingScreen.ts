@@ -1,7 +1,8 @@
-import { BaseContainer, GameScreen, GameText, GameWindow } from "client/ui/atoms";
+import { BaseContainer, GameImage, GameScreen, GameText, GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
 import { Computed } from "@rbxts/fusion";
 import GameState from "client/states/GameState";
+import { GameImages } from "shared";
 
 export const LoadingScreen = () => {
 	return GameScreen({
@@ -17,6 +18,12 @@ export const LoadingScreen = () => {
 				BackgroundTransparency: 0.2,
 
 				Content: {
+					BackgroundImage: GameImage({
+						Image: GameImages.Screens.Loading,
+						Size: UDim2.fromScale(1, 1),
+						BackgroundTransparency: 1,
+						ZIndex: 0,
+					}),
 					LoadingText: GameText({
 						TextState: Computed(() => {
 							return (

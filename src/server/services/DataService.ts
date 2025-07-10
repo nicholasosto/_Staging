@@ -53,7 +53,7 @@ export class DataService {
 
 	/* Constructor */
 	private constructor() {
-		print("DataProfileController Initialized.");
+		print("DataService - initialized.");
 	}
 
 	/* Start */
@@ -74,7 +74,7 @@ export class DataService {
 
 			// Warn if the profile is nil
 			if (profile === undefined) {
-				warn(`ProfileService: (1) - Failed to load profile for player: ${player.Name}`);
+				warn(`DataService: (1) - Failed to load profile for player: ${player.Name}`);
 				return;
 			}
 
@@ -90,10 +90,10 @@ export class DataService {
 				this._profileMap.delete(player); // Remove the profile from the map
 			});
 		} catch (err) {
-			warn(`ProfileService: (2) - Error loading profile for player ${player.Name}: ${err}`);
+			warn(`DataService: (2) - Error loading profile for player ${player.Name}: ${err}`);
 		}
 		if (CodeSettings.DEBUG_DATASERVICE) {
-			print(`DataProfileController._onPlayerJoining(${player.Name}) called.`, this._profileMap.get(player));
+			print(`DataService.RegisterPlayer(${player.Name}) called.`, this._profileMap.get(player));
 		}
 	}
 
@@ -108,10 +108,11 @@ export class DataService {
 
 		while (this._profileMap.get(player) === undefined) {
 			// If the profile is undefined, wait for it to be created
-			warn(`DataProfileController.GetProfile: Waiting for profile for player ${player.Name}`);
+			warn(`\nDataService: Waiting for profile for player ${player.Name}`);
 			task.wait(1); // Wait for 1 second before checking again
 		}
 
 		return this._profileMap.get(player); // Return the profile from the map
 	}
 }
+DataService.Start(); // Initialize the DataService

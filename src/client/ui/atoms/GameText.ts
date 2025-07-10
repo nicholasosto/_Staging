@@ -50,6 +50,7 @@ export function GameText(props: GameTextProps): TextLabel {
 		BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		Text: Computed(() => tostring(props.TextState.get())),
 		TextSize: props.TextSize ?? 14,
+		TextScaled: props.TextScaled ?? true,
 		ZIndex: props.ZIndex ?? 1,
 		LayoutOrder: props.LayoutOrder ?? 0,
 		/* TextStroke properties */
