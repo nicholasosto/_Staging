@@ -8,24 +8,24 @@
  */
 
 /* =============================================== Imports =============================================== */
+import { run } from "@rbxts/testez";
 import { ServiceWrapper } from "./ServiceWrapper";
+import { RunEvery } from "shared/helpers/RunCycle";
+import { Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
 
 warn("Server: Main Script Initializing...");
+ServiceWrapper.GetInstance(); // Start all services
 
-let lastUpdate = tick();
-
-task.spawn(() => {
-	let loopCount = 0;
-	while (loopCount < 600) {
-		// Run for 60 seconds (600 iterations at 0.1s intervals)
-		// Run for 60 seconds
-		const currentTime = tick();
-		if (currentTime - lastUpdate >= 1) {
-			loopCount++;
-			lastUpdate = currentTime;
+Players.PlayerAdded.Connect((player) => {
+	warn(`Player added: ${player.Name}`);
+	task.spawn(() => {
+		let progressionData = ServiceWrapper.ProgressionService.GetProgression(player);
+		while (!progressionData) {
+			warn(`Waiting for progression data for player: ${player.Name}`);
+			task.wait(1); // Wait for 1 second before checking again
+			progressionData = ServiceWrapper.ProgressionService.GetProgression(player);
 		}
-
-		task.wait(0.1); // Adjust the wait time as needed for performance
-	}
+		warn(`Progression data ready for player: ${player.Name}`, progressionData);
+	});
 });
