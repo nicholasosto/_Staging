@@ -8,24 +8,30 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { run } from "@rbxts/testez";
+import { ServerSend } from "./network";
+import { DataService } from "./services";
 import { ServiceWrapper } from "./ServiceWrapper";
-import { RunEvery } from "shared/helpers/RunCycle";
 import { Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
+function onCharacterLoaded(character: Model) {
+	print(`Character loaded: ${character.Name}`);
+}
 
-warn("Server: Main Script Initializing...");
-ServiceWrapper.GetInstance(); // Start all services
+function onDataLoaded(player: Player, data: unknown) {
+	print(`Data loaded for player: ${player.Name}`, data);
+	ServerSend.GameStateUpdated(player, true, true); // Notify client that data is loaded
+}
 
-Players.PlayerAdded.Connect((player) => {
-	warn(`Player added: ${player.Name}`);
-	task.spawn(() => {
-		let progressionData = ServiceWrapper.ProgressionService.GetProgression(player);
-		while (!progressionData) {
-			warn(`Waiting for progression data for player: ${player.Name}`);
-			task.wait(1); // Wait for 1 second before checking again
-			progressionData = ServiceWrapper.ProgressionService.GetProgression(player);
-		}
-		warn(`Progression data ready for player: ${player.Name}`, progressionData);
-	});
-});
+function onPlayerAdded(player: Player) {
+	player.CharacterAdded.Connect(onCharacterLoaded);
+	DataService.RegisterPlayer(player);
+	const profile = DataService.GetProfile(player);
+	warn(`Data profile loaded for player: ${player.Name}`, profile);
+}
+
+function onPlayerRemoving(player: Player) {
+	ServiceWrapper.UnregisterPlayer(player);
+}
+
+Players.PlayerAdded.Connect(onPlayerAdded);
+Players.PlayerRemoving.Connect(onPlayerRemoving);

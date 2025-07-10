@@ -41,6 +41,7 @@ export const GameScreen = (props: GameScreenProps) => {
 		ResetOnSpawn: props.ResetOnSpawn,
 		Enabled: props.Enabled,
 		Parent: parent,
+		IgnoreGuiInset: props.IgnoreGuiInset ?? false,
 		[Children]: props.Content ?? {},
 	});
 };

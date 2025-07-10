@@ -20,7 +20,8 @@
  *   shared
  */
 
-import { AbilityKey, SettingKey, ProfileDataKey, ProfileDataMap, ClientDispatch, AttributeKey, AdminNet } from "shared";
+
+import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet } from "shared";
 
 /* Abilities Signals*/
 const UseAbilitySignal = ClientDispatch.Client.Get("UseAbility");
@@ -33,7 +34,7 @@ const ModifyAttributeSignal = ClientDispatch.Client.Get("ModifyAttribute");
 const UpdateSettingSignal = ClientDispatch.Client.Get("UpdatePlayerSetting");
 
 /* Function Signals */
-const GetProfileDataSignal = ClientDispatch.Client.Get("GetData");
+const GetProfileDataByKey = ClientDispatch.Client.Get("GetDataByKey");
 
 /* Spawn Weapon Signal */
 const SpawnWeaponSignal = AdminNet.Client.Get("SPAWN_WEAPON");
@@ -45,12 +46,6 @@ function SetAbilities(abilities: AbilityKey[]): void {
 
 function UseAbility(abilityKey: AbilityKey): void {
 	UseAbilitySignal.SendToServer(abilityKey);
-}
-
-/* Profile Data Main Function */
-export async function GetProfileData<K extends ProfileDataKey>(key: K): Promise<ProfileDataMap[K] | undefined> {
-	print(`CallServer: GetProfileData(${key}) called.`);
-	return (await GetProfileDataSignal.CallServerAsync(key)) as ProfileDataMap[K] | undefined;
 }
 
 /* Attributes */
@@ -72,7 +67,6 @@ export function SpawnWeapon(): void {
 }
 
 export const ClientSend = {
-	GetData: GetProfileData,
 	SetAbilities: SetAbilities,
 	UseAbility: UseAbility,
 	ModifyAttribute: ModifyAttribute,

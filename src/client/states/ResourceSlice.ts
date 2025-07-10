@@ -36,7 +36,6 @@ function createResourceState(resourceDTO: ResourceDTO) {
 		current: currentValue,
 		max: maxValue,
 		percent: Computed(() => {
-			print(`createResourceState: Calculating percent for ${data.current}/${data.max}`);
 			const current = currentValue.get();
 			const max = maxValue.get();
 			return max > 0 ? current / max : 0;
@@ -59,13 +58,11 @@ export default class ResourceSlice {
 
 	public UpdateResource(key: ResourceKey, data: ResourceDTO): void {
 		const resourceState = this[key];
-		warn(`Current resource state for ${key}:`, resourceState);
 		if (resourceState) {
 			resourceState.current.set(data.current);
 			resourceState.max.set(data.max);
 		} else {
 			warn(`Resource key ${key} does not exist in ResourceSlice.`);
 		}
-		warn(`Updated resource ${key}:`, resourceState);
 	}
 }

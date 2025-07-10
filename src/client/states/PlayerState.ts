@@ -22,10 +22,6 @@ import AttributesSlice from "./AttributesSlice";
 import ProgressionSlice from "./ProgressionSlice";
 import CurrencySlice from "./CurrencySlice";
 import SettingsSlice from "./SettingsState";
-import { ClientSend } from "client/network";
-
-/* Data Request */
-const InitialData = ClientSend.GetData("Abilities");
 
 /* Player State Wrapper */
 class PlayerStateClass {

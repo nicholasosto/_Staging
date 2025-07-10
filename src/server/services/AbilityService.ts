@@ -20,7 +20,7 @@
 
 /* =============================================== Imports =============================================== */
 import { AbilitiesMeta, AbilityKey, loadAnimation, playAnimation } from "shared";
-import { DataProfileController } from "./DataService";
+import { DataService } from "./DataService";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { ResourcesService } from "./ResourcesService";
 
@@ -41,7 +41,7 @@ export class AbilityService {
 	}
 	/* ------------------------------- Mutator Methods ------------------------------- */
 	public static SetAbilities(player: Player, abilities: AbilityKey[]) {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		if (!profile) {
 			warn(`No profile found for player ${player.Name}.`);
 			return;
@@ -51,7 +51,7 @@ export class AbilityService {
 
 	/* ------------------------------- Ability Management ------------------------------- */
 	public static AddAbility(player: Player, abilityKey: AbilityKey) {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		if (!profile) {
 			warn(`No profile found for player ${player.Name}.`);
 			return;
@@ -66,7 +66,7 @@ export class AbilityService {
 
 	/* ------------------------------- Ability Removal ------------------------------- */
 	public static RemoveAbility(player: Player, abilityKey: AbilityKey) {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		if (!profile) {
 			warn(`No profile found for player ${player.Name}.`);
 			return;
@@ -83,7 +83,7 @@ export class AbilityService {
 
 	/* ------------------------------- Ability Retrieval ------------------------------- */
 	public static GetAbilities(player: Player): AbilityKey[] | undefined {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		return profile?.Data.Abilities;
 	}
 

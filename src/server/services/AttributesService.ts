@@ -20,7 +20,7 @@
 
 /* =============================================== Imports ===================== */
 import { AttributeKey, clampAttr } from "shared/definitions/ProfileDefinitions/Attributes";
-import { DataProfileController } from "./DataService";
+import { DataService } from "./DataService";
 import { ResourcesService } from "./ResourcesService";
 
 /* =============================================== Service ===================== */
@@ -39,7 +39,7 @@ export class AttributesService {
 	}
 
 	public static Increase(player: Player, key: AttributeKey, amount: number) {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		if (!profile) return;
 		const attrs = profile.Data.Attributes;
 		const newValue = clampAttr(key, attrs[key] + amount);
@@ -52,7 +52,7 @@ export class AttributesService {
 	}
 
 	public static Get(player: Player) {
-		return DataProfileController.GetProfile(player)?.Data.Attributes;
+		return DataService.GetProfile(player)?.Data.Attributes;
 	}
 }
 

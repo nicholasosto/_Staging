@@ -18,7 +18,6 @@
  */
 
 /* =============================================== Imports ====================================================== */
-import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
@@ -41,9 +40,9 @@ const DefaultProfileData: ProfileDataMap = {
 };
 
 /* Data Profile Controller */
-export class DataProfileController {
+export class DataService {
 	/* Singleton Instance */
-	private static _instance: DataProfileController | undefined;
+	private static _instance: DataService | undefined;
 
 	/* ProfileService Initialization */
 	private static _profileStore = ProfileService.GetProfileStore(DATASTORE_NAME, DefaultProfileData);
@@ -51,9 +50,6 @@ export class DataProfileController {
 	/* Map to store player profiles */
 	private static _profileMap = new Map<Player, Profile<ProfileDataMap>>(); // Map to store player profiles
 
-	/* Connections */
-	private static _playerAddedConnection: RBXScriptConnection | undefined;
-	private static _playerRemovingConnection: RBXScriptConnection | undefined;
 
 	/* Constructor */
 	private constructor() {
@@ -61,31 +57,15 @@ export class DataProfileController {
 	}
 
 	/* Start */
-	public static Start(): DataProfileController {
+	public static Start(): DataService {
 		if (this._instance === undefined) {
-			this._instance = new DataProfileController();
-			this._initializeConnections(); // Initialize connections
+			this._instance = new DataService();
 		}
 		return this._instance;
 	}
 
-	/* Initialize Connections */
-	private static _initializeConnections() {
-		/* Player Added */
-		this._playerAddedConnection?.Disconnect();
-		this._playerAddedConnection = Players.PlayerAdded.Connect((player: Player) => {
-			this._onPlayerJoining(player);
-		});
-
-		/* Player Removing */
-		this._playerRemovingConnection?.Disconnect();
-		this._playerRemovingConnection = Players.PlayerRemoving.Connect((player: Player) => {
-			this._onPlayerLeaving(player);
-		});
-	}
-
 	/* On Player Joining */
-	private static async _onPlayerJoining(player: Player) {
+	public static async RegisterPlayer(player: Player) {
 		/* Create Player Key */
 		const playerKey = player.Name + "_" + tostring(player.UserId);
 		try {
@@ -118,16 +98,20 @@ export class DataProfileController {
 	}
 
 	/* On Player Leaving */
-	private static _onPlayerLeaving(player: Player) {
+	public static UnRegisterPlayer(player: Player) {
 		//print(`Player leaving: ${player.Name}`);
 		this._profileMap.delete(player); // Remove the profile from the map
 	}
 
 	/* Get Profile */
 	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
-		if (CodeSettings.DEBUG_DATASERVICE) {
-			print(`DataProfileController.GetProfile(${player.Name}) called.`, this._profileMap.get(player));
+
+		while (this._profileMap.get(player) === undefined) {
+			// If the profile is undefined, wait for it to be created
+			warn(`DataProfileController.GetProfile: Waiting for profile for player ${player.Name}`);
+			task.wait(1); // Wait for 1 second before checking again
 		}
+
 		return this._profileMap.get(player); // Return the profile from the map
 	}
 }

@@ -1,14 +1,15 @@
-import { DataProfileController } from "server/services";
+import { DataService } from "server/services";
 import { ClientDispatch, ProfileDataKey } from "shared";
 
 const Functions = {
 	/* -- Profile Data -- */
-	GetProfileData: ClientDispatch.Server.Get("GetData"),
+	GetAllProfileData: ClientDispatch.Server.Get("GetAllData"),
+	GetProfileDataByKey: ClientDispatch.Server.Get("GetDataByKey"),
 };
 
 /* --- Listeners --- */
-Functions.GetProfileData.SetCallback((player: Player, key: ProfileDataKey) => {
-	const profile = DataProfileController.GetProfile(player);
+Functions.GetProfileDataByKey.SetCallback((player: Player, key: ProfileDataKey) => {
+	const profile = DataService.GetProfile(player);
 	if (profile) {
 		const data = profile.Data[key];
 		if (data !== undefined) {
@@ -19,6 +20,16 @@ Functions.GetProfileData.SetCallback((player: Player, key: ProfileDataKey) => {
 		}
 	} else {
 		warn(`GetProfileData: No profile found for player ${player.Name}.`);
+		return undefined;
+	}
+});
+
+Functions.GetAllProfileData.SetCallback((player: Player) => {
+	const profile = DataService.GetProfile(player);
+	if (profile) {
+		return profile.Data;
+	} else {
+		warn(`GetAllProfileData: No profile found for player ${player.Name}.`);
 		return undefined;
 	}
 });

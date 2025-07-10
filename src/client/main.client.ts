@@ -32,10 +32,14 @@ import {
 	ShopScreen,
 	InventoryScreen,
 } from "./ui/screens";
+import { LoadingScreen } from "./ui/screens/LoadingScreen";
 //import * as Dispatch from "./network/ClientDispatch";
 
 /* =============================================== References ============================================= */
-warn("PlayerState:", PlayerStateInstance);
+const loadingScreen = LoadingScreen(); // Ensure the loading screen is initialized
+while (loadingScreen.Enabled) {
+	wait(0.2); // Wait until the loading screen is no longer enabled
+}
 PlayerHUDScreen();
 GemForgeScreen();
 SettingsScreen();
@@ -46,4 +50,3 @@ CharacterScreen();
 InventoryScreen();
 
 /* =============================================== Network Tests ============================================= */
-// Uncomment to test network calls

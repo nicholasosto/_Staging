@@ -1,11 +1,19 @@
-import { AbilityKey, AttributesDTO, PlayerSettings, ResourceDTO, ServerDispatch } from "shared";
+import { AbilityKey, AttributesDTO, ClientDispatch, PlayerSettings, ResourceDTO, ServerDispatch } from "shared";
 import { ProgressionDTO } from "shared/definitions/ProfileDefinitions/Progression";
 import { PlayerStateInstance } from "client/states/PlayerState";
+import { GameState } from "client/states";
 
 const Events = {
 	/* -- Profile Data -- */
 	ProfileDataUpdated: ServerDispatch.Client.Get("ProfileDataUpdated"),
 	ResourceUpdated: ServerDispatch.Client.Get("ResourceUpdated"),
+	/* -- Game State -- */
+	GameStateUpdated: ServerDispatch.Client.Get("GameStateUpdated"),
+};
+
+const Functions = {
+	GetProfileDataByKey: ClientDispatch.Client.Get("GetDataByKey"),
+	GetAllData: ClientDispatch.Client.Get("GetAllData"),
 };
 
 /* State Slices ------------------------------------- */
@@ -19,11 +27,22 @@ const resourceSlice = PlayerStateInstance.Resources;
 const currencySlice = PlayerStateInstance.Currency;
 const settingsSlice = PlayerStateInstance.Settings;
 
-/* --- Listeners --- */
+Functions.GetAllData.CallServerAsync().andThen((profileData) => {
+	if (profileData) {
+		warn("Client: Called GetAllData successfully. Profile data loaded:", profileData);
+		// Initialize slices with the loaded profile data
+		abilitySlice.UpdateAbilities(profileData.Abilities as AbilityKey[]);
+		attributesSlice.UpdateAttributes(profileData.Attributes as AttributesDTO);
+		progressionSlice.UpdateProgression(profileData.Progression as ProgressionDTO);
+		currencySlice.UpdateCurrency(profileData.Currency as Record<string, number>);
+	}
+	GameState.DataLoaded.set(true);
+	GameState.PlayerDataLoaded.set(true);
+});
 
 /* Profile Data Update ------------------------------- */
 Events.ProfileDataUpdated.Connect((dataKey, data) => {
-	warn(`Client Listener: ProfileDataUpdated(${dataKey}) called.`, data);
+	warn(`Client Event - Profile Updated By Key( ${dataKey} ) called.`, data);
 	switch (dataKey) {
 		case "Abilities":
 			abilitySlice.UpdateAbilities(data as AbilityKey[]);
@@ -51,3 +70,12 @@ Events.ResourceUpdated.Connect((key, data) => {
 	resourceSlice.UpdateResource(key, data as ResourceDTO);
 });
 warn("Client network initialized successfully.");
+
+/* Game State Update -------------------------------------------- */
+Events.GameStateUpdated.Connect((dataLoaded, playerDataLoaded) => {
+	warn(
+		`Client Listener: GameStateUpdated called. Data Loaded: ${dataLoaded}, Player Data Loaded: ${playerDataLoaded}`,
+	);
+	GameState.DataLoaded.set(dataLoaded);
+	GameState.PlayerDataLoaded.set(playerDataLoaded);
+});

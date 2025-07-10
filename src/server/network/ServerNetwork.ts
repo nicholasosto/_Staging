@@ -37,4 +37,7 @@ export const ServerSend = {
 		warn(`Server Network: ResourceUpdated(${key}) called.`);
 		ResourceUpdated.SendToPlayer(player, key, data);
 	},
+	GameStateUpdated: (player: Player, dataLoaded: boolean, playerDataLoaded: boolean) => {
+		ServerDispatch.Server.Get("GameStateUpdated").SendToPlayer(player, dataLoaded, playerDataLoaded);
+	},
 };

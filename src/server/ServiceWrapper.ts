@@ -1,27 +1,36 @@
 import { AbilityKey, AttributeKey, ResourceKey, SettingKey } from "shared";
-import {
-	AbilityService,
-	ProgressionService,
-	BattleRoomService,
-	ResourcesService,
-	SettingsService,
-	AttributesService,
-	DataProfileController,
-} from "./services";
+import { ResourcesService, DataService } from "./services";
+import { ServerSend } from "./network";
 
 export class ServiceWrapper {
 	private static _instance: ServiceWrapper | undefined;
 
 	private constructor() {
-		warn("ServiceWrapper [Starts All Services] Beginning Initialization...");
-		DataProfileController.Start(); // Initialize the data profile controller
-		AbilityService.Start(); // Initialize the AbilityService
-		ProgressionService.Start(); // Initialize the ProgressionService
-		BattleRoomService.Start(); // Initialize the BattleRoomService
-		ResourcesService.Start(); // Initialize the ResourcesService
-		SettingsService.Start(); // Initialize the SettingsService
-		AttributesService.Start(); // Initialize the AttributesService
-		warn("ServiceWrapper [All Services] Initialization Complete.");
+		DataService.Start(); // Initialize the data profile controller
+	}
+
+	public static RegisterPlayer(player: Player) {
+		while (!DataService.GetProfile(player)) {
+			warn(`Waiting for data profile for player: ${player.Name}`);
+			task.wait(1);
+		}
+		warn(`Data profile loaded for player: ${player.Name}`);
+		ServerSend.GameStateUpdated(player, true, true); // Notify client that data is loaded
+		player.CharacterAdded.Connect((character) => {
+			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
+			humanoid.Died.Connect(() => {
+				ResourcesService.ModifyResource(player, "Health", 100); // Reset health or any other resource
+				task.delay(2, () => {
+					ResourcesService.ModifyResource(player, "Health", 100); // Reset health or any other resource
+					player.LoadCharacter();
+				});
+			});
+		});
+		player.LoadCharacterWithHumanoidDescription(new Instance("HumanoidDescription"));
+	}
+
+	public static UnregisterPlayer(player: Player) {
+		warn(`2 - ServiceWrapper: Unregistering player ${player.Name}`);
 	}
 
 	public static GetInstance(): ServiceWrapper {
@@ -30,67 +39,4 @@ export class ServiceWrapper {
 		}
 		return this._instance;
 	}
-
-	public static AbilityService = {
-		AddAbility: (player: Player, abilityKey: AbilityKey) => {
-			AbilityService.AddAbility(player, abilityKey);
-		},
-		RemoveAbility: (player: Player, abilityKey: AbilityKey) => {
-			AbilityService.RemoveAbility(player, abilityKey);
-		},
-		SetAbilities: (player: Player, abilities: AbilityKey[]) => {
-			AbilityService.SetAbilities(player, abilities);
-		},
-		CastAbility: (player: Player, abilityKey: AbilityKey) => {
-			AbilityService.Activate(player, abilityKey);
-		},
-	};
-
-	public static ProgressionService = {
-		AddExperience: (player: Player, amount: number) => {
-			return ProgressionService.AddExperience(player, amount);
-		},
-		GetProgression: (player: Player) => {
-			return ProgressionService.Get(player);
-		},
-	};
-
-	public static BattleRoomService = {
-		CreateBattleRoom: (hostPlayer: Player) => {
-			return BattleRoomService.CreateRoom(hostPlayer);
-		},
-		JoinBattleRoom: (roomId: string, player: Player) => {
-			return BattleRoomService.JoinRoom(player, roomId);
-		},
-	};
-
-	public static ResourcesService = {
-		GetResources: (player: Player, resourceKey: string) => {
-			return ResourcesService.GetResources(player);
-		},
-		ModifyResource: (player: Player, resourceKey: ResourceKey, amount: number) => {
-			return ResourcesService.ModifyResource(player, resourceKey, amount);
-		},
-		RecalculateResources: (player: Player) => {
-			return ResourcesService.Recalculate(player);
-		},
-	};
-
-	public static SettingsService = {
-		GetSettings: (player: Player) => {
-			return SettingsService.GetSettings(player);
-		},
-		UpdateSetting: (player: Player, key: SettingKey, value: boolean | string) => {
-			return SettingsService.SetSettings(player, key, value);
-		},
-	};
-
-	public static AttributesService = {
-		IncreaseAttribute: (player: Player, attributeKey: AttributeKey, amount: number) => {
-			return AttributesService.Increase(player, attributeKey, amount);
-		},
-		GetAttributesDTO: (player: Player) => {
-			return AttributesService.Get(player);
-		},
-	};
 }

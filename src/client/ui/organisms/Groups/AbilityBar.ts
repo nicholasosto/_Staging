@@ -41,13 +41,13 @@ export function AbilityBarComponent(): Frame {
 		Content: {
 			Buttons: Computed(() => {
 				const list = abilitySlice.Abilities.get();
-				warn(`AbilityBarComponent: Rendering ${list.size()} abilities`);
+				//warn(`AbilityBarComponent: Rendering ${list.size()} abilities`);
 				return list.map((ability) => AbilityButton(ability));
 			}),
 		},
 	});
 
-	warn("AbilityBarComponent: Created with", abilitySlice.Abilities.get().size(), "abilities");
+	//warn("AbilityBarComponent: Created with", abilitySlice.Abilities.get().size(), "abilities");
 
 	return abilityBarComponent;
 }

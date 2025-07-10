@@ -45,7 +45,10 @@ export const ClientDispatch = Net.Definitions.Create({
 	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),
 
 	/* -- Profile Data -- */
-	GetData: Net.Definitions.ServerFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
+	GetAllData: Net.Definitions.ServerAsyncFunction<() => ProfileDataMap | undefined>(),
+	GetDataByKey:
+		Net.Definitions.ServerAsyncFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
+	
 
 	/* -- Update Data -- */
 	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
@@ -58,4 +61,6 @@ export const ServerDispatch = Net.Definitions.Create({
 		Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
 	/* -- Resources -- */
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, data: ResourceDTO]>(),
+
+	GameStateUpdated: Net.Definitions.ServerToClientEvent<[dataLoaded: boolean, playerDataLoaded: boolean]>(),
 });

@@ -30,7 +30,7 @@
 import { Players, RunService } from "@rbxts/services";
 import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
-import { DataProfileController } from "./DataService";
+import { DataService } from "./DataService";
 import { calculateResources } from "shared/calculations";
 import { ServerSend } from "server/network";
 
@@ -84,7 +84,7 @@ export class ResourcesService {
 
 	public static Recalculate(player: Player) {
 		const svc = this.Start();
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
 		const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
 
@@ -142,7 +142,7 @@ export class ResourcesService {
 			const character = player.Character || player.CharacterAdded.Wait()[0];
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 
-			const profile = DataProfileController.GetProfile(player);
+			const profile = DataService.GetProfile(player);
 			const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
 			const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
 

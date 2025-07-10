@@ -20,7 +20,7 @@
 
 /* =============================================== Imports ================================== */
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
-import { DataProfileController } from "./DataService";
+import { DataService } from "./DataService";
 
 /* =============================================== Service ================================== */
 export class ProgressionService {
@@ -39,7 +39,7 @@ export class ProgressionService {
 
 	/* ------------------------------- Public API ---------------------------------------- */
 	public static AddExperience(player: Player, amount: number) {
-		const profile = DataProfileController.GetProfile(player);
+		const profile = DataService.GetProfile(player);
 		if (!profile) return;
 
 		const progression = profile.Data.Progression;
@@ -53,7 +53,7 @@ export class ProgressionService {
 	}
 
 	public static Get(player: Player) {
-		return DataProfileController.GetProfile(player)?.Data.Progression;
+		return DataService.GetProfile(player)?.Data.Progression;
 	}
 }
 
