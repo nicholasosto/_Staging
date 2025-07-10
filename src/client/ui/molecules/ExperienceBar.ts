@@ -31,9 +31,9 @@ export function ExperienceBar() {
 	});
 
 	const bar = BarMeter({
-		ProgressState: percent,
+		Percent: percent,
 		Gradient: Gradients.ExperienceGradient(),
-		Text: "Experience",
+		Label: Computed(() => `Level ${level.get()} - ${math.floor(percent.get() * 100)}%`),
 	});
 
 	const glowTweenInfo = new TweenInfo(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out);

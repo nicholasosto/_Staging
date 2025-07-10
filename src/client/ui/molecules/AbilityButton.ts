@@ -35,11 +35,11 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 	/* Cooldown Bar */
 	const cooldownBar = BarMeter({
 		Size: UDim2.fromOffset(64, 16),
-		ProgressState: Computed(() => {
+		Percent: Computed(() => {
 			const progress = cooldownTimer.Progress.get();
 			return progress;
 		}),
-		Text: meta.displayName,
+		Label: Computed(() => meta.displayName),
 	});
 
 	/* Image Button */

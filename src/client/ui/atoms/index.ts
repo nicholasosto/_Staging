@@ -31,7 +31,7 @@
  * @since        0.1.0
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
-export * from "./AvatarBust";
+
 export * from "./Badge";
 export * from "./BaseContainer";
 export * from "./BorderImage";

@@ -12,7 +12,6 @@ const Events = {
 /* State Slices ------------------------------------- */
 // These slices are used to manage the player's abilities, attributes, progression, resources, and settings
 
-
 /* Slices -------------------------------------- */
 const abilitySlice = PlayerStateInstance.Abilities;
 const attributesSlice = PlayerStateInstance.Attributes;

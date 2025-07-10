@@ -15,8 +15,8 @@
 
 import { Players } from "@rbxts/services";
 import { New } from "@rbxts/fusion";
-import { BaseContainer } from "./BaseContainer";
-import { BorderImage } from "./BorderImage";
+import { BaseContainer } from "../atoms/BaseContainer";
+import { BorderImage } from "../atoms/BorderImage";
 
 export const AvatarBust = (userId: number, layoutOrder?: number) => {
 	/* -- Avatar Bust Image -- */

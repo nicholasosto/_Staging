@@ -23,7 +23,6 @@ import {
 } from "shared/definitions/ProfileDefinitions/Progression";
 
 export default class ProgressionSlice {
-
 	public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
 	public readonly NextLevelExperience = Value(DefaultProgression.NextLevelExperience);
 	public readonly ExperiencePercent!: Computed<number>;

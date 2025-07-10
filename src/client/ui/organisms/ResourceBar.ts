@@ -30,7 +30,7 @@ import Fusion, { Observer, OnChange } from "@rbxts/fusion";
 import { PlayerStateInstance } from "client/states/PlayerState";
 
 // -------------- Local helpers --------------------------------------------- //
-export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
+function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
 	const state = resourceState;
 	const meta = ResourceMeta[resourceKey];
 	const { Spring, Computed } = Fusion;
@@ -44,9 +44,9 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 	});
 
 	const ProgressBarInstance = BarMeter({
-		ProgressState: progress2,
+		Percent: progress2,
 		Gradient: meta.gradient,
-		Text: meta.displayName,
+		Label: Computed(() => meta.displayName),
 	});
 
 	const resourceBarContainer = BaseContainer({

@@ -35,8 +35,8 @@ class PlayerStateClass {
 	/** Active status effects */
 	public StatusEffects = Value<StatusEffect[]>([]);
 
-	constructor() {
-		warn("PlayerState created: ", Players.LocalPlayer.Name);
+	constructor(player: Player = Players.LocalPlayer) {
+		warn("PlayerState created: ", player.Name);
 	}
 }
 

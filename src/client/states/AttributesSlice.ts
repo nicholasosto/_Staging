@@ -18,14 +18,14 @@ import { Value } from "@rbxts/fusion";
 import { ATTR_KEYS, AttributeKey, AttributesDTO, DefaultAttributes } from "shared";
 
 export default class AttributesSlice {
-	public readonly Attributes: Record<AttributeKey, Value<number>> = {} as never;
+	public readonly Attributes: Record<AttributeKey, Value<number>> = {} as Record<AttributeKey, Value<number>>;
 	public readonly Available = Value(0);
 	public readonly Spent = Value(0);
 
 	constructor() {
-		for (const key of ATTR_KEYS) {
+		ATTR_KEYS.forEach((key) => {
 			this.Attributes[key] = Value(DefaultAttributes[key]);
-		}
+		});
 		this.Available.set(DefaultAttributes.AvailablePoints);
 		this.Spent.set(DefaultAttributes.SpentPoints);
 	}

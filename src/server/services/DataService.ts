@@ -38,7 +38,6 @@ const DefaultProfileData: ProfileDataMap = {
 	Progression: DefaultProgression, // Player progression data
 	Settings: DefaultSettings,
 	Currency: DefaultCurrency,
-	
 };
 
 /* Data Profile Controller */

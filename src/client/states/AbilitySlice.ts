@@ -26,7 +26,6 @@ export default class AbilitySlice {
 
 	constructor() {
 		print("AbilitySlice initialized");
-		this.Abilities.set(["earthquake", "melee"]); // Initialize with an empty list
 	}
 
 	/** Replace the ability list and notify the server */

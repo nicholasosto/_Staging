@@ -24,23 +24,40 @@ import Fusion, { Children, New, Value, Computed, OnChange } from "@rbxts/fusion"
 import { BorderImage, BaseContainer, GameText } from "../atoms";
 
 export interface BarMeterProps extends Fusion.PropertyTable<Frame> {
-	ProgressState?: Computed<number>;
+	Percent: Computed<number>;
 	CurrentValue?: Value<number>;
 	MaxValue?: Value<number>;
 	Gradient?: UIGradient;
-	Text?: string;
+	Label?: Computed<string>;
 }
 
 export function BarMeter(props: BarMeterProps) {
-	const TextValue = Value(props.Text ?? "Bar Meter");
+	const TextValue =
+		props.Label ??
+		Computed(() => {
+			const current = props.CurrentValue?.get() ?? 0;
+			const max = props.MaxValue?.get() ?? 100;
+			return tostring(current) + " / " + tostring(max);
+		});
+
+	const BarSize = Computed(() => {
+		const current = props.CurrentValue?.get() ?? 0;
+		const max = props.MaxValue?.get() ?? 100;
+		print(`BarMeter: Current Value = ${current}, Max Value = ${max}`);
+		if (max === 0) {
+			print("BarMeter: Max Value is zero, returning 0%.");
+			return UDim2.fromScale(0, 1);
+		}
+		const percentage = current / math.max(max, 1);
+
+		const uDim2 = UDim2.fromScale(percentage, 1);
+		return uDim2;
+	});
 
 	/* Fill Bar */
 	const fillBar = New("Frame")({
-		Name: "FillBar2",
-		Size: Computed(() => {
-			const size = UDim2.fromScale(props.ProgressState?.get() ?? 0, 1);
-			return size;
-		}),
+		Name: "BarMeter",
+		Size: BarSize,
 		ZIndex: 90,
 		[Children]: {
 			Gradient: props.Gradient ?? {},

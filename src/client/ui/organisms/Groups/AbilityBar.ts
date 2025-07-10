@@ -26,14 +26,13 @@
  */
 
 import { Computed } from "@rbxts/fusion";
-import AbilitySlice from "client/states/AbilitySlice";
 import { PlayerStateInstance } from "client/states/PlayerState";
 import { ListContainer } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules/AbilityButton";
 
 export function AbilityBarComponent(): Frame {
 	const abilitySlice = PlayerStateInstance.Abilities;
-	return ListContainer({
+	const abilityBarComponent = ListContainer({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),
 		AnchorPoint: new Vector2(0.5, 1),
@@ -42,8 +41,13 @@ export function AbilityBarComponent(): Frame {
 		Content: {
 			Buttons: Computed(() => {
 				const list = abilitySlice.Abilities.get();
+				warn(`AbilityBarComponent: Rendering ${list.size()} abilities`);
 				return list.map((ability) => AbilityButton(ability));
 			}),
 		},
 	});
+
+	warn("AbilityBarComponent: Created with", abilitySlice.Abilities.get().size(), "abilities");
+
+	return abilityBarComponent;
 }

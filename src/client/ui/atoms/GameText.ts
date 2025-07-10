@@ -26,7 +26,7 @@ import { useToken } from "theme/hooks";
 export interface GameTextProps extends Fusion.PropertyTable<TextLabel> {
 	ShadowBox?: boolean;
 	Title?: boolean;
-	TextStateValue: Value<string> | Value<number>;
+	TextStateValue: Value<string> | Value<number> | Computed<string> | Computed<number>;
 }
 
 export function GameText(props: GameTextProps): TextLabel {
