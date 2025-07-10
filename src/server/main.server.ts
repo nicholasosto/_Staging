@@ -8,18 +8,10 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { Players } from "@rbxts/services";
-import { ServerSend } from "./network";
 import { ServiceWrapper } from "./ServiceWrapper";
-
-const ServiceWrapperInstance = ServiceWrapper.GetInstance();
-
-const { AbilityService, ProgressionService, BattleRoomService, ResourcesService, SettingsService, AttributesService } =
-	ServiceWrapper;
-
 /* =============================================== Initialization ========================================= */
 
-print("Server main script initialized successfully.");
+warn("Server: Main Script Initializing...");
 
 let lastUpdate = tick();
 
@@ -32,8 +24,6 @@ task.spawn(() => {
 		if (currentTime - lastUpdate >= 1) {
 			loopCount++;
 			lastUpdate = currentTime;
-			// Perform periodic server tasks here, e.g., updating game state, handling events, etc.
-			Players.GetPlayers().forEach((player) => {});
 		}
 
 		task.wait(0.1); // Adjust the wait time as needed for performance

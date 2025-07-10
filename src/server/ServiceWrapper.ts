@@ -6,13 +6,22 @@ import {
 	ResourcesService,
 	SettingsService,
 	AttributesService,
+	DataProfileController,
 } from "./services";
 
 export class ServiceWrapper {
 	private static _instance: ServiceWrapper | undefined;
 
 	private constructor() {
-		print("ServiceWrapper initialized.");
+		warn("ServiceWrapper [Starts All Services] Beginning Initialization...");
+		DataProfileController.Start(); // Initialize the data profile controller
+		AbilityService.Start(); // Initialize the AbilityService
+		ProgressionService.Start(); // Initialize the ProgressionService
+		BattleRoomService.Start(); // Initialize the BattleRoomService
+		ResourcesService.Start(); // Initialize the ResourcesService
+		SettingsService.Start(); // Initialize the SettingsService
+		AttributesService.Start(); // Initialize the AttributesService
+		warn("ServiceWrapper [All Services] Initialization Complete.");
 	}
 
 	public static GetInstance(): ServiceWrapper {

@@ -18,7 +18,7 @@ function AttributeControl(props: AttributeControlsProps) {
 
 	const displayText = GameText({
 		LayoutOrder: 1,
-		TextStateValue: Value(AttributesMeta[props.attributeKey].displayName),
+		TextState: Value(AttributesMeta[props.attributeKey].displayName),
 	});
 
 	const controller = CombinedAdjustor({

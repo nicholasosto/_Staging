@@ -22,8 +22,9 @@
  */
 
 import { Players } from "@rbxts/services";
-import { ListContainer, AvatarBust } from "client/ui/atoms";
-import { ResourceBars } from "../ResourceBar";
+import { ListContainer } from "client/ui/atoms";
+import { AvatarBust } from "client/ui/molecules";
+import { ResourceBars } from "client/ui/organisms/ResourceBar";
 
 export interface CharacterInfoCardProps {
 	Size?: UDim2;

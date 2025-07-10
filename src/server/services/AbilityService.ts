@@ -144,6 +144,3 @@ export class AbilityService {
 		return true;
 	}
 }
-
-// Auto-start on import
-AbilityService.Start();

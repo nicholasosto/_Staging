@@ -73,7 +73,7 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 	const ValueDisplay = GameText({
 		LayoutOrder: 1,
 		Size: new UDim2(0, 50, 0, 50),
-		TextStateValue: stringValue,
+		TextState: stringValue,
 	});
 	const DecrementButton = Decrementor({ value, amount, OnDecrement, LayoutOrder: 0 });
 

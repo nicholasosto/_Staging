@@ -32,7 +32,7 @@ export function LevelGem() {
 				BackgroundTransparency: 1,
 			}),
 			Label: GameText({
-				TextStateValue: labelValue,
+				TextState: labelValue,
 				Size: UDim2.fromScale(1, 0.3),
 				Position: UDim2.fromScale(0, 0.7),
 				BackgroundTransparency: 1,

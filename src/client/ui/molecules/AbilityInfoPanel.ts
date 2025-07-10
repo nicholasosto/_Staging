@@ -17,25 +17,25 @@ export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
 
 	const abilityName = GameText({
 		Name: `AbilityName-${abilityKey}`,
-		TextStateValue: Value(abilityMeta.displayName),
+		TextState: Value(abilityMeta.displayName),
 		Size: UDim2.fromScale(0.8, 1),
 	});
 	const abilityDescription = GameText({
 		Name: `AbilityDescription-${abilityKey}`,
-		TextStateValue: Value(abilityMeta.description),
+		TextState: Value(abilityMeta.description),
 		Size: UDim2.fromScale(1, 0.3),
 		TextWrapped: true,
 	});
 	const abilityCooldown = GameText({
 		Name: `AbilityCooldown-${abilityKey}`,
-		TextStateValue: Value(`Cooldown: ${abilityMeta.cooldown} seconds`),
+		TextState: Value(`Cooldown: ${abilityMeta.cooldown} seconds`),
 		Size: UDim2.fromScale(1, 0.3),
 		BackgroundTransparency: 1,
 		TextColor3: Color3.fromRGB(255, 100, 100), //
 	});
 	const abilityPower = GameText({
 		Name: `AbilityPower-${abilityKey}`,
-		TextStateValue: Value(`Base Power: ${abilityMeta.basePower}`),
+		TextState: Value(`Base Power: ${abilityMeta.basePower}`),
 		BackgroundTransparency: 1,
 		TextColor3: Color3.fromRGB(100, 255, 100), //
 		Size: UDim2.fromScale(1, 0.3),

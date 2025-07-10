@@ -30,7 +30,7 @@ export const BaseContainer = (props: BaseContainerProps) => {
 		Position: props.Position ?? UDim2.fromScale(0, 0),
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		BackgroundColor3: props.BackgroundColor3 ?? bg,
-		BackgroundTransparency: props.BackgroundTransparency ?? 0.2,
+		BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		LayoutOrder: props.LayoutOrder ?? 0,
 		ZIndex: props.ZIndex ?? 1,
 		[Children]: {

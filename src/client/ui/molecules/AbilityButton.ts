@@ -17,7 +17,7 @@
 import { Computed, Children } from "@rbxts/fusion";
 
 import { UIButton, GameImage, ListContainer } from "client/ui/atoms";
-import { BarMeter } from "./BarMeter";
+import { ProgressBar } from "./ProgressBar";
 import { ClientSend } from "client/network";
 import { AbilityKey, AbilitiesMeta, CooldownTimer, GameImages } from "shared";
 
@@ -33,7 +33,7 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 	const cooldownTimer = new CooldownTimer(meta.cooldown);
 
 	/* Cooldown Bar */
-	const cooldownBar = BarMeter({
+	const cooldownBar = ProgressBar({
 		Size: UDim2.fromOffset(64, 16),
 		Percent: Computed(() => {
 			const progress = cooldownTimer.Progress.get();

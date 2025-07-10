@@ -22,42 +22,29 @@
  */
 
 // -------------- Imports ----------------------------------------------------- //
-import { BaseContainer, ListContainer } from "client/ui/atoms"; // absolute alias
+import { BaseContainer, BorderImage, ListContainer } from "client/ui/atoms"; // absolute alias
 import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
-import { BarMeter } from "client/ui/molecules";
-import ResourceSlice, { ResourceState } from "client/states/ResourceSlice";
-import Fusion, { Observer, OnChange } from "@rbxts/fusion";
+import { ProgressBar } from "client/ui/molecules";
+import { ResourceState } from "client/states/ResourceSlice";
+import Fusion, { Computed, Observer, OnChange } from "@rbxts/fusion";
 import { PlayerStateInstance } from "client/states/PlayerState";
 
-// -------------- Local helpers --------------------------------------------- //
+// -------------- Local helpers --------------------------------- //
 function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
 	const state = resourceState;
 	const meta = ResourceMeta[resourceKey];
-	const { Spring, Computed } = Fusion;
 
-	const progress = Computed(() => Spring(state.percent, 40, 1).get());
-
-	const progress2 = state.percent;
-
-	Observer(progress2).onChange(() => {
-		warn(`Observer: ${resourceKey} progress changed to ${progress.get()}`);
-	});
-
-	const ProgressBarInstance = BarMeter({
-		Percent: progress2,
-		Gradient: meta.gradient,
+	const resourceBar = ProgressBar({
+		Name: `${resourceKey}_Bar`,
+		Percent: state.percent,
 		Label: Computed(() => meta.displayName),
-	});
-
-	const resourceBarContainer = BaseContainer({
-		Name: `${resourceKey}_BarContainer`,
-		Size: UDim2.fromScale(1, 0.3),
+		Border: BorderImage.GothicMetal(),
+		Gradient: meta.gradient,
 		LayoutOrder: meta.layoutOrder,
-		Content: {
-			ProgressBar: ProgressBarInstance,
-		},
+		Size: new UDim2(1, 0, 0.31, 0),
+		BackgroundTransparency: 1,
 	});
-	return resourceBarContainer;
+	return resourceBar;
 }
 
 export const ResourceBars = (layoutOrder?: number) => {

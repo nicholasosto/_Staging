@@ -1,5 +1,4 @@
 import { AbilityKey, AttributesDTO, PlayerSettings, ResourceDTO, ServerDispatch } from "shared";
-import { AbilitySlice, AttributesSlice, ResourceSlice, ProgressionSlice, SettingsState } from "client/states";
 import { ProgressionDTO } from "shared/definitions/ProfileDefinitions/Progression";
 import { PlayerStateInstance } from "client/states/PlayerState";
 

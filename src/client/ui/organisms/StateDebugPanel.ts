@@ -37,13 +37,13 @@ function CreateInfoRow(state: Value<string> | Value<number>, label: string) {
 	const Label = GameText({
 		Size: UDim2.fromScale(0.3, 1),
 		Name: `${label}_Label`,
-		TextStateValue: Value(label),
+		TextState: Value(label),
 	});
 
 	const ValueContent = GameText({
 		Size: UDim2.fromScale(0.7, 1),
 		Name: `${label}_Value`,
-		TextStateValue: state,
+		TextState: state,
 	});
 
 	return ListContainer({

@@ -8,7 +8,7 @@
  */
 
 import Fusion, { Computed, Observer } from "@rbxts/fusion";
-import { BarMeter } from "./BarMeter";
+import { ProgressBar } from "./ProgressBar";
 import { PlayerStateInstance } from "client/states/PlayerState";
 import { Gradients } from "shared/constants/gradients";
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
@@ -30,9 +30,8 @@ export function ExperienceBar() {
 		return exp / math.max(nextExp, 1);
 	});
 
-	const bar = BarMeter({
+	const bar = ProgressBar({
 		Percent: percent,
-		Gradient: Gradients.ExperienceGradient(),
 		Label: Computed(() => `Level ${level.get()} - ${math.floor(percent.get() * 100)}%`),
 	});
 

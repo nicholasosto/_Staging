@@ -16,7 +16,8 @@ const themeButtons = {
 	[ThemeKey.CyberGothic]: () => {
 		return UIButton({
 			Label: "Cyber Gothic",
-			Size: new UDim2(0.3, 0, 0.1, 0),
+			Variant: "flat",
+			Size: new UDim2(0.3, 0, 1, 0),
 			OnClick: () => ThemeState.set(ThemeKey.CyberGothic),
 			LayoutOrder: 1,
 		});
@@ -24,7 +25,7 @@ const themeButtons = {
 	[ThemeKey.SolarDrift]: () => {
 		return UIButton({
 			Label: "Solar Drift",
-			Size: new UDim2(0.3, 0, 0.1, 0),
+			Size: new UDim2(0.3, 0, 1, 0),
 			OnClick: () => ThemeState.set(ThemeKey.SolarDrift),
 			LayoutOrder: 2,
 		});
@@ -32,7 +33,8 @@ const themeButtons = {
 	[ThemeKey.Fateless]: () => {
 		return UIButton({
 			Label: "Fateless",
-			Size: new UDim2(0.3, 0, 0.1, 0),
+			BackgroundTransparency: 0.5,
+			Size: new UDim2(0.3, 0, 1, 0),
 			OnClick: () => ThemeState.set(ThemeKey.Fateless),
 			LayoutOrder: 3,
 		});
@@ -53,6 +55,7 @@ export const AdminButtonBar = (props: AdminButtonBarProps) => {
 		Position: props.Position ?? UDim2.fromOffset(0, 0),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		LayoutOrientation: "horizontal",
+		BackgroundTransparency: 0.5,
 		Gap: 5,
 		Content: {
 			CyberGothic: themeButtons[ThemeKey.CyberGothic](),

@@ -22,9 +22,14 @@ import AttributesSlice from "./AttributesSlice";
 import ProgressionSlice from "./ProgressionSlice";
 import CurrencySlice from "./CurrencySlice";
 import SettingsSlice from "./SettingsState";
+import { ClientSend } from "client/network";
+
+/* Data Request */
+const InitialData = ClientSend.GetData("Abilities");
 
 /* Player State Wrapper */
 class PlayerStateClass {
+	private static instance: PlayerStateClass;
 	public readonly Abilities = new AbilitySlice();
 	public readonly Resources = new ResourceSlice();
 	public readonly Attributes = new AttributesSlice();
@@ -37,6 +42,9 @@ class PlayerStateClass {
 
 	constructor(player: Player = Players.LocalPlayer) {
 		warn("PlayerState created: ", player.Name);
+		if (PlayerStateClass.instance) {
+			return PlayerStateClass.instance;
+		}
 	}
 }
 

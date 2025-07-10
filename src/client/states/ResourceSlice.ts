@@ -27,7 +27,7 @@ export type ResourceStateMap = {
 
 /* Helpers ----------------------------------------------------------- */
 /* Create Resource State */
-export function createResourceState(resourceDTO: ResourceDTO) {
+function createResourceState(resourceDTO: ResourceDTO) {
 	const data = resourceDTO;
 	const currentValue = Value(data.current);
 	const maxValue = Value(data.max);
@@ -59,9 +59,13 @@ export default class ResourceSlice {
 
 	public UpdateResource(key: ResourceKey, data: ResourceDTO): void {
 		const resourceState = this[key];
+		warn(`Current resource state for ${key}:`, resourceState);
 		if (resourceState) {
 			resourceState.current.set(data.current);
 			resourceState.max.set(data.max);
+		} else {
+			warn(`Resource key ${key} does not exist in ResourceSlice.`);
 		}
+		warn(`Updated resource ${key}:`, resourceState);
 	}
 }

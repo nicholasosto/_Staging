@@ -106,7 +106,7 @@ export const UIButton = (props: UIButtonProps) => {
 			Label: props.Label
 				? GameText({
 						Name: "Label",
-						TextStateValue: Value(props.Label),
+						TextState: Value(props.Label),
 						AnchorPoint: new Vector2(0.5, 1),
 						Position: UDim2.fromScale(0.5, 1),
 						Size: UDim2.fromScale(1, 0.25),
