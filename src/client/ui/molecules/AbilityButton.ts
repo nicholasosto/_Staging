@@ -14,12 +14,13 @@
  * @dependencies
  *   @rbxts/fusion ^0.4.0
  */
-import { Computed, Children } from "@rbxts/fusion";
+import { Computed, Children, New } from "@rbxts/fusion";
 
-import { UIButton, GameImage, ListContainer } from "client/ui/atoms";
+import { UIButton, GameImage, ListContainer, BaseContainer, BorderImage } from "client/ui/atoms";
 import { ProgressBar } from "./ProgressBar";
 import { ClientSend } from "client/network";
 import { AbilityKey, AbilitiesMeta, CooldownTimer, GameImages } from "shared";
+import { Padding } from "../tokens";
 
 export interface AbilityButtonProps {
 	abilityKey: AbilityKey;
@@ -32,9 +33,29 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 	/* Timer */
 	const cooldownTimer = new CooldownTimer(meta.cooldown);
 
+	const MysticalBackground = New("Folder")({
+		Name: "MysticalBackground",
+		[Children]: [
+			New("ImageLabel")({
+				Image: "rbxassetid://73987241775051", // Replace with actual mystical background image ID
+				Size: UDim2.fromScale(1, 1),
+				BackgroundTransparency: 1,
+				ZIndex: -1, // Ensure it is behind the button
+				[Children]: [
+					New("UIStroke")({
+						Color: Color3.fromRGB(255, 255, 255),
+						Thickness: 5,
+						ApplyStrokeMode: Enum.ApplyStrokeMode.Border,
+					}),
+				],
+			}),
+		],
+	});
+
 	/* Cooldown Bar */
 	const cooldownBar = ProgressBar({
-		Size: UDim2.fromOffset(64, 16),
+		Size: new UDim2(1, 0, 0.3, 0), // Full width, fixed height
+		Border: BorderImage.GothicMetal(),
 		Percent: Computed(() => {
 			const progress = cooldownTimer.Progress.get();
 			return progress;
@@ -51,7 +72,10 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 			/* Ability Icon */
 			Icon: GameImage({
 				Image: meta.iconId,
-				Size: UDim2.fromScale(0.6, 0.6),
+				Size: UDim2.fromScale(0.85, 0.85),
+				AnchorPoint: new Vector2(0.5, 0.5),
+				Position: UDim2.fromScale(0.5, 0.5),
+				ZIndex: 1, // Ensure icon is above the background
 			}),
 		},
 		OnClick: () => {
@@ -64,12 +88,16 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 
 	// tick down timer using RunService or similar
 
-	return ListContainer({
-		Size: UDim2.fromOffset(80, 90),
+	const listContainer = ListContainer({
+		Size: UDim2.fromOffset(74, 90),
 		LayoutOrientation: "vertical",
+		BackgroundTransparency: 1,
 		Content: {
+			Background: MysticalBackground,
 			ButtonIcon: button,
 			CooldownBar: cooldownBar,
 		},
 	});
+
+	return listContainer;
 }

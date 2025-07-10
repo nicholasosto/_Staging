@@ -20,7 +20,6 @@
  *   shared
  */
 
-
 import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet } from "shared";
 
 /* Abilities Signals*/

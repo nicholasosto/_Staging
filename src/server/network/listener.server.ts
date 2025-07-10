@@ -1,5 +1,8 @@
-import { DataService } from "server/services";
-import { ClientDispatch, ProfileDataKey } from "shared";
+import { AbilityService, DataService } from "server/services";
+import { AbilityKey, ClientDispatch, ProfileDataKey } from "shared";
+const Events = {
+	UseAbility: ClientDispatch.Server.Get("UseAbility"),
+};
 
 const Functions = {
 	/* -- Profile Data -- */
@@ -32,4 +35,8 @@ Functions.GetAllProfileData.SetCallback((player: Player) => {
 		warn(`GetAllProfileData: No profile found for player ${player.Name}.`);
 		return undefined;
 	}
+});
+
+Events.UseAbility.Connect((player: Player, abilityKey: AbilityKey) => {
+	AbilityService.Activate(player, abilityKey);
 });

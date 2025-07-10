@@ -25,8 +25,7 @@ function onDataLoaded(player: Player, data: unknown) {
 	const description = Players.GetHumanoidDescriptionFromUserId(3100629956);
 	if (description) {
 		player.LoadCharacterWithHumanoidDescription(description);
-	}
-	else {
+	} else {
 		warn(`Failed to load HumanoidDescription for player: ${player.Name}`);
 	}
 }

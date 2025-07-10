@@ -48,7 +48,6 @@ export const ClientDispatch = Net.Definitions.Create({
 	GetAllData: Net.Definitions.ServerAsyncFunction<() => ProfileDataMap | undefined>(),
 	GetDataByKey:
 		Net.Definitions.ServerAsyncFunction<(dataKey: ProfileDataKey) => ProfileDataMap[ProfileDataKey] | undefined>(),
-	
 
 	/* -- Update Data -- */
 	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),

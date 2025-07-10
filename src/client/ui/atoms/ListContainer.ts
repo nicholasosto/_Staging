@@ -12,7 +12,7 @@
  * ╰───────────────────────────────╯
  */
 
-import Fusion, { Children } from "@rbxts/fusion";
+import Fusion, { Children, Computed } from "@rbxts/fusion";
 import { useToken } from "theme/hooks";
 import { Dragger } from "../tokens/dragger";
 
@@ -51,14 +51,8 @@ export const ListContainer = (props: ListContainerProps) => {
 		FillDirection:
 			props.LayoutOrientation === "horizontal" ? Enum.FillDirection.Horizontal : Enum.FillDirection.Vertical,
 		Padding: props.Gap !== undefined ? new UDim(0, props.Gap) : undefined,
-		HorizontalAlignment:
-			props.AlignmentType === Enum.HorizontalAlignment.Center
-				? Enum.HorizontalAlignment.Center
-				: Enum.HorizontalAlignment.Left,
-		VerticalAlignment:
-			props.AlignmentType === Enum.VerticalAlignment.Center
-				? Enum.VerticalAlignment.Center
-				: Enum.VerticalAlignment.Top,
+		HorizontalAlignment: Enum.HorizontalAlignment.Center,
+		VerticalAlignment: Enum.VerticalAlignment.Center,
 	});
 
 	const Component = Fusion.New("Frame")({

@@ -101,6 +101,7 @@ export const UIButton = (props: UIButtonProps) => {
 		BackgroundColor3: variant === "panel" ? background : (props.BackgroundColor3 ?? new Color3(1, 1, 1)),
 		Image: resolveIcon(props.Icon),
 		ImageColor3: props.ImageColor3 ?? new Color3(1, 1, 1),
+		ZIndex: props.ZIndex ?? 1,
 		[OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
 		[Children]: {
 			Label: props.Label

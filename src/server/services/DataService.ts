@@ -50,7 +50,6 @@ export class DataService {
 	/* Map to store player profiles */
 	private static _profileMap = new Map<Player, Profile<ProfileDataMap>>(); // Map to store player profiles
 
-
 	/* Constructor */
 	private constructor() {
 		print("DataService - initialized.");
@@ -105,7 +104,6 @@ export class DataService {
 
 	/* Get Profile */
 	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
-
 		while (this._profileMap.get(player) === undefined) {
 			// If the profile is undefined, wait for it to be created
 			warn(`\nDataService: Waiting for profile for player ${player.Name}`);

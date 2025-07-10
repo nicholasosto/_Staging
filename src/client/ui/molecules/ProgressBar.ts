@@ -20,8 +20,8 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion, { Computed } from "@rbxts/fusion";
-import { BaseContainer, BorderImage, GameText } from "../atoms";
+import Fusion, { Children, Computed, New } from "@rbxts/fusion";
+import { BaseContainer, BorderImage, GameImage, GameText } from "../atoms";
 import { reactiveWidth } from "../tokens/uDim";
 
 export interface ProgressBarProps extends Fusion.PropertyTable<Frame> {
@@ -35,6 +35,9 @@ export const ProgressBar = (props: ProgressBarProps) => {
 	/* ProgressBar Label */
 	const Label = GameText({
 		TextState: props.Label ?? Computed(() => `${math.floor(props.Percent.get() * 100)}%`),
+		TextStrokeTransparency: 0.2,
+		TextScaled: false,
+		TextSize: 14,
 	});
 
 	// const ReactiveSize = Computed(() => {
@@ -59,6 +62,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
 		BackgroundTransparency: 1,
 		//BackgroundColor3: Color3.fromRGB(0, 0, 0),
 		BorderImage: props.Border ?? BorderImage.GothicMetal(),
+
 		Content: {
 			Fill: ProgressFrame,
 			Label: Label,

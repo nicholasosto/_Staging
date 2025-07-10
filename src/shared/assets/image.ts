@@ -101,6 +101,7 @@ export const GameImages = {
 	},
 	Screens: {
 		Loading: "rbxassetid://70565375536693",
+		GameTitle: "rbxassetid://83079804672155",
 	},
 } as const;
 

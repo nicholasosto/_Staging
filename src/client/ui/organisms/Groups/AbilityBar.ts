@@ -34,9 +34,10 @@ export function AbilityBarComponent(): Frame {
 	const abilitySlice = PlayerStateInstance.Abilities;
 	const abilityBarComponent = ListContainer({
 		Name: "AbilityBar",
-		Size: new UDim2(1, 0, 0, 100),
+		Size: new UDim2(0.5, 0, 0, 100),
 		AnchorPoint: new Vector2(0.5, 1),
 		Position: new UDim2(0.5, 0, 1, -10),
+		BackgroundTransparency: 0.5,
 		LayoutOrientation: "horizontal",
 		Content: {
 			Buttons: Computed(() => {
