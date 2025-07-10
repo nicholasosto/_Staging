@@ -27,11 +27,12 @@
 
 import { Computed } from "@rbxts/fusion";
 import AbilitySlice from "client/states/AbilitySlice";
+import { PlayerStateInstance } from "client/states/PlayerState";
 import { ListContainer } from "client/ui/atoms";
 import { AbilityButton } from "client/ui/molecules/AbilityButton";
 
 export function AbilityBarComponent(): Frame {
-	const abilitySlice = AbilitySlice.getInstance();
+	const abilitySlice = PlayerStateInstance.Abilities;
 	return ListContainer({
 		Name: "AbilityBar",
 		Size: new UDim2(1, 0, 0, 100),

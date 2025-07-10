@@ -9,14 +9,16 @@
 
 import Fusion, { Computed, Observer } from "@rbxts/fusion";
 import { BarMeter } from "./BarMeter";
-import ProgressionSlice from "client/states/ProgressionSlice";
+import { PlayerStateInstance } from "client/states/PlayerState";
 import { Gradients } from "shared/constants/gradients";
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
 import { createAudio } from "shared/assets/audio";
 import { TweenService } from "@rbxts/services";
 
+const ProgressionSlice = PlayerStateInstance.Progression;
+
 export function ExperienceBar() {
-	const slice = ProgressionSlice.getInstance();
+	const slice = ProgressionSlice;
 	const level = slice.Progression.Level;
 	const experience = slice.Progression.Experience;
 

@@ -17,7 +17,7 @@
  */
 
 import Fusion, { Computed, Value } from "@rbxts/fusion";
-import PlayerState from "client/states/PlayerState";
+import { PlayerStateInstance } from "client/states/PlayerState";
 
 import { BaseContainer, GameText, ListContainer } from "client/ui/atoms";
 
@@ -58,7 +58,7 @@ function CreateInfoRow(state: Value<string> | Value<number>, label: string) {
 }
 
 export const StateDebugPanel = (props: Partial<StateDebugPanelProps>) => {
-	const resourceState = PlayerState.getInstance().Resources;
+	const resourceState = PlayerStateInstance.Resources;
 	const HealthRow = CreateInfoRow(resourceState.Health.current, "Health");
 	const ManaRow = CreateInfoRow(resourceState.Mana.current, "Mana");
 	const StaminaRow = CreateInfoRow(resourceState.Stamina.current, "Stamina");

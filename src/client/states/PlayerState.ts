@@ -5,49 +5,39 @@
  * @module      PlayerState
  * @layer       Client/State
  * @description Lightweight wrapper exposing client state slices.
- */
-
-/**
  * @author       Codex
  * @license      MIT
  * @since        0.1.0
  * @lastUpdated  2025-07-10 by Codex – Added metadata header
  */
 
+/* Non-Slice Imports */
 import { Value } from "@rbxts/fusion";
+import { StatusEffect } from "shared/definitions/StatusEffect";
+import { Players } from "@rbxts/services";
+/* Slices */
 import AbilitySlice from "./AbilitySlice";
 import ResourceSlice from "./ResourceSlice";
 import AttributesSlice from "./AttributesSlice";
 import ProgressionSlice from "./ProgressionSlice";
 import CurrencySlice from "./CurrencySlice";
-import { StatusEffect } from "shared/definitions/StatusEffect";
-import { AbilityKey, DEFAULT_RESOURCES, ResourceDTO } from "shared";
+import SettingsSlice from "./SettingsState";
 
-export default class PlayerState {
-	private static instance: PlayerState;
-
-	public readonly Abilities = AbilitySlice.getInstance();
+/* Player State Wrapper */
+class PlayerStateClass {
+	public readonly Abilities = new AbilitySlice();
 	public readonly Resources = new ResourceSlice();
-	public readonly Attributes = AttributesSlice.getInstance();
-	public readonly Progression = ProgressionSlice.getInstance();
-	public readonly Currency = CurrencySlice.getInstance();
+	public readonly Attributes = new AttributesSlice();
+	public readonly Progression = new ProgressionSlice();
+	public readonly Settings = new SettingsSlice();
+	public readonly Currency = new CurrencySlice();
 
 	/** Active status effects */
 	public StatusEffects = Value<StatusEffect[]>([]);
 
-	private constructor() {
-		warn("PlayerState:", PlayerState);
+	constructor() {
+		warn("PlayerState created: ", Players.LocalPlayer.Name);
 	}
-
-	public static getInstance(): PlayerState {
-		if (!this.instance) {
-			this.instance = new PlayerState();
-		}
-		return this.instance;
-	}
-
-	public static updateAbilities(abilities: AbilityKey[]): void {
-		this.getInstance().Abilities.Abilities.set(abilities);
-	}
-	public static updateResources(resources: ResourceDTO): void {}
 }
+
+export const PlayerStateInstance = new PlayerStateClass();

@@ -21,7 +21,7 @@
  */
 
 /* =============================================== External Imports ============================================= */
-import PlayerState from "./states/PlayerState";
+import { PlayerStateInstance } from "./states/PlayerState";
 import {
 	GemForgeScreen,
 	PlayerHUDScreen,
@@ -35,7 +35,7 @@ import {
 //import * as Dispatch from "./network/ClientDispatch";
 
 /* =============================================== References ============================================= */
-PlayerState.getInstance(); // Initialize PlayerState to ensure all slices are set up
+warn("PlayerState:", PlayerStateInstance);
 PlayerHUDScreen();
 GemForgeScreen();
 SettingsScreen();

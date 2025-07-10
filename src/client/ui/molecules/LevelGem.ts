@@ -10,10 +10,12 @@
 import { GameImage, BaseContainer, GameText } from "../atoms";
 import { GameImages } from "shared/assets";
 import { Value, Observer } from "@rbxts/fusion";
-import ProgressionSlice from "client/states/ProgressionSlice";
+import { PlayerStateInstance } from "client/states";
+
+const ProgressionSlice = PlayerStateInstance.Progression;
 
 export function LevelGem() {
-	const level = ProgressionSlice.getInstance().Progression.Level;
+	const level = ProgressionSlice.Progression.Level;
 	const labelValue = Value(`Lv ${level.get()}`);
 	Observer(level).onChange(() => {
 		labelValue.set(`Lv ${level.get()}`);

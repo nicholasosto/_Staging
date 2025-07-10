@@ -15,21 +15,14 @@
  */
 
 import { Value } from "@rbxts/fusion";
-import {
-	ATTR_KEYS,
-	AttributeKey,
-	AttributesDTO,
-	DefaultAttributes,
-} from "shared/definitions/ProfileDefinitions/Attributes";
+import { ATTR_KEYS, AttributeKey, AttributesDTO, DefaultAttributes } from "shared";
 
 export default class AttributesSlice {
-	private static instance: AttributesSlice;
-
 	public readonly Attributes: Record<AttributeKey, Value<number>> = {} as never;
 	public readonly Available = Value(0);
 	public readonly Spent = Value(0);
 
-	private constructor() {
+	constructor() {
 		for (const key of ATTR_KEYS) {
 			this.Attributes[key] = Value(DefaultAttributes[key]);
 		}
@@ -48,12 +41,5 @@ export default class AttributesSlice {
 		}
 		this.Available.set(attributes.AvailablePoints);
 		this.Spent.set(attributes.SpentPoints);
-	}
-
-	public static getInstance(): AttributesSlice {
-		if (!this.instance) {
-			this.instance = new AttributesSlice();
-		}
-		return this.instance;
 	}
 }

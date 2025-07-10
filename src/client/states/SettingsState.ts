@@ -27,11 +27,10 @@ import {
 	SettingKey,
 } from "shared/definitions/ProfileDefinitions/Settings";
 
-export default class SettingsState {
-	private static instance: SettingsState;
+export default class SettingsSlice {
 	public Settings: Record<SettingKey, Value<boolean | string>> = {} as never;
 
-	private constructor() {
+	constructor() {
 		for (const key of SETTING_KEYS) {
 			this.Settings[key] = Value(DefaultSettings[key]);
 		}
@@ -46,16 +45,5 @@ export default class SettingsState {
 				warn(`Setting ${key} not found in SettingsState or provided settings.`);
 			}
 		}
-	}
-
-	public static getInstance(): SettingsState {
-		if (!this.instance) {
-			this.instance = new SettingsState();
-		}
-		return this.instance;
-	}
-
-	public set(key: SettingKey, value: boolean | string) {
-		this.Settings[key].set(value);
 	}
 }

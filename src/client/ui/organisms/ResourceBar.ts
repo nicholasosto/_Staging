@@ -27,7 +27,7 @@ import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
 import { BarMeter } from "client/ui/molecules";
 import ResourceSlice, { ResourceState } from "client/states/ResourceSlice";
 import Fusion, { Observer, OnChange } from "@rbxts/fusion";
-import PlayerState from "client/states/PlayerState";
+import { PlayerStateInstance } from "client/states/PlayerState";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
@@ -61,7 +61,7 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 }
 
 export const ResourceBars = (layoutOrder?: number) => {
-	const slice = PlayerState.getInstance().Resources;
+	const slice = PlayerStateInstance.Resources;
 	const resourceBars = ListContainer({
 		Name: "ResourceBars",
 		Size: new UDim2(1, 0, 1, 0),

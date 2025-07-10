@@ -1,7 +1,7 @@
 import { ATTR_KEYS, AttributeKey, AttributesMeta } from "shared";
 import { GameImage, GameText, ListContainer } from "../atoms";
 import { CombinedAdjustor } from "../molecules";
-import PlayerState from "client/states/PlayerState";
+import { PlayerStateInstance } from "client/states/PlayerState";
 
 import { Value } from "@rbxts/fusion";
 
@@ -22,7 +22,7 @@ function AttributeControl(props: AttributeControlsProps) {
 
 	const controller = CombinedAdjustor({
 		LayoutOrder: 2,
-		value: PlayerState.getInstance().Attributes.Attributes[props.attributeKey],
+		value: PlayerStateInstance.Attributes.Attributes[props.attributeKey],
 		amount: 1,
 	});
 

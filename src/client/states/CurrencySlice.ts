@@ -5,33 +5,27 @@
  * @module      CurrencySlice
  * @layer       Client/State
  * @description Reactive container for player currency amounts.
- */
-
-/**
- * @author       Codex
+ * @author       Trembus
  * @license      MIT
  * @since        0.1.0
- * @lastUpdated  2025-07-10 by Codex – Added metadata header
+ * @lastUpdated  2025-07-10 by Trembus – Refactored to be dynamic class instead of singleton
  */
 
 import { Value } from "@rbxts/fusion";
-import { CURRENCY_KEY, CurrencyKey, DefaultCurrency } from "shared/definitions/ProfileDefinitions/Currency";
+import { CURRENCY_KEYS, CurrencyKey, DefaultCurrency } from "shared";
 
 export default class CurrencySlice {
-	private static instance: CurrencySlice;
-
 	public readonly Currency: Record<CurrencyKey, Value<number>> = {} as never;
 
-	private constructor() {
-		for (const key of CURRENCY_KEY) {
+	constructor() {
+		for (const key of CURRENCY_KEYS) {
 			this.Currency[key] = Value(DefaultCurrency[key]);
 		}
 	}
 
-	public static getInstance(): CurrencySlice {
-		if (!this.instance) {
-			this.instance = new CurrencySlice();
+	public UpdateCurrency(currency: Record<CurrencyKey, number>) {
+		for (const key of CURRENCY_KEYS) {
+			this.Currency[key].set(currency[key] ?? DefaultCurrency[key]);
 		}
-		return this.instance;
 	}
 }

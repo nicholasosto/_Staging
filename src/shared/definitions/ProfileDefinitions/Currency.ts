@@ -7,8 +7,8 @@
  * @description Canonical list of in-game currencies and their metadata.
  */
 
-export const CURRENCY_KEY = ["GOLD", "SILVER", "BRONZE"] as const;
-export type CurrencyKey = (typeof CURRENCY_KEY)[number];
+export const CURRENCY_KEYS = ["GOLD", "SILVER", "BRONZE"] as const;
+export type CurrencyKey = (typeof CURRENCY_KEYS)[number];
 export interface CurrencyMeta {
 	displayName: string;
 	iconId: string;
@@ -22,7 +22,7 @@ export const CurrencyMetaMap = {
 
 export type CurrencyMap = Record<CurrencyKey, number>;
 
-export const DefaultCurrency = CURRENCY_KEY.reduce<CurrencyMap>((obj, key) => {
+export const DefaultCurrency = CURRENCY_KEYS.reduce<CurrencyMap>((obj, key) => {
 	obj[key] = 0;
 	return obj;
 }, {} as CurrencyMap);

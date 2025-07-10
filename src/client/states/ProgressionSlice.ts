@@ -23,13 +23,12 @@ import {
 } from "shared/definitions/ProfileDefinitions/Progression";
 
 export default class ProgressionSlice {
-	private static instance: ProgressionSlice;
 
 	public readonly Progression: Record<ProgressionKey, Value<number>> = {} as never;
 	public readonly NextLevelExperience = Value(DefaultProgression.NextLevelExperience);
 	public readonly ExperiencePercent!: Computed<number>;
 
-	private constructor() {
+	constructor() {
 		for (const key of PROGRESSION_KEYS) {
 			this.Progression[key] = Value(DefaultProgression[key]);
 		}
@@ -47,12 +46,5 @@ export default class ProgressionSlice {
 			}
 		}
 		this.NextLevelExperience.set(data.NextLevelExperience ?? DefaultProgression.NextLevelExperience);
-	}
-
-	public static getInstance(): ProgressionSlice {
-		if (!this.instance) {
-			this.instance = new ProgressionSlice();
-		}
-		return this.instance;
 	}
 }

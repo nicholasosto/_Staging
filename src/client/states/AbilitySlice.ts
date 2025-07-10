@@ -21,24 +21,17 @@ import { Value } from "@rbxts/fusion";
 import { AbilityKey } from "shared/definitions";
 
 export default class AbilitySlice {
-	private static instance: AbilitySlice;
-
 	/** Reactive list of equipped abilities */
 	public readonly Abilities = Value<AbilityKey[]>([]);
 
-	private constructor() {
+	constructor() {
 		print("AbilitySlice initialized");
-	}
-
-	public static getInstance(): AbilitySlice {
-		if (this.instance === undefined) {
-			this.instance = new AbilitySlice();
-		}
-		return this.instance;
+		this.Abilities.set(["earthquake", "melee"]); // Initialize with an empty list
 	}
 
 	/** Replace the ability list and notify the server */
 	public UpdateAbilities(list: AbilityKey[]) {
+		warn("AbilitySlice: Updating abilities to", list);
 		this.Abilities.set(list);
 	}
 }

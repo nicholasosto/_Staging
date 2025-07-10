@@ -20,13 +20,13 @@
  *   @rbxts/fusion ^0.4.0
  */
 import { GameWindow } from "client/ui/atoms";
-import { ScreenKey, SettingsState } from "client/states";
+import { ScreenKey, PlayerStateInstance } from "client/states";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {
-	const state = SettingsState.getInstance();
+	const state = PlayerStateInstance.Settings;
 	const keys = [...SETTING_KEYS] as SettingKey[];
 
 	return GameWindow({

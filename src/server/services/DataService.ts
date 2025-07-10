@@ -22,7 +22,7 @@ import { Players } from "@rbxts/services";
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AbilityKey, DefaultAttributes, DefaultSettings, ProfileDataMap } from "shared/definitions";
+import { AbilityKey, DefaultAttributes, DefaultCurrency, DefaultSettings, ProfileDataMap } from "shared/definitions";
 import { CodeSettings } from "shared/constants/CodeSettings";
 import { DefaultProgression } from "shared/definitions/ProfileDefinitions/Progression";
 
@@ -37,6 +37,8 @@ const DefaultProfileData: ProfileDataMap = {
 	Attributes: DefaultAttributes, // Player attributes
 	Progression: DefaultProgression, // Player progression data
 	Settings: DefaultSettings,
+	Currency: DefaultCurrency,
+	
 };
 
 /* Data Profile Controller */
