@@ -28,7 +28,7 @@
                         },
 
                         "Constants": {
-                                "$path": "out/constants"
+                                "$path": "out/shared"
                         }
 		},
 		"StarterPlayer": {
