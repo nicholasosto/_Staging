@@ -23,10 +23,11 @@
 
 // -------------- Imports ----------------------------------------------------- //
 import { BaseContainer, ListContainer } from "client/ui/atoms"; // absolute alias
-import { ResourceKey, ResourceMeta, ResourceState } from "shared/definitions/Resources";
+import { ResourceKey, ResourceMeta } from "shared/definitions/Resources";
 import { BarMeter } from "client/ui/molecules";
-import { ResourceSlice } from "client/states";
+import ResourceSlice, { ResourceState } from "client/states/ResourceSlice";
 import Fusion, { Observer, OnChange } from "@rbxts/fusion";
+import PlayerState from "client/states/PlayerState";
 
 // -------------- Local helpers --------------------------------------------- //
 export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
@@ -36,12 +37,14 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 
 	const progress = Computed(() => Spring(state.percent, 40, 1).get());
 
-	Observer(progress).onChange(() => {
+	const progress2 = state.percent;
+
+	Observer(progress2).onChange(() => {
 		warn(`Observer: ${resourceKey} progress changed to ${progress.get()}`);
 	});
 
 	const ProgressBarInstance = BarMeter({
-		ProgressState: progress,
+		ProgressState: progress2,
 		Gradient: meta.gradient,
 		Text: meta.displayName,
 	});
@@ -58,7 +61,7 @@ export function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceSta
 }
 
 export const ResourceBars = (layoutOrder?: number) => {
-	const slice = ResourceSlice.getInstance();
+	const slice = PlayerState.getInstance().Resources;
 	const resourceBars = ListContainer({
 		Name: "ResourceBars",
 		Size: new UDim2(1, 0, 1, 0),

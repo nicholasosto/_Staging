@@ -26,7 +26,7 @@ import { useToken } from "theme/hooks";
 export interface GameTextProps extends Fusion.PropertyTable<TextLabel> {
 	ShadowBox?: boolean;
 	Title?: boolean;
-	TextStateValue: Value<string>;
+	TextStateValue: Value<string> | Value<number>;
 }
 
 export function GameText(props: GameTextProps): TextLabel {
@@ -48,7 +48,7 @@ export function GameText(props: GameTextProps): TextLabel {
 		Size: props.Size ?? UDim2.fromScale(0.5, 0.5),
 		TextColor3: colour,
 		BackgroundTransparency: props.BackgroundTransparency ?? 1,
-		Text: Computed(() => props.TextStateValue.get()),
+		Text: Computed(() => tostring(props.TextStateValue.get())),
 		TextSize: props.TextSize ?? 14,
 		ZIndex: props.ZIndex ?? 1,
 		LayoutOrder: props.LayoutOrder ?? 0,

@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/types" />
 
 import { Value } from "@rbxts/fusion";
-import { BorderImage } from "../atoms";
+import { BorderImage } from "client/ui/atoms/BorderImage";
 import { createAudio } from "shared/assets/audio";
 import { FillbarColors, PanelBackgroundColors, TextColors } from "./color";
 

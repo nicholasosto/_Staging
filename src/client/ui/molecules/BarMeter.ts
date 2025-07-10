@@ -64,8 +64,8 @@ export function BarMeter(props: BarMeterProps) {
 
 	/* Container */
 	const container = BaseContainer({
-		Name: "BarMeter",
-		Size: props.Size ?? UDim2.fromScale(1, 0.1),
+		Name: props.Name ?? "BarMeter",
+		Size: props.Size ?? UDim2.fromScale(1, 1),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0.5, 0.5),
 		Position: props.Position ?? new UDim2(0.5, 0, 0.5, 0),
 		BorderImage: BorderImage.GothicMetal(),

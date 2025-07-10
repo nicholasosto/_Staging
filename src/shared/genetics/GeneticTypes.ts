@@ -19,14 +19,14 @@
 
 // -----------------------------------------------------------------------------
 export enum CodonKind {
-    PART = "PART",
-    FORCE = "FORCE",
-    CONSTRAINT = "CONSTRAINT",
+	PART = "PART",
+	FORCE = "FORCE",
+	CONSTRAINT = "CONSTRAINT",
 }
 
 export interface Codon<T> {
-    kind: CodonKind;
-    value: T;
+	kind: CodonKind;
+	value: T;
 }
 
 export type Chromosome = Codon<unknown>[];

@@ -21,13 +21,13 @@ import AttributesSlice from "./AttributesSlice";
 import ProgressionSlice from "./ProgressionSlice";
 import CurrencySlice from "./CurrencySlice";
 import { StatusEffect } from "shared/definitions/StatusEffect";
-import { AbilityKey, ResourceDTO } from "shared";
+import { AbilityKey, DEFAULT_RESOURCES, ResourceDTO } from "shared";
 
 export default class PlayerState {
 	private static instance: PlayerState;
 
 	public readonly Abilities = AbilitySlice.getInstance();
-	public readonly Resources = ResourceSlice.getInstance();
+	public readonly Resources = new ResourceSlice();
 	public readonly Attributes = AttributesSlice.getInstance();
 	public readonly Progression = ProgressionSlice.getInstance();
 	public readonly Currency = CurrencySlice.getInstance();

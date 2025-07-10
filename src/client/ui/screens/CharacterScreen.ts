@@ -22,12 +22,23 @@
 
 import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
+import { StateDebugPanel } from "../organisms/StateDebugPanel";
+import PlayerState from "client/states/PlayerState";
 const Key: ScreenKey = "Character";
 
 export const CharacterScreen = () => {
 	return GameWindow({
 		Name: `${Key}Screen`,
 		ScreenKey: Key,
-		Content: {},
+		Content: {
+			StateDebugPanel: StateDebugPanel({
+				Value1: PlayerState.getInstance().Resources.Health.current,
+				Value2: PlayerState.getInstance().Resources.Mana.current,
+				Value3: PlayerState.getInstance().Resources.Stamina.current,
+				Computed1: PlayerState.getInstance().Resources.Health.percent,
+				Computed2: PlayerState.getInstance().Resources.Mana.percent,
+				Computed3: PlayerState.getInstance().Resources.Stamina.percent,
+			}),
+		},
 	});
 };

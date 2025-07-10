@@ -26,22 +26,22 @@ import { Codon, CodonKind } from "shared/genetics";
  * @returns Created instance or undefined.
  */
 export function expressCodon<T>(codon: Codon<T>, parent: Instance): Instance | undefined {
-    switch (codon.kind) {
-        case CodonKind.PART: {
-            const part = new Instance("Part");
-            const value = codon.value as unknown as { size?: Vector3; color?: Color3; cframe?: CFrame };
-            if (value.size) part.Size = value.size;
-            if (value.color) part.Color = value.color;
-            if (value.cframe) part.CFrame = value.cframe;
-            part.Parent = parent;
-            return part;
-        }
-        case CodonKind.FORCE:
-            // TODO: apply physics forces based on codon
-            // See Documents/OrganismStructure.md for planned organism patterns.
-            return undefined;
-        case CodonKind.CONSTRAINT:
-            // TODO: apply constraints to parts when implemented
-            return undefined;
-    }
+	switch (codon.kind) {
+		case CodonKind.PART: {
+			const part = new Instance("Part");
+			const value = codon.value as unknown as { size?: Vector3; color?: Color3; cframe?: CFrame };
+			if (value.size) part.Size = value.size;
+			if (value.color) part.Color = value.color;
+			if (value.cframe) part.CFrame = value.cframe;
+			part.Parent = parent;
+			return part;
+		}
+		case CodonKind.FORCE:
+			// TODO: apply physics forces based on codon
+			// See Documents/OrganismStructure.md for planned organism patterns.
+			return undefined;
+		case CodonKind.CONSTRAINT:
+			// TODO: apply constraints to parts when implemented
+			return undefined;
+	}
 }

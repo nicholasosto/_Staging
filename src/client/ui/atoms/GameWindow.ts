@@ -21,7 +21,7 @@
  */
 
 import Fusion, { Children, New, OnEvent } from "@rbxts/fusion";
-import { BaseContainer } from ".";
+import { BaseContainer } from "./BaseContainer";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
 import { ScreenKey, ScreenState } from "client/states";
