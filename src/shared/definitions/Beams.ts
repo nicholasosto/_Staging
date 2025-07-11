@@ -1,3 +1,5 @@
+import { GameImages } from "shared/assets";
+
 /**
  * @file        BeamDefinition.ts
  * @module      BeamDefinition
@@ -14,6 +16,8 @@
  * @since         0.2.1
  * @lastUpdated   2025-07-11 – Added sample beam catalog (3 entries)
  */
+export const BeamPhysicsType = ["None", "Pull", "Repel", "Chain"] as const;
+export type BeamPhysicsType = (typeof BeamPhysicsType)[number];
 
 /** Blueprint for a beam archetype. */
 export interface BeamDefinition {
@@ -24,6 +28,7 @@ export interface BeamDefinition {
 	readonly segments?: number;
 	readonly lifetime: number; // seconds
 	readonly tweenInfo?: TweenInfo; // optional pulse / wobble
+	readonly physicsType?: BeamPhysicsType; // how it interacts with other objects
 	readonly onTick?: (beam: Beam, dt: number) => void; // runtime hook
 }
 
@@ -36,11 +41,18 @@ export const BeamCatalog = {
 	 * Blood‑red constrictor that pulses wider then shrinks, simulating a snake.
 	 */
 	Constrictor: <BeamDefinition>{
-		texture: "rbxassetid://123456789", // placeholder
+		texture: GameImages.Beam.Constrictor_1,
 		color: new ColorSequence(Color3.fromRGB(180, 40, 40), Color3.fromRGB(80, 5, 5)),
 		width0: 0.4,
 		width1: 0.4,
 		lifetime: 5,
+		physicsType: "Pull",
+		segments: 20,
+		onTick: (beam, dt) => {
+			// Pulse effect: widen then shrink
+			const pulse = math.sin(tick() * 2) * 0.1 + 0.1; // oscillate between 0.1 and 0.2
+			beam.Width0 = beam.Width1 = 0.4 + pulse;
+		},
 		tweenInfo: new TweenInfo(0.6, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
 	},
 
@@ -48,11 +60,14 @@ export const BeamCatalog = {
 	 * Violet soul‑drain beam that slowly narrows while draining.
 	 */
 	SoulDrain: <BeamDefinition>{
-		texture: "rbxassetid://987654321", // placeholder
+		texture: GameImages.Beam.SoulDrain_1,
 		color: new ColorSequence(Color3.fromRGB(140, 0, 255), Color3.fromRGB(60, 0, 80)),
 		width0: 0.3,
 		width1: 0.15,
 		lifetime: 6,
+		physicsType: "Chain",
+		tweenInfo: new TweenInfo(0.8, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true),
+		segments: 15,
 		onTick: (beam, dt) => {
 			// Gradually thin out to emphasise depletion
 			beam.Width0 = math.max(0.05, beam.Width0 - dt * 0.02);
@@ -64,12 +79,15 @@ export const BeamCatalog = {
 	 * Icy chain that flickers between light blue & white segments.
 	 */
 	IceChain: <BeamDefinition>{
-		texture: "rbxassetid://24682468", // placeholder
+		texture: GameImages.Beam.IceChain_1,
 		color: new ColorSequence(Color3.fromRGB(200, 235, 255), Color3.fromRGB(150, 220, 255)),
 		width0: 0.25,
 		width1: 0.25,
 		segments: 10,
 		lifetime: 4,
+		physicsType: "Repel",
+		tweenInfo: new TweenInfo(0.5, Enum.EasingStyle.Bounce, Enum.EasingDirection.InOut, -1, true),
+		// Flickering effect to simulate ice shards
 		onTick: (beam, dt) => {
 			// shimmer by offsetting texture
 			beam.TextureSpeed = 2;

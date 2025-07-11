@@ -2,7 +2,7 @@ import { Workspace } from "@rbxts/services";
 import { ZoneBase } from "./ZoneBase";
 import { PlayerHelpers } from "shared/helpers/PlayerCharacter";
 import { ResourcesService } from "server/services";
-import { BeamFactory } from "shared/facory";
+import { BeamFactory } from "shared/factory";
 import { CharacterAttachments } from "shared/types";
 import { SSEntity } from "shared/types/SSEntity";
 import { SSEntityHelper } from "shared/helpers/SSEntityHelpers";

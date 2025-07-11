@@ -59,6 +59,14 @@ export const GameImages = {
 		Vitality: "rbxassetid://121291227474039",
 		Luck: "rbxassetid://114767496083209",
 	},
+	Beam: {
+		Constrictor_1: "rbxassetid://75175588188120",
+		Constrictor_2: "rbxassetid://117812481070645",
+		SoulDrain_1: "rbxassetid://95584643329398",
+		SoulDrain_2: "rbxassetid://98023166137532",
+		IceChain_1: "rbxassetid://101823462513180",
+		IceChain_2: "rbxassetid://136513380446132",
+	},
 	Borders: {
 		GothicMetal: "rbxassetid://80375133768026",
 		RedThick: "rbxassetid://134322739825066",
