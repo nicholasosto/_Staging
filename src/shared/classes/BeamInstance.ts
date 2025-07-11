@@ -46,7 +46,7 @@ export class BeamInstance {
 		this.rebind(a0, a1);
 
 		const hb = RunService.Heartbeat.Connect((dt) => this.onHeartbeat(dt));
-		this.maid.GiveTask(hb);   // auto-disconnect
+		this.maid.GiveTask(hb); // auto-disconnect
 		this.maid.GiveTask(this.beam); // beam freed on Destroy
 	}
 

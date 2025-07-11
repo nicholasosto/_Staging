@@ -31,6 +31,7 @@ The purpose of this document is to provide a concise overview of coding conventi
 
 **Fusion Event Calling Style**: See [Fusion Event Guide](./Documents/FusionEventGuide.md) for the OnEvent/OnChange syntax.
 **Avoid nil checks using `if(!value)` or `if(value == null)`**. Instead, use `if(value === undefined)` to check for specific nil values.
+**Workspace misreferences**: Ensure all workspace references are correct. If you encounter a `Workspace` reference error, try importing game.Workspace directly instead of using `workspace`.
 
 *Prepend the full TSDoc header template (see Appendix A) whenever you create a new `.ts` file.*
 
