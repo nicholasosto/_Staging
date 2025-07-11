@@ -28,7 +28,7 @@
 
 /* =============================================== Imports ===================== */
 import { Players, RunService } from "@rbxts/services";
-import { ResourceKey, ResourceDTO, RESOURCE_KEYS, DEFAULT_RESOURCES } from "shared/definitions/Resources";
+import { ResourceKey, ResourceDTO, RESOURCE_KEYS } from "shared/definitions/Resources";
 import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataService } from "./DataService";
 import { calculateResources } from "shared/calculations";
@@ -61,25 +61,27 @@ export class ResourcesService {
 	public static ModifyResource(player: Player, key: ResourceKey, delta: number): boolean {
 		const svc = this.Start();
 		const resources = svc._map.get(player);
+		const resourceData = resources?.[key];
 
-		// Check if the player has resources initialized
-		if (!resources) return false;
-
-		// Check if the resource key is valid
-		const resourceData = resources[key];
-		if (!resourceData) return false;
-
-		// Check if the delta is zero or negative
-		if (delta + resourceData.current < 0) return false;
+		if (!this.ValidateResourceModification(player, key, delta) || !resourceData) {
+			return false;
+		}
 
 		// Update the resource value
 		const newResourceCurrent = math.clamp(resourceData.current + delta, 0, resourceData.max);
-
 		resourceData.current = newResourceCurrent;
 
 		// Send updated resource data to the player
 		svc._send(player, key, resourceData);
 		return true;
+	}
+
+	public static ValidateResourceModification(player: Player, key: ResourceKey, delta: number): boolean {
+		const resources = this.GetResources(player);
+		if (!resources) return false;
+		const resourceData = resources[key];
+		if (!resourceData) return false;
+		return resourceData.current + delta >= 0 && resourceData.current + delta <= resourceData.max;
 	}
 
 	public static Recalculate(player: Player) {

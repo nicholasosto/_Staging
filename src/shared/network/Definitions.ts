@@ -40,7 +40,7 @@ export const ClientDispatch = Net.Definitions.Create({
 	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 
 	/* -- Abilities -- */
-	UseAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
+	UseAbility: Net.Definitions.ServerAsyncFunction<(abilityKey: AbilityKey) => boolean>(),
 	AddAbility: Net.Definitions.ClientToServerEvent<[abilityKey: AbilityKey]>(),
 	SetAbilities: Net.Definitions.ClientToServerEvent<[abilities: AbilityKey[]]>(),
 

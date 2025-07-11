@@ -43,24 +43,24 @@ function SetAbilities(abilities: AbilityKey[]): void {
 	SetAbilitiesSignal.SendToServer(abilities);
 }
 
-function UseAbility(abilityKey: AbilityKey): void {
-	UseAbilitySignal.SendToServer(abilityKey);
+async function UseAbility(abilityKey: AbilityKey): Promise<boolean | undefined> {
+	return await UseAbilitySignal.CallServerAsync(abilityKey);
 }
 
 /* Attributes */
-export async function ModifyAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
+async function ModifyAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
 	print(`CallServer: ModifyAttribute(${attributeKey}, ${amount}) called.`);
 	await ModifyAttributeSignal.SendToServer(attributeKey, amount);
 }
 
 /* Settings */
-export function UpdateSetting(key: SettingKey, value: boolean | string): void {
+function UpdateSetting(key: SettingKey, value: boolean | string): void {
 	print(`CallServer: UpdateSetting(${key}, ${value}) called.`);
 	UpdateSettingSignal.SendToServer(key, value);
 }
 
 /* Under development */
-export function SpawnWeapon(): void {
+function SpawnWeapon(): void {
 	print(`CallServer: SpawnWeapon called.`);
 	const weapon = SpawnWeaponSignal.CallServerAsync();
 }

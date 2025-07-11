@@ -2,18 +2,28 @@ import { Workspace } from "@rbxts/services";
 import { ZoneBase } from "./ZoneBase";
 import { PlayerHelpers } from "shared/helpers/PlayerCharacter";
 import { ResourcesService } from "server/services";
+import { BeamFactory } from "shared/facory";
+import { CharacterAttachments } from "shared/types";
+import { SSEntity } from "shared/types/SSEntity";
+import { SSEntityHelper } from "shared/helpers/SSEntityHelpers";
+const beamFactory = new BeamFactory();
 
 const PlayerEntered = (player: Player) => {
-	const character = player.Character || player.CharacterAdded.Wait()[0];
+	let character = player.Character || player.CharacterAdded.Wait()[0];
+	character = character as CharacterAttachments;
 	if (character === undefined) {
-		print(`Player ${player.Name} entered the Battle Zone, but their character is not available.`);
+		warn(`Player ${player.Name} entered the Battle Zone, but Attachments are not available.`);
 		return;
 	}
+	print(`Player ${player.Name} has entered the Battle Zone.`);
 
-	if (character.PrimaryPart === undefined) {
-		print(`Player ${player.Name} has no PrimaryPart in their character.`);
+	const rigs = SSEntityHelper.getRigsInRadius(character.GetPivot(), 100);
+	if (rigs.size() === 0) {
+		warn(`No rigs found within 100 studs of ${character.GetFullName()}.`);
 		return;
 	}
+	beamFactory.createBeam("Constrictor", character as SSEntity, rigs[0].rig);
+
 	ResourcesService.ModifyResource(player, "Health", -20); // Example: Modify health resource when entering the Battle Zone
 };
 

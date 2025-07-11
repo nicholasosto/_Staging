@@ -79,10 +79,17 @@ export function AbilityButton(abilityKey: AbilityKey): Frame {
 			}),
 		},
 		OnClick: () => {
-			if (cooldownTimer.Progress.get() <= 0) {
-				ClientSend.UseAbility(abilityKey);
-				cooldownTimer.start();
-			}
+			ClientSend.UseAbility(abilityKey)
+				.andThen((success) => {
+					if (!success) {
+						warn(`Failed to use ability: ${abilityKey}`);
+					} else {
+						cooldownTimer.start(); // Start the cooldown timer
+					}
+				})
+				.catch((err) => {
+					warn(`Error using ability ${abilityKey}: ${err}`);
+				});
 		},
 	});
 

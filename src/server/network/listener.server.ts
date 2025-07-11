@@ -37,6 +37,14 @@ Functions.GetAllProfileData.SetCallback((player: Player) => {
 	}
 });
 
-Events.UseAbility.Connect((player: Player, abilityKey: AbilityKey) => {
-	AbilityService.Activate(player, abilityKey);
+Events.UseAbility.SetCallback((player: Player, abilityKey: AbilityKey) => {
+	warn(`UseAbility called for player ${player.Name} with ability ${abilityKey}`);
+	const success = AbilityService.Activate(player, abilityKey);
+	print(`AbilityService.Activate(${player.Name}, ${abilityKey}) returned: ${success}`);
+	if (!success) {
+		warn(`Failed to activate ability ${abilityKey} for player ${player.Name}.`);
+		return false;
+	}
+	warn(`Ability ${abilityKey} activated for player ${player.Name}.`);
+	return success;
 });
