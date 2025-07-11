@@ -1,50 +1,7 @@
-import { ATTR_KEYS, AttributeKey, AttributesMeta } from "shared";
-import { GameImage, GameText, ListContainer } from "../atoms";
-import { CombinedAdjustor } from "../molecules";
-import { PlayerStateInstance } from "client/states/PlayerState";
-
-import { Value } from "@rbxts/fusion";
+import { ATTR_KEYS } from "shared";
+import { ListContainer } from "../atoms";
+import { AttributeControl } from "../molecules";
 import { AttributesSlice } from "client/states";
-
-interface AttributeControlsProps {
-	attributeKey: AttributeKey;
-}
-
-function AttributeControl(props: AttributeControlsProps) {
-	const icon = GameImage({
-		LayoutOrder: 0,
-		Image: AttributesMeta[props.attributeKey].iconId,
-	});
-
-	const displayText = GameText({
-		LayoutOrder: 1,
-		TextState: Value(AttributesMeta[props.attributeKey].displayName),
-	});
-
-	const controller = CombinedAdjustor({
-		LayoutOrder: 2,
-		value: PlayerStateInstance.Attributes.Attributes[props.attributeKey],
-		amount: 1,
-	});
-
-	const container = ListContainer({
-		Gap: 10,
-		LayoutOrientation: "horizontal",
-		AlignmentType: Enum.HorizontalAlignment.Center,
-		Content: {
-			Icon: icon,
-			DisplayText: displayText,
-			Controller: controller,
-		},
-		Size: new UDim2(1, 0, 0, 50),
-		BackgroundTransparency: 1,
-		AnchorPoint: new Vector2(0.5, 0.5),
-		Position: new UDim2(0.5, 0, 0, 0),
-		Name: `AttributeControl_${props.attributeKey}`,
-		LayoutOrder: 0,
-	});
-	return container;
-}
 
 export interface AttributeContainerProps {
 	AttributeSlice: AttributesSlice;

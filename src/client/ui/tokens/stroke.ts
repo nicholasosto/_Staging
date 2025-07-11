@@ -28,13 +28,15 @@ import Fusion, { New } from "@rbxts/fusion";
 export interface StrokeProps {
 	Thickness?: Fusion.Computed<number>;
 	Color?: Fusion.Computed<Color3>;
+	Transparency?: Fusion.Computed<number>;
 }
 
-export const Stroke = (props: StrokeProps) => {
+export const Stroke = (props?: StrokeProps) => {
 	return New("UIStroke")({
 		Name: "Stroke",
-		Thickness: props.Thickness ?? 1,
-		Color: props.Color ?? new Color3(1, 1, 1),
+		Thickness: props?.Thickness ?? 1,
+		Color: props?.Color ?? new Color3(0, 0, 0),
+		Transparency: props?.Transparency ?? 0.5,
 		ApplyStrokeMode: Enum.ApplyStrokeMode.Border,
 	});
 };

@@ -31,6 +31,7 @@ export const MenuButtonImageMap: Record<ScreenKey, string> = {
 	Shop: "rbxassetid://101998590177560",
 	Teleport: "rbxassetid://127118741571164",
 	GemForge: "rbxassetid://116506062642047",
+	Developer: "rbxassetid://95069877371395",
 } as const;
 
 export const GameImages = {

@@ -31,8 +31,10 @@
  * @since        0.1.0
  * @lastUpdated  2025-07-05 by Luminesa – initial header add
  */
+export * from "./aspect-ratio";
 export * from "./audio";
 export * from "./color";
+export * from "./corner";
 export * from "./dragger";
 export * from "./layouts";
 export * from "./padding";

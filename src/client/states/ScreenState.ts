@@ -20,7 +20,16 @@ import { Value } from "@rbxts/fusion";
 /**
  * Ordered list of all HUD-related screen keys.
  */
-export const SCREEN_KEYS = ["Settings", "Inventory", "Character", "Quests", "Shop", "Teleport", "GemForge"] as const;
+export const SCREEN_KEYS = [
+	"Settings",
+	"Inventory",
+	"Character",
+	"Quests",
+	"Shop",
+	"Teleport",
+	"GemForge",
+	"Developer",
+] as const;
 
 export type ScreenKey = (typeof SCREEN_KEYS)[number];
 export type ScreenMap = Record<ScreenKey, Value<boolean>>;
@@ -34,6 +43,7 @@ export const ScreenState: ScreenMap = {
 	Shop: Value(false),
 	Teleport: Value(false),
 	GemForge: Value(false),
+	Developer: Value(false),
 } satisfies ScreenMap;
 
 export const ScreenOrder: ScreenOrder = {
@@ -44,6 +54,7 @@ export const ScreenOrder: ScreenOrder = {
 	Shop: 5,
 	Teleport: 6,
 	GemForge: 7,
+	Developer: 8,
 } satisfies ScreenOrder;
 
 /**

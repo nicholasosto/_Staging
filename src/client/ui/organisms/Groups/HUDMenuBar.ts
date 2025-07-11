@@ -9,9 +9,7 @@
 import { ListContainer } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
-import { SCREEN_KEYS, ScreenKey, ScreenOrder } from "client/states";
-import { Badge } from "client/ui/atoms/Badge";
-import { Value } from "@rbxts/fusion";
+import { SCREEN_KEYS, ScreenOrder } from "client/states";
 
 export interface HudMenuBarProps {
 	layoutOrder?: number;
@@ -23,7 +21,7 @@ export interface HudMenuBarProps {
 export const HUDMenuBar = (props: HudMenuBarProps) => {
 	const container = ListContainer({
 		Name: "HUDMenuBar",
-		Size: props.Size ?? new UDim2(0, 380, 0, 56),
+		Size: props.Size ?? new UDim2(0, 440, 0, 56),
 		Position: props.Position ?? new UDim2(0, 10, 0, 10),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		Gap: 5,

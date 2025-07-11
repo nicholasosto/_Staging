@@ -11,6 +11,7 @@
  */
 
 export * from "./CharacterScreen";
+export * from "./DeveloperScreen";
 export * from "./GemForgeScreen";
 export * from "./InventoryScreen";
 export * from "./PlayerHUDScreen";

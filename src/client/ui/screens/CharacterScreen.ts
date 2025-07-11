@@ -24,23 +24,36 @@ import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "client/states";
 import { PlayerStateInstance } from "client/states/PlayerState";
 import { AttributeControls } from "../organisms";
+import { StateInfoDisplay } from "../molecules";
 const Key: ScreenKey = "Character";
 
+/* Attribute Control Properties */
+const AttributeControlProps = {
+	Size: new UDim2(0, 300, 0.5, 0),
+	Position: new UDim2(0, 0, 0.5, 0),
+	AnchorPoint: new Vector2(0.5, 0.5),
+	BackgroundTransparency: 1,
+	LayoutOrder: 0,
+	ZIndex: 1,
+	AttributeSlice: PlayerStateInstance.Attributes,
+};
+
+/* StateInfoDisplayProps */
+const StateInfoDisplayProps = {
+	Label: "Strength",
+	Value: PlayerStateInstance.Attributes.Attributes["str"],
+};
+
+/* Window Properties */
+const GameWindowProps = {
+	Name: `${Key}Screen`,
+	ScreenKey: Key,
+	Content: {
+		AttributeControls: AttributeControls(AttributeControlProps),
+		StateInfoDisplay: StateInfoDisplay(StateInfoDisplayProps),
+	},
+};
+
 export const CharacterScreen = () => {
-	const attributeControls = AttributeControls({
-		AttributeSlice: PlayerStateInstance.Attributes,
-		Size: new UDim2(1, 0, 0.5, 0),
-		Position: new UDim2(0, 0, 0.5, 0),
-		BackgroundTransparency: 1,
-		AnchorPoint: new Vector2(0.5, 0.5),
-		LayoutOrder: 0,
-		ZIndex: 1,
-	});
-	return GameWindow({
-		Name: `${Key}Screen`,
-		ScreenKey: Key,
-		Content: {
-			AttributeControls: attributeControls,
-		},
-	});
+	return GameWindow(GameWindowProps);
 };

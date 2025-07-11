@@ -31,6 +31,7 @@ import {
 	TeleportScreen,
 	ShopScreen,
 	InventoryScreen,
+	DeveloperScreen,
 } from "./ui/screens";
 import { LoadingScreen } from "./ui/screens/LoadingScreen";
 //import * as Dispatch from "./network/ClientDispatch";
@@ -48,5 +49,6 @@ QuestsScreen(); // Assuming this is the correct screen name
 ShopScreen();
 CharacterScreen();
 InventoryScreen();
+DeveloperScreen();
 
 /* =============================================== Network Tests ============================================= */

@@ -23,7 +23,7 @@ export const Incrementor = (props: IncrementorProps) => {
 	const { value, amount = 1, OnIncrement, LayoutOrder } = props;
 
 	const Component = UIButton({
-		Size: new UDim2(0, 50, 0, 50),
+		Size: new UDim2(0, 35, 0, 35),
 		Icon: GameImages.Control.Increment,
 		LayoutOrder: LayoutOrder,
 		OnClick: () => {
@@ -45,7 +45,7 @@ export const Decrementor = (props: DecrementorProps) => {
 	const { value, amount = 1, OnDecrement, LayoutOrder } = props;
 
 	const Component = UIButton({
-		Size: new UDim2(0, 50, 0, 50),
+		Size: new UDim2(0, 35, 0, 35),
 		Icon: GameImages.Control.Decrement,
 		LayoutOrder: LayoutOrder,
 		OnClick: () => {
@@ -58,6 +58,7 @@ export const Decrementor = (props: DecrementorProps) => {
 
 /* ----------------------------- CombinedAdjustor Component ----------------------------- */
 export interface CombinedAdjustorProps {
+	Size?: UDim2;
 	LayoutOrder?: number;
 	value: Value<number>;
 	amount?: number;
@@ -72,7 +73,7 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 	const IncrementButton = Incrementor({ value, amount, OnIncrement, LayoutOrder: 2 });
 	const ValueDisplay = GameText({
 		LayoutOrder: 1,
-		Size: new UDim2(0, 50, 0, 50),
+		Size: new UDim2(0, 35, 1, 0),
 		TextState: stringValue,
 	});
 	const DecrementButton = Decrementor({ value, amount, OnDecrement, LayoutOrder: 0 });
@@ -80,7 +81,8 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 	const container = ListContainer({
 		Name: "CombinedAdjustor",
 		LayoutOrientation: "horizontal",
-		Size: new UDim2(0, 100, 0, 50),
+		Size: new UDim2(0, 110, 1, 0),
+		LayoutOrder: props.LayoutOrder ?? 0,
 		Gap: 10,
 		Content: {
 			Incrementor: IncrementButton,
