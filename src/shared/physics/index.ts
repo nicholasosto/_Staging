@@ -14,3 +14,5 @@
 
 export * from "./ConstraintUtils";
 export * from "./ForceUtils";
+export * from "./PhysicsBeamService";
+export * from "./ConstrictorBeam";

@@ -19,7 +19,7 @@ The table below lists core modules grouped by network layer and their current st
 |Shared|`shared/states`|Usable|Signal-based shared state|
 |Shared|`theme`|Usable|Fusion theme store with Fateless theme|
 |Shared|`constants`|Rock Solid|Sizes and asset ids|
-|Shared|`shared/physics`|Usable|Utility forces and ropes|
+|Shared|`shared/physics`|Usable|Utility forces, ropes and physics beams|
 |Shared|`shared/calculations/calculateResources.ts`|Usable|Derives resources from attributes|
 |Shared|`shared/genetics/GeneticTypes.ts`|Usable|Core genetic types|
 |Shared|`shared/genetics/Mutations.ts`|Usable|Chromosome mutation helpers|
