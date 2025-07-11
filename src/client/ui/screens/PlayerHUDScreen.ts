@@ -11,6 +11,8 @@ import { SpacialInterface } from "shared";
 import { GameScreen } from "../atoms";
 import { AbilityBarComponent, AdminButtonBar, HUDMenuBar } from "../organisms";
 import { CharacterInfoCard } from "../organisms/Groups/CharacterInfoCard";
+import { Computed, Value } from "@rbxts/fusion";
+import { GameState } from "client/states";
 
 /* =============================================== Player HUD Screen ============================================= */
 const Offset = 10; // Offset for positioning elements
@@ -43,6 +45,7 @@ export const PlayerHUDScreen = () => {
 	/* Screen */
 	return GameScreen({
 		Name: "PlayerHUDScreen",
+		Enabled: Computed(() => GameState.PlayerDataLoaded.get()),
 		Content: {
 			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
 			HUDMenuBar: HUDMenuBar(HudMenuBarProps),

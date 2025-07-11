@@ -21,6 +21,7 @@
  */
 
 /* =============================================== External Imports ============================================= */
+import { ThemeKey, ThemeState } from "theme";
 import { PlayerStateInstance } from "./states/PlayerState";
 import {
 	GemForgeScreen,
@@ -50,5 +51,7 @@ ShopScreen();
 CharacterScreen();
 InventoryScreen();
 DeveloperScreen();
+
+ThemeState.set(ThemeKey.CyberGothic); // Set the initial theme
 
 /* =============================================== Network Tests ============================================= */

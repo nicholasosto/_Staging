@@ -27,11 +27,11 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.0",
     "eslint-plugin-roblox-ts": "^0.0.36",
+    "nx": "21.2.2",
     "prettier": "^3.6.0",
     "roblox-ts": "^3.0.0",
     "rojo": "^1.0.1",
-    "typescript": "^5.8.3",
-    "nx": "21.2.2"
+    "typescript": "^5.8.3"
   },
   "dependencies": {
     "@rbxts/cmdr": "^1.12.1",
@@ -45,6 +45,7 @@
     "@rbxts/signals": "^1.0.5",
     "@rbxts/t": "^3.2.1",
     "@rbxts/testEz": "npm:@rbxts/testez@^0.4.2-ts.0",
+    "@rbxts/wcs": "^2.4.1",
     "@rbxts/zone-plus": "^3.2.0",
     "fs": "^0.0.1-security",
     "io-serve": "^1.1.2",
