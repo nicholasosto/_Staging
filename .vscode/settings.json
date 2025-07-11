@@ -11,5 +11,14 @@
 	},
 	"eslint.run": "onType",
 	"eslint.format.enable": true,
-	"nxConsole.generateAiAgentRules": true
+	"nxConsole.generateAiAgentRules": true,
+	"chat.mcp.serverSampling": {
+		"_Staging/.vscode/mcp.json: nx-mcp": {
+			"allowedModels": [
+				"github.copilot-chat/gpt-4.1",
+				"github.copilot-chat/claude-sonnet-4",
+				"github.copilot-chat/o3-mini"
+			]
+		}
+	}
 }
