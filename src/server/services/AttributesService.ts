@@ -41,7 +41,8 @@ export class AttributesService {
 	public static Increase(player: Player, key: AttributeKey, amount: number) {
 		const profile = DataService.GetProfile(player);
 		if (!profile) return;
-		const attrs = profile.Data.Attributes;
+		const attrs = this.FetchAttributes(player);
+		if (!attrs) return;
 		const newValue = clampAttr(key, attrs[key] + amount);
 		const delta = newValue - attrs[key];
 		if (delta === 0) return;
@@ -51,7 +52,7 @@ export class AttributesService {
 		ResourcesService.Recalculate(player);
 	}
 
-	public static Get(player: Player) {
+	public static FetchAttributes(player: Player) {
 		return DataService.GetProfile(player)?.Data.Attributes;
 	}
 }

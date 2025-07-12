@@ -9,7 +9,7 @@
 
 import { SpacialInterface } from "shared";
 import { GameScreen } from "../atoms";
-import { AbilityBarComponent, AdminButtonBar, HUDMenuBar } from "../organisms";
+import { AbilityBarComponent, ThemeOptions, HUDMenuBar } from "../organisms";
 import { CharacterInfoCard } from "../organisms/Groups/CharacterInfoCard";
 import { Computed, Value } from "@rbxts/fusion";
 import { GameState } from "client/states";
@@ -29,17 +29,7 @@ const HudMenuBarProps = {
 	LayoutOrder: 2,
 };
 
-const AdminButtonBarProps = {
-	Size: new UDim2(0, 200, 0, 56),
-	Position: new UDim2(
-		0,
-		Offset,
-		0,
-		3 * Offset + CharacterInfoCardProps.Size.Y.Offset + HudMenuBarProps.Size.Y.Offset,
-	),
-	AnchorPoint: new Vector2(0, 0),
-	LayoutOrder: 3,
-};
+
 
 export const PlayerHUDScreen = () => {
 	/* Screen */
@@ -49,7 +39,7 @@ export const PlayerHUDScreen = () => {
 		Content: {
 			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
 			HUDMenuBar: HUDMenuBar(HudMenuBarProps),
-			AdminButtonBar: AdminButtonBar(AdminButtonBarProps),
+			
 			AbilityBar: AbilityBarComponent(),
 		},
 	});

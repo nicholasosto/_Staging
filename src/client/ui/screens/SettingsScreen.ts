@@ -24,7 +24,12 @@ import { ScreenKey } from "shared";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";
 import { PlayerStateInstance } from "client/states";
+import { ThemeOptions } from "../organisms";
 const Key: ScreenKey = "Settings";
+
+const ThemeOptionsProps = {
+	Size: new UDim2(0, 200, 0, 56),
+};
 
 export const SettingsScreen = () => {
 	const state = PlayerStateInstance.Settings;
@@ -35,7 +40,9 @@ export const SettingsScreen = () => {
 		ScreenKey: Key,
 		Content: {
 			Layout: Layout.VerticalSet(2),
-			SettingItems: {},
+			SettingItems: {
+				ThemeOptions: ThemeOptions(ThemeOptionsProps),
+			},
 		},
 	});
 };

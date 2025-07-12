@@ -18,6 +18,7 @@
 
 import { GameImages } from "shared/assets";
 import { AnimationKey } from "shared/definitions/Animation";
+import { SSEntity } from "shared/types/SSEntity";
 
 // Ability Keys
 export const ABILITY_KEYS = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as const;
@@ -29,6 +30,13 @@ export type AbilityKey = (typeof ABILITY_KEYS)[number];
 export function isAbilityKey(key: string): key is AbilityKey {
 	return ABILITY_KEYS.includes(key as AbilityKey);
 }
+
+// Cast Context
+export type AbilityCastContext = {
+	caster: SSEntity;
+	startPosition: Vector3; // Starting position of the ability cast
+	target?: SSEntity | undefined; // Target entity, if applicable
+};
 
 // Ability Metadata Interface
 export interface AbilityMeta {
@@ -42,6 +50,9 @@ export interface AbilityMeta {
 		mana: number; // Mana cost for the ability
 		stamina: number; // Stamina cost for the ability
 	};
+	onStart: (context: AbilityCastContext) => void; // Optional start function for initialization
+	onTick?: (context: AbilityCastContext, deltaTime: number) => void; // Optional tick function for continuous effects
+	onEnd?: (context: AbilityCastContext) => void; // Optional end function for cleanup
 }
 
 export const AbilitiesMeta = {
@@ -56,6 +67,10 @@ export const AbilitiesMeta = {
 			mana: 20, // Example mana cost
 			stamina: 10, // Example stamina cost
 		},
+		onStart: ({ caster, startPosition }) => {
+			print(`Fireball cast started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the fireball cast can be added here
+		},
 	},
 	ice_shard: {
 		displayName: "Ice Shard",
@@ -67,6 +82,10 @@ export const AbilitiesMeta = {
 		cost: {
 			mana: 25, // Example mana cost
 			stamina: 25, // Example stamina cost
+		},
+		onStart: ({ caster, startPosition }) => {
+			print(`Ice Shard cast started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the ice shard cast can be added here
 		},
 	},
 	lightning_bolt: {
@@ -80,6 +99,10 @@ export const AbilitiesMeta = {
 			mana: 25, // Example mana cost
 			stamina: 15, // Example stamina cost
 		},
+		onStart: ({ caster, startPosition }) => {
+			print(`Lightning Bolt cast started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the lightning bolt cast can be added here
+		},
 	},
 	earthquake: {
 		displayName: "Earthquake",
@@ -91,6 +114,10 @@ export const AbilitiesMeta = {
 		cost: {
 			mana: 30, // Example mana cost
 			stamina: 20, // Example stamina cost
+		},
+		onStart: ({ caster, startPosition }) => {
+			print(`Earthquake cast started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the earthquake cast can be added here
 		},
 	},
 	melee: {
@@ -104,13 +131,11 @@ export const AbilitiesMeta = {
 			mana: 0,
 			stamina: 5,
 		},
+		onStart: ({ caster, startPosition }) => {
+			print(`Melee attack started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the melee attack can be added here
+		},
 	},
 } as const satisfies Record<AbilityKey, AbilityMeta>;
 
-export const DefaultAbilities = ABILITY_KEYS.reduce<Record<AbilityKey, number>>(
-	(obj, key) => {
-		obj[key] = 0;
-		return obj;
-	},
-	{} as Record<AbilityKey, number>,
-);
+export const DefaultAbilities = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as AbilityKey[];

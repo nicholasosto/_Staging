@@ -3,19 +3,13 @@
 This folder contains server-side services responsible for game state management and gameplay systems.
 Below is a quick reference of each service and the main mutations they expose.
 
-## Services
+## Service Layers
+    1. DataLayer: Handles data persistence and retrieval.
+    1. 
 
 ### DataService
 
 Handles player profile loading via ProfileService. Provides `GetProfile(player)` to access profile data.
-
-### ManifestationForgeService
-
-Validates and constructs manifestation DTOs. `ForgeManifestation(player, formId, abilityId, bonusId)` creates a new manifestation entry in the player's profile.
-
-### BattleRoomService
-
-Manages temporary battle rooms and teleports players when the countdown completes. Key mutations: `CreateRoom(owner)`, `JoinRoom(player, roomId)`, `SetActiveGem(player, roomId, gemId)`.
 
 ### SettingsService
 

@@ -1,10 +1,10 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        AdminButtonBar.ts
- * @module      AdminButtonBar
+ * @file        ThemeOptions.ts
+ * @module      ThemeOptions
  * @layer       Client/UI/Organisms
- * @description Horizontal bar of service test buttons for administrators.
+ * @description Organism for selecting and applying different UI themes.
  */
 
 import Fusion from "@rbxts/fusion";
@@ -41,14 +41,14 @@ const themeButtons = {
 	},
 };
 
-export interface AdminButtonBarProps {
+export interface ThemeOptionProps {
 	Size?: UDim2;
 	Position?: UDim2;
 	AnchorPoint?: Vector2;
 	LayoutOrder?: number;
 }
 
-export const AdminButtonBar = (props: AdminButtonBarProps) => {
+export const ThemeOptions = (props: ThemeOptionProps) => {
 	const Component = ListContainer({
 		Name: "AdminButtonBar",
 		Size: props.Size ?? UDim2.fromOffset(380, 50),
