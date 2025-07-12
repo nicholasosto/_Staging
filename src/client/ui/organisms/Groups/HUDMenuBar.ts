@@ -9,7 +9,8 @@
 import { ListContainer } from "client/ui/atoms";
 import { HUDMenuButton } from "client/ui/molecules/HUDMenuButton";
 import { GameImages, MenuButtonImageMap } from "shared/assets";
-import { SCREEN_KEYS, ScreenOrder } from "client/states";
+import { SCREEN_KEYS } from "shared";
+import { ScreenOrder } from "client/states";
 
 export interface HudMenuBarProps {
 	layoutOrder?: number;

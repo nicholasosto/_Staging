@@ -21,7 +21,7 @@
  */
 
 import { GameWindow } from "client/ui/atoms";
-import { ScreenKey } from "client/states";
+import { ScreenKey } from "shared";
 import { PlayerStateInstance } from "client/states/PlayerState";
 import { AttributeControls } from "../organisms";
 import { StateInfoDisplay } from "../molecules";

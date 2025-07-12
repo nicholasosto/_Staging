@@ -24,8 +24,9 @@ import Fusion, { Children, New, OnEvent } from "@rbxts/fusion";
 import { BaseContainer } from "./BaseContainer";
 import { Players } from "@rbxts/services";
 import { GameImages } from "shared/assets";
-import { ScreenKey, ScreenState } from "client/states";
+import { ScreenState } from "client/states";
 import { Padding } from "../tokens";
+import { ScreenKey } from "shared";
 
 const DEFAULT_WINDOW_SIZE = new UDim2(0.5, 0, 0.5, 0);
 

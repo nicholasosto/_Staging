@@ -10,10 +10,11 @@
 /* =============================================== Imports =============================================== */
 import { DataService } from "./services";
 import { ServiceWrapper } from "./ServiceWrapper";
-import { Players } from "@rbxts/services";
+import { CollectionService, Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
 function onCharacterLoaded(character: Model) {
-	print(`Character loaded: ${character.Name}`);
+	CollectionService.AddTag(character, "SSEntity");
+	print(`Character loaded: ${character.Name} and tag added.`);
 }
 
 function onDataLoaded(player: Player, data: unknown) {

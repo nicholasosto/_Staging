@@ -18,11 +18,11 @@ const PlayerEntered = (player: Player) => {
 	print(`Player ${player.Name} has entered the Battle Zone.`);
 
 	const rigs = SSEntityHelper.getRigsInRadius(character.GetPivot(), 100);
-	if (rigs.size() === 0) {
-		warn(`No rigs found within 100 studs of ${character.GetFullName()}.`);
-		return;
-	}
+	if (rigs.size() === 0) return;
+
 	beamFactory.createBeam("Constrictor", character as SSEntity, rigs[0].rig);
+	beamFactory.CreateConstrictorBeam(character as SSEntity, rigs[0].rig);
+
 
 	ResourcesService.ModifyResource(player, "Health", -20); // Example: Modify health resource when entering the Battle Zone
 };

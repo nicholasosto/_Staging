@@ -21,7 +21,7 @@
  */
 
 import { GameWindow } from "client/ui/atoms";
-import { ScreenKey } from "client/states";
+import { ScreenKey } from "shared";
 import { ListContainer } from "client/ui/atoms";
 import { Padding } from "../tokens";
 import { GemSlotKey } from "shared";

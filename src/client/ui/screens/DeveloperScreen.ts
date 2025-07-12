@@ -1,5 +1,6 @@
 import { BaseContainer, BaseContainerProps, GameWindow, ListContainer } from "client/ui/atoms";
-import { PlayerStateInstance, ScreenKey } from "client/states";
+import { PlayerStateInstance } from "client/states";
+import { ScreenKey } from "shared";
 import { Value } from "@rbxts/fusion";
 import { StateInfoDisplay } from "../molecules";
 

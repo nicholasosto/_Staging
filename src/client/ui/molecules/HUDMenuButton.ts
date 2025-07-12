@@ -18,7 +18,8 @@
 import Fusion, { Children, Computed, New, OnEvent, Value } from "@rbxts/fusion";
 import { GameImage, UIButton } from "client/ui/atoms";
 import { GameImages, MenuButtonImageMap } from "shared";
-import { ScreenKey, ShowScreen, ScreenState } from "client/states";
+import { ShowScreen, ScreenState } from "client/states";
+import { ScreenKey } from "shared";
 
 export interface HUDMenuButtonProps extends Fusion.PropertyTable<ImageButton> {
 	/** Which screen this button toggles. */

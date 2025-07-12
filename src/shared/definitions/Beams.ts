@@ -45,7 +45,7 @@ export const BeamCatalog = {
 		color: new ColorSequence(Color3.fromRGB(180, 40, 40), Color3.fromRGB(80, 5, 5)),
 		width0: 0.4,
 		width1: 0.4,
-		lifetime: 5,
+		lifetime: 115,
 		physicsType: "Pull",
 		segments: 20,
 		onTick: (beam, dt) => {
@@ -64,7 +64,7 @@ export const BeamCatalog = {
 		color: new ColorSequence(Color3.fromRGB(140, 0, 255), Color3.fromRGB(60, 0, 80)),
 		width0: 0.3,
 		width1: 0.15,
-		lifetime: 6,
+		lifetime: 116,
 		physicsType: "Chain",
 		tweenInfo: new TweenInfo(0.8, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true),
 		segments: 15,
@@ -84,7 +84,7 @@ export const BeamCatalog = {
 		width0: 0.25,
 		width1: 0.25,
 		segments: 10,
-		lifetime: 4,
+		lifetime: 114,
 		physicsType: "Repel",
 		tweenInfo: new TweenInfo(0.5, Enum.EasingStyle.Bounce, Enum.EasingDirection.InOut, -1, true),
 		// Flickering effect to simulate ice shards

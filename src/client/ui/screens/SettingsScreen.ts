@@ -20,9 +20,10 @@
  *   @rbxts/fusion ^0.4.0
  */
 import { GameWindow } from "client/ui/atoms";
-import { ScreenKey, PlayerStateInstance } from "client/states";
+import { ScreenKey } from "shared";
 import { SETTING_KEYS, SettingKey } from "shared/definitions/ProfileDefinitions/Settings";
 import { Layout } from "../tokens";
+import { PlayerStateInstance } from "client/states";
 const Key: ScreenKey = "Settings";
 
 export const SettingsScreen = () => {

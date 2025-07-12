@@ -20,7 +20,7 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { ScreenKey } from "client/states";
+import { ScreenKey } from "shared";
 import { GameWindow } from "client/ui/atoms";
 
 const Key: ScreenKey = "Teleport";

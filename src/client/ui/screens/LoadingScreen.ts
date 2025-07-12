@@ -8,7 +8,7 @@ import {
 	ListContainer,
 	UIButton,
 } from "client/ui/atoms";
-import { ScreenKey } from "client/states";
+import { ScreenKey } from "shared";
 import { Computed, Value } from "@rbxts/fusion";
 import GameState from "client/states/GameState";
 import { GameImages } from "shared";

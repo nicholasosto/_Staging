@@ -1,5 +1,5 @@
 import { GameWindow } from "client/ui/atoms";
-import { ScreenKey } from "client/states";
+import { ScreenKey } from "shared";
 
 const Key: ScreenKey = "Quests";
 export const QuestsScreen = () => {
