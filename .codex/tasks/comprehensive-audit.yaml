@@ -1,0 +1,26 @@
+name: Comprehensive Audit
+description: Full repo health check with lint, test coverage and dependency scan
+prompt_file: .codex/prompts/code-audit.md
+
+model: o3
+temperature: 0.2
+max_tokens: 800
+
+args:
+  minCoverage: "85%"
+
+context:
+  - path: src
+    recursive: true
+    exclude: ["**/*.spec.ts"]
+  - path: tests
+    recursive: true
+    include: ["**/*.spec.ts"]
+  - path: package.json
+    recursive: false
+
+approval_policy: trusted   # ask before running anything outside the trusted set
+sandbox: workspace-write     # allow writes inside repo but block network
+postprocessors:
+  - npm run lint
+  - npm test

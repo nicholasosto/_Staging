@@ -1,0 +1,6 @@
+# .codex/tasks/code-audit.yaml
+name: Code Audit
+prompt_file: .codex/prompts/code-audit.md
+context:
+  - path: src
+    recursive: true
