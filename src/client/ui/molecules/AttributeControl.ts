@@ -4,25 +4,48 @@ import { CombinedAdjustor } from "../molecules/ValueAdjustors";
 import { PlayerStateInstance } from "client/states/PlayerState";
 
 import { Value } from "@rbxts/fusion";
+import { StateInfoDisplay } from "./StateInfoDisplay";
+import { AttributesSlice } from "client/states";
 
 export interface AttributeControlsProps {
 	attributeKey: AttributeKey;
 }
 
+/* Points Display Component */
+export function AttributePointsCard() {
+	const container = ListContainer({
+		Name: "AttributePointsContainer",
+		Size: new UDim2(0, 150, 1, 0),
+		LayoutOrder: 0,
+		LayoutOrientation: "horizontal",
+		AlignmentType: Enum.HorizontalAlignment.Center,
+		Gap: 10,
+		Content: {
+			AvailablePoints: StateInfoDisplay({
+				Size: new UDim2(0.45, 0, 1, 0),
+				Label: "Available",
+				Value: PlayerStateInstance.Attributes.Available,
+			}),
+			SpentPoints: StateInfoDisplay({
+				Size: new UDim2(0.45, 0, 1, 0),
+				Label: "Spent",
+				Value: PlayerStateInstance.Attributes.Spent,
+			}),
+		},
+	});
+	return container;
+}
+
+/* Attribute Control Component */
 export function AttributeControl(props: AttributeControlsProps) {
 	const icon = GameImage({
-		Size: new UDim2(0, 35, 0, 35),
+		Size: new UDim2(0, 45, 1, 35),
 		LayoutOrder: 0,
 		Image: AttributesMeta[props.attributeKey].iconId,
 	});
 
-	const displayText = GameText({
-		Size: new UDim2(0, 70, 1, 0),
-		LayoutOrder: 1,
-		TextState: Value(AttributesMeta[props.attributeKey].displayName),
-	});
-
 	const controller = CombinedAdjustor({
+		Size: new UDim2(0, 100, 1, 0),
 		LayoutOrder: 2,
 		value: PlayerStateInstance.Attributes.Attributes[props.attributeKey],
 		amount: 1,
@@ -41,7 +64,12 @@ export function AttributeControl(props: AttributeControlsProps) {
 		LayoutOrder: 0,
 		Content: {
 			Icon: icon,
-			DisplayText: displayText,
+			StateInfoDisplay: StateInfoDisplay({
+				Size: new UDim2(0, 150, 1, 0),
+				LayoutOrder: 1,
+				Label: AttributesMeta[props.attributeKey].displayName,
+				Value: PlayerStateInstance.Attributes.Attributes[props.attributeKey],
+			}),
 			Controller: controller,
 		},
 	});

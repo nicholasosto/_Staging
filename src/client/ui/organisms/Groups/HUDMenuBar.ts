@@ -19,6 +19,8 @@ export interface HudMenuBarProps {
 	AnchorPoint?: Vector2;
 }
 
+type ActiveScreenKey = (typeof SCREEN_KEYS)[number];
+const activeScreens: ActiveScreenKey[] = ["Character", "Settings", "Inventory"];
 export const HUDMenuBar = (props: HudMenuBarProps) => {
 	const container = ListContainer({
 		Name: "HUDMenuBar",
@@ -29,7 +31,7 @@ export const HUDMenuBar = (props: HudMenuBarProps) => {
 		LayoutOrientation: "horizontal",
 		BackgroundTransparency: 1,
 		LayoutOrder: props.layoutOrder ?? 0,
-		Content: SCREEN_KEYS.map((value) => {
+		Content: activeScreens.map((value) => {
 			return HUDMenuButton({
 				ScreenKey: value,
 				Name: `${value}_Button`,

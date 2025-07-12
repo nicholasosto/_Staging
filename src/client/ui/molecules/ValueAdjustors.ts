@@ -62,11 +62,12 @@ export interface CombinedAdjustorProps {
 	LayoutOrder?: number;
 	value: Value<number>;
 	amount?: number;
+	displayValue?: boolean; // If true, shows the value in the middle
 	OnIncrement?: () => void;
 	OnDecrement?: () => void;
 }
 export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
-	const { value, amount = 1, OnIncrement, OnDecrement } = props;
+	const { value, amount = 1, displayValue = false, OnIncrement, OnDecrement } = props;
 
 	const stringValue = Value(tostring(value.get()));
 
@@ -86,7 +87,7 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 		Gap: 10,
 		Content: {
 			Incrementor: IncrementButton,
-			ValueDisplay: ValueDisplay,
+			ValueDisplay: displayValue === true ? ValueDisplay : undefined,
 			Decrementor: DecrementButton,
 		},
 	});

@@ -4,7 +4,7 @@
  * MessageToast.ts  – Fusion molecule for transient player messages
  */
 import Fusion, { Computed, Value, Children, Observer } from "@rbxts/fusion";
-import { BaseContainer, GameText, Badge, BorderImage } from "client/ui/atoms";
+import { BaseContainer, GameText, Badge, BorderImage, ListContainer } from "client/ui/atoms";
 import { MessageShape } from "shared/definitions/Message";
 
 export interface MessageToastProps {
@@ -20,31 +20,63 @@ export function MessageToast(props: MessageToastProps) {
 
 	const title = Computed(() => props.Message.get()?.title ?? "");
 	const body = Computed(() => props.Message.get()?.content ?? "");
-	const severityLabel = Value((props.Message.get()?.severity ?? "").upper().sub(0, 3));
+	const severityEmoji = Computed(() => {
+		switch (props.Message.get()?.severity) {
+			case "info":
+				return "ℹ️";
+			case "warning":
+				return "⚠️";
+			case "error":
+				return "❗";
+			case "success":
+				return "✅";
+			case "prompt":
+				return "❓";
+			default:
+				return "ℹ️"; // Default to info if severity is unknown
+		}
+	});
+	const severityLabel = Value(severityEmoji.get());
 
 	/* ---------- UI tree ---------- */
 	const toast = BaseContainer({
 		Name: "MessageToast",
-		Size: UDim2.fromScale(0.35, 0), // autosize Y
-		AutomaticSize: Enum.AutomaticSize.Y,
+		Size: UDim2.fromOffset(500, 300), // autosize Y
 		AnchorPoint: new Vector2(0.5, 0),
 		Position: UDim2.fromScale(0.5, 0.08),
 		BackgroundTransparency: 0.15,
 		BorderImage: BorderImage.GothicMetal(), // coloured frame
 		Content: {
-			Title: GameText({
-				TextState: title,
-				TextSize: 20,
-				LayoutOrder: 1,
-			}),
-			Body: GameText({
-				TextState: body,
-				TextSize: 16,
-				LayoutOrder: 2,
-			}),
+			/* -- Badge for severity -- */
 			Badge: Badge({
 				TextValue: severityLabel, // Computed<T> also works
 				Corner: "TopRight",
+				BackgroundColor3: props.Message.get()?.textColor ?? new Color3(1, 1, 1), // Default to white
+				OnClick: () => {
+					show.set(false); // Hide toast on click
+				}
+			}),
+			LayoutContainer: ListContainer({
+				LayoutOrientation: "vertical",
+				Gap: 5,
+				Content: {
+					/* -- Title and Body -- */
+					Title: GameText({
+						TextState: title,
+						Size: UDim2.fromScale(1, 0.3), // autosize X
+						TextSize: 20,
+						TextScaled: false,
+						LayoutOrder: 1,
+					}),
+					Body: GameText({
+						Size: UDim2.fromScale(1, 0.7), // autosize X
+						TextState: body,
+						TextSize: 16,
+						TextScaled: false,
+						TextColor3: props.Message.get()?.textColor ?? new Color3(1, 1, 1), // Default to white
+						LayoutOrder: 2,
+					}),
+				},
 			}),
 		},
 	});

@@ -50,7 +50,7 @@ export const MessageMetaRecord: Record<SeverityKey, MessageMeta> = {
 	},
 };
 
-export function createMessageTemplate(
+export function createMessage(
 	title: string,
 	content: string,
 	severity: SeverityKey = "info",
@@ -66,40 +66,40 @@ export function createMessageTemplate(
 	};
 }
 
-export const MessageTemplates: Record<string, MessageShape> = {
-	DataLoadedSuccess: createMessageTemplate("Data Loaded", "Your game data has been successfully loaded.", "success"),
-	PlayerDataLoadedSuccess: createMessageTemplate(
+export const MessageLibrary: Record<string, MessageShape> = {
+	DataLoadedSuccess: createMessage("Data Loaded", "Your game data has been successfully loaded.", "success"),
+	PlayerDataLoadedSuccess: createMessage(
 		"Player Data Loaded",
 		"Your player data has been successfully loaded.",
 		"success",
 	),
-	ProfileUpdateSuccess: createMessageTemplate("Profile Updated", "Your profile has been successfully updated.", "success"),
-	ProfileUpdateError: createMessageTemplate(
+	ProfileUpdateSuccess: createMessage("Profile Updated", "Your profile has been successfully updated.", "success"),
+	ProfileUpdateError: createMessage(
 		"Profile Update Error",
 		"An error occurred while updating your profile. Please try again later.",
 		"error",
 	),
-	InvalidProfileData: createMessageTemplate(
+	InvalidProfileData: createMessage(
 		"Invalid Profile Data",
 		"Your profile data is invalid or corrupted. Please contact support.",
 		"error",
 	),
-	NetworkError: createMessageTemplate(
+	NetworkError: createMessage(
 		"Network Error",
 		"An error occurred while communicating with the server. Please check your internet connection.",
 		"error",
 	),
-	AbilityOnCooldown: createMessageTemplate(
+	AbilityOnCooldown: createMessage(
 		"Ability On Cooldown",
 		"Your ability is currently on cooldown. Please wait before using it again.",
 		"warning",
 	),
-	AbilityUnlocked: createMessageTemplate("Ability Unlocked", "Congratulations! You have unlocked a new ability.", "success"),
-	LevelUp: createMessageTemplate("Level Up", "Congratulations! You have leveled up.", "success"),
-	InsufficientResources: createMessageTemplate(
+	AbilityUnlocked: createMessage("Ability Unlocked", "Congratulations! You have unlocked a new ability.", "success"),
+	LevelUp: createMessage("Level Up", "Congratulations! You have leveled up.", "success"),
+	InsufficientResources: createMessage(
 		"Insufficient Resources",
 		"You do not have enough resources to perform this action.",
 		"error",
 	),
-	InvalidAction: createMessageTemplate("Invalid Action", "The action you attempted is invalid or not allowed.", "error"),
+	InvalidAction: createMessage("Invalid Action", "The action you attempted is invalid or not allowed.", "error"),
 };

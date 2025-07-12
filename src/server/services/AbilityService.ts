@@ -20,6 +20,9 @@ import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { ResourcesService } from "./ResourcesService";
 import { SSEntity } from "shared/types/SSEntity";
 import { RunService } from "@rbxts/services";
+import { ServerSend } from "server/network";
+import MessageService from "./MessageService";
+import { createMessage } from "shared/definitions/Message";
 
 /* =============================================== Service =============================================== */
 export default class AbilityService {
@@ -196,7 +199,22 @@ export default class AbilityService {
 		/* Validate Ability */
 		if (!this._playerHasAbility(player, abilityKey)) return false;
 		/* Validate Resources and Cooldown */
-		if (!this._validateResources(player, abilityKey) || !this._validateCooldown(player, abilityKey)) {
+		if (!this._validateResources(player, abilityKey)) {
+			const message = createMessage(
+				"Ability Activation Failed",
+				`You do not have enough resources or ${AbilitiesMeta[abilityKey].displayName}`,
+				"error",
+			);
+			ServerSend.SendMessageToPlayer(player, message);
+			return false;
+		}
+		if (!this._validateCooldown(player, abilityKey)) {
+			const message = createMessage(
+				"Ability On Cooldown",
+				`Your ${AbilitiesMeta[abilityKey].displayName} is on cooldown.`,
+				"warning",
+			);
+			ServerSend.SendMessageToPlayer(player, message);
 			return false;
 		}
 		// Start the cooldown for the ability

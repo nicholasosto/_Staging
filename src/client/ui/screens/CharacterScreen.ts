@@ -23,7 +23,7 @@
 import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "shared";
 import { PlayerStateInstance } from "client/states/PlayerState";
-import { AttributeControls } from "../organisms";
+import { AttributeControlCard } from "../organisms";
 import { StateInfoDisplay } from "../molecules";
 const Key: ScreenKey = "Character";
 
@@ -49,7 +49,7 @@ const GameWindowProps = {
 	Name: `${Key}Screen`,
 	ScreenKey: Key,
 	Content: {
-		AttributeControls: AttributeControls(AttributeControlProps),
+		AttributeControls: AttributeControlCard(AttributeControlProps),
 		StateInfoDisplay: StateInfoDisplay(StateInfoDisplayProps),
 	},
 };

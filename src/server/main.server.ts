@@ -8,7 +8,7 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { DataService } from "./services";
+import { DataService, ResourcesService } from "./services";
 import { ServiceWrapper } from "./ServiceWrapper";
 import { CollectionService, Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
@@ -18,7 +18,7 @@ type ServerLoadStateType = (typeof ServerLoadState)[number];
 type ServerLoadStateMap = Record<ServerLoadStateType, boolean>;
 const serverLoadState: ServerLoadStateMap = {
 	DataServiceLoaded: DataService.Start() !== undefined,
-	DataWrapperServicesLoaded: false,
+	DataWrapperServicesLoaded: ResourcesService.Start() !== undefined,
 	GameplayServicesLoaded: false,
 };
 
@@ -29,6 +29,9 @@ function onCharacterLoaded(character: Model) {
 
 function spawnCharacter(player: Player) {
 	/* Temporary spawn logic */
+	while (serverLoadState.DataServiceLoaded === false) {
+		wait(0.1); // Wait until DataService is loaded
+	}
 	const HumanoidDescription = Players.GetHumanoidDescriptionFromUserId(player.UserId);
 	if (HumanoidDescription) {
 		player.LoadCharacterWithHumanoidDescription(HumanoidDescription);
@@ -44,6 +47,7 @@ function onPlayerAdded(player: Player) {
 
 	/* Register the player with services */
 	DataService.RegisterPlayer(player);
+	ResourcesService.RegisterPlayer(player);
 	spawnCharacter(player);
 }
 

@@ -27,12 +27,14 @@
  */
 
 /* =============================================== Imports ===================== */
-import { Players, RunService } from "@rbxts/services";
-import { ResourceKey, ResourceDTO, RESOURCE_KEYS } from "shared/definitions/Resources";
-import { DefaultAttributes, AttributesDTO } from "shared/definitions/ProfileDefinitions/Attributes";
+import { RunService } from "@rbxts/services";
+import { ResourceKey, ResourceDTO, RESOURCE_KEYS, ResourceDataMap } from "shared/definitions/Resources";
+import { DefaultAttributes } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataService } from "./DataService";
 import { calculateResources } from "shared/calculations";
 import { ServerSend } from "server/network";
+import { createMessage } from "shared/definitions/Message";
+import { t } from "@rbxts/t";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -40,10 +42,8 @@ export class ResourcesService {
 	private readonly _map = new Map<Player, Record<ResourceKey, ResourceDTO>>();
 	private readonly _lastSend = new Map<Player, Map<ResourceKey, number>>();
 
-	private static heartbeat: RBXScriptConnection | undefined;
-
 	private constructor() {
-		this._setupConnections();
+		if (RunService.IsStudio()) warn(`ResourcesService started`);
 	}
 
 	public static Start(): ResourcesService {
@@ -53,7 +53,43 @@ export class ResourcesService {
 		return this._instance;
 	}
 
-	/* ------------------------------- Public API ------------------------------- */
+	/* -- Register Player -- */
+	public static RegisterPlayer(player: Player): boolean {
+		const svc = this.Start();
+		/* -- Check if player is already registered -- */
+		if (svc._map.has(player)) {
+			warn(`ResourcesService: Player ${player.Name} is already registered.`);
+			return true; // Already registered
+		}
+		/* -- Initialize player resources -- */
+		svc._map.set(player, svc._calculatePlayerResources(player));
+		return true; // Successfully registered
+	}
+
+	private _calculatePlayerResources(player: Player): ResourceDataMap {
+		const attributeData = DataService.GetProfileDataByKey(player, "Attributes") ?? DefaultAttributes;
+		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
+		const level = progressionData?.Level ?? 1;
+		return calculateResources(attributeData, level);
+	}
+
+	private _modifyHealth(player: Player, delta: number): boolean {
+		const resources = this._map.get(player);
+		if (!resources) return false;
+		const healthData = resources["Health"];
+		if (!healthData) return false;
+		// Update the health value
+		const newHealth = healthData.current + delta;
+		const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
+		if (humanoid === undefined) {
+			warn(`ResourcesService: Humanoid not found for player ${player.Name}`);
+			return false;
+		}
+		humanoid.TakeDamage(delta);
+		return true;
+	}
+
+	/* Get Resources ------------------------------- */
 	public static GetResources(player: Player): Record<ResourceKey, ResourceDTO> | undefined {
 		return this.Start()._map.get(player);
 	}
@@ -86,56 +122,13 @@ export class ResourcesService {
 
 	public static Recalculate(player: Player) {
 		const svc = this.Start();
-		const attributeData = DataService.GetProfileDataByKey(player, "Attributes");
-		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
-		if (!attributeData || !progressionData) {
-			warn(`ResourcesService: Missing attribute or progression data for player ${player.Name}`);
-			return;
+		const resources = svc._calculatePlayerResources(player);
+		svc._map.set(player, resources);
+
+		// Send updated resources to the player
+		for (const key of RESOURCE_KEYS) {
+			svc._send(player, key, resources[key]);
 		}
-		const current = svc._map.get(player);
-		const snapshot = calculateResources(attributeData, progressionData.Level, current);
-		svc._map.set(player, snapshot);
-
-		(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
-			svc._send(player, key, snapshot[key]);
-		});
-	}
-
-	/* ------------------------------- Internal -------------------------------- */
-	private _setupConnections() {
-
-		/* Heartbeat Connection */
-		ResourcesService.heartbeat?.Disconnect();
-		let lastHeartbeat = tick();
-		ResourcesService.heartbeat = RunService.Heartbeat.Connect(() => {
-			if (tick() - lastHeartbeat < 1) return; // Prevent too frequent updates
-			lastHeartbeat = tick();
-			// Periodically sync and regenerate resources for all players
-			Players.GetPlayers().forEach((player) => {
-				const resources = this._map.get(player);
-				if (!resources) return;
-				const character = player.Character;
-				const humanoid = character?.FindFirstChildOfClass("Humanoid") as Humanoid | undefined;
-				if (humanoid) {
-					if (humanoid.Health !== resources.Health.current) {
-						humanoid.Health = resources.Health.current;
-					}
-					if (humanoid.MaxHealth !== resources.Health.max) {
-						humanoid.MaxHealth = resources.Health.max;
-					}
-				}
-
-				// Regenerate resources over time
-				(RESOURCE_KEYS as ReadonlyArray<ResourceKey>).forEach((key) => {
-					const data = resources[key];
-					if (data.current < data.max) {
-						data.current = math.min(data.current + 1, data.max); // Regenerate resources over time
-						this._send(player, key, data);
-					}
-				});
-			});
-		});
-		// heartbeat ready
 	}
 
 	public InitializeResources(player: Player) {
@@ -160,14 +153,6 @@ export class ResourcesService {
 
 			(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
 				this._send(player, key, resources[key]);
-			});
-
-			humanoid.HealthChanged.Connect((newHealth) => {
-				const res = this._map.get(player);
-				if (!res) return;
-				const healthData = res["Health"];
-				healthData.current = newHealth;
-				this._send(player, "Health", healthData);
 			});
 		});
 	}

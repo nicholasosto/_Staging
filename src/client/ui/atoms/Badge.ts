@@ -20,11 +20,12 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import { Children, Computed, New, PropertyTable, Value } from "@rbxts/fusion";
+import { Children, Computed, New, OnEvent, PropertyTable, Value } from "@rbxts/fusion";
 
 export interface BadgeProps extends PropertyTable<TextButton> {
 	TextValue: Value<string>; // Text displayed on the badge
 	Corner: "TopLeft" | "TopRight" | "BottomLeft" | "BottomRight"; // Position of the badge corner
+	OnClick?: () => void; // Optional click handler
 }
 
 export const Badge = (props: BadgeProps) => {
@@ -61,6 +62,11 @@ export const Badge = (props: BadgeProps) => {
 			Corner: New("UICorner")({
 				CornerRadius: new UDim(0, 8), // Rounded corners
 			}),
+		},
+		[OnEvent("Activated")]: () => {
+			if (props.OnClick) {
+				props.OnClick();
+			}
 		},
 	});
 

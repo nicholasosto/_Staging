@@ -37,7 +37,7 @@ function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
 	const resourceBar = ProgressBar({
 		Name: `${resourceKey}_Bar`,
 		Percent: state.percent,
-		Label: Computed(() => meta.displayName),
+		Label: Computed(() => `${meta.displayName}: ${math.floor(state.percent.get() * 100)}% (${state.current.get()}/${state.max.get()})`),
 		Border: BorderImage.GothicMetal(),
 		Gradient: meta.gradient,
 		LayoutOrder: meta.layoutOrder,

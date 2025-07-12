@@ -11,6 +11,6 @@
  */
 
 export * from "./Groups";
-export * from "./AttributeControls";
+export * from "./AttributeControlCard";
 export * from "./ProgressionCard";
 export * from "./ResourceBar";
