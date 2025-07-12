@@ -17,31 +17,32 @@ function onCharacterLoaded(character: Model) {
 	print(`Character loaded: ${character.Name} and tag added.`);
 }
 
-function onDataLoaded(player: Player, data: unknown) {
-	print(`Data loaded for player: ${player.Name}`, data);
-	const HumanoidDescription = new Instance("HumanoidDescription") as HumanoidDescription;
-	HumanoidDescription.HeadColor = Color3.fromRGB(255, 255, 255);
-	HumanoidDescription.TorsoColor = Color3.fromRGB(255, 255, 0);
-
-	const description = Players.GetHumanoidDescriptionFromUserId(3100629956);
-	if (description) {
-		player.LoadCharacterWithHumanoidDescription(description);
+function spawnCharacter(player: Player) {
+	/* Temporary spawn logic */
+	const HumanoidDescription = Players.GetHumanoidDescriptionFromUserId(player.UserId);
+	if (HumanoidDescription) {
+		player.LoadCharacterWithHumanoidDescription(HumanoidDescription);
 	} else {
-		warn(`Failed to load HumanoidDescription for player: ${player.Name}`);
+		warn(`No HumanoidDescription found for player: ${player.Name}`);
 	}
 }
 
+/* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {
+	/* Connect the CharacterAdded event to handle character loading */
 	player.CharacterAdded.Connect(onCharacterLoaded);
+
+	/* Register the player with services */
 	DataService.RegisterPlayer(player);
-	const profile = DataService.GetProfile(player);
-	onDataLoaded(player, profile?.Data);
-	warn(`Data profile loaded for player: ${player.Name}`, profile);
+	spawnCharacter(player);
 }
 
+/* --- Player Removing Handler --- */
 function onPlayerRemoving(player: Player) {
 	ServiceWrapper.UnregisterPlayer(player);
 }
+
+/* =============================================== Main Execution ========================================= */
 Players.GetPlayers().forEach(onPlayerAdded); // Register existing players
 Players.PlayerAdded.Connect(onPlayerAdded);
 Players.PlayerRemoving.Connect(onPlayerRemoving);

@@ -26,7 +26,7 @@ export namespace SSEntityHelper {
 		}, []);
 	}
 
-	export function getClosestRig(origin: CFrame, radius = math.huge): RigInfo | undefined {
+	export function getClosestRig(playerCharacter: SSEntity, origin: CFrame, radius = math.huge): RigInfo | undefined {
 		let bestRig: RigInfo | undefined = undefined;
 		let bestDist = radius;
 
