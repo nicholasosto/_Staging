@@ -1,6 +1,6 @@
 /// <reference types="@rbxts/types" />
 
-import { ScreenKey } from "shared/definitions/Screen"
+import { ScreenKey } from "shared/definitions/Screen";
 
 /**
  * @file        image.ts
@@ -102,6 +102,14 @@ export const GameImages = {
 		Armor: "rbxassetid://98384046526938",
 		Weapon: "rbxassetid://98384046526938",
 		Accessory: "rbxassetid://98384046526938",
+	},
+	StatusIcon: {
+		DarkEnergy: "rbxassetid://112790635225543",
+		LightEnergy: "rbxassetid://128191185980101",
+		Might: "rbxassetid://121141253261646",
+		Chill: "rbxassetid://106953131478004",
+		FlightChill: "rbxassetid://95573543624955",
+		Shattered: "rbxassetid://135235376575135",
 	},
 	TextureImage: {
 		BoneDoily: "rbxassetid://108018297611555",
