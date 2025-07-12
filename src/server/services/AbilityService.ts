@@ -18,9 +18,6 @@ import { AbilitiesMeta, AbilityKey, loadAnimation, playAnimation } from "shared"
 import { DataService } from "./DataService";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 import { ResourcesService } from "./ResourcesService";
-import { BeamCatalog } from "shared/definitions/Beams";
-import { BeamFactory } from "shared/factory";
-import { SSEntityHelper } from "shared/helpers/SSEntityHelpers";
 import { SSEntity } from "shared/types/SSEntity";
 import { RunService } from "@rbxts/services";
 

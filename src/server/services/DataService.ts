@@ -110,7 +110,7 @@ export class DataService {
 	}
 
 	/* Get Profile */
-	private static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
+	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
 		while (this._profileMap.get(player) === undefined) {
 			// If the profile is undefined, wait for it to be created
 			warn(`\nDataService: Waiting for profile for player ${player.Name}`);

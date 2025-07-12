@@ -19,5 +19,4 @@ export * from "./ExperienceBar";
 export * from "./HUDMenuButton";
 export * from "./LevelGem";
 export * from "./StateInfoDisplay";
-export * from "./UserMessage";
 export * from "./ValueAdjustors";

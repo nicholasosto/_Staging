@@ -32,6 +32,11 @@ export default class MessageSlice {
 
 	public static show(message: MessageShape, duration: number = 5) {
 		this.messageData.set(message);
+		task.delay(duration, () => {
+			if (this.messageData.get() === message) {
+				this.messageData.set(undefined);
+			}
+		});
 	}
 	public static getMessageData(): Value<MessageShape | undefined> {
 		return this.messageData;

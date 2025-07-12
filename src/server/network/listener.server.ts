@@ -1,4 +1,5 @@
-import { AbilityService, DataService } from "server/services";
+import { DataService } from "server/services";
+import AbilityService from "server/services/AbilityService";
 import { AbilityKey, ClientDispatch, ProfileDataKey } from "shared";
 const Events = {
 	UseAbility: ClientDispatch.Server.Get("UseAbility"),

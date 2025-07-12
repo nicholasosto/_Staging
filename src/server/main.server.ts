@@ -12,6 +12,16 @@ import { DataService } from "./services";
 import { ServiceWrapper } from "./ServiceWrapper";
 import { CollectionService, Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
+
+const ServerLoadState = ["DataServiceLoaded", "DataWrapperServicesLoaded", "GameplayServicesLoaded"] as const;
+type ServerLoadStateType = (typeof ServerLoadState)[number];
+type ServerLoadStateMap = Record<ServerLoadStateType, boolean>;
+const serverLoadState: ServerLoadStateMap = {
+	DataServiceLoaded: DataService.Start() !== undefined,
+	DataWrapperServicesLoaded: false,
+	GameplayServicesLoaded: false,
+};
+
 function onCharacterLoaded(character: Model) {
 	CollectionService.AddTag(character, "SSEntity");
 	print(`Character loaded: ${character.Name} and tag added.`);

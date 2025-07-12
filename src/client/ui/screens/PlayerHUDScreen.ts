@@ -12,7 +12,8 @@ import { GameScreen } from "../atoms";
 import { AbilityBarComponent, ThemeOptions, HUDMenuBar } from "../organisms";
 import { CharacterInfoCard } from "../organisms/Groups/CharacterInfoCard";
 import { Computed, Value } from "@rbxts/fusion";
-import { GameState } from "client/states";
+import { GameState, MessageSlice } from "client/states";
+import { MessageToast } from "../organisms/MessageToast";
 
 /* =============================================== Player HUD Screen ============================================= */
 const Offset = 10; // Offset for positioning elements
@@ -37,7 +38,10 @@ export const PlayerHUDScreen = () => {
 		Content: {
 			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
 			HUDMenuBar: HUDMenuBar(HudMenuBarProps),
-
+			MessageToast: MessageToast({
+				Message: MessageSlice.getMessageData(),
+				Duration: 11,
+			}),
 			AbilityBar: AbilityBarComponent(),
 		},
 	});

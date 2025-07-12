@@ -86,12 +86,14 @@ export class ResourcesService {
 
 	public static Recalculate(player: Player) {
 		const svc = this.Start();
-		const profile = DataService.GetProfile(player);
-		const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
-		const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
-
+		const attributeData = DataService.GetProfileDataByKey(player, "Attributes");
+		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
+		if (!attributeData || !progressionData) {
+			warn(`ResourcesService: Missing attribute or progression data for player ${player.Name}`);
+			return;
+		}
 		const current = svc._map.get(player);
-		const snapshot = calculateResources(attrs, level, current);
+		const snapshot = calculateResources(attributeData, progressionData.Level, current);
 		svc._map.set(player, snapshot);
 
 		(RESOURCE_KEYS as readonly ResourceKey[]).forEach((key) => {
@@ -101,9 +103,6 @@ export class ResourcesService {
 
 	/* ------------------------------- Internal -------------------------------- */
 	private _setupConnections() {
-		Players.PlayerAdded.Connect((p) => this._onJoin(p));
-		Players.PlayerRemoving.Connect((p) => this._onLeave(p));
-		Players.GetPlayers().forEach((p) => this._onJoin(p));
 
 		/* Heartbeat Connection */
 		ResourcesService.heartbeat?.Disconnect();
@@ -139,16 +138,21 @@ export class ResourcesService {
 		// heartbeat ready
 	}
 
-	private _onJoin(player: Player) {
+	public InitializeResources(player: Player) {
 		task.defer(() => {
 			const character = player.Character || player.CharacterAdded.Wait()[0];
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 
-			const profile = DataService.GetProfile(player);
-			const attrs: AttributesDTO = profile?.Data.Attributes ?? DefaultAttributes;
-			const level = (profile as unknown as { Data: { Level?: number } })?.Data?.Level ?? 1;
+			const attributeData = DataService.GetProfileDataByKey(player, "Attributes");
+			const progressionData = DataService.GetProfileDataByKey(player, "Progression");
+			const level = progressionData?.Level ?? 1;
 
-			const resources = calculateResources(attrs, level);
+			if (!attributeData || !progressionData) {
+				warn(`ResourcesService: Missing attribute or progression data for player ${player.Name}`);
+				return;
+			}
+
+			const resources = calculateResources(attributeData, level);
 			this._map.set(player, resources);
 
 			humanoid.MaxHealth = resources.Health.max;
