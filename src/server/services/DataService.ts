@@ -21,7 +21,14 @@
 import ProfileService from "@rbxts/profileservice";
 import { Profile } from "@rbxts/profileservice/globals";
 // DTO
-import { AbilityKey, DefaultAbilities, DefaultAttributes, DefaultCurrency, DefaultSettings, ProfileDataMap } from "shared/definitions";
+import {
+	AbilityKey,
+	DefaultAbilities,
+	DefaultAttributes,
+	DefaultCurrency,
+	DefaultSettings,
+	ProfileDataMap,
+} from "shared/definitions";
 import { CodeSettings } from "shared/constants/CodeSettings";
 import { DefaultProgression } from "shared/definitions/ProfileDefinitions/Progression";
 

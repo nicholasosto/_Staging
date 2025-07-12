@@ -13,4 +13,3 @@ export const SCREEN_KEYS = [
 ] as const;
 
 export type ScreenKey = (typeof SCREEN_KEYS)[number];
-

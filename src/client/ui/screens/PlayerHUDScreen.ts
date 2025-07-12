@@ -29,8 +29,6 @@ const HudMenuBarProps = {
 	LayoutOrder: 2,
 };
 
-
-
 export const PlayerHUDScreen = () => {
 	/* Screen */
 	return GameScreen({
@@ -39,7 +37,7 @@ export const PlayerHUDScreen = () => {
 		Content: {
 			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
 			HUDMenuBar: HUDMenuBar(HudMenuBarProps),
-			
+
 			AbilityBar: AbilityBarComponent(),
 		},
 	});
