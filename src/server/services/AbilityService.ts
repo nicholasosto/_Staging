@@ -44,51 +44,61 @@ export class AbilityService {
 		return this._instance;
 	}
 	/* ------------------------------- Mutator Methods ------------------------------- */
-	public static SetAbilities(player: Player, abilities: AbilityKey[]) {
-		const profile = DataService.GetProfile(player);
-		if (!profile) {
+	public static SetAbilities(player: Player, abilities: AbilityKey[]): boolean {
+		const currentAbilities = DataService.GetProfileDataByKey(player, "Abilities");
+		if (!currentAbilities) {
 			warn(`No profile found for player ${player.Name}.`);
-			return;
+			return false;
 		}
-		profile.Data.Abilities = abilities;
+		return DataService.SetProfileDataByKey(player, "Abilities", abilities);
 	}
 
 	/* ------------------------------- Ability Management ------------------------------- */
-	public static AddAbility(player: Player, abilityKey: AbilityKey) {
-		const profile = DataService.GetProfile(player);
-		if (!profile) {
-			warn(`No profile found for player ${player.Name}.`);
-			return;
+	public static AddAbility(player: Player, abilityKey: AbilityKey): boolean {
+		const currentAbilities = this.GetAbilities(player);
+		if (!currentAbilities) {
+			warn(`No abilities found for player ${player.Name}.`);
+			return false;
 		}
-		if (!profile.Data.Abilities.includes(abilityKey)) {
-			profile.Data.Abilities.push(abilityKey);
+		if (!currentAbilities.includes(abilityKey)) {
+			currentAbilities.push(abilityKey);
+			this.SetAbilities(player, currentAbilities);
 			print(`Added ability ${abilityKey} to player ${player.Name}.`);
-		} else {
-			warn(`Player ${player.Name} already has ability ${abilityKey}.`);
 		}
+		return true;
 	}
 
 	/* ------------------------------- Ability Removal ------------------------------- */
-	public static RemoveAbility(player: Player, abilityKey: AbilityKey) {
-		const profile = DataService.GetProfile(player);
-		if (!profile) {
-			warn(`No profile found for player ${player.Name}.`);
-			return;
+	public static RemoveAbility(player: Player, abilityKey: AbilityKey): boolean {
+		const currentAbilities = this.GetAbilities(player);
+		if (!currentAbilities) {
+			warn(`No abilities found for player ${player.Name}.`);
+			return false;
 		}
-		const abilities = profile.Data.Abilities;
-		const index = abilities.indexOf(abilityKey);
-		const removed = abilities.remove(index);
-		if (removed) {
+		if (currentAbilities.includes(abilityKey)) {
+			const updatedAbilities = currentAbilities.filter((ability) => ability !== abilityKey);
+			this.SetAbilities(player, updatedAbilities);
 			print(`Removed ability ${abilityKey} from player ${player.Name}.`);
+			return true;
 		} else {
 			warn(`Player ${player.Name} does not have ability ${abilityKey}.`);
 		}
+
+		return false;
 	}
 
 	/* ------------------------------- Ability Retrieval ------------------------------- */
 	public static GetAbilities(player: Player): AbilityKey[] | undefined {
-		const profile = DataService.GetProfile(player);
-		return profile?.Data.Abilities;
+		return DataService.GetProfileDataByKey(player, "Abilities");
+	}
+
+	public static SetAbilitiesForPlayer(player: Player, abilities: AbilityKey[]): boolean {
+		const profile = DataService.SetProfileDataByKey(player, "Abilities", abilities);
+		if (!profile) {
+			warn(`Failed to set abilities for player ${player.Name}.`);
+			return false;
+		}
+		return true;
 	}
 
 	/* ------------------------------- Validation ------------------------------------- */

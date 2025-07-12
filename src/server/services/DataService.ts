@@ -110,7 +110,7 @@ export class DataService {
 	}
 
 	/* Get Profile */
-	public static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
+	private static GetProfile(player: Player): Profile<ProfileDataMap> | undefined {
 		while (this._profileMap.get(player) === undefined) {
 			// If the profile is undefined, wait for it to be created
 			warn(`\nDataService: Waiting for profile for player ${player.Name}`);
@@ -119,5 +119,47 @@ export class DataService {
 
 		return this._profileMap.get(player); // Return the profile from the map
 	}
+
+	/* ---- Public Profile Data Accessors ---- */
+	/**
+	 * Get specific profile data by key.
+	 * @param player The player whose profile data to access.
+	 * @param dataKey The key of the profile data to retrieve.
+	 * @returns The profile data for the specified key, or undefined if not found.
+	 */
+	public static GetProfileDataByKey<K extends keyof ProfileDataMap>(
+		player: Player,
+		dataKey: K,
+	): ProfileDataMap[K] | undefined {
+		const profile = this.GetProfile(player);
+		if (profile === undefined) {
+			warn(`DataService: No profile found for player ${player.Name}`);
+			return undefined;
+		}
+		return profile.Data[dataKey]; // Return the specific data by key
+	}
+
+	/**
+	 * Set specific profile data by key.
+	 * @param player The player whose profile data to modify.
+	 * @param dataKey The key of the profile data to set.
+	 * @param data The new data to set for the specified key.
+	 * @returns The updated profile data for the specified key, or undefined if not found.
+	 */
+	public static SetProfileDataByKey<K extends keyof ProfileDataMap>(
+		player: Player,
+		dataKey: K,
+		data: ProfileDataMap[K],
+	): ProfileDataMap[K] | undefined {
+		{
+			const profile = this.GetProfile(player);
+			if (profile === undefined) {
+				warn(`DataService: No profile found for player ${player.Name}`);
+				return;
+			}
+			profile.Data[dataKey] = data; // Set the specific data by key
+			profile.Save(); // Save the profile after updating data
+			return profile.Data[dataKey]; // Return the updated data
+		}
+	}
 }
-DataService.Start(); // Initialize the DataService
