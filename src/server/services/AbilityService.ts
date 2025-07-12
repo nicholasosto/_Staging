@@ -1,21 +1,16 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        AbilityService.ts
- * @module      AbilityService
- * @layer       Server/Services
- * @classType   Singleton
- * @description Manages player abilities and activation cooldowns.
+ * ### AbilityService
+ * Server-side service for managing player abilities and cooldowns.
  *
- * ╭───────────────────────────────╮
- * │  Soul Steel · Coding Guide    │
- * │  Fusion v4 · Strict TS · ECS  │
- * ╰───────────────────────────────╯
+ * @module     Server/Services/AbilityService
+ * @owner      Trembus
+ * @since      0.2.0
+ * @lastUpdate 2025-07-12
  *
- * @author       Codex
- * @license      MIT
- * @since        0.2.0
- * @lastUpdated  2025-07-03 by Codex – Initial creation
+ * @remarks
+ * Manages abilities via DataService, handles cooldowns, and resource validation.
  */
 
 /* =============================================== Imports =============================================== */
@@ -27,14 +22,15 @@ import { BeamCatalog } from "shared/definitions/Beams";
 import { BeamFactory } from "shared/factory";
 import { SSEntityHelper } from "shared/helpers/SSEntityHelpers";
 import { SSEntity } from "shared/types/SSEntity";
+import { RunService } from "@rbxts/services";
 
 /* =============================================== Service =============================================== */
-export class AbilityService {
+export default class AbilityService {
 	private static _instance: AbilityService | undefined;
 	private readonly _cooldowns = new Map<Player, Map<AbilityKey, CooldownTimer>>();
 
 	private constructor() {
-		print("AbilityService initialized.");
+		if (RunService.IsStudio()) print(`AbilityService started`);
 	}
 
 	public static Start(): AbilityService {
@@ -43,14 +39,28 @@ export class AbilityService {
 		}
 		return this._instance;
 	}
+	/**
+	 * Shutdown and cleanup the service.
+	 */
+	public static Destroy(): void {
+		this._instance?.destroyInternal();
+		this._instance = undefined;
+	}
+
 	/* ------------------------------- Mutator Methods ------------------------------- */
 	public static SetAbilities(player: Player, abilities: AbilityKey[]): boolean {
 		const currentAbilities = DataService.GetProfileDataByKey(player, "Abilities");
+		//#TODO: Replace with full validation
 		if (!currentAbilities) {
 			warn(`No profile found for player ${player.Name}.`);
 			return false;
 		}
-		return DataService.SetProfileDataByKey(player, "Abilities", abilities);
+		if (DataService.SetProfileDataByKey(player, "Abilities", abilities) === undefined) {
+			return true;
+		} else {
+			warn(`Failed to set abilities for player ${player.Name}.`);
+			return false;
+		}
 	}
 
 	/* ------------------------------- Ability Management ------------------------------- */
@@ -208,5 +218,13 @@ export class AbilityService {
 		print(`Activated ability ${abilityKey} for player ${player.Name}.`);
 
 		return true;
+	}
+
+	// Private cleanup helper
+	private destroyInternal() {
+		// Clear cooldowns
+		this._cooldowns.clear();
+		// ...destroy any other resources/events...
+		if (RunService.IsStudio()) warn(`AbilityService destroyed`);
 	}
 }

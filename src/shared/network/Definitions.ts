@@ -20,6 +20,7 @@ import {
 	ProfileDataKey,
 	ResourceDTO,
 } from "shared/definitions";
+import { MessageShape } from "shared/definitions/Message";
 
 /*
  * Generic helpers ────────────────────────────────────────────────
@@ -60,6 +61,8 @@ export const ServerDispatch = Net.Definitions.Create({
 		Net.Definitions.ServerToClientEvent<[dataKey: ProfileDataKey, data: ProfileDataMap[ProfileDataKey]]>(),
 	/* -- Resources -- */
 	ResourceUpdated: Net.Definitions.ServerToClientEvent<[key: ResourceKey, data: ResourceDTO]>(),
-
+	/* -- Game State -- */
 	GameStateUpdated: Net.Definitions.ServerToClientEvent<[dataLoaded: boolean, playerDataLoaded: boolean]>(),
+	/* -- Messages -- */
+	SendMessageToPlayer: Net.Definitions.ServerToClientEvent<[message: MessageShape]>(),
 });

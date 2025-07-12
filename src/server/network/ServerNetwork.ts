@@ -18,8 +18,10 @@
  *   @rbxts/fusion ^0.4.0
  */
 /* =============================================== Imports =============================================== */
+import { Message } from "@rbxts/wcs";
 import { ResourceKey, ProfileDataKey, ProfileDataMap, ResourceDTO } from "shared";
 import { ServerDispatch } from "shared";
+import { MessageShape } from "shared/definitions/Message";
 
 /* ================================================ Events =============================================== */
 
@@ -39,5 +41,9 @@ export const ServerSend = {
 	},
 	GameStateUpdated: (player: Player, dataLoaded: boolean, playerDataLoaded: boolean) => {
 		ServerDispatch.Server.Get("GameStateUpdated").SendToPlayer(player, dataLoaded, playerDataLoaded);
+	},
+	SendMessageToPlayer: (player: Player, message: MessageShape) => {
+		warn(`Server Network: Message sent to ${player.Name}: [${message.severity ?? "info"}] ${message.content}`);
+		ServerDispatch.Server.Get("SendMessageToPlayer").SendToPlayer(player, message);
 	},
 };

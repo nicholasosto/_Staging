@@ -1,7 +1,7 @@
 import { AbilityKey, AttributesDTO, ClientDispatch, PlayerSettings, ResourceDTO, ServerDispatch } from "shared";
 import { ProgressionDTO } from "shared/definitions/ProfileDefinitions/Progression";
 import { PlayerStateInstance } from "client/states/PlayerState";
-import { GameState } from "client/states";
+import { GameState, MessageSlice } from "client/states";
 
 const Events = {
 	/* -- Profile Data -- */
@@ -9,6 +9,8 @@ const Events = {
 	ResourceUpdated: ServerDispatch.Client.Get("ResourceUpdated"),
 	/* -- Game State -- */
 	GameStateUpdated: ServerDispatch.Client.Get("GameStateUpdated"),
+	/* -- Messages -- */
+	SendMessageToPlayer: ServerDispatch.Client.Get("SendMessageToPlayer"),
 };
 
 const Functions = {
@@ -78,4 +80,10 @@ Events.GameStateUpdated.Connect((dataLoaded, playerDataLoaded) => {
 	);
 	GameState.DataLoaded.set(dataLoaded);
 	GameState.PlayerDataLoaded.set(playerDataLoaded);
+});
+
+/* Message Handling -------------------------------------------- */
+Events.SendMessageToPlayer.Connect((message) => {
+	MessageSlice.show(message, 11);
+	warn(`Client Listener: SendMessageToPlayer called. Message: [${message.severity ?? "info"}] ${message.content}`);
 });

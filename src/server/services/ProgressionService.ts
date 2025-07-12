@@ -21,6 +21,7 @@
 /* =============================================== Imports ================================== */
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
 import { DataService } from "./DataService";
+import { t } from "@rbxts/t";
 
 /* =============================================== Service ================================== */
 export class ProgressionService {
@@ -38,22 +39,32 @@ export class ProgressionService {
 	}
 
 	/* ------------------------------- Public API ---------------------------------------- */
-	public static AddExperience(player: Player, amount: number) {
-		const profile = DataService.GetProfile(player);
-		if (!profile) return;
+	public static AddExperience(player: Player, amount: number): boolean {
+		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
+		if (!progressionData) return false;
 
-		const progression = profile.Data.Progression;
-		progression.Experience += amount;
-		while (progression.Experience >= progression.NextLevelExperience) {
-			progression.Experience -= progression.NextLevelExperience;
-			progression.Level += 1;
-			progression.NextLevelExperience = getNextLevelExperience(progression.Level);
+		/* Update experience and level */
+		progressionData.Experience += amount;
+		while (progressionData.Experience >= progressionData.NextLevelExperience) {
+			progressionData.Experience -= progressionData.NextLevelExperience;
+			this._levelUp(player);
 		}
-		return progression;
+		DataService.SetProfileDataByKey(player, "Progression", progressionData);
+		return true;
+	}
+	private static _levelUp(player: Player): boolean {
+		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
+		if (!progressionData) return false;
+
+		progressionData.Level += 1;
+		progressionData.NextLevelExperience = getNextLevelExperience(progressionData.Level);
+		DataService.SetProfileDataByKey(player, "Progression", progressionData);
+		return true;
 	}
 
-	public static Get(player: Player) {
-		return DataService.GetProfile(player)?.Data.Progression;
+	/** Get the progression data for a player */
+	public static GetProgressionData(player: Player) {
+		return DataService.GetProfileDataByKey(player, "Progression");
 	}
 }
 

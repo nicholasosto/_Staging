@@ -20,30 +20,24 @@
  *   @rbxts/fusion ^0.4.0
  */
 
-import Fusion from "@rbxts/fusion";
-
-const { Value } = Fusion;
+import Fusion, { Value } from "@rbxts/fusion";
+import { MessageShape } from "shared/definitions/Message";
 
 export default class MessageSlice {
 	private static instance: MessageSlice;
 
-	public readonly Text = Value("");
-	public readonly Visible = Value(false);
-	public readonly IsError = Value(false);
+	private static messageData: Value<MessageShape | undefined> = Value(undefined);
 
 	private constructor() {}
 
-	public show(text: string, isError = false, duration = 2) {
-		this.Text.set(text);
-		this.IsError.set(isError);
-		this.Visible.set(true);
-		task.delay(duration, () => {
-			this.Visible.set(false);
-		});
+	public static show(message: MessageShape, duration: number = 5) {
+		this.messageData.set(message);
 	}
-
+	public static getMessageData(): Value<MessageShape | undefined> {
+		return this.messageData;
+	}
 	public static getInstance(): MessageSlice {
-		if (!this.instance) {
+		if (this.instance === undefined) {
 			this.instance = new MessageSlice();
 		}
 		return this.instance;

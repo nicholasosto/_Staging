@@ -1,0 +1,27 @@
+name: Luminesa - Server Services Architect
+description: Service Template Adherence and Code Quality Check and Development
+prompt:
+
+
+model: o3
+temperature: 0.2
+max_tokens: 800
+
+args:
+  minCoverage: "85%"
+
+context:
+  - path: src
+    recursive: true
+    exclude: ["**/*.spec.ts"]
+  - path: tests
+    recursive: true
+    include: ["**/*.spec.ts"]
+  - path: package.json
+    recursive: false
+
+approval_policy: trusted   # ask before running anything outside the trusted set
+sandbox: workspace-write     # allow writes inside repo but block network
+postprocessors:
+  - npm run lint
+  - npm test
