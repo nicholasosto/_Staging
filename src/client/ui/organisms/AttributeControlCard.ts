@@ -1,8 +1,9 @@
 import { ATTR_KEYS } from "shared";
-import { ListContainer } from "../atoms";
+import { BaseContainer, ListContainer } from "../atoms";
 import { AttributeControl, AttributePointsCard } from "../molecules";
 
 import Fusion from "@rbxts/fusion";
+import { Padding } from "../tokens";
 
 export function AttributeControlCard(props: Fusion.PropertyTable<Frame>) {
 	const attributeControls = ATTR_KEYS.map((key) => {
@@ -15,8 +16,17 @@ export function AttributeControlCard(props: Fusion.PropertyTable<Frame>) {
 		LayoutOrientation: "vertical",
 		AlignmentType: Enum.VerticalAlignment.Center,
 		Content: {
-			AttributePoints: AttributePointsCard(),
-			AttributeControls: attributeControls,
+			AttributePoints: AttributePointsCard({
+				LayoutOrder: 0,
+			}),
+			AttributeControls: ListContainer({
+				Name: "AttributeControls",
+				Size: new UDim2(1, 0, 0, 300),
+				LayoutOrder: 1,
+				LayoutOrientation: "vertical",
+				AlignmentType: Enum.VerticalAlignment.Top,
+				Content: attributeControls,
+			}),
 		},
 		/* -- SPA -- */
 		Size: props.Size ?? new UDim2(1, 0, 1, 0),
@@ -27,6 +37,7 @@ export function AttributeControlCard(props: Fusion.PropertyTable<Frame>) {
 		BackgroundTransparency: props.BackgroundTransparency ?? 1,
 		LayoutOrder: props.LayoutOrder ?? 0,
 		ZIndex: props.ZIndex ?? 1,
+		Padding: Padding(4),
 	});
 	return container;
 }

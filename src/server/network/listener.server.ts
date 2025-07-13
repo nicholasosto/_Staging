@@ -1,14 +1,15 @@
 import { DataService } from "server/services";
 import AbilityService from "server/services/AbilityService";
-import { AbilityKey, ClientDispatch, ProfileDataKey } from "shared";
-const Events = {
-	UseAbility: ClientDispatch.Server.Get("UseAbility"),
-};
+import AttributesService from "server/services/AttributesService";
+import { AbilityKey, AttributeKey, ClientDispatch, ProfileDataKey } from "shared";
 
 const Functions = {
 	/* -- Profile Data -- */
 	GetAllProfileData: ClientDispatch.Server.Get("GetAllData"),
 	GetProfileDataByKey: ClientDispatch.Server.Get("GetDataByKey"),
+	/* -- Abilities -- */
+	UseAbility: ClientDispatch.Server.Get("UseAbility"),
+	ModifyAttribute: ClientDispatch.Server.Get("ModifyAttribute"),
 };
 
 /* --- Listeners --- */
@@ -38,7 +39,8 @@ Functions.GetAllProfileData.SetCallback((player: Player) => {
 	}
 });
 
-Events.UseAbility.SetCallback((player: Player, abilityKey: AbilityKey) => {
+/* -- Abilities -- */
+Functions.UseAbility.SetCallback((player: Player, abilityKey: AbilityKey) => {
 	warn(`UseAbility called for player ${player.Name} with ability ${abilityKey}`);
 	const success = AbilityService.Activate(player, abilityKey);
 	print(`AbilityService.Activate(${player.Name}, ${abilityKey}) returned: ${success}`);
@@ -48,4 +50,14 @@ Events.UseAbility.SetCallback((player: Player, abilityKey: AbilityKey) => {
 	}
 	warn(`Ability ${abilityKey} activated for player ${player.Name}.`);
 	return success;
+});
+
+/* -- Attributes -- */
+Functions.ModifyAttribute.SetCallback((player: Player, attributeKey: AttributeKey, amount: number) => {
+	const attrs = AttributesService.ModifyAttribute(player, attributeKey, amount);
+	if (attrs === undefined) {
+		warn(`ModifyAttribute failed for player ${player.Name} on attribute ${attributeKey} with amount ${amount}.`);
+		return undefined;
+	}
+	return attrs;
 });

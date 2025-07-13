@@ -16,6 +16,7 @@ export interface IncrementorProps {
 	value: Value<number>;
 	amount?: number;
 	OnIncrement?: () => void;
+	Validator: () => boolean;
 	LayoutOrder?: number;
 }
 
@@ -27,7 +28,9 @@ export const Incrementor = (props: IncrementorProps) => {
 		Icon: GameImages.Control.Increment,
 		LayoutOrder: LayoutOrder,
 		OnClick: () => {
-			value.set(value.get() + amount);
+			if (props.Validator() === false) {
+				return;
+			}
 			OnIncrement?.();
 		},
 	});
@@ -39,6 +42,7 @@ export interface DecrementorProps {
 	value: Value<number>;
 	amount?: number;
 	OnDecrement?: () => void;
+	Validator: () => boolean;
 	LayoutOrder?: number;
 }
 export const Decrementor = (props: DecrementorProps) => {
@@ -49,7 +53,9 @@ export const Decrementor = (props: DecrementorProps) => {
 		Icon: GameImages.Control.Decrement,
 		LayoutOrder: LayoutOrder,
 		OnClick: () => {
-			value.set(value.get() - amount);
+			if (props.Validator() === false) {
+				return;
+			}
 			OnDecrement?.();
 		},
 	});
@@ -71,13 +77,31 @@ export const CombinedAdjustor = (props: CombinedAdjustorProps) => {
 
 	const stringValue = Value(tostring(value.get()));
 
-	const IncrementButton = Incrementor({ value, amount, OnIncrement, LayoutOrder: 2 });
+	const IncrementButton = UIButton({
+		Size: new UDim2(0, 35, 1, 0),
+		Icon: GameImages.Control.Increment,
+		LayoutOrder: 0,
+		RatioValue: 1,
+		OnClick: () => {
+			props.OnIncrement?.();
+		},
+	});
+
+	const DecrementButton = UIButton({
+		Size: new UDim2(0, 35, 1, 0),
+		Icon: GameImages.Control.Decrement,
+		LayoutOrder: 0,
+		RatioValue: 1,
+		OnClick: () => {
+			props.OnDecrement?.();
+		},
+	});
+
 	const ValueDisplay = GameText({
 		LayoutOrder: 1,
 		Size: new UDim2(0, 35, 1, 0),
 		TextState: stringValue,
 	});
-	const DecrementButton = Decrementor({ value, amount, OnDecrement, LayoutOrder: 0 });
 
 	const container = ListContainer({
 		Name: "CombinedAdjustor",

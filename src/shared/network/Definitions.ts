@@ -19,6 +19,7 @@ import {
 	ProfileDataMap,
 	ProfileDataKey,
 	ResourceDTO,
+	AttributesDTO,
 } from "shared/definitions";
 import { MessageShape } from "shared/definitions/Message";
 
@@ -38,7 +39,8 @@ export const AdminNet = Net.Definitions.Create({
 
 export const ClientDispatch = Net.Definitions.Create({
 	/* -- Attributes -- */
-	IncreaseAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
+	ModifyAttribute:
+		Net.Definitions.ServerAsyncFunction<(attributeKey: AttributeKey, amount: number) => AttributesDTO | undefined>(),
 
 	/* -- Abilities -- */
 	UseAbility: Net.Definitions.ServerAsyncFunction<(abilityKey: AbilityKey) => boolean>(),
@@ -52,7 +54,6 @@ export const ClientDispatch = Net.Definitions.Create({
 
 	/* -- Update Data -- */
 	UpdatePlayerSetting: Net.Definitions.ClientToServerEvent<[key: SettingKey, value: boolean | string]>(),
-	ModifyAttribute: Net.Definitions.ClientToServerEvent<[attributeKey: AttributeKey, amount: number]>(),
 });
 
 export const ServerDispatch = Net.Definitions.Create({

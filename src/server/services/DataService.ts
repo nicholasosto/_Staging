@@ -150,16 +150,16 @@ export class DataService {
 		player: Player,
 		dataKey: K,
 		data: ProfileDataMap[K],
-	): ProfileDataMap[K] | undefined {
+	): boolean {
 		{
 			const profile = this.GetProfile(player);
 			if (profile === undefined) {
 				warn(`DataService: No profile found for player ${player.Name}`);
-				return;
+				return false;
 			}
 			profile.Data[dataKey] = data; // Set the specific data by key
 			profile.Save(); // Save the profile after updating data
-			return profile.Data[dataKey]; // Return the updated data
+			return true; // Return the updated data
 		}
 	}
 }

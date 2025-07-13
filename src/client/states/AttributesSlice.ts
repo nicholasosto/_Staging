@@ -15,6 +15,7 @@
  */
 
 import { Value } from "@rbxts/fusion";
+import { ClientSend } from "client/network";
 import { ATTR_KEYS, AttributeKey, AttributesDTO, DefaultAttributes } from "shared";
 
 export default class AttributesSlice {
@@ -41,5 +42,22 @@ export default class AttributesSlice {
 		}
 		this.Available.set(attributes.AvailablePoints);
 		this.Spent.set(attributes.SpentPoints);
+	}
+
+
+	public ModifyAttribute(key: AttributeKey, amount: number): boolean {
+		ClientSend.ModifyAttribute(key, amount).then((attrs) => {
+			if (attrs === undefined	) {
+				warn(`ModifyAttribute failed for key ${key} with amount ${amount}.`);
+				return false;
+			} 
+			this.UpdateAttributes(attrs);
+			return true;
+		}).catch((err) => {
+			warn(`Failed to modify attribute ${key} by ${amount}:`, err);
+			return false;
+		});
+
+		return true;
 	}
 }

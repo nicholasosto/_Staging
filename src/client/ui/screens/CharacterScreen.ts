@@ -24,7 +24,8 @@ import { GameWindow } from "client/ui/atoms";
 import { ScreenKey } from "shared";
 import { PlayerStateInstance } from "client/states/PlayerState";
 import { AttributeControlCard } from "../organisms";
-import { StateInfoDisplay } from "../molecules";
+import { Padding } from "../tokens";
+
 const Key: ScreenKey = "Character";
 
 /* Attribute Control Properties */
@@ -38,19 +39,13 @@ const AttributeControlProps = {
 	AttributeSlice: PlayerStateInstance.Attributes,
 };
 
-/* StateInfoDisplayProps */
-const StateInfoDisplayProps = {
-	Label: "Strength",
-	Value: PlayerStateInstance.Attributes.Attributes["str"],
-};
-
 /* Window Properties */
 const GameWindowProps = {
 	Name: `${Key}Screen`,
 	ScreenKey: Key,
+	Padding: Padding(10),
 	Content: {
 		AttributeControls: AttributeControlCard(AttributeControlProps),
-		StateInfoDisplay: StateInfoDisplay(StateInfoDisplayProps),
 	},
 };
 

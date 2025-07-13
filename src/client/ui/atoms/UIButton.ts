@@ -60,6 +60,7 @@ export interface UIButtonProps extends PropertyTable<ImageButton> {
 	Selected?: boolean;
 
 	LayoutOrder?: number;
+	RatioValue?: number; // Aspect ratio for the button, if applicable
 
 	/* Content */
 
@@ -104,6 +105,12 @@ export const UIButton = (props: UIButtonProps) => {
 		ZIndex: props.ZIndex ?? 1,
 		[OnEvent("Activated")]: () => props.OnClick && props.OnClick(),
 		[Children]: {
+			AspectRatio: props.RatioValue
+				? New("UIAspectRatioConstraint")({
+						AspectRatio: props.RatioValue,
+						DominantAxis: Enum.DominantAxis.Height,
+					})
+				: undefined,
 			Label: props.Label
 				? GameText({
 						Name: "Label",

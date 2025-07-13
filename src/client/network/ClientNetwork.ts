@@ -20,7 +20,7 @@
  *   shared
  */
 
-import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet } from "shared";
+import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet, AttributesDTO } from "shared";
 
 /* Abilities Signals*/
 const UseAbilitySignal = ClientDispatch.Client.Get("UseAbility");
@@ -48,9 +48,9 @@ async function UseAbility(abilityKey: AbilityKey): Promise<boolean | undefined> 
 }
 
 /* Attributes */
-async function ModifyAttribute(attributeKey: AttributeKey, amount: number): Promise<void> {
+async function ModifyAttribute(attributeKey: AttributeKey, amount: number): Promise<AttributesDTO | undefined> {
 	print(`CallServer: ModifyAttribute(${attributeKey}, ${amount}) called.`);
-	await ModifyAttributeSignal.SendToServer(attributeKey, amount);
+	return await ModifyAttributeSignal.CallServerAsync(attributeKey, amount);
 }
 
 /* Settings */
