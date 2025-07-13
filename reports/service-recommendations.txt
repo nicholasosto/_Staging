@@ -1,0 +1,14 @@
+Consider implementing a ServiceLoader that declares dependencies explicitly.
+Services should register themselves but defer Start until dependencies are ready.
+Example minimal loader:
+```ts
+interface ServiceMeta { svc: any; deps: string[] }
+function load(services: ServiceMeta[]) {
+  const map = new Map();
+  const loadSvc = (meta) => {
+    meta.deps.forEach(d => loadSvc(map.get(d)));
+    meta.svc.Start();
+  };
+  services.forEach(loadSvc);
+}
+```

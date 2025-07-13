@@ -1,0 +1,18 @@
+digraph ServiceDeps {
+  "AbilityService" -> "DataService";
+  "AbilityService" -> "ResourcesService";
+  "AbilityService" -> "MessageService";
+  "AttributesService" -> "DataService";
+  "AttributesService" -> "ResourcesService";
+  "BattleRoomService";
+  "DataService";
+  "MessageService";
+  "NPCService";
+  "OrganismService";
+  "ProgressionService" -> "DataService";
+  "ResourcesService" -> "DataService";
+  "SSEntityService";
+  "SettingsService";
+  "StatusEffectService";
+  "WeaponService";
+}
