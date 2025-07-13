@@ -63,6 +63,34 @@ export class ResourcesService {
 		}
 		/* -- Initialize player resources -- */
 		svc._map.set(player, svc._calculatePlayerResources(player));
+		task.spawn(() => {
+			const character = player.Character || player.CharacterAdded.Wait()[0];
+			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
+			const resources = svc._map.get(player);
+			if (!resources) {
+				warn(`ResourcesService: No resources found for player ${player.Name}`);
+				return false; // Failed to register
+			}
+			humanoid.MaxHealth = resources.Health.max;
+			humanoid.Health = resources.Health.current;
+			humanoid.HealthChanged.Connect((newHealth) => {
+				// Update health resource when humanoid health changes
+				const healthResource = resources.Health;
+				healthResource.current = math.clamp(newHealth, 0, healthResource.max);
+				svc._send(player, "Health", healthResource);
+			});
+			// Send initial resources to the player
+			for (const key of RESOURCE_KEYS) {
+				svc._send(player, key, resources[key]);
+			}
+			/* -- Connect player leave event -- */
+			player.AncestryChanged.Connect((_, parent) => {
+				if (parent === undefined) {
+					svc._onLeave(player);
+				}
+			});
+		});
+
 		return true; // Successfully registered
 	}
 
@@ -73,21 +101,21 @@ export class ResourcesService {
 		return calculateResources(attributeData, level);
 	}
 
-	private _modifyHealth(player: Player, delta: number): boolean {
-		const resources = this._map.get(player);
-		if (!resources) return false;
-		const healthData = resources["Health"];
-		if (!healthData) return false;
-		// Update the health value
-		const newHealth = healthData.current + delta;
-		const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
-		if (humanoid === undefined) {
-			warn(`ResourcesService: Humanoid not found for player ${player.Name}`);
-			return false;
-		}
-		humanoid.TakeDamage(delta);
-		return true;
-	}
+	// private _modifyHealth(player: Player, delta: number): boolean {
+	// 	const resources = this._map.get(player);
+	// 	if (!resources) return false;
+	// 	const healthData = resources["Health"];
+	// 	if (!healthData) return false;
+	// 	// Update the health value
+	// 	const newHealth = healthData.current + delta;
+	// 	const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
+	// 	if (humanoid === undefined) {
+	// 		warn(`ResourcesService: Humanoid not found for player ${player.Name}`);
+	// 		return false;
+	// 	}
+	// 	humanoid.TakeDamage(delta);
+	// 	return true;
+	// }
 
 	/* Get Resources ------------------------------- */
 	public static GetResources(player: Player): Record<ResourceKey, ResourceDTO> | undefined {
@@ -106,6 +134,15 @@ export class ResourcesService {
 		// Update the resource value
 		const newResourceCurrent = math.clamp(resourceData.current + delta, 0, resourceData.max);
 		resourceData.current = newResourceCurrent;
+		if (key === "Health") {
+			const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
+			if (humanoid) {
+				humanoid.Health = newResourceCurrent;
+			} else {
+				warn(`ResourcesService: Humanoid not found for player ${player.Name}`);
+				return false;
+			}
+		}
 
 		// Send updated resource data to the player
 		svc._send(player, key, resourceData);
