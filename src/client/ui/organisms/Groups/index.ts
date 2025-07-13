@@ -11,6 +11,6 @@
  */
 
 export * from "./AbilityBar";
-export * from "../UNDERDEV/ThemeOptions";
+export * from "./ThemeOptions";
 export * from "./CharacterInfoCard";
 export * from "./HUDMenuBar";
