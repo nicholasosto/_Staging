@@ -38,7 +38,7 @@ e:\_Staging/
 server/
 ├── index.ts                    # Barrel export for server modules
 ├── main.server.ts              # Server entry point and bootstrap
-├── ServiceWrapper.ts           # Service management wrapper
+├── services/PlayerLifecycleService.ts # Player lifecycle manager
 ├── classes/                    # Server-side class definitions
 │   ├── index.ts               # Barrel export
 │   ├── components/            # ECS-style components
