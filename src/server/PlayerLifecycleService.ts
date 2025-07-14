@@ -92,8 +92,9 @@ export class PlayerLifecycleService {
 			/* - Update Game State - */
 			ServerSend.GameStateUpdated(player, true, true);
 
-			/* - Register Player in Services - */
-			ResourcesService.RegisterPlayer(player);
+                        /* - Register Player in Services - */
+                        ResourcesService.RegisterPlayer(player);
+                        AbilityService.RegisterPlayer(player);
 
 			player.LoadCharacter();
 			if (svc._debug) print(`Character loaded for ${player.Name}`);
@@ -140,8 +141,9 @@ export class PlayerLifecycleService {
 			cons.HumanoidDied?.Disconnect();
 			svc._connections.delete(player);
 		}
-		/* Unregister Player from Services */
-		DataService.UnRegisterPlayer(player);
+                /* Unregister Player from Services */
+                AbilityService.UnregisterPlayer(player);
+                DataService.UnRegisterPlayer(player);
 		if (svc._debug) print(`Unregistered player ${player.Name}`);
 	}
 }
