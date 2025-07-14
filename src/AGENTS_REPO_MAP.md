@@ -34,7 +34,8 @@ e:\_Staging/
 server/
 ├── index.ts                    # Barrel export for server modules
 ├── main.server.ts              # Server entry point and bootstrap
-├── services/PlayerLifecycleService.ts # Player lifecycle manager
+├── ServiceWrapper.ts # Lifecycle router
+├── PlayerLifeCycle.ts # Player lifecycle manager
 ├── classes/                    # Server-side class definitions
 │   ├── index.ts               # Barrel export
 │   ├── components/            # ECS-style components
@@ -217,7 +218,7 @@ Client-server communication is handled through:
 1. Create service file in `src/server/services/`
 2. Extend base service pattern from existing services
 3. Add to services barrel export (`services/index.ts`)
-4. Initialize in `PlayerLifecycleService.ts`
+4. Initialize in `ServiceWrapper.ts`
 5. Update this documentation
 
 ### Creating New Zones

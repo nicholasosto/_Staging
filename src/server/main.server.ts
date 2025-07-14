@@ -8,20 +8,20 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { PlayerLifecycleService } from "./PlayerLifecycleService";
+import { ServiceWrapper } from "./ServiceWrapper";
 import { Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
 
-PlayerLifecycleService.Start(true);
+ServiceWrapper.Start(true);
 
 /* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {
-	PlayerLifecycleService.RegisterPlayer(player);
+	ServiceWrapper.RegisterPlayer(player);
 }
 
 /* --- Player Removing Handler --- */
 function onPlayerRemoving(player: Player) {
-	PlayerLifecycleService.UnregisterPlayer(player);
+	ServiceWrapper.UnregisterPlayer(player);
 }
 
 /* =============================================== Main Execution ========================================= */
