@@ -21,22 +21,22 @@ import { CooldownTimer } from "shared/classes/CooldownTimer";
 
 /** Represents a player's ability with an internal cooldown timer. */
 export default class Ability {
-        public readonly Key: AbilityKey;
-        private readonly cooldown: CooldownTimer;
+	public readonly Key: AbilityKey;
+	private readonly cooldown: CooldownTimer;
 
-        constructor(key: AbilityKey) {
-                this.Key = key;
-                const meta = AbilitiesMeta[key];
-                this.cooldown = new CooldownTimer(meta.cooldown);
-        }
+	constructor(key: AbilityKey) {
+		this.Key = key;
+		const meta = AbilitiesMeta[key];
+		this.cooldown = new CooldownTimer(meta.cooldown);
+	}
 
-        /** True when the ability can be activated. */
-        public isReady(): boolean {
-                return this.cooldown.isReady();
-        }
+	/** True when the ability can be activated. */
+	public isReady(): boolean {
+		return this.cooldown.isReady();
+	}
 
-        /** Begin the cooldown phase. */
-        public startCooldown(): void {
-                this.cooldown.start();
-        }
+	/** Begin the cooldown phase. */
+	public startCooldown(): void {
+		this.cooldown.start();
+	}
 }
