@@ -39,6 +39,7 @@ export class ResourcesService {
 	private static _instance: ResourcesService | undefined;
 	private readonly _map = new Map<Player, Record<ResourceKey, ResourceDTO>>();
 	private readonly _lastSend = new Map<Player, Map<ResourceKey, number>>();
+	private static _heartbeatConnection: RBXScriptConnection | undefined;
 
 	private constructor() {
 		if (RunService.IsStudio()) warn(`ResourcesService started`);
@@ -47,8 +48,44 @@ export class ResourcesService {
 	public static Start(): ResourcesService {
 		if (!this._instance) {
 			this._instance = new ResourcesService();
+			let lastHeartbeat = tick();
+			this._heartbeatConnection = RunService.Heartbeat.Connect(() => {
+				if (tick() - lastHeartbeat < 1) return; // Throttle heartbeat to once per second
+				this._instance?._map.forEach((resources, player) => {
+					if (!player.Character) return; // Skip if player has no character
+					this.regenerationTick(player);
+				});
+				lastHeartbeat = tick();
+				print(`[ResourcesService] Heartbeat running`);
+			});
 		}
 		return this._instance;
+	}
+
+	private static regenerationTick(player: Player) {
+		const svc = this.Start();
+		const resources = svc._map.get(player);
+		if (!resources) {
+			warn(`ResourcesService: No resources found for player ${player.Name}`);
+			return;
+		}
+		// Regenerate resources here, e.g., Health, Mana, Stamina
+		const healthResource = resources.Health;
+		if (healthResource.current < healthResource.max) {
+			healthResource.current = math.min(healthResource.current + 1, healthResource.max);
+			svc._send(player, "Health", healthResource);
+		}
+		// Add similar logic for other resources like Mana, Stamina, etc.
+		const manaResource = resources.Mana;
+		if (manaResource.current < manaResource.max) {
+			manaResource.current = math.min(manaResource.current + 1, manaResource.max);
+			svc._send(player, "Mana", manaResource);
+		}
+		const staminaResource = resources.Stamina;
+		if (staminaResource.current < staminaResource.max) {
+			staminaResource.current = math.min(staminaResource.current + 1, staminaResource.max);
+			svc._send(player, "Stamina", staminaResource);
+		}
 	}
 
 	/* -- Register Player -- */
