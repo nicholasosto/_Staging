@@ -24,18 +24,18 @@
 import { PlayerLifeCycle } from "./PlayerLifeCycle";
 
 export class ServiceWrapper {
-        /** Start the player lifecycle service. */
-        public static Start(debug = false) {
-                PlayerLifeCycle.Start(debug);
-        }
+	/** Start the player lifecycle service. */
+	public static Start(debug = false) {
+		PlayerLifeCycle.Start(debug);
+	}
 
-        /** Register a player with the lifecycle service. */
-        public static RegisterPlayer(player: Player) {
-                PlayerLifeCycle.RegisterPlayer(player);
-        }
+	/** Register a player with the lifecycle service. */
+	public static RegisterPlayer(player: Player) {
+		PlayerLifeCycle.RegisterPlayer(player);
+	}
 
-        /** Unregister a player from the lifecycle service. */
-        public static UnregisterPlayer(player: Player) {
-                PlayerLifeCycle.UnregisterPlayer(player);
-        }
+	/** Unregister a player from the lifecycle service. */
+	public static UnregisterPlayer(player: Player) {
+		PlayerLifeCycle.UnregisterPlayer(player);
+	}
 }
