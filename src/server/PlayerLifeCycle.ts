@@ -1,8 +1,8 @@
 /// <reference types="@rbxts/types" />
 
 /**
- * @file        PlayerLifecycleService.ts
- * @module      PlayerLifecycleService
+ * @file        PlayerLifeCycle.ts
+ * @module      PlayerLifeCycle
  * @layer       Server/Services
  * @classType   Singleton
  * @description Handles player joining, spawning, respawning and leaving.
@@ -38,8 +38,8 @@ interface PlayerConnections {
 }
 
 /* =============================================== Service ===================== */
-export class PlayerLifecycleService {
-	private static _instance: PlayerLifecycleService | undefined;
+export class PlayerLifeCycle {
+	private static _instance: PlayerLifeCycle | undefined;
 	private readonly _connections = new Map<Player, PlayerConnections>();
 	private static _heartbeatConnection: RBXScriptConnection | undefined;
 	private readonly _debug: boolean;
@@ -54,16 +54,16 @@ export class PlayerLifecycleService {
 
 		/* -- Gameplay Layer Initialization -- */
 		AbilityService.Start();
-		if (this._debug) print("PlayerLifecycleService started");
+		if (this._debug) print("PlayerLifeCycle started");
 	}
 
 	/**
 	 * @param debug Whether to enable debug logging.
 	 * Destroys the service and cleans up connections.
 	 */
-	public static Start(debug = false): PlayerLifecycleService {
+	public static Start(debug = false): PlayerLifeCycle {
 		if (this._instance === undefined) {
-			this._instance = new PlayerLifecycleService(debug);
+			this._instance = new PlayerLifeCycle(debug);
 			this._runHeartbeat();
 		}
 		return this._instance;
@@ -167,6 +167,6 @@ export class PlayerLifecycleService {
 }
 
 // Auto-start to connect existing players if needed
-//Players.GetPlayers().forEach((player) => PlayerLifecycleService.RegisterPlayer(player));
-// Players.PlayerAdded.Connect((player) => PlayerLifecycleService.RegisterPlayer(player));
-// Players.PlayerRemoving.Connect((player) => PlayerLifecycleService.UnregisterPlayer(player));
+//Players.GetPlayers().forEach((player) => PlayerLifeCycle.RegisterPlayer(player));
+// Players.PlayerAdded.Connect((player) => PlayerLifeCycle.RegisterPlayer(player));
+// Players.PlayerRemoving.Connect((player) => PlayerLifeCycle.UnregisterPlayer(player));
