@@ -66,8 +66,9 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/BattleRoomService.ts`|Usable|Matchmaking and teleport skeleton|
 |Server|`server/services/SettingsService.ts`|Usable|Stores player settings|
 |Server|`server/entity/Manifestation.ts`|Stub|Placeholder creation logic|
+|Server|`server/classes/Ability.ts`|Usable|Ability wrapper with cooldown|
 |Server|`server/services/NPCService.ts`|Usable|Spawns NPCs from definitions|
-|Server|`server/services/AbilityService.ts`|Under Construction|Handles ability activation and cooldowns|
+|Server|`server/services/AbilityService.ts`|Usable|Handles ability activation and cooldowns|
 |Server|`server/services/StatusEffectService.ts`|Under Construction|Refactored to use StatusEffects|
 |Server|`server/services/ResourcesService.ts`|Usable|Calculates and syncs resources|
 |Server|`server/services/PlayerLifecycleService.ts`|Usable|Manages player join & respawn|
