@@ -44,19 +44,20 @@ export default class AttributesSlice {
 		this.Spent.set(attributes.SpentPoints);
 	}
 
-
 	public ModifyAttribute(key: AttributeKey, amount: number): boolean {
-		ClientSend.ModifyAttribute(key, amount).then((attrs) => {
-			if (attrs === undefined	) {
-				warn(`ModifyAttribute failed for key ${key} with amount ${amount}.`);
+		ClientSend.ModifyAttribute(key, amount)
+			.then((attrs) => {
+				if (attrs === undefined) {
+					warn(`ModifyAttribute failed for key ${key} with amount ${amount}.`);
+					return false;
+				}
+				this.UpdateAttributes(attrs);
+				return true;
+			})
+			.catch((err) => {
+				warn(`Failed to modify attribute ${key} by ${amount}:`, err);
 				return false;
-			} 
-			this.UpdateAttributes(attrs);
-			return true;
-		}).catch((err) => {
-			warn(`Failed to modify attribute ${key} by ${amount}:`, err);
-			return false;
-		});
+			});
 
 		return true;
 	}

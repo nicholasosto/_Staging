@@ -40,7 +40,9 @@ export const AdminNet = Net.Definitions.Create({
 export const ClientDispatch = Net.Definitions.Create({
 	/* -- Attributes -- */
 	ModifyAttribute:
-		Net.Definitions.ServerAsyncFunction<(attributeKey: AttributeKey, amount: number) => AttributesDTO | undefined>(),
+		Net.Definitions.ServerAsyncFunction<
+			(attributeKey: AttributeKey, amount: number) => AttributesDTO | undefined
+		>(),
 
 	/* -- Abilities -- */
 	UseAbility: Net.Definitions.ServerAsyncFunction<(abilityKey: AbilityKey) => boolean>(),

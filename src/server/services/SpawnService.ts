@@ -36,7 +36,7 @@ export class SpawnService {
 		CollectionService.AddTag(character, "SSEntity");
 		humanoid.Died.Connect(() => {
 			print(`Humanoid died for player: ${player.Name}`);
-            ResourcesService.Recalculate(player); // Recalculate resources on death
+			ResourcesService.Recalculate(player); // Recalculate resources on death
 			this._spawnCharacter(player); // Respawn character on death
 		});
 		return character;

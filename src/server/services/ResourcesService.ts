@@ -33,8 +33,6 @@ import { DefaultAttributes } from "shared/definitions/ProfileDefinitions/Attribu
 import { DataService } from "./DataService";
 import { calculateResources } from "shared/calculations";
 import { ServerSend } from "server/network";
-import { createMessage } from "shared/definitions/Message";
-import { t } from "@rbxts/t";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -63,6 +61,8 @@ export class ResourcesService {
 		}
 		/* -- Initialize player resources -- */
 		svc._map.set(player, svc._calculatePlayerResources(player));
+
+		/* -- Initialize player character and humanoid -- */
 		task.spawn(() => {
 			const character = player.Character || player.CharacterAdded.Wait()[0];
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
@@ -95,27 +95,12 @@ export class ResourcesService {
 	}
 
 	private _calculatePlayerResources(player: Player): ResourceDataMap {
+		const svc = ResourcesService.Start();
 		const attributeData = DataService.GetProfileDataByKey(player, "Attributes") ?? DefaultAttributes;
 		const progressionData = DataService.GetProfileDataByKey(player, "Progression");
 		const level = progressionData?.Level ?? 1;
-		return calculateResources(attributeData, level);
+		return calculateResources(attributeData, level, svc._map.get(player));
 	}
-
-	// private _modifyHealth(player: Player, delta: number): boolean {
-	// 	const resources = this._map.get(player);
-	// 	if (!resources) return false;
-	// 	const healthData = resources["Health"];
-	// 	if (!healthData) return false;
-	// 	// Update the health value
-	// 	const newHealth = healthData.current + delta;
-	// 	const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
-	// 	if (humanoid === undefined) {
-	// 		warn(`ResourcesService: Humanoid not found for player ${player.Name}`);
-	// 		return false;
-	// 	}
-	// 	humanoid.TakeDamage(delta);
-	// 	return true;
-	// }
 
 	/* Get Resources ------------------------------- */
 	public static GetResources(player: Player): Record<ResourceKey, ResourceDTO> | undefined {

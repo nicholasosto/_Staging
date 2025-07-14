@@ -14,15 +14,14 @@ import { Players } from "@rbxts/services";
 
 PlayerLifecycleService.Start(false);
 
-
 /* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {
-        PlayerLifecycleService.RegisterPlayer(player);
+	PlayerLifecycleService.RegisterPlayer(player);
 }
 
 /* --- Player Removing Handler --- */
 function onPlayerRemoving(player: Player) {
-        PlayerLifecycleService.UnregisterPlayer(player);
+	PlayerLifecycleService.UnregisterPlayer(player);
 }
 
 /* =============================================== Main Execution ========================================= */

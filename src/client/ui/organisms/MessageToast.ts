@@ -54,7 +54,7 @@ export function MessageToast(props: MessageToastProps) {
 				BackgroundColor3: props.Message.get()?.textColor ?? new Color3(1, 1, 1), // Default to white
 				OnClick: () => {
 					show.set(false); // Hide toast on click
-				}
+				},
 			}),
 			LayoutContainer: ListContainer({
 				LayoutOrientation: "vertical",

@@ -164,20 +164,10 @@ export default class AbilityService {
 	/* ------------------------------- Cooldown Management ------------------------------- */
 	private static _startCooldown(player: Player, abilityKey: AbilityKey): void {
 		// Get or create the cooldown map for the player
-		let playerCooldowns = this._instance?._cooldowns.get(player);
-		if (!playerCooldowns) {
-			warn(
-				`No cooldowns found for player ${player.Name}. Creating a new cooldown map.`,
-				"Check Validation - This should not happen.",
-			);
-			playerCooldowns = new Map<AbilityKey, CooldownTimer>();
-			this._instance?._cooldowns.set(player, playerCooldowns);
-		}
-		const cooldown = AbilitiesMeta[abilityKey]?.cooldown ?? 0;
-		const timer = new CooldownTimer(cooldown);
-		playerCooldowns.set(abilityKey, timer);
-		timer.start();
-		print(`Started cooldown for ability ${abilityKey} for player ${player.Name}.`);
+		const svc = AbilityService.Start();
+		const playerCooldowns = svc._cooldowns.get(player);
+		const abilityCooldown = playerCooldowns?.get(abilityKey);
+		abilityCooldown?.start(); // Start the cooldown timer if it exists
 	}
 
 	private static _consumeResources(player: Player, abilityKey: AbilityKey): void {
