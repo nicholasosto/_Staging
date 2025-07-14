@@ -24,6 +24,8 @@ import { ServerSend } from "server/network";
 import MessageService from "./MessageService";
 import { createMessage } from "shared/definitions/Message";
 
+const msgService = MessageService.Start();
+
 /* =============================================== Service =============================================== */
 export default class AbilityService {
 	private static _instance: AbilityService | undefined;
@@ -52,13 +54,13 @@ export default class AbilityService {
 		const currentAbilities = DataService.GetProfileDataByKey(player, "Abilities");
 		//#TODO: Replace with full validation
 		if (!currentAbilities) {
-			warn(`No profile found for player ${player.Name}.`);
+			MessageService.Start().SendErrorToPlayer(player, "[AbilityService] No abilities found for player.");
 			return false;
 		}
 		if (DataService.SetProfileDataByKey(player, "Abilities", abilities) === undefined) {
 			return true;
 		} else {
-			warn(`Failed to set abilities for player ${player.Name}.`);
+			MessageService.Start().SendErrorToPlayer(player, "[AbilityService] Failed to set abilities.");
 			return false;
 		}
 	}
@@ -67,13 +69,13 @@ export default class AbilityService {
 	public static AddAbility(player: Player, abilityKey: AbilityKey): boolean {
 		const currentAbilities = this.GetAbilities(player);
 		if (!currentAbilities) {
-			warn(`No abilities found for player ${player.Name}.`);
+			MessageService.Start().SendErrorToPlayer(player, "[AbilityService] No abilities found for player.");
 			return false;
 		}
 		if (!currentAbilities.includes(abilityKey)) {
 			currentAbilities.push(abilityKey);
 			this.SetAbilities(player, currentAbilities);
-			print(`Added ability ${abilityKey} to player ${player.Name}.`);
+			msgService.SendSuccessToPlayer(player, `Added ability ${abilityKey} to player ${player.Name}.`);
 		}
 		return true;
 	}

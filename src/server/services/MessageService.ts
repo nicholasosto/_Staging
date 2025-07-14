@@ -41,9 +41,37 @@ export default class MessageService {
 	}
 
 	/** Sends an error message to a specific player. */
-	public SendErrorToPlayer(player: Player, message: MessageShape) {
-		message.severity = "error";
-		this.SendMessageToPlayer(player, message);
+	public SendErrorToPlayer(player: Player, message: string) {
+		this.SendMessageToPlayer(player, {
+			severity: "error",
+			content: message,
+			id: "",
+			timestamp: DateTime.now().UnixTimestamp,
+			title: "Error",
+			textColor: new Color3(0.8, 0.2, 0.2),
+		});
+	}
+
+	public SendInfoToPlayer(player: Player, message: string) {
+		this.SendMessageToPlayer(player, {
+			severity: "info",
+			content: message,
+			id: "",
+			timestamp: DateTime.now().UnixTimestamp,
+			title: "Info",
+			textColor: new Color3(0.2, 0.6, 0.8),
+		});
+	}
+
+	public SendSuccessToPlayer(player: Player, message: string) {
+		this.SendMessageToPlayer(player, {
+			severity: "success",
+			content: message,
+			id: "",
+			timestamp: DateTime.now().UnixTimestamp,
+			title: "Success",
+			textColor: new Color3(0.2, 0.8, 0.2),
+		});
 	}
 
 	/** Sends a message to all connected players. */
