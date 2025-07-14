@@ -26,7 +26,7 @@
 
 /* =============================================== Imports ===================== */
 import { Players } from "@rbxts/services";
-import { DataService, SpawnService, ResourcesService } from "./";
+import { DataService, SpawnService, ResourcesService } from "server/services";
 import { ServerSend } from "server/network";
 
 /* =============================================== Types ======================= */
@@ -52,7 +52,7 @@ export class PlayerLifecycleService {
 	}
 
 	public static Start(debug = false): PlayerLifecycleService {
-		if (!this._instance) {
+		if (this._instance === undefined) {
 			this._instance = new PlayerLifecycleService(debug);
 		}
 		return this._instance;

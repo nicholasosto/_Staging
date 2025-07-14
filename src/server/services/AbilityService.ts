@@ -212,6 +212,7 @@ export default class AbilityService {
 			return false;
 		}
 		// Start the cooldown for the ability
+		warn(`Starting cooldown for ability ${abilityKey} for player ${player.Name}`);
 		this._startCooldown(player, abilityKey);
 		// Consume the resources required for the ability
 		this._consumeResources(player, abilityKey);

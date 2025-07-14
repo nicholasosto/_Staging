@@ -8,11 +8,11 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { PlayerLifecycleService } from "./services";
+import { PlayerLifecycleService } from "./PlayerLifecycleService";
 import { Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
 
-PlayerLifecycleService.Start(false);
+PlayerLifecycleService.Start(true);
 
 /* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {

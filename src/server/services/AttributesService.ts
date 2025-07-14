@@ -42,80 +42,35 @@ export default class AttributesService {
 		this._instance = undefined;
 	}
 
-	public static ModifyAttribute(
-		player: Player,
-		attributeKey: AttributeKey,
-		amount: number,
-	): AttributesDTO | undefined {
+	public static ModAttribute(player: Player, attributeKey: AttributeKey, amount: number): AttributesDTO | undefined {
 		const attrs = DataService.GetProfileDataByKey(player, "Attributes");
-		if (attrs === undefined) {
-			warn(`ModifyAttribute: No attributes found for player ${player.Name}.`);
-			return undefined;
-		}
+		if (attrs === undefined) return undefined;
+
+		// Calculated amounts
 		const newAmount = attrs[attributeKey] + amount;
 		const newAvailable = attrs.AvailablePoints - amount;
 		const newSpent = attrs.SpentPoints + amount;
-		if (newAvailable < 0) {
-			warn(`ModifyAttribute: Not enough available points for player ${player.Name}.`);
-			return undefined;
-		}
-		if (newSpent < 0) {
-			warn(`ModifyAttribute: Spent points cannot go negative for player ${player.Name}.`);
-			return undefined;
-		}
-		if (newAmount < 1 || newAmount > 999) {
-			warn(`ModifyAttribute: New value for ${attributeKey} is out of bounds for player ${player.Name}.`);
+
+		/* Validation */
+		if (newAvailable < 0 || newSpent < 0 || newAmount < 1 || newAmount > 999) {
+			warn(
+				`[AttributesService] Invalid attribute modification for player ${player.Name}: ${attributeKey}, ${amount}`,
+			);
 			return undefined;
 		}
 
+		/* Set new values */
 		attrs[attributeKey] = newAmount;
 		attrs.AvailablePoints -= amount;
 		attrs.SpentPoints += amount;
 
 		if (DataService.SetProfileDataByKey(player, "Attributes", attrs) === false) {
-			warn(`ModifyAttribute: Failed to set profile data for ${player.Name}.`);
+			warn(`[AttributesService] Failed to set attribute ${attributeKey} for player ${player.Name}.`);
 			return undefined;
 		}
 		ResourcesService.Recalculate(player);
 		return this.FetchAttributes(player);
 	}
-	private static _validateMod(attri: AttributesDTO | undefined, attrKey: AttributeKey, delta: number): boolean {
-		let validationMessage = "Attribute Modification Validation: ";
-
-		if (attri === undefined) {
-			validationMessage += "Attributes data is undefined.";
-			warn(validationMessage);
-			return false;
-		}
-		const newAvailable = attri.AvailablePoints + delta;
-		const newAttributeValue = attri[attrKey] + delta;
-
-		/* - Check if attribute attempted to be modified is valid - */
-		if (attri[attrKey] === undefined) {
-			validationMessage += `Attribute ${attrKey} does not exist. `;
-			return false;
-		}
-		/* - Check if new attribute value is within valid range - */
-		if (newAttributeValue < 1 || newAttributeValue > 999) {
-			validationMessage += `New value for ${attrKey} is out of bounds: ${newAttributeValue}. `;
-			return false;
-		}
-		/* - Check if available points after modification is valid - */
-		if (newAvailable < 0) {
-			validationMessage += `New available points after modification is negative: ${newAvailable}. `;
-			return false;
-		}
-
-		/* - Check Spent Points - */
-		if (attri.SpentPoints + delta < 0) {
-			validationMessage += `Spent points would go negative after modification: ${attri.SpentPoints + delta}. `;
-			return false;
-		}
-
-		validationMessage += `New Value: ${attri[attrKey]}, Available Points: ${attri.AvailablePoints}`;
-		return true;
-	}
-
 	/**
 	 * Fetches the profile data for a player.
 	 * @param player The player whose profile data is to be fetched.

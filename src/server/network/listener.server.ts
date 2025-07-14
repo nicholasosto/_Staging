@@ -54,7 +54,7 @@ Functions.UseAbility.SetCallback((player: Player, abilityKey: AbilityKey) => {
 
 /* -- Attributes -- */
 Functions.ModifyAttribute.SetCallback((player: Player, attributeKey: AttributeKey, amount: number) => {
-	const attrs = AttributesService.ModifyAttribute(player, attributeKey, amount);
+	const attrs = AttributesService.ModAttribute(player, attributeKey, amount);
 	if (attrs === undefined) {
 		warn(`ModifyAttribute failed for player ${player.Name} on attribute ${attributeKey} with amount ${amount}.`);
 		return undefined;

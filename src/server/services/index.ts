@@ -44,4 +44,4 @@ export * from "./ProgressionService";
 export * from "./WeaponService";
 export * from "./OrganismService";
 export * from "./SpawnService";
-export * from "./PlayerLifecycleService";
+
