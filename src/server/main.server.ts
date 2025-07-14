@@ -8,47 +8,21 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { DataService, ResourcesService, SpawnService } from "./services";
-import { ServiceWrapper } from "./ServiceWrapper";
-import { CollectionService, Players } from "@rbxts/services";
+import { PlayerLifecycleService } from "./services";
+import { Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
 
-const ServerLoadState = ["DataServiceLoaded", "DataWrapperServicesLoaded", "GameplayServicesLoaded"] as const;
-type ServerLoadStateType = (typeof ServerLoadState)[number];
-type ServerLoadStateMap = Record<ServerLoadStateType, boolean>;
-const serverLoadState: ServerLoadStateMap = {
-	DataServiceLoaded: DataService.Start() !== undefined,
-	DataWrapperServicesLoaded: ResourcesService.Start() !== undefined,
-	GameplayServicesLoaded: false,
-};
+PlayerLifecycleService.Start(false);
 
-
-// function spawnCharacter(player: Player) {
-// 	/* Temporary spawn logic */
-// 	while (serverLoadState.DataServiceLoaded === false) {
-// 		wait(0.1); // Wait until DataService is loaded
-// 	}
-// 	const HumanoidDescription = Players.GetHumanoidDescriptionFromUserId(player.UserId);
-// 	if (HumanoidDescription) {
-// 		player.LoadCharacterWithHumanoidDescription(HumanoidDescription);
-// 	} else {
-// 		warn(`No HumanoidDescription found for player: ${player.Name}`);
-// 	}
-// }
 
 /* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {
-
-	/* Register the player with services */
-	DataService.RegisterPlayer(player);
-	SpawnService.RegisterPlayer(player);
-	ResourcesService.RegisterPlayer(player);
-	//spawnCharacter(player);
+        PlayerLifecycleService.RegisterPlayer(player);
 }
 
 /* --- Player Removing Handler --- */
 function onPlayerRemoving(player: Player) {
-	ServiceWrapper.UnregisterPlayer(player);
+        PlayerLifecycleService.UnregisterPlayer(player);
 }
 
 /* =============================================== Main Execution ========================================= */

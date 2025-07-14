@@ -59,7 +59,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/states/ProgressionSlice.ts`|Usable|Level and experience slice|
 |Client|`client/states/MessageSlice.ts`|Usable|Transient user messages|
 |Client|`client/states/CurrencySlice.ts`|Stub|Currency amounts|
-|Server|`server/main.server.ts`|Under Construction|Joins players and loads profiles|
+|Server|`server/main.server.ts`|Under Construction|Bootstraps PlayerLifecycleService|
 |Server|`server/network/listener.server.ts`|Usable|Server network handlers|
 |Server|`server/services/DataService.ts`|Usable|Loads player profiles|
 |Server|`server/services/ManifestationForgeService.ts`|Under Construction|Creates manifestations|
@@ -70,6 +70,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/AbilityService.ts`|Under Construction|Handles ability activation and cooldowns|
 |Server|`server/services/StatusEffectService.ts`|Under Construction|Refactored to use StatusEffects|
 |Server|`server/services/ResourcesService.ts`|Usable|Calculates and syncs resources|
+|Server|`server/services/PlayerLifecycleService.ts`|Usable|Manages player join & respawn|
 |Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
 |Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
