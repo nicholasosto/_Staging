@@ -18,17 +18,14 @@
  * @lastUpdated  2025-07-08 by Codex – Initial creation
  *
  * @dependencies
- *   @rbxts/services
+ *   ./AbilityService
  *   ./DataService
- *   ./SpawnService
  *   ./ResourcesService
  */
 
 /* =============================================== Imports ===================== */
-import { Players } from "@rbxts/services";
-import { DataService, ResourcesService } from "server/services";
+import { DataService, ResourcesService, AbilityService } from "server/services";
 import { ServerSend } from "server/network";
-import AbilityService from "./services/AbilityService";
 
 /* =============================================== Types ======================= */
 interface PlayerConnections {

@@ -27,7 +27,7 @@ import { createMessage } from "shared/definitions/Message";
 const msgService = MessageService.Start();
 
 /* =============================================== Service =============================================== */
-export default class AbilityService {
+export class AbilityService {
 	private static _instance: AbilityService | undefined;
 	private readonly _abilities = new Map<Player, Map<AbilityKey, Ability>>();
 
