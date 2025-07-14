@@ -74,6 +74,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/PlayerLifecycleService.ts`|Usable|Manages player join & respawn|
 |Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
 |Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
+|Server|`server/services/CombatService.ts`|Under Construction|Tracks damage & kill credit|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
 |Server|`server/entity/EvolvingOrganism.ts`|Under Construction|DNA‑driven organism|
