@@ -24,10 +24,13 @@
  */
 
 /* =============================================== Imports ===================== */
+import { RunService } from "@rbxts/services";
 import { DataService, ResourcesService, AbilityService } from "server/services";
 import { ServerSend } from "server/network";
+import { generateUniqueId } from "shared/helpers";
+import { RegisterInstance } from "./helpers";
 
-/* =============================================== Types ======================= */
+/* ================================ Types ======================= */
 interface PlayerConnections {
 	CharacterAdded?: RBXScriptConnection;
 	CharacterRemoving?: RBXScriptConnection;
@@ -38,6 +41,7 @@ interface PlayerConnections {
 export class PlayerLifecycleService {
 	private static _instance: PlayerLifecycleService | undefined;
 	private readonly _connections = new Map<Player, PlayerConnections>();
+	private static _heartbeatConnection: RBXScriptConnection | undefined;
 	private readonly _debug: boolean;
 
 	private constructor(debug = false) {
@@ -46,7 +50,7 @@ export class PlayerLifecycleService {
 		DataService.Start();
 
 		/* -- Calculated Layer Initialization -- */
-		ResourcesService.Start();
+		ResourcesService.Start(true);
 
 		/* -- Gameplay Layer Initialization -- */
 		AbilityService.Start();
@@ -60,6 +64,7 @@ export class PlayerLifecycleService {
 	public static Start(debug = false): PlayerLifecycleService {
 		if (this._instance === undefined) {
 			this._instance = new PlayerLifecycleService(debug);
+			this._runHeartbeat();
 		}
 		return this._instance;
 	}
@@ -70,6 +75,12 @@ export class PlayerLifecycleService {
 	 */
 	public static RegisterPlayer(player: Player) {
 		const svc = this.Start();
+		/* -- Add an ID to the player -- */
+		const registeredInstance = RegisterInstance(player);
+		if (registeredInstance === undefined) {
+			warn(`Failed to register player ${player.Name}. Instance is undefined.`);
+			return;
+		}
 
 		/* -- Player Already Registered? -- */
 		if (svc._connections.has(player)) {
@@ -142,6 +153,16 @@ export class PlayerLifecycleService {
 		AbilityService.UnregisterPlayer(player);
 		DataService.UnRegisterPlayer(player);
 		if (svc._debug) print(`Unregistered player ${player.Name}`);
+	}
+
+	private static _runHeartbeat() {
+		let lastHeartbeat = tick();
+		this._heartbeatConnection?.Disconnect();
+		this._heartbeatConnection = RunService.Heartbeat.Connect(() => {
+			if (tick() - lastHeartbeat < 1) return; // Throttle heartbeat to once per second
+			lastHeartbeat = tick();
+			ResourcesService.OnHeartbeat();
+		});
 	}
 }
 

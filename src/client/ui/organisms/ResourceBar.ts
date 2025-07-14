@@ -39,7 +39,7 @@ function ResourceBar(resourceKey: ResourceKey, resourceState: ResourceState) {
 		Percent: state.percent,
 		Label: Computed(
 			() =>
-				`${meta.displayName}: ${math.floor(state.percent.get() * 100)}% (${state.current.get()}/${state.max.get()})`,
+				`${meta.displayName}: ${math.floor(state.percent.get() * 100)}% (${math.round(state.current.get())}/${math.round(state.max.get())})`,
 		),
 		Border: BorderImage.GothicMetal(),
 		Gradient: meta.gradient,

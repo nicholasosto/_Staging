@@ -16,6 +16,7 @@ export * from "./Animation";
 export * from "./Codon";
 export * from "./GenericUIInterfaces";
 export * from "./Loot";
+export * from "./Message";
 export * from "./NPC";
 export * from "./Rarity";
 export * from "./Resources";

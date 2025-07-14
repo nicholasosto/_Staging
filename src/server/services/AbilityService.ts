@@ -14,30 +14,29 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { AbilitiesMeta, AbilityKey, loadAnimation, playAnimation } from "shared";
-import { DataService } from "./DataService";
-import Ability from "server/classes/Ability";
-import { ResourcesService } from "./ResourcesService";
-import { SSEntity } from "shared/types/SSEntity";
 import { RunService } from "@rbxts/services";
-import { ServerSend } from "server/network";
+import { AbilitiesMeta, AbilityKey, loadAnimation, playAnimation, createMessage, SSEntity } from "shared";
+import { DataService } from "./DataService";
+import { ResourcesService } from "./ResourcesService";
 import MessageService from "./MessageService";
-import { createMessage } from "shared/definitions/Message";
+import { ServerSend } from "server/network";
+import Ability from "server/classes/Ability";
 
 const msgService = MessageService.Start();
 
 /* =============================================== Service =============================================== */
 export class AbilityService {
 	private static _instance: AbilityService | undefined;
+	private static _debug: boolean = false;
 	private readonly _abilities = new Map<Player, Map<AbilityKey, Ability>>();
 
-	private constructor() {
-		if (RunService.IsStudio()) print(`AbilityService started`);
+	private constructor(debug: boolean) {
+		if (debug) print(`AbilityService started`);
 	}
 
-	public static Start(): AbilityService {
+	public static Start(debug = false): AbilityService {
 		if (!this._instance) {
-			this._instance = new AbilityService();
+			this._instance = new AbilityService(debug);
 		}
 		return this._instance;
 	}

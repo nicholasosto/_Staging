@@ -27,7 +27,6 @@
  */
 
 /* =============================================== Imports ===================== */
-import { RunService } from "@rbxts/services";
 import { ResourceKey, ResourceDTO, RESOURCE_KEYS, ResourceDataMap } from "shared/definitions/Resources";
 import { DefaultAttributes } from "shared/definitions/ProfileDefinitions/Attributes";
 import { DataService } from "./DataService";
@@ -37,55 +36,45 @@ import { ServerSend } from "server/network";
 /* =============================================== Service ===================== */
 export class ResourcesService {
 	private static _instance: ResourcesService | undefined;
+	private static _debug: boolean;
 	private readonly _map = new Map<Player, Record<ResourceKey, ResourceDTO>>();
 	private readonly _lastSend = new Map<Player, Map<ResourceKey, number>>();
 	private static _heartbeatConnection: RBXScriptConnection | undefined;
 
-	private constructor() {
-		if (RunService.IsStudio()) warn(`ResourcesService started`);
+	private constructor(debug: boolean) {
+		if (debug) print("ResourcesService started");
 	}
 
-	public static Start(): ResourcesService {
+	public static Start(debug = false): ResourcesService {
 		if (!this._instance) {
-			this._instance = new ResourcesService();
-			let lastHeartbeat = tick();
-			this._heartbeatConnection = RunService.Heartbeat.Connect(() => {
-				if (tick() - lastHeartbeat < 1) return; // Throttle heartbeat to once per second
-				this._instance?._map.forEach((resources, player) => {
-					if (!player.Character) return; // Skip if player has no character
-					this.regenerationTick(player);
-				});
-				lastHeartbeat = tick();
-				print(`[ResourcesService] Heartbeat running`);
-			});
+			this._instance = new ResourcesService(debug);
+			this._debug = debug;
 		}
 		return this._instance;
 	}
 
-	private static regenerationTick(player: Player) {
+	public static OnHeartbeat() {
+		this._instance?._map.forEach((resources, player) => {
+			if (!player.Character) return; // Skip if player has no character
+			RESOURCE_KEYS.forEach((key) => {
+				if (key === "Health") return; // Skip Health regeneration for now
+				if (this._debug) print(`Regenerating ${key} for ${player.Name}`);
+				this.regenerationTick(player, key);
+			});
+		});
+	}
+
+	private static regenerationTick(player: Player, key: ResourceKey) {
 		const svc = this.Start();
-		const resources = svc._map.get(player);
-		if (!resources) {
-			warn(`ResourcesService: No resources found for player ${player.Name}`);
-			return;
-		}
-		// Regenerate resources here, e.g., Health, Mana, Stamina
-		const healthResource = resources.Health;
-		if (healthResource.current < healthResource.max) {
-			healthResource.current = math.min(healthResource.current + 1, healthResource.max);
-			svc._send(player, "Health", healthResource);
-		}
-		// Add similar logic for other resources like Mana, Stamina, etc.
-		const manaResource = resources.Mana;
-		if (manaResource.current < manaResource.max) {
-			manaResource.current = math.min(manaResource.current + 1, manaResource.max);
-			svc._send(player, "Mana", manaResource);
-		}
-		const staminaResource = resources.Stamina;
-		if (staminaResource.current < staminaResource.max) {
-			staminaResource.current = math.min(staminaResource.current + 1, staminaResource.max);
-			svc._send(player, "Stamina", staminaResource);
-		}
+		if (!svc._map.has(player)) return;
+		if (!svc._map.get(player)?.[key]) return;
+		const resource = svc._map.get(player)![key];
+		if (resource.current >= resource.max) return; // Skip if already at max
+		// Regenerate resource by a fixed amount per tick
+		const regenerationAmount = 1; // Adjust as needed
+		const newCurrent = math.clamp(resource.current + regenerationAmount, 0, resource.max);
+		resource.current = newCurrent;
+		svc._send(player, key, resource);
 	}
 
 	/* -- Register Player -- */

@@ -1,5 +1,4 @@
-import { DataService } from "server/services";
-import AbilityService from "server/services/AbilityService";
+import { DataService, AbilityService } from "server/services";
 import AttributesService from "server/services/AttributesService";
 import { AbilityKey, AttributeKey, ClientDispatch, ProfileDataKey } from "shared";
 
