@@ -125,6 +125,10 @@ export default class AbilityService {
 		// Get or create the cooldown map for the player
 		let playerCooldowns = this._instance?._cooldowns.get(player);
 		if (!playerCooldowns) {
+			warn(
+				`No cooldowns found for player ${player.Name}. Creating a new cooldown map.`,
+				"Check Validation - This should not happen.",
+			);
 			playerCooldowns = new Map<AbilityKey, CooldownTimer>();
 			this._instance?._cooldowns.set(player, playerCooldowns);
 		}

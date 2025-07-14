@@ -8,7 +8,7 @@
  */
 
 /* =============================================== Imports =============================================== */
-import { DataService, ResourcesService } from "./services";
+import { DataService, ResourcesService, SpawnService } from "./services";
 import { ServiceWrapper } from "./ServiceWrapper";
 import { CollectionService, Players } from "@rbxts/services";
 /* =============================================== Initialization ========================================= */
@@ -22,33 +22,28 @@ const serverLoadState: ServerLoadStateMap = {
 	GameplayServicesLoaded: false,
 };
 
-function onCharacterLoaded(character: Model) {
-	CollectionService.AddTag(character, "SSEntity");
-	print(`Character loaded: ${character.Name} and tag added.`);
-}
 
-function spawnCharacter(player: Player) {
-	/* Temporary spawn logic */
-	while (serverLoadState.DataServiceLoaded === false) {
-		wait(0.1); // Wait until DataService is loaded
-	}
-	const HumanoidDescription = Players.GetHumanoidDescriptionFromUserId(player.UserId);
-	if (HumanoidDescription) {
-		player.LoadCharacterWithHumanoidDescription(HumanoidDescription);
-	} else {
-		warn(`No HumanoidDescription found for player: ${player.Name}`);
-	}
-}
+// function spawnCharacter(player: Player) {
+// 	/* Temporary spawn logic */
+// 	while (serverLoadState.DataServiceLoaded === false) {
+// 		wait(0.1); // Wait until DataService is loaded
+// 	}
+// 	const HumanoidDescription = Players.GetHumanoidDescriptionFromUserId(player.UserId);
+// 	if (HumanoidDescription) {
+// 		player.LoadCharacterWithHumanoidDescription(HumanoidDescription);
+// 	} else {
+// 		warn(`No HumanoidDescription found for player: ${player.Name}`);
+// 	}
+// }
 
 /* --- Player Added Handler --- */
 function onPlayerAdded(player: Player) {
-	/* Connect the CharacterAdded event to handle character loading */
-	player.CharacterAdded.Connect(onCharacterLoaded);
 
 	/* Register the player with services */
 	DataService.RegisterPlayer(player);
+	SpawnService.RegisterPlayer(player);
 	ResourcesService.RegisterPlayer(player);
-	spawnCharacter(player);
+	//spawnCharacter(player);
 }
 
 /* --- Player Removing Handler --- */
