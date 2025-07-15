@@ -1,0 +1,17 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:            # also supports pull_request, release, etc.
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest          # runner
+    steps:
+      - uses: actions/checkout@v4   # pull your code
+      - uses: actions/setup-node@v4 # install Node 20
+        with:
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
