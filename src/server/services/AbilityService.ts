@@ -31,6 +31,7 @@ export class AbilityService {
 	private readonly _abilities = new Map<Player, Map<AbilityKey, Ability>>();
 
 	private constructor(debug: boolean) {
+		AbilityService._debug = debug;
 		if (debug) print(`AbilityService started`);
 	}
 

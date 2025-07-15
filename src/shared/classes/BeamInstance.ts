@@ -40,7 +40,9 @@ export class BeamInstance {
 		a1: Attachment,
 	) {
 		this.beam = new Instance("Beam");
-		this.beam.Parent = game.Workspace; // or a more appropriate parent
+		this.beam.Name = `BeamInstance-${this.id}`;
+		this.beam.Parent = a0.Parent; // Attach to the same parent as the first attachment
+		this.beam.FaceCamera = true;
 
 		this.applyStatic(def);
 		this.rebind(a0, a1);
@@ -48,6 +50,7 @@ export class BeamInstance {
 		const hb = RunService.Heartbeat.Connect((dt) => this.onHeartbeat(dt));
 		this.maid.GiveTask(hb); // auto-disconnect
 		this.maid.GiveTask(this.beam); // beam freed on Destroy
+		this.def.onStart?.(this.beam); // call onStart hook if defined
 	}
 
 	/** Re-use this object with new attachments (called by the pool). */
@@ -94,6 +97,7 @@ export class BeamInstance {
 		this.def.onTick?.(this.beam, dt);
 
 		if (this.elapsed >= this.def.lifetime) {
+			this.def.onEnd?.(this.beam);
 			this.Destroy();
 		}
 	}

@@ -1,6 +1,10 @@
-import { DataService, AbilityService, WeaponService } from "server/services";
+import { Workspace } from "@rbxts/services";
+import { DataService, AbilityService, WeaponService, NPCService } from "server/services";
 import AttributesService from "server/services/AttributesService";
-import { AbilityKey, AdminNet, AttributeKey, ClientDispatch, ProfileDataKey } from "shared";
+import { BeamService } from "server/services/BeamService";
+import { AbilityKey, AdminNet, AttributeKey, ClientDispatch, NPCKey, ProfileDataKey, SSEntity } from "shared";
+import { BeamKey } from "shared/definitions/Beams";
+import { RopeKey } from "shared/physics/physics.types";
 
 const Functions = {
 	/* -- Profile Data -- */
@@ -12,6 +16,7 @@ const Functions = {
 
 	/*-- Admin Functions --*/
 	SpawnRope: AdminNet.Server.Get("SPAWN_ROPE"),
+	SpawnBeam: AdminNet.Server.Get("SPAWN_BEAM"),
 	SpawnWeapon: AdminNet.Server.Get("SPAWN_WEAPON"),
 	SpawnNPC: AdminNet.Server.Get("SPAWN_NPC"),
 };
@@ -67,13 +72,23 @@ Functions.ModifyAttribute.SetCallback((player: Player, attributeKey: AttributeKe
 });
 
 /* -- Admin Functions -- */
-Functions.SpawnRope.Connect((player: Player, ropeKey?: string) => {
-	if (ropeKey !== undefined) {
-		print(`SpawnRope called for player ${player.Name} with ropeKey: ${ropeKey}`);
-		// Logic to spawn the rope
-	} else {
-		print(`SpawnRope called for player ${player.Name} without a specific ropeKey.`);
-	}
+Functions.SpawnRope.Connect((player: Player, ropeKey?: RopeKey) => {
+	task.spawn(() => {
+		const character = player.Character || player.CharacterAdded.Wait()[0];
+		const sourceEntity = character as SSEntity;
+		const targetEntity = Workspace.FindFirstChild("SSEntityTarget") as SSEntity; // Replace with actual target entity logic
+		print(`Spawning rope for player ${player.Name} from ${sourceEntity.Name} to ${targetEntity.Name}`);
+	});
+});
+
+Functions.SpawnBeam.Connect((player: Player, beamKey: BeamKey) => {
+	task.spawn(() => {
+		const character = player.Character || player.CharacterAdded.Wait()[0];
+		const sourceEntity = character as SSEntity;
+		const targetEntity = Workspace.FindFirstChild("SSEntityTarget") as SSEntity; // Replace with actual target entity logic
+		print(`Spawning beam for player ${player.Name} from ${sourceEntity.Name} to ${targetEntity.Name}`);
+		BeamService.BeamBetween(beamKey, sourceEntity, targetEntity);
+	});
 });
 
 Functions.SpawnWeapon.SetCallback((player: Player) => {
@@ -81,7 +96,11 @@ Functions.SpawnWeapon.SetCallback((player: Player) => {
 	WeaponService.SpawnWeapon(player);
 });
 
-Functions.SpawnNPC.Connect((player: Player, npcKey: string) => {
+Functions.SpawnNPC.Connect((player: Player, npcKey: NPCKey) => {
 	print(`SpawnNPC called for player ${player.Name} with npcKey: ${npcKey}`);
-	// Logic to spawn the NPC
+	task.spawn(() => {
+		const character = player.Character || player.CharacterAdded.Wait()[0];
+		const position = character.GetPivot().mul(new CFrame(0, 0, -10)); // Spawn slightly above the character
+		NPCService.Spawn(npcKey, position);
+	});
 });

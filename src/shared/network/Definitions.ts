@@ -21,6 +21,7 @@ import {
 	ResourceDTO,
 	AttributesDTO,
 } from "shared/definitions";
+import { BeamKey } from "shared/definitions/Beams";
 import { MessageShape } from "shared/definitions/Message";
 import { RopeKey } from "shared/physics/physics.types";
 
@@ -35,7 +36,8 @@ type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMa
 
 export const AdminNet = Net.Definitions.Create({
 	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
-	SPAWN_ROPE: Net.Definitions.ClientToServerEvent<[ropeKey?: RopeKey]>(),
+	SPAWN_ROPE: Net.Definitions.ClientToServerEvent<[ropeKey: RopeKey]>(),
+	SPAWN_BEAM: Net.Definitions.ClientToServerEvent<[beamKey: BeamKey]>(),
 	SPAWN_WEAPON: Net.Definitions.ServerAsyncFunction<() => void>(),
 });
 

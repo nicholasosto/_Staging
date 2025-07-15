@@ -30,6 +30,8 @@ export interface BeamDefinition {
 	readonly tweenInfo?: TweenInfo; // optional pulse / wobble
 	readonly physicsType?: BeamPhysicsType; // how it interacts with other objects
 	readonly onTick?: (beam: Beam, dt: number) => void; // runtime hook
+	readonly onStart?: (beam: Beam) => void; // called when beam is created
+	readonly onEnd?: (beam: Beam) => void; // called when beam is destroyed
 }
 
 /**
@@ -81,16 +83,38 @@ export const BeamCatalog = {
 	IceChain: <BeamDefinition>{
 		texture: GameImages.Beam.IceChain_1,
 		color: new ColorSequence(Color3.fromRGB(200, 235, 255), Color3.fromRGB(150, 220, 255)),
-		width0: 0.25,
-		width1: 0.25,
+		width0: 2.25,
+		width1: 1.25,
 		segments: 10,
-		lifetime: 114,
+		lifetime: 5,
 		physicsType: "Repel",
 		tweenInfo: new TweenInfo(0.5, Enum.EasingStyle.Bounce, Enum.EasingDirection.InOut, -1, true),
 		// Flickering effect to simulate ice shards
 		onTick: (beam, dt) => {
 			// shimmer by offsetting texture
 			beam.TextureSpeed = 2;
+		},
+		onStart: (beam) => {
+			// Initial shimmer effect
+			const forceVector = new Instance("VectorForce");
+			forceVector.Force = new Vector3(0, 0, 0);
+			forceVector.RelativeTo = Enum.ActuatorRelativeTo.Attachment0;
+			forceVector.Attachment0 = beam.Attachment0;
+			forceVector.Attachment1 = beam.Attachment1;
+			forceVector.Parent = beam.Parent; // Attach to the beam's parent
+			forceVector.Enabled = true;
+			task.delay(0.1, () => {
+				forceVector.Force = new Vector3(0, 4000, 0); // Apply upward force
+			});
+		},
+		onEnd: (beam) => {
+			// Cleanup force vector
+			warn(`Beam ended: ${beam.Name}`);
+			beam.Parent?.GetChildren().forEach((child) => {
+				if (child.IsA("VectorForce")) {
+					child.Destroy();
+				}
+			});
 		},
 	},
 } as const;

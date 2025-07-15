@@ -16,9 +16,10 @@ export class BeamFactory {
 	/** Generic creator used by convenience wrappers. */
 	public createBeam<K extends BeamKey>(key: K, source: SSEntity, target: SSEntity): BeamInstance {
 		const def = BeamCatalog[key];
-		const [a0, a1] = this.makeAttachments(source, target);
+		const [a0, a1] = this.getAttachments(source, target);
 
 		const instance = new BeamInstance(def, a0, a1);
+		print(`BeamFactory: Created beam ${key} from ${source.Name} to ${target.Name}`);
 
 		// When the beam destroys itself, Maid will run our cleanup callback.
 		this.janitor.GiveTask(() => instance.Destroy());
@@ -43,22 +44,14 @@ export class BeamFactory {
 
 	// ─── Helpers ─────────────────────────────────────────────────────────
 
-	private makeAttachments(src: SSEntity, dst: SSEntity): [Attachment, Attachment] {
-		return [this.ensureAttachment(src), this.ensureAttachment(dst)];
-	}
-
-	/** Ensures each character has a reusable attachment on its HRP. */
-	private ensureAttachment(SSEntity: SSEntity): Attachment {
-		const hrp = SSEntity.FindFirstChild("HumanoidRootPart") as BasePart | undefined;
-		assert(hrp, `SSEntity ${SSEntity.GetFullName()} missing HumanoidRootPart`);
-
-		let att = hrp.FindFirstChildOfClass("Attachment") as Attachment | undefined;
-		if (!att) {
-			att = new Instance("Attachment");
-			att.Name = "BeamSocket";
-			att.Parent = hrp;
+	private getAttachments(src: SSEntity, dst: SSEntity): [Attachment, Attachment] {
+		const srcAttachment = src.RightHand.RightGripAttachment as Attachment | undefined;
+		const dstAttachment = dst.Head.FaceFrontAttachment as Attachment | undefined;
+		if (!srcAttachment || !dstAttachment) {
+			error(`BeamFactory: Missing attachments for source ${src.Name} or target ${dst.Name}`);
 		}
-		return att;
+		print(`BeamFactory: Using attachments ${srcAttachment.Name} and ${dstAttachment.Name}`);
+		return [srcAttachment, dstAttachment];
 	}
 }
 

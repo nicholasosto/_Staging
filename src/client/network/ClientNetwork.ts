@@ -21,6 +21,7 @@
  */
 
 import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet, AttributesDTO, NPCKey } from "shared";
+import { BeamKey } from "shared/definitions/Beams";
 import { RopeKey } from "shared/physics/physics.types";
 
 /* Abilities Signals*/
@@ -66,9 +67,14 @@ function SpawnWeapon(): void {
 	const weapon = SpawnWeaponSignal.CallServerAsync();
 }
 
-function SpawnRope(ropeKey?: RopeKey): void {
+function SpawnRope(ropeKey: RopeKey): void {
 	print(`CallServer: SpawnRope(${ropeKey}) called.`);
 	AdminNet.Client.Get("SPAWN_ROPE").SendToServer(ropeKey);
+}
+
+function SpawnBeam(beamKey: BeamKey): void {
+	print(`CallServer: SpawnBeam(${beamKey}) called.`);
+	AdminNet.Client.Get("SPAWN_BEAM").SendToServer(beamKey);
 }
 
 function SpawnNPC(npcKey: NPCKey): void {
@@ -90,5 +96,6 @@ export const ClientSend = {
 	/* -- Admin Functions --*/
 	SpawnWeapon: SpawnWeapon,
 	SpawnRope: SpawnRope,
+	SpawnBeam: SpawnBeam,
 	SpawnNPC: SpawnNPC,
 };
