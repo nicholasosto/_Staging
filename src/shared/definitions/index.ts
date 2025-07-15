@@ -18,6 +18,7 @@ export * from "./GenericUIInterfaces";
 export * from "./Loot";
 export * from "./Message";
 export * from "./NPC";
+export * from "./Projectile";
 export * from "./Rarity";
 export * from "./Resources";
 export * from "./StatusEffect";

@@ -20,7 +20,16 @@
  *   shared
  */
 
-import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet, AttributesDTO, NPCKey } from "shared";
+import {
+	AbilityKey,
+	SettingKey,
+	ClientDispatch,
+	AttributeKey,
+	AdminNet,
+	AttributesDTO,
+	NPCKey,
+	ProjectileKey,
+} from "shared";
 import { BeamKey } from "shared/definitions/Beams";
 import { RopeKey } from "shared/physics/physics.types";
 
@@ -98,4 +107,8 @@ export const ClientSend = {
 	SpawnRope: SpawnRope,
 	SpawnBeam: SpawnBeam,
 	SpawnNPC: SpawnNPC,
+	SpawnProjectile: (projectileKey: ProjectileKey) => {
+		print(`CallServer: SpawnProjectile(${projectileKey}) called.`);
+		AdminNet.Client.Get("SPAWN_PROJECTILE").SendToServer(projectileKey);
+	},
 };

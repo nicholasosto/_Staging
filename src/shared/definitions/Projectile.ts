@@ -8,6 +8,7 @@ export interface ProjectileDefinition {
 	readonly speed: number; // studs per second
 	readonly damage: number; // damage dealt on hit
 	readonly lifetime: number; // seconds before despawn
+	readonly tweenInfo: TweenInfo; // tweening properties for movement
 	readonly physicsType?: "Pull" | "Repel" | "Chain"; // how it interacts with other objects
 	readonly onTick?: (projectile: BasePart, dt: number) => void; // runtime hook
 	readonly onStart?: (projectile: BasePart) => void; // called when projectile
@@ -23,6 +24,7 @@ export const ProjectileCatalog = {
 		damage: 20,
 		lifetime: 5,
 		physicsType: "Pull",
+		tweenInfo: new TweenInfo(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, -1, true),
 		onTick: (projectile, dt) => {
 			// Add ice shard specific behavior here
 			//projectile.Velocity = projectile.CFrame.LookVector.mul(projectile.Speed);
@@ -46,6 +48,7 @@ export const ProjectileCatalog = {
 		damage: 30,
 		lifetime: 4,
 		physicsType: "Repel",
+		tweenInfo: new TweenInfo(0.3, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true),
 		onTick: (projectile, dt) => {
 			// Add fireball specific behavior here
 			//projectile.Velocity = projectile.CFrame.LookVector.mul(projectile.Speed);
@@ -69,6 +72,7 @@ export const ProjectileCatalog = {
 		damage: 40,
 		lifetime: 3,
 		physicsType: "Chain",
+		tweenInfo: new TweenInfo(0.2, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, -1, true),
 		onTick: (projectile, dt) => {
 			// Add lightning bolt specific behavior here
 			//projectile.Velocity = projectile.CFrame.LookVector.mul(projectile.Speed);

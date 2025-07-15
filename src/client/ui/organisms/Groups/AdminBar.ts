@@ -48,19 +48,29 @@ const SpawnBeamProps: UIButtonProps = {
 	},
 };
 
+const SpawnProjectileProps: UIButtonProps = {
+	Icon: GameImages.Ability.Lightning_Bolt,
+	Label: "Spawn Lightning Bolt",
+	Size: new UDim2(0, 50, 0, 50),
+	Position: Computed(() => new UDim2(0, 250, 0, 10)),
+	OnClick: () => {
+		ClientSend.SpawnProjectile("LightningBolt");
+	},
+};
+
 export function AdminBar() {
 	const container = ListContainer({
 		Name: "AdminBar",
 		LayoutOrder: 1,
 		LayoutOrientation: "horizontal",
 		Size: new UDim2(1, 0, 0, 70),
-		Position: new UDim2(0.5, -100, 0, 0),
 		Gap: 10,
 		Content: {
 			SpawnRopeButton: UIButton(SpawnRopeProps),
 			SpawnWeaponButton: UIButton(SpawnWeaponProps),
 			SpawnNPCButton: UIButton(SpawnNPCProps),
 			SpawnBeamButton: UIButton(SpawnBeamProps),
+			SpawnProjectileButton: UIButton(SpawnProjectileProps),
 		},
 	});
 

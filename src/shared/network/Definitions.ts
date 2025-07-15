@@ -20,6 +20,7 @@ import {
 	ProfileDataKey,
 	ResourceDTO,
 	AttributesDTO,
+	ProjectileKey,
 } from "shared/definitions";
 import { BeamKey } from "shared/definitions/Beams";
 import { MessageShape } from "shared/definitions/Message";
@@ -39,6 +40,7 @@ export const AdminNet = Net.Definitions.Create({
 	SPAWN_ROPE: Net.Definitions.ClientToServerEvent<[ropeKey: RopeKey]>(),
 	SPAWN_BEAM: Net.Definitions.ClientToServerEvent<[beamKey: BeamKey]>(),
 	SPAWN_WEAPON: Net.Definitions.ServerAsyncFunction<() => void>(),
+	SPAWN_PROJECTILE: Net.Definitions.ClientToServerEvent<[projectileKey: ProjectileKey]>(),
 });
 
 export const ClientDispatch = Net.Definitions.Create({

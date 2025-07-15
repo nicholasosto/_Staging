@@ -2,7 +2,18 @@ import { Workspace } from "@rbxts/services";
 import { DataService, AbilityService, WeaponService, NPCService } from "server/services";
 import AttributesService from "server/services/AttributesService";
 import { BeamService } from "server/services/BeamService";
-import { AbilityKey, AdminNet, AttributeKey, ClientDispatch, NPCKey, ProfileDataKey, SSEntity } from "shared";
+import {
+	AbilityKey,
+	AdminNet,
+	AttributeKey,
+	ClientDispatch,
+	NPCKey,
+	ProfileDataKey,
+	ProjectileCatalog,
+	ProjectileKey,
+	SSEntity,
+} from "shared";
+import { ProjectileInstance } from "shared/classes/ProjectileInstance";
 import { BeamKey } from "shared/definitions/Beams";
 import { RopeKey } from "shared/physics/physics.types";
 
@@ -19,6 +30,7 @@ const Functions = {
 	SpawnBeam: AdminNet.Server.Get("SPAWN_BEAM"),
 	SpawnWeapon: AdminNet.Server.Get("SPAWN_WEAPON"),
 	SpawnNPC: AdminNet.Server.Get("SPAWN_NPC"),
+	SpawnProjectile: AdminNet.Server.Get("SPAWN_PROJECTILE"),
 };
 
 /* --- Listeners --- */
@@ -102,5 +114,15 @@ Functions.SpawnNPC.Connect((player: Player, npcKey: NPCKey) => {
 		const character = player.Character || player.CharacterAdded.Wait()[0];
 		const position = character.GetPivot().mul(new CFrame(0, 0, -10)); // Spawn slightly above the character
 		NPCService.Spawn(npcKey, position);
+	});
+});
+
+Functions.SpawnProjectile.Connect((player: Player, projectileKey: ProjectileKey) => {
+	print(`SpawnProjectile called for player ${player.Name} with projectileKey: ${projectileKey}`);
+	task.spawn(() => {
+		const character = player.Character || player.CharacterAdded.Wait()[0];
+		const startPosition = character.GetPivot().mul(new CFrame(0, 0, -10)); // Spawn slightly in front of the character
+		const projectile = new ProjectileInstance(ProjectileCatalog[projectileKey], startPosition.Position);
+		print(`Projectile ${projectileKey} spawned for player ${player.Name} at position ${startPosition.Position}`);
 	});
 });
