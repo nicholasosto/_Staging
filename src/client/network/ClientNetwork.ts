@@ -20,7 +20,8 @@
  *   shared
  */
 
-import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet, AttributesDTO } from "shared";
+import { AbilityKey, SettingKey, ClientDispatch, AttributeKey, AdminNet, AttributesDTO, NPCKey } from "shared";
+import { RopeKey } from "shared/physics/physics.types";
 
 /* Abilities Signals*/
 const UseAbilitySignal = ClientDispatch.Client.Get("UseAbility");
@@ -65,10 +66,29 @@ function SpawnWeapon(): void {
 	const weapon = SpawnWeaponSignal.CallServerAsync();
 }
 
+function SpawnRope(ropeKey?: RopeKey): void {
+	print(`CallServer: SpawnRope(${ropeKey}) called.`);
+	AdminNet.Client.Get("SPAWN_ROPE").SendToServer(ropeKey);
+}
+
+function SpawnNPC(npcKey: NPCKey): void {
+	print(`CallServer: SpawnNPC(${npcKey}) called.`);
+	AdminNet.Client.Get("SPAWN_NPC").SendToServer(npcKey);
+}
+
 export const ClientSend = {
+	/* Abilities */
 	SetAbilities: SetAbilities,
 	UseAbility: UseAbility,
+
+	/* Attributes */
 	ModifyAttribute: ModifyAttribute,
+
+	/* Settings */
 	UpdateSetting: UpdateSetting,
+
+	/* -- Admin Functions --*/
 	SpawnWeapon: SpawnWeapon,
+	SpawnRope: SpawnRope,
+	SpawnNPC: SpawnNPC,
 };

@@ -107,22 +107,23 @@ export class WeaponService {
 	}
 
 	public static Start(): WeaponService {
-		if (!this._instance) {
+		if (this._instance === undefined) {
 			this._instance = new WeaponService();
 		}
 		return this._instance;
 	}
 
 	/* ------------------------------- Public API ---------------------------------------- */
-	public static SpawnWeapon(position: Vector3): void {
+	public static SpawnWeapon(player: Player): void {
 		print("Spawning weapon...");
-		const newWeapon = new SpawnModel("Whip", position);
-		newWeapon.Model.Parent = Workspace;
-		//newWeapon.GrowModel(1.5); // Example scale factor
-		task.delay(1, () => {
-			newWeapon.GrowModel(1.5);
-			newWeapon.SetPosition(position.add(new Vector3(0, 150, 0))); // Spawn above the ground
+		task.spawn(() => {
+			const character = player.Character || player.CharacterAdded.Wait()[0];
+			const newWeapon = new SpawnModel("Whip", character.GetPivot().Position);
+			newWeapon.Model.Parent = character;
+			//newWeapon.GrowModel(1.5); // Example scale factor
+			task.delay(1, () => {
+				newWeapon.GrowModel(1.5);
+			});
 		});
-		//newWeapon.SetPosition(position.add(new Vector3(0, 55, 0))); // Spawn above the ground
 	}
 }

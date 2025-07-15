@@ -9,7 +9,7 @@
  * @since        0.1.0
  * @lastUpdated  2025-07-09 by Trembus – initial header add
  */
-
+export * from "./AdminBar";
 export * from "./AbilityBar";
 export * from "./ThemeOptions";
 export * from "./CharacterInfoCard";

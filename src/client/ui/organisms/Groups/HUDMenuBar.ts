@@ -20,7 +20,7 @@ export interface HudMenuBarProps {
 }
 
 type ActiveScreenKey = (typeof SCREEN_KEYS)[number];
-const activeScreens: ActiveScreenKey[] = ["Character", "Settings", "Inventory"];
+const activeScreens: ActiveScreenKey[] = ["Character", "Settings", "Inventory", "Developer"];
 export const HUDMenuBar = (props: HudMenuBarProps) => {
 	const container = ListContainer({
 		Name: "HUDMenuBar",

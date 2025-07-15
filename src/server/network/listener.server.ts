@@ -1,6 +1,6 @@
-import { DataService, AbilityService } from "server/services";
+import { DataService, AbilityService, WeaponService } from "server/services";
 import AttributesService from "server/services/AttributesService";
-import { AbilityKey, AttributeKey, ClientDispatch, ProfileDataKey } from "shared";
+import { AbilityKey, AdminNet, AttributeKey, ClientDispatch, ProfileDataKey } from "shared";
 
 const Functions = {
 	/* -- Profile Data -- */
@@ -9,6 +9,11 @@ const Functions = {
 	/* -- Abilities -- */
 	UseAbility: ClientDispatch.Server.Get("UseAbility"),
 	ModifyAttribute: ClientDispatch.Server.Get("ModifyAttribute"),
+
+	/*-- Admin Functions --*/
+	SpawnRope: AdminNet.Server.Get("SPAWN_ROPE"),
+	SpawnWeapon: AdminNet.Server.Get("SPAWN_WEAPON"),
+	SpawnNPC: AdminNet.Server.Get("SPAWN_NPC"),
 };
 
 /* --- Listeners --- */
@@ -59,4 +64,24 @@ Functions.ModifyAttribute.SetCallback((player: Player, attributeKey: AttributeKe
 		return undefined;
 	}
 	return attrs;
+});
+
+/* -- Admin Functions -- */
+Functions.SpawnRope.Connect((player: Player, ropeKey?: string) => {
+	if (ropeKey !== undefined) {
+		print(`SpawnRope called for player ${player.Name} with ropeKey: ${ropeKey}`);
+		// Logic to spawn the rope
+	} else {
+		print(`SpawnRope called for player ${player.Name} without a specific ropeKey.`);
+	}
+});
+
+Functions.SpawnWeapon.SetCallback((player: Player) => {
+	print(`SpawnWeapon called for player ${player.Name}`);
+	WeaponService.SpawnWeapon(player);
+});
+
+Functions.SpawnNPC.Connect((player: Player, npcKey: string) => {
+	print(`SpawnNPC called for player ${player.Name} with npcKey: ${npcKey}`);
+	// Logic to spawn the NPC
 });

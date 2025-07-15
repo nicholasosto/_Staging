@@ -22,6 +22,7 @@ import {
 	AttributesDTO,
 } from "shared/definitions";
 import { MessageShape } from "shared/definitions/Message";
+import { RopeKey } from "shared/physics/physics.types";
 
 /*
  * Generic helpers ────────────────────────────────────────────────
@@ -34,6 +35,7 @@ type GetDataFn = <K extends ProfileDataKey>(dataKey: K) => Promise<ProfileDataMa
 
 export const AdminNet = Net.Definitions.Create({
 	SPAWN_NPC: Net.Definitions.ClientToServerEvent<[npcId: NPCKey]>(),
+	SPAWN_ROPE: Net.Definitions.ClientToServerEvent<[ropeKey?: RopeKey]>(),
 	SPAWN_WEAPON: Net.Definitions.ServerAsyncFunction<() => void>(),
 });
 
