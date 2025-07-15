@@ -1,10 +1,22 @@
+import { ReplicatedStorage } from "@rbxts/services";
+
+let projectilesFolder = ReplicatedStorage.FindFirstChild("Projectiles", true);
+while (!projectilesFolder) {
+	task.wait(0.2);
+	print("Waiting for Projectiles folder to be available...");
+	projectilesFolder = ReplicatedStorage.FindFirstChild("Projectiles", true);
+	if (!projectilesFolder) {
+		continue;
+	}
+}
+warn(`Projectiles folder found: ${projectilesFolder.GetFullName()}`);
+
 export const ProjectileKeys = ["IceShard", "Fireball", "LightningBolt"] as const;
 export type ProjectileKey = (typeof ProjectileKeys)[number];
 
 /** Blueprint for a projectile archetype. */
 export interface ProjectileDefinition {
-	readonly texture: string;
-	readonly color: Color3;
+	readonly part: BasePart; // the part that represents the projectile
 	readonly speed: number; // studs per second
 	readonly damage: number; // damage dealt on hit
 	readonly lifetime: number; // seconds before despawn
@@ -18,7 +30,7 @@ export interface ProjectileDefinition {
 
 export const ProjectileCatalog = {
 	IceShard: <ProjectileDefinition>{
-		texture: "rbxassetid://12345678", // replace with actual asset ID
+		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
 		color: new Color3(0.8, 0.9, 1),
 		speed: 100,
 		damage: 20,
@@ -42,7 +54,7 @@ export const ProjectileCatalog = {
 		},
 	},
 	Fireball: <ProjectileDefinition>{
-		texture: "rbxassetid://87654321", // replace with actual asset ID
+		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
 		color: new Color3(1, 0.5, 0),
 		speed: 120,
 		damage: 30,
@@ -66,7 +78,7 @@ export const ProjectileCatalog = {
 		},
 	},
 	LightningBolt: <ProjectileDefinition>{
-		texture: "rbxassetid://11223344", // replace with actual asset ID
+		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
 		color: new Color3(1, 1, 0),
 		speed: 150,
 		damage: 40,

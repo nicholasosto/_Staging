@@ -19,59 +19,41 @@ export class ProjectileInstance {
 		private readonly def: ProjectileDefinition,
 		startPosition: Vector3,
 	) {
-		this.projectile = new Instance("Part");
-		this.projectile.Name = `Projectile-${this.def.texture}`;
-		this.projectile.Size = new Vector3(1, 1, 1);
-		this.projectile.Position = startPosition;
-		this.projectile.Color = this.def.color;
-		this.projectile.Anchored = false;
-		this.projectile.CanCollide = true;
-		this.projectile.Parent = Workspace;
-
-		this.applyStatic(def);
-
+		this.projectile = def.part.Clone();
 		const hb = RunService.Heartbeat.Connect((dt) => this.onHeartbeat(dt));
 		const onHit = this.projectile.Touched.Connect((hit) => {
 			if (this.def.onHit) {
 				this.def.onHit(this.projectile, hit);
+				print(`Projectile hit: ${hit.Name}`);
 			}
 			//this.Destroy();
 		});
+		this.projectile.Parent = Workspace;
+		this.projectile.PivotTo(new CFrame(startPosition));
 		this.maid.GiveTask(hb); // auto-disconnect
 		this.maid.GiveTask(this.projectile); // projectile freed on Destroy
 		this.def.onStart?.(this.projectile); // call onStart hook if defined
 	}
 
-	private applyStatic(def: ProjectileDefinition): void {
-		if (def.texture !== undefined) {
-			const decal = new Instance("Decal");
-			decal.Texture = def.texture;
-			decal.Parent = this.projectile;
-		}
-	}
-
 	private onHeartbeat(dt: number): void {
 		this.elapsed += dt;
-
+		/* -- Call the onTick hook if defined -- */
 		if (this.def.onTick) {
 			this.def.onTick(this.projectile, dt);
 		}
 
+		/* -- Check if the projectile has exceeded its lifetime -- */
 		if (this.elapsed >= this.def.lifetime) {
 			this.def.onEnd?.(this.projectile);
 			this.Destroy();
 			return;
 		}
+		/*-- Create a tween to move the projectile smoothly --*/
+		const tween = TweenService.Create(this.projectile, this.def.tweenInfo, {
+			Position: this.projectile.Position.add(this.projectile.CFrame.LookVector.mul(this.def.speed * dt)),
+		});
 
-		TweenService.Create(
-			this.projectile,
-
-			this.def.tweenInfo,
-
-			{
-				Position: this.projectile.Position.add(this.projectile.CFrame.LookVector.mul(this.def.speed * dt)),
-			},
-		).Play();
+		tween.Play();
 	}
 
 	public Destroy(): void {
