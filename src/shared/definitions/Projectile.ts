@@ -31,7 +31,6 @@ export interface ProjectileDefinition {
 export const ProjectileCatalog = {
 	IceShard: <ProjectileDefinition>{
 		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
-		color: new Color3(0.8, 0.9, 1),
 		speed: 100,
 		damage: 20,
 		lifetime: 5,
@@ -55,7 +54,6 @@ export const ProjectileCatalog = {
 	},
 	Fireball: <ProjectileDefinition>{
 		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
-		color: new Color3(1, 0.5, 0),
 		speed: 120,
 		damage: 30,
 		lifetime: 4,
@@ -79,7 +77,6 @@ export const ProjectileCatalog = {
 	},
 	LightningBolt: <ProjectileDefinition>{
 		part: projectilesFolder.FindFirstChild("Fireball_Epic") as BasePart,
-		color: new Color3(1, 1, 0),
 		speed: 150,
 		damage: 40,
 		lifetime: 3,
@@ -102,3 +99,44 @@ export const ProjectileCatalog = {
 		},
 	},
 } as const;
+
+export function CreateProjectile(key: ProjectileKey, position: Vector3): BasePart | undefined {
+	const definition = ProjectileCatalog[key];
+	if (!definition) {
+		warn(`No projectile definition found for key: ${key}`);
+		return undefined;
+	}
+
+	const projectile = definition.part.Clone();
+	projectile.Position = position;
+	projectile.Anchored = false;
+	projectile.CanCollide = true;
+
+	if (definition.onStart) {
+		definition.onStart(projectile);
+	}
+
+	projectile.Parent = projectilesFolder;
+
+	// Start the projectile's movement
+	task.spawn(() => {
+		let elapsedTime = 0;
+		while (elapsedTime < definition.lifetime) {
+			task.wait(0.1);
+			elapsedTime += 0.1;
+
+			if (definition.onTick) {
+				definition.onTick(projectile, 0.1);
+			}
+
+			// Move the projectile
+			projectile.CFrame = projectile.CFrame.mul(new CFrame(0, 0, -definition.speed * 0.1));
+		}
+
+		if (definition.onEnd) {
+			definition.onEnd(projectile);
+		}
+	});
+
+	return projectile;
+}

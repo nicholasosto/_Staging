@@ -246,6 +246,17 @@ export class AbilityService {
 
 		loadAnimation(character, AbilitiesMeta[abilityKey].animationKey);
 		playAnimation(character, AbilitiesMeta[abilityKey].animationKey);
+		const meta = AbilitiesMeta[abilityKey];
+		if (meta === undefined) {
+			warn(`No metadata found for ability ${abilityKey}`);
+			return false;
+		}
+		if (meta.onStart === undefined) {
+			warn(`No onStart function defined for ability ${abilityKey}`);
+			return false;
+		}
+		meta.onStart({ caster: character as SSEntity, startPosition: characterCFrame.Position });
+
 		print(`Activated ability ${abilityKey} for player ${player.Name}.`);
 
 		return true;

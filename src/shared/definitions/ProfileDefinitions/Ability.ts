@@ -19,6 +19,8 @@
 import { GameImages } from "shared/assets";
 import { AnimationKey } from "shared/definitions/Animation";
 import { SSEntity } from "shared/types/SSEntity";
+import { CreateProjectile, ProjectileKeys } from "../Projectile";
+import { Workspace } from "@rbxts/services";
 
 // Ability Keys
 export const ABILITY_KEYS = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as const;
@@ -116,8 +118,14 @@ export const AbilitiesMeta = {
 			stamina: 20, // Example stamina cost
 		},
 		onStart: ({ caster, startPosition }) => {
-			print(`Earthquake cast started by ${caster.GetFullName()} at position ${startPosition}`);
-			// Additional logic for starting the earthquake cast can be added here
+			const projectile = CreateProjectile("IceShard", startPosition);
+			if (!projectile) {
+				print(`Failed to create IceShard projectile at ${startPosition}`);
+				return;
+			}
+			projectile.Parent = Workspace;
+			print(`IceShard cast started by ${caster.GetFullName()} at position ${startPosition}`);
+			// Additional logic for starting the IceShard cast can be added here
 		},
 	},
 	melee: {
