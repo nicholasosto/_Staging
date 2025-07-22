@@ -108,6 +108,7 @@ export const playAnimation = (model: Model, key: AnimationKey): void => {
 	if (track) {
 		track.Play();
 	} else {
+		loadAnimation(model, key)?.Play();
 		warn(`Animation track for ${key} not found on model ${model.Name}`);
 	}
 };

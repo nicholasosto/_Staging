@@ -53,6 +53,15 @@ export class NPC {
 		this.model.Destroy();
 	}
 
+	public MoveNPC(npc: NPC, cFrame: CFrame): void {
+		if (!npc.model) {
+			warn(`NPC model not found for ${npc.name}`);
+			return;
+		}
+		npc.model.PivotTo(cFrame);
+		print(`NPC ${npc.name} moved to ${cFrame.Position}`);
+	}
+
 	private static randomOf<T>(array: readonly T[]): T {
 		return array[math.random(0, array.size() - 1)];
 	}

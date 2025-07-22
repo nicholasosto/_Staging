@@ -1,16 +1,19 @@
 import { Workspace } from "@rbxts/services";
 import { ZoneBase } from "./ZoneBase";
 import { PlayerHelpers } from "shared/helpers/PlayerCharacter";
-import { ResourcesService } from "server/services";
+import { NPCService, ResourcesService, SpawnNPC, StatusEffectService } from "server/services";
 import { BeamFactory } from "shared/factory";
 import { CharacterAttachments } from "shared/types";
 import { SSEntity } from "shared/types/SSEntity";
 import { SSEntityHelper } from "shared/helpers/SSEntityHelpers";
+import { NPC } from "server/classes";
 const beamFactory = new BeamFactory();
 
 const PlayerEntered = (player: Player) => {
 	let character = player.Character || player.CharacterAdded.Wait()[0];
 	character = character as CharacterAttachments;
+	StatusEffectService.AddEffect(player, "SpeedBoost"); // Example: Add a speed boost effect when entering the Battle Zone
+	StatusEffectService.AddEffect(player, "Raged"); // Example: Add a rage effect when entering the Battle Zone
 	if (character === undefined) {
 		warn(`Player ${player.Name} entered the Battle Zone, but Attachments are not available.`);
 		return;
@@ -24,6 +27,15 @@ const PlayerEntered = (player: Player) => {
 	}
 
 	ResourcesService.ModifyResource(player, "Health", -20); // Example: Modify health resource when entering the Battle Zone
+
+	/*-- NPC TEST --*/
+	const npc = SpawnNPC("BLOOD_TOAD", character.GetPivot().add(new Vector3(0, 5, 0)));
+	if (npc) {
+		print(`NPC ${npc.name} spawned in the Battle Zone.`);
+		npc.MoveNPC(npc, character.GetPivot().add(new Vector3(0, 10, 0))); // Move NPC above the player
+	} else {
+		warn(`Failed to spawn NPC in the Battle Zone for player ${player.Name}.`);
+	}
 };
 
 const PlayerLeft = (player: Player) => {

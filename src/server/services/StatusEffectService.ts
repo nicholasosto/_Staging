@@ -39,6 +39,7 @@ export class StatusEffectService {
 
 	/* ------------------------------- Public API ------------------------------- */
 	public static AddEffect(player: Player, effectKey: StatusEffectKey) {
+		print(`Adding effect ${effectKey} to player ${player.Name}`);
 		const meta = StatusEffectMeta[effectKey];
 		const svc = this.Start();
 		let map = svc._effects.get(player);

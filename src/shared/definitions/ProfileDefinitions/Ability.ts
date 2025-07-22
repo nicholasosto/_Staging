@@ -17,10 +17,11 @@
  */
 
 import { GameImages } from "shared/assets";
-import { AnimationKey } from "shared/definitions/Animation";
+import { AnimationKey, playAnimation } from "shared/definitions/Animation";
 import { SSEntity } from "shared/types/SSEntity";
 import { CreateProjectile, ProjectileKeys } from "../Projectile";
 import { Workspace } from "@rbxts/services";
+import { VFXKey, VisualEffectMetaMap } from "../VisualEffect";
 
 // Ability Keys
 export const ABILITY_KEYS = ["fireball", "ice_shard", "lightning_bolt", "earthquake", "melee"] as const;
@@ -45,6 +46,7 @@ export interface AbilityMeta {
 	displayName: string;
 	iconId: string;
 	animationKey: AnimationKey; // Animation ID for the ability
+	castEffect?: VFXKey; // Optional visual effect to play when casting
 	description: string;
 	cooldown: number; // Cooldown in seconds
 	basePower: number; // Base power of the ability
@@ -62,6 +64,7 @@ export const AbilitiesMeta = {
 		displayName: "Fireball",
 		iconId: GameImages.Ability.Flame_Sythe,
 		animationKey: "HallowHold", // Replace with actual animation key
+		castEffect: "FireAura", // Optional visual effect to play when casting
 		description: "Launches a fiery projectile that explodes on impact.",
 		cooldown: 5,
 		basePower: 50,
@@ -69,8 +72,13 @@ export const AbilitiesMeta = {
 			mana: 20, // Example mana cost
 			stamina: 10, // Example stamina cost
 		},
-		onStart: ({ caster, startPosition }) => {
-			print(`Fireball cast started by ${caster.GetFullName()} at position ${startPosition}`);
+		onStart: (context: AbilityCastContext) => {
+			const { caster, startPosition } = context;
+			playAnimation(caster, AbilitiesMeta.fireball.animationKey);
+			VisualEffectMetaMap.FireAura.run(caster, 5); // Run the FireAura effect for 5 seconds
+			print(
+				`OnStart: ${AbilitiesMeta.fireball.displayName} cast by ${caster.GetFullName()} at position ${startPosition}`,
+			);
 			// Additional logic for starting the fireball cast can be added here
 		},
 	},

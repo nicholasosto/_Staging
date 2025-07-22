@@ -20,6 +20,9 @@
 
 import { NPCKey } from "shared/definitions/NPC";
 import { NPC } from "server/classes/npc";
+import { RegisterInstance } from "server/helpers";
+import { playAnimation } from "shared";
+import { RunEffect } from "./VisualEffectsService";
 
 export class NPCService {
 	private static _instance: NPCService | undefined;
@@ -40,7 +43,19 @@ export class NPCService {
 		const svc = this.Start();
 		const npc = new NPC(key, cFrame);
 		svc._npcs.add(npc);
+		RegisterInstance(npc.model);
+		playAnimation(npc.model, "GodLike"); // Example animation, replace with actual key
+		RunEffect("ToxicCloud", npc.model, 55); // Example effect, replace with actual key
 		return npc;
+	}
+
+	public static MoveNPC(npc: NPC, cFrame: CFrame): void {
+		const svc = this.Start();
+		if (svc._npcs.has(npc)) {
+			npc.MoveNPC(npc, cFrame);
+		} else {
+			warn(`NPC ${npc.name} not found in service.`);
+		}
 	}
 
 	public static Remove(npc: NPC) {
@@ -51,3 +66,7 @@ export class NPCService {
 		}
 	}
 }
+
+export const SpawnNPC = (key: NPCKey, cFrame: CFrame): NPC => {
+	return NPCService.Spawn(key, cFrame);
+};

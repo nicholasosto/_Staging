@@ -245,7 +245,6 @@ export class AbilityService {
 		if (characterCFrame === undefined) return false;
 
 		loadAnimation(character, AbilitiesMeta[abilityKey].animationKey);
-		playAnimation(character, AbilitiesMeta[abilityKey].animationKey);
 		const meta = AbilitiesMeta[abilityKey];
 		if (meta === undefined) {
 			warn(`No metadata found for ability ${abilityKey}`);

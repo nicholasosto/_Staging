@@ -23,3 +23,4 @@ export * from "./Rarity";
 export * from "./Resources";
 export * from "./StatusEffect";
 export * from "./Screen";
+export * from "./VisualEffect";
