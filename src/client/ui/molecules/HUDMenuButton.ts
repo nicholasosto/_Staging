@@ -22,35 +22,38 @@ import { GameImages, MenuButtonImageMap } from "shared";
 import { ScreenKey, ShowScreen, ScreenState } from "client/states";
 
 export interface HUDMenuButtonProps extends Fusion.PropertyTable<ImageButton> {
-        /** Which screen this button toggles. */
-        ScreenKey: ScreenKey;
-        DefaultColour?: Color3 | Fusion.Computed<Color3>;
-        HoverColour?: Color3 | Fusion.Computed<Color3>;
-        SelectedColour?: Color3 | Fusion.Computed<Color3>;
+	/** Which screen this button toggles. */
+	ScreenKey: ScreenKey;
+	DefaultColour?: Color3 | Fusion.Computed<Color3>;
+	HoverColour?: Color3 | Fusion.Computed<Color3>;
+	SelectedColour?: Color3 | Fusion.Computed<Color3>;
 }
 
 /* =============================== HUDMenuButton Component ====================== */
 export const HUDMenuButton = (props: HUDMenuButtonProps) => {
-        const SelectedState = ScreenState[props.ScreenKey] ?? Value(false);
-        const Hovered = Value(false);
+	const SelectedState = ScreenState[props.ScreenKey] ?? Value(false);
+	const Hovered = Value(false);
 
-        const toComputed = (colour: Color3 | Fusion.Computed<Color3> | undefined, fallback: Fusion.Computed<Color3>): Fusion.Computed<Color3> => {
-                if (colour === undefined) return fallback;
-                return typeIs(colour, "Color3") ? Computed(() => colour) : (colour as Fusion.Computed<Color3>);
-        };
+	const toComputed = (
+		colour: Color3 | Fusion.Computed<Color3> | undefined,
+		fallback: Fusion.Computed<Color3>,
+	): Fusion.Computed<Color3> => {
+		if (colour === undefined) return fallback;
+		return typeIs(colour, "Color3") ? Computed(() => colour) : (colour as Fusion.Computed<Color3>);
+	};
 
-        const defaultColor = toComputed(props.DefaultColour, useToken("panelBg"));
-        const hoverColor = toComputed(props.HoverColour, useToken("panelBgHover"));
-        const selectedColor = toComputed(props.SelectedColour, useToken("panelBorder"));
+	const defaultColor = toComputed(props.DefaultColour, useToken("panelBg"));
+	const hoverColor = toComputed(props.HoverColour, useToken("panelBgHover"));
+	const selectedColor = toComputed(props.SelectedColour, useToken("panelBorder"));
 
-        const computedBGColor = Computed(() => {
-                if (SelectedState.get()) {
-                        return selectedColor.get();
-                } else if (Hovered.get()) {
-                        return hoverColor.get();
-                }
-                return defaultColor.get();
-        });
+	const computedBGColor = Computed(() => {
+		if (SelectedState.get()) {
+			return selectedColor.get();
+		} else if (Hovered.get()) {
+			return hoverColor.get();
+		}
+		return defaultColor.get();
+	});
 
 	const button = New("ImageButton")({
 		Name: props.Name ?? "ToggleMenuButton",
@@ -76,7 +79,7 @@ export const HUDMenuButton = (props: HUDMenuButtonProps) => {
 				BackgroundTransparency: 1,
 				Position: UDim2.fromScale(0.5, 0.5),
 				AnchorPoint: new Vector2(0.5, 0.5),
-                                ImageColor3: props.ImageColor3 ?? new Color3(1, 1, 1),
+				ImageColor3: props.ImageColor3 ?? new Color3(1, 1, 1),
 			}),
 		},
 	});

@@ -30,8 +30,8 @@ const slice = MessageSlice.getInstance();
 export function UserMessage() {
 	const textColor = useToken("textPrimary");
 
-        const errorColor = useToken("healthFill");
-        const colour = Computed(() => (slice.IsError.get() ? errorColor.get() : textColor.get()));
+	const errorColor = useToken("healthFill");
+	const colour = Computed(() => (slice.IsError.get() ? errorColor.get() : textColor.get()));
 
 	const label = New("TextLabel")({
 		Name: "MessageLabel",

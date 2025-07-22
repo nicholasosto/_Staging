@@ -4,13 +4,13 @@ import { New, Value, Computed } from "@rbxts/fusion";
 import { useToken } from "theme/hooks";
 
 export interface AbilityInfoPanelProps {
-        abilityKey: AbilityKey;
-        CooldownColor?: Color3 | Computed<Color3>;
-        PowerColor?: Color3 | Computed<Color3>;
+	abilityKey: AbilityKey;
+	CooldownColor?: Color3 | Computed<Color3>;
+	PowerColor?: Color3 | Computed<Color3>;
 }
 
 export function AbilityInfoPanel({ abilityKey, CooldownColor, PowerColor }: AbilityInfoPanelProps) {
-        const abilityMeta = AbilitiesMeta[abilityKey];
+	const abilityMeta = AbilitiesMeta[abilityKey];
 
 	const abilityIcon = GameImage({
 		Name: `AbilityIcon-${abilityKey}`,
@@ -29,23 +29,23 @@ export function AbilityInfoPanel({ abilityKey, CooldownColor, PowerColor }: Abil
 		Size: UDim2.fromScale(1, 0.3),
 		TextWrapped: true,
 	});
-        const cooldownColor = CooldownColor ?? useToken("healthFill");
-        const powerColor = PowerColor ?? useToken("staminaFill");
+	const cooldownColor = CooldownColor ?? useToken("healthFill");
+	const powerColor = PowerColor ?? useToken("staminaFill");
 
-        const abilityCooldown = GameText({
-                Name: `AbilityCooldown-${abilityKey}`,
-                TextStateValue: Value(`Cooldown: ${abilityMeta.cooldown} seconds`),
-                Size: UDim2.fromScale(1, 0.3),
-                BackgroundTransparency: 1,
-                TextColor3: cooldownColor,
-        });
-        const abilityPower = GameText({
-                Name: `AbilityPower-${abilityKey}`,
-                TextStateValue: Value(`Base Power: ${abilityMeta.basePower}`),
-                BackgroundTransparency: 1,
-                TextColor3: powerColor,
-                Size: UDim2.fromScale(1, 0.3),
-        });
+	const abilityCooldown = GameText({
+		Name: `AbilityCooldown-${abilityKey}`,
+		TextStateValue: Value(`Cooldown: ${abilityMeta.cooldown} seconds`),
+		Size: UDim2.fromScale(1, 0.3),
+		BackgroundTransparency: 1,
+		TextColor3: cooldownColor,
+	});
+	const abilityPower = GameText({
+		Name: `AbilityPower-${abilityKey}`,
+		TextStateValue: Value(`Base Power: ${abilityMeta.basePower}`),
+		BackgroundTransparency: 1,
+		TextColor3: powerColor,
+		Size: UDim2.fromScale(1, 0.3),
+	});
 
 	return ListContainer({
 		Name: `AbilityInfoPanel-${abilityKey}`,

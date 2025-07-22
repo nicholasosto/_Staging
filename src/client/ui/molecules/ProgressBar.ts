@@ -61,7 +61,7 @@ export const ProgressBar = (props: ProgressBarProps) => {
 		Size: props.Size ?? UDim2.fromScale(1, 1),
 		AnchorPoint: props.AnchorPoint ?? new Vector2(0, 0),
 		Position: props.Position ?? UDim2.fromScale(0, 0),
-                BackgroundColor3: props.BackgroundColor3 ?? useToken("panelBg"),
+		BackgroundColor3: props.BackgroundColor3 ?? useToken("panelBg"),
 		LayoutOrder: props.LayoutOrder ?? 0,
 		[Children]: {
 			Fill: fillBar,

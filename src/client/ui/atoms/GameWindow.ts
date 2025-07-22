@@ -31,11 +31,11 @@ import { Padding } from "../tokens";
 const DEFAULT_WINDOW_SIZE = new UDim2(0.5, 0, 0.5, 0);
 
 export interface GameWindowProps extends Fusion.PropertyTable<Frame> {
-        Title?: string;
-        ScreenKey: ScreenKey;
-        Content?: Fusion.ChildrenValue;
-        TitleColor?: Color3 | Fusion.Computed<Color3>;
-        TitleStrokeColor?: Color3 | Fusion.Computed<Color3>;
+	Title?: string;
+	ScreenKey: ScreenKey;
+	Content?: Fusion.ChildrenValue;
+	TitleColor?: Color3 | Fusion.Computed<Color3>;
+	TitleStrokeColor?: Color3 | Fusion.Computed<Color3>;
 }
 
 export function GameWindow(props: GameWindowProps) {
@@ -47,18 +47,18 @@ export function GameWindow(props: GameWindowProps) {
 	props.Parent = props.Parent ?? Players.LocalPlayer.WaitForChild("PlayerGui");
 
 	/* Title Bar */
-        const textColour = props.TitleColor ?? useToken("textPrimary");
-        const strokeColour = props.TitleStrokeColor ?? useToken("textSecondary");
+	const textColour = props.TitleColor ?? useToken("textPrimary");
+	const strokeColour = props.TitleStrokeColor ?? useToken("textSecondary");
 
-        const titleBar = New("TextLabel")({
-                Name: "TitleText",
-                Size: UDim2.fromScale(1, 0.1),
-                Position: UDim2.fromScale(0, 0),
-                Text: props.Title,
-                BackgroundTransparency: 0.95,
-                TextColor3: textColour,
-                TextStrokeColor3: strokeColour,
-                TextStrokeTransparency: 0.5,
+	const titleBar = New("TextLabel")({
+		Name: "TitleText",
+		Size: UDim2.fromScale(1, 0.1),
+		Position: UDim2.fromScale(0, 0),
+		Text: props.Title,
+		BackgroundTransparency: 0.95,
+		TextColor3: textColour,
+		TextStrokeColor3: strokeColour,
+		TextStrokeTransparency: 0.5,
 		TextSize: 25,
 		Font: Enum.Font.SourceSansBold,
 		TextXAlignment: Enum.TextXAlignment.Center,

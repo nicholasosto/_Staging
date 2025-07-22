@@ -42,28 +42,28 @@ export const Badge = (props: BadgeProps) => {
 		}
 	});
 
-        // Create the badge button with an icon and text
-        const bg = props.BackgroundColor3 ?? useToken("panelBorder");
-        const text = props.TextColor3 ?? useToken("textPrimary");
-        const stroke = props.TextStrokeColor3 ?? useToken("textSecondary");
+	// Create the badge button with an icon and text
+	const bg = props.BackgroundColor3 ?? useToken("panelBorder");
+	const text = props.TextColor3 ?? useToken("textPrimary");
+	const stroke = props.TextStrokeColor3 ?? useToken("textSecondary");
 
-        const button = New("TextButton")({
-                Name: props.Name ?? "Badge",
-                AnchorPoint: new Vector2(0.5, 0.5), // Center the badge
-                Position: Position,
-                Size: props.Size ?? UDim2.fromOffset(34, 34),
-                BackgroundTransparency: 0,
-                BackgroundColor3: bg,
-                Text: Computed(() => props.TextValue.get()),
-                ZIndex: props.ZIndex ?? 10000,
-                LayoutOrder: props.LayoutOrder ?? 0,
-                TextColor3: text,
-                TextStrokeColor3: stroke,
-                TextStrokeTransparency: props.TextStrokeTransparency ?? 0.5, // Default stroke transparency
-                TextSize: props.TextSize ?? 14,
-                [Children]: {
-                        Corner: New("UICorner")({
-                                CornerRadius: new UDim(0, 8), // Rounded corners
+	const button = New("TextButton")({
+		Name: props.Name ?? "Badge",
+		AnchorPoint: new Vector2(0.5, 0.5), // Center the badge
+		Position: Position,
+		Size: props.Size ?? UDim2.fromOffset(34, 34),
+		BackgroundTransparency: 0,
+		BackgroundColor3: bg,
+		Text: Computed(() => props.TextValue.get()),
+		ZIndex: props.ZIndex ?? 10000,
+		LayoutOrder: props.LayoutOrder ?? 0,
+		TextColor3: text,
+		TextStrokeColor3: stroke,
+		TextStrokeTransparency: props.TextStrokeTransparency ?? 0.5, // Default stroke transparency
+		TextSize: props.TextSize ?? 14,
+		[Children]: {
+			Corner: New("UICorner")({
+				CornerRadius: new UDim(0, 8), // Rounded corners
 			}),
 		},
 	});
