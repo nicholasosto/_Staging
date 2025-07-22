@@ -9,7 +9,7 @@
 
 import { SpacialInterface } from "shared";
 import { GameScreen } from "../atoms";
-import { AdminButtonBar, HUDMenuBar } from "../organisms";
+import { AbilityBarComponent, AdminButtonBar, HUDMenuBar } from "../organisms";
 import { CharacterInfoCard } from "../organisms/Groups/CharacterInfoCard";
 
 /* =============================================== Player HUD Screen ============================================= */
@@ -47,6 +47,7 @@ export const PlayerHUDScreen = () => {
 			CharacterInfoCard: CharacterInfoCard(CharacterInfoCardProps),
 			HUDMenuBar: HUDMenuBar(HudMenuBarProps),
 			AdminButtonBar: AdminButtonBar(AdminButtonBarProps),
+			AbilityBar: AbilityBarComponent(),
 		},
 	});
 };
