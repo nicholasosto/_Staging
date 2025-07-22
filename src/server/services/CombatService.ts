@@ -57,6 +57,7 @@ export class CombatService {
 
 	/** Register an entity once it enters the world. */
 	public static RegisterEntity(entity: SSEntity): void {
+		warn(`CombatService: Registering entity ${entity.Name}`);
 		const svc = this.Start();
 		if (svc._entities.has(entity)) return;
 

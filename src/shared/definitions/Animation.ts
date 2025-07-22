@@ -15,11 +15,13 @@
 export const ANIMATION_KEY = [
 	"WhipAttack",
 	"Dodge",
+	"BigDodge",
 	"GodLike",
 	"HallowHold",
 	"KickFast",
 	"PowerBeam",
 	"Punch_01",
+	"Punch_02",
 	"ScytheAttack",
 	"SpinKick",
 	"TakeDamage",
@@ -51,14 +53,16 @@ export const GetTrack = (model: Model, key: AnimationKey): AnimationTrack | unde
 export const AnimationAssets: Record<AnimationKey, string> = {
 	WhipAttack: "rbxassetid://125608150014654", // Replace with actual asset
 	Dodge: "rbxassetid://15487656295", // Replace with actual asset
+	BigDodge: "rbxassetid://15547518905", // Replace with actual asset
 	GodLike: "rbxassetid://140479956568725", // Replace with actual asset
 	HallowHold: "rbxassetid://125099220628366", // Replace with actual asset
 	KickFast: "rbxassetid://126544239907410", // Replace with actual asset
 	PowerBeam: "rbxassetid://132928610589952", // Replace with actual asset
-	Punch_01: "rbxassetid://15487656295", // Replace with actual asset
+	Punch_01: "rbxassetid://16157509842", // Replace with actual asset
+	Punch_02: "rbxassetid://16157364563", // Replace with actual asset
 	ScytheAttack: "rbxassetid://77799116860007", // Replace with actual asset
 	SpinKick: "rbxassetid://100351397638487", // Replace with actual asset
-	TakeDamage: "rbxassetid://16144885391", // Replace with actual
+	TakeDamage: "rbxassetid://16158676664", // Replace with actual
 	Taunt: "rbxassetid://98363948502311", // Replace with actual asset
 };
 

@@ -27,10 +27,11 @@ export class VisualEffectService {
 		}
 		// Attachments are not always present, so we check
 		const ssEntity = character as SSEntity;
-		if(ssEntity === undefined) {
+		if (ssEntity === undefined) {
 			warn(`SSEntity not found for character: ${character.Name}`);
 			return;
 		}
+
 		// Spawn particles/models
 		meta.run(ssEntity, duration);
 		print(`Effect ${effectKey} completed for character: ${character.Name}`);

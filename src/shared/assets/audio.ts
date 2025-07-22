@@ -18,6 +18,9 @@
  */
 
 export const GameAudio = {
+	Combat: {
+		Hurt: "rbxassetid://124168040156203",
+	},
 	RobotTheme: {
 		BackgroundMusic: "rbxassetid://1234567890", // Replace with actual asset ID
 		SuccessClick: "rbxassetid://1234567891",
@@ -27,6 +30,10 @@ export const GameAudio = {
 		MeleeAttack: "rbxassetid://1234567895",
 		Death: "rbxassetid://1234567896",
 		LevelUp: "rbxassetid://1234567897",
+		Hurt: "rbxassetid://95887429435303",
+	},
+	FatelessTheme: {
+		Hurt: "rbxassetid://124168040156203", // Replace with actual asset ID
 	},
 	ZombieTheme: {
 		BackgroundMusic: "rbxassetid://1234567898", // Replace with actual asset ID
@@ -37,6 +44,7 @@ export const GameAudio = {
 		MeleeAttack: "rbxassetid://1234567903",
 		Death: "rbxassetid://1234567904",
 		LevelUp: "rbxassetid://1234567905",
+		Hurt: "rbxassetid://149041017",
 	},
 } as const;
 

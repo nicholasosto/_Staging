@@ -32,6 +32,8 @@ import { DefaultAttributes } from "shared/definitions/ProfileDefinitions/Attribu
 import { DataService } from "./DataService";
 import { calculateResources } from "shared/calculations";
 import { ServerSend } from "server/network";
+import { playAnimation, SSEntity } from "shared";
+import { RunEffect } from "./VisualEffectsService";
 
 /* =============================================== Service ===================== */
 export class ResourcesService {
@@ -147,6 +149,9 @@ export class ResourcesService {
 		resourceData.current = newResourceCurrent;
 		if (key === "Health") {
 			const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
+			const ssEntity = player.Character as SSEntity;
+			RunEffect("TakeDamage", ssEntity, 0.5); // Run a damage effect for 0.5 seconds
+			playAnimation(ssEntity, "TakeDamage");
 			if (humanoid) {
 				humanoid.Health = newResourceCurrent;
 			} else {

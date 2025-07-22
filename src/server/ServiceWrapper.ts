@@ -22,6 +22,7 @@
  */
 
 import { PlayerLifeCycle } from "./PlayerLifeCycle";
+import { CombatService } from "./services";
 
 export class ServiceWrapper {
 	/** Start the player lifecycle service. */

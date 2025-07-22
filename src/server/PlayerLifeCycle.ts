@@ -25,10 +25,11 @@
 
 /* =============================================== Imports ===================== */
 import { RunService } from "@rbxts/services";
-import { DataService, ResourcesService, AbilityService } from "server/services";
+import { DataService, ResourcesService, AbilityService, CombatService } from "server/services";
 import { ServerSend } from "server/network";
 import { generateUniqueId } from "shared/helpers";
 import { RegisterInstance } from "./helpers";
+import { SSEntity } from "shared";
 
 /* ================================ Types ======================= */
 interface PlayerConnections {
@@ -74,6 +75,7 @@ export class PlayerLifeCycle {
 	 * @param player The player to register.
 	 */
 	public static RegisterPlayer(player: Player) {
+		warn(`PLC Service: Registering player ${player.Name}`);
 		const svc = this.Start();
 		/* -- Add an ID to the player -- */
 		const registeredInstance = RegisterInstance(player);
@@ -115,6 +117,8 @@ export class PlayerLifeCycle {
 		connections.CharacterAdded = player.CharacterAdded.Connect((character) => {
 			if (svc._debug) print(`Character added for ${player.Name}`);
 			ResourcesService.Start().InitializeResources(player);
+			CombatService.RegisterEntity(character as SSEntity);
+			RegisterInstance(character);
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 			connections.HumanoidDied = humanoid.Died.Connect(() => {
 				if (svc._debug) print(`Humanoid died for ${player.Name}`);

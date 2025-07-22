@@ -141,7 +141,7 @@ export const AbilitiesMeta = {
 		iconId: GameImages.Ability.Melee,
 		animationKey: "Punch_01", // Replace with actual animation key
 		description: "A basic melee attack that deals physical damage.",
-		cooldown: 2,
+		cooldown: 0.6,
 		basePower: 30,
 		cost: {
 			mana: 0,
@@ -149,6 +149,7 @@ export const AbilitiesMeta = {
 		},
 		onStart: ({ caster, startPosition }) => {
 			print(`Melee attack started by ${caster.GetFullName()} at position ${startPosition}`);
+			playAnimation(caster, AbilitiesMeta.melee.animationKey);
 			// Additional logic for starting the melee attack can be added here
 		},
 	},

@@ -234,7 +234,7 @@ export class AbilityService {
 				`Your ${AbilitiesMeta[abilityKey].displayName} is on cooldown.`,
 				"warning",
 			);
-			ServerSend.SendMessageToPlayer(player, message);
+			//ServerSend.SendMessageToPlayer(player, message);
 			return false;
 		}
 		warn(`Starting cooldown for ability ${abilityKey} for player ${player.Name}`);
