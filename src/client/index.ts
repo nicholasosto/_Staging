@@ -13,4 +13,4 @@
 export * from "./states";
 export * from "./network";
 export * from "./ui";
-export * from "./TargetingClient";
+export * from "./targeting/TargetingClient";

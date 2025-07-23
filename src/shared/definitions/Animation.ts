@@ -107,10 +107,14 @@ export function loadAnimation(model: Model, key: AnimationKey): AnimationTrack |
 	return undefined;
 }
 
-export const playAnimation = (model: Model, key: AnimationKey): void => {
+export const playAnimation = (model: Model, key: AnimationKey, duration: number): void => {
 	const track = GetTrack(model, key);
+	print(`Playing animation ${key} on model ${model.Name} for duration ${duration}`);
+	const length = track?.Length ?? 1;
+	const speed = length > 0 ? length / duration : 1;
 	if (track) {
 		track.Play();
+		track.AdjustSpeed(speed);
 	} else {
 		loadAnimation(model, key)?.Play();
 		warn(`Animation track for ${key} not found on model ${model.Name}`);

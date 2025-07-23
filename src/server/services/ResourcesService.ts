@@ -151,7 +151,7 @@ export class ResourcesService {
 			const humanoid = player.Character?.FindFirstChildOfClass("Humanoid");
 			const ssEntity = player.Character as SSEntity;
 			RunEffect("TakeDamage", ssEntity, 0.5); // Run a damage effect for 0.5 seconds
-			playAnimation(ssEntity, "TakeDamage");
+			playAnimation(ssEntity, "TakeDamage", 0.5); // Play the TakeDamage animation for 0.5 seconds
 			if (humanoid) {
 				humanoid.Health = newResourceCurrent;
 			} else {

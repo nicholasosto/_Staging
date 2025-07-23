@@ -44,7 +44,7 @@ export class NPCService {
 		const npc = new NPC(key, cFrame);
 		svc._npcs.add(npc);
 		setupSSEntity(npc.model);
-		playAnimation(npc.model, "GodLike"); // Example animation, replace with actual key
+		playAnimation(npc.model, "GodLike", 1.5); // Example animation, replace with actual key
 		RunEffect("ToxicCloud", npc.model, 55); // Example effect, replace with actual key
 		return npc;
 	}

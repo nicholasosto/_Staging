@@ -49,6 +49,7 @@ export interface AbilityMeta {
 	castEffect?: VFXKey; // Optional visual effect to play when casting
 	description: string;
 	cooldown: number; // Cooldown in seconds
+	duration: number; // Duration of the ability time to use (prevents overlapping ability casts)
 	basePower: number; // Base power of the ability
 	cost: {
 		mana: number; // Mana cost for the ability
@@ -66,6 +67,7 @@ export const AbilitiesMeta = {
 		animationKey: "HallowHold", // Replace with actual animation key
 		castEffect: "FireAura", // Optional visual effect to play when casting
 		description: "Launches a fiery projectile that explodes on impact.",
+		duration: 2,
 		cooldown: 5,
 		basePower: 50,
 		cost: {
@@ -74,7 +76,8 @@ export const AbilitiesMeta = {
 		},
 		onStart: (context: AbilityCastContext) => {
 			const { caster, startPosition } = context;
-			playAnimation(caster, AbilitiesMeta.fireball.animationKey);
+			playAnimation(caster, AbilitiesMeta.fireball.animationKey, AbilitiesMeta.fireball.duration);
+
 			VisualEffectMetaMap.FireAura.run(caster, 5); // Run the FireAura effect for 5 seconds
 			print(
 				`OnStart: ${AbilitiesMeta.fireball.displayName} cast by ${caster.GetFullName()} at position ${startPosition}`,
@@ -88,6 +91,7 @@ export const AbilitiesMeta = {
 		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Launches a shard of ice that pierces through enemies.",
 		cooldown: 0.31,
+		duration: 1.5, // Duration of the ability cast
 		basePower: 40,
 		cost: {
 			mana: 25, // Example mana cost
@@ -103,6 +107,7 @@ export const AbilitiesMeta = {
 		iconId: GameImages.Ability.Lightning_Bolt,
 		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Calls down a bolt of lightning to strike enemies.",
+		duration: 1.5, // Duration of the ability cast
 		cooldown: 7,
 		basePower: 60,
 		cost: {
@@ -120,6 +125,7 @@ export const AbilitiesMeta = {
 		animationKey: "HallowHold", // Replace with actual animation key
 		description: "Causes the ground to shake, damaging all nearby enemies.",
 		cooldown: 10,
+		duration: 2, // Duration of the ability cast
 		basePower: 80,
 		cost: {
 			mana: 30, // Example mana cost
@@ -142,6 +148,7 @@ export const AbilitiesMeta = {
 		animationKey: "Punch_01", // Replace with actual animation key
 		description: "A basic melee attack that deals physical damage.",
 		cooldown: 0.6,
+		duration: 0.5, // Duration of the ability cast
 		basePower: 30,
 		cost: {
 			mana: 0,
@@ -149,7 +156,7 @@ export const AbilitiesMeta = {
 		},
 		onStart: ({ caster, startPosition }) => {
 			print(`Melee attack started by ${caster.GetFullName()} at position ${startPosition}`);
-			playAnimation(caster, AbilitiesMeta.melee.animationKey);
+			playAnimation(caster, AbilitiesMeta.melee.animationKey, AbilitiesMeta.melee.duration);
 			// Additional logic for starting the melee attack can be added here
 		},
 	},

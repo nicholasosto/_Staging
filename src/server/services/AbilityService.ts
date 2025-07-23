@@ -218,45 +218,42 @@ export class AbilityService {
 
 		if (!this._playerHasAbility(player, abilityKey)) return false;
 
-		/* Validate Resources and Cooldown */
+		/* Validate Resources */
 		if (!this._validateResources(player, abilityKey)) {
-			const message = createMessage(
-				"Ability Activation Failed",
-				`You do not have enough resources or ${AbilitiesMeta[abilityKey].displayName}`,
-				"error",
-			);
+			const message = createMessage("Activation Failed", `You do not have enough resources`, "error");
 			ServerSend.SendMessageToPlayer(player, message);
 			return false;
 		}
+
+		/* Validate Cooldown */
 		if (!this._validateCooldown(player, abilityKey)) {
-			const message = createMessage(
-				"Ability On Cooldown",
-				`Your ${AbilitiesMeta[abilityKey].displayName} is on cooldown.`,
-				"warning",
-			);
-			//ServerSend.SendMessageToPlayer(player, message);
 			return false;
 		}
-		warn(`Starting cooldown for ability ${abilityKey} for player ${player.Name}`);
+
+		/* Casting Check and Tagging */
+		if (character.HasTag("Casting")) {
+			warn(`Player ${player.Name} is already casting an ability.`);
+			return false;
+		}
+		character.AddTag("Casting"); // Add a casting tag to the entity
+		task.delay(AbilitiesMeta[abilityKey].duration, () => {
+			character.RemoveTag("Casting"); // Remove the casting tag after the ability duration
+		});
+
+		/* Start Cooldown and Consume Resources */
 		this._startCooldown(player, abilityKey);
 		this._consumeResources(player, abilityKey);
-
 		const characterCFrame = character.GetPivot();
 		if (characterCFrame === undefined) return false;
 
+		/* Load Animation and Run Ability */
 		loadAnimation(character, AbilitiesMeta[abilityKey].animationKey);
 		const meta = AbilitiesMeta[abilityKey];
 		if (meta === undefined) {
 			warn(`No metadata found for ability ${abilityKey}`);
 			return false;
 		}
-		if (meta.onStart === undefined) {
-			warn(`No onStart function defined for ability ${abilityKey}`);
-			return false;
-		}
-		meta.onStart({ caster: character as SSEntity, startPosition: characterCFrame.Position });
-
-		print(`Activated ability ${abilityKey} for player ${player.Name}.`);
+		meta?.onStart({ caster: character as SSEntity, startPosition: characterCFrame.Position });
 
 		return true;
 	}
@@ -264,7 +261,6 @@ export class AbilityService {
 	// Private cleanup helper
 	private destroyInternal() {
 		this._abilities.clear();
-		// ...destroy any other resources/events...
 		if (RunService.IsStudio()) warn(`AbilityService destroyed`);
 	}
 }
