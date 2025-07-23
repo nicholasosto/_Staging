@@ -20,9 +20,9 @@
 
 import { NPCKey } from "shared/definitions/NPC";
 import { NPC } from "server/classes/npc";
-import { RegisterInstance } from "server/helpers";
 import { playAnimation } from "shared";
 import { RunEffect } from "./VisualEffectsService";
+import { setupSSEntity } from "./Internal";
 
 export class NPCService {
 	private static _instance: NPCService | undefined;
@@ -43,7 +43,7 @@ export class NPCService {
 		const svc = this.Start();
 		const npc = new NPC(key, cFrame);
 		svc._npcs.add(npc);
-		RegisterInstance(npc.model);
+		setupSSEntity(npc.model);
 		playAnimation(npc.model, "GodLike"); // Example animation, replace with actual key
 		RunEffect("ToxicCloud", npc.model, 55); // Example effect, replace with actual key
 		return npc;

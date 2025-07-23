@@ -21,7 +21,6 @@
 /* =============================================== Imports ================================== */
 import { getNextLevelExperience } from "shared/definitions/ProfileDefinitions/Progression";
 import { DataService } from "./DataService";
-import { t } from "@rbxts/t";
 
 /* =============================================== Service ================================== */
 export class ProgressionService {

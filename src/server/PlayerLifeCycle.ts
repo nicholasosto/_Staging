@@ -27,9 +27,9 @@
 import { RunService } from "@rbxts/services";
 import { DataService, ResourcesService, AbilityService, CombatService } from "server/services";
 import { ServerSend } from "server/network";
-import { generateUniqueId } from "shared/helpers";
 import { RegisterInstance } from "./helpers";
 import { SSEntity } from "shared";
+import { setupSSEntity } from "./services/Internal";
 
 /* ================================ Types ======================= */
 interface PlayerConnections {
@@ -118,7 +118,7 @@ export class PlayerLifeCycle {
 			if (svc._debug) print(`Character added for ${player.Name}`);
 			ResourcesService.Start().InitializeResources(player);
 			CombatService.RegisterEntity(character as SSEntity);
-			RegisterInstance(character);
+			setupSSEntity(character);
 			const humanoid = character.WaitForChild("Humanoid") as Humanoid;
 			connections.HumanoidDied = humanoid.Died.Connect(() => {
 				if (svc._debug) print(`Humanoid died for ${player.Name}`);
@@ -169,8 +169,3 @@ export class PlayerLifeCycle {
 		});
 	}
 }
-
-// Auto-start to connect existing players if needed
-//Players.GetPlayers().forEach((player) => PlayerLifeCycle.RegisterPlayer(player));
-// Players.PlayerAdded.Connect((player) => PlayerLifeCycle.RegisterPlayer(player));
-// Players.PlayerRemoving.Connect((player) => PlayerLifeCycle.UnregisterPlayer(player));
