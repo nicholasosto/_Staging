@@ -12,6 +12,7 @@ export * from "./ProfileDefinitions";
 export * from "./PanelSlots";
 
 // Modules
+export * from "./AbilityDefinitions";
 export * from "./Animation";
 export * from "./Codon";
 export * from "./GenericUIInterfaces";

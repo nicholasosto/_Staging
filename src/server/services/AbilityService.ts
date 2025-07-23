@@ -15,7 +15,7 @@
 
 /* =============================================== Imports =============================================== */
 import { RunService } from "@rbxts/services";
-import { AbilitiesMeta, AbilityKey, loadAnimation, playAnimation, createMessage, SSEntity } from "shared";
+import { AbilityCatalog, AbilityKey, loadAnimation, playAnimation, createMessage, SSEntity } from "shared";
 import { DataService } from "./DataService";
 import { ResourcesService } from "./ResourcesService";
 import MessageService from "./MessageService";
@@ -170,8 +170,8 @@ export class AbilityService {
 
 	private static _validateResources(player: Player, abilityKey: AbilityKey): boolean {
 		// Get the required resources for the ability
-		const manaCost = AbilitiesMeta[abilityKey]?.cost.mana ?? 0;
-		const staminaCost = AbilitiesMeta[abilityKey]?.cost.stamina ?? 0;
+		const manaCost = AbilityCatalog[abilityKey]?.cost.mana ?? 0;
+		const staminaCost = AbilityCatalog[abilityKey]?.cost.stamina ?? 0;
 
 		// Validate if the player has enough resources
 		const validateMana = ResourcesService.ValidateResourceModification(player, "Mana", -manaCost);
@@ -197,8 +197,8 @@ export class AbilityService {
 		}
 
 		/* Get the required resources for the ability */
-		const manaCost = AbilitiesMeta[abilityKey]?.cost.mana ?? 0;
-		const staminaCost = AbilitiesMeta[abilityKey]?.cost.stamina ?? 0;
+		const manaCost = AbilityCatalog[abilityKey]?.cost.mana ?? 0;
+		const staminaCost = AbilityCatalog[abilityKey]?.cost.stamina ?? 0;
 		if (manaCost > 0) {
 			ResourcesService.ModifyResource(player, "Mana", -manaCost);
 		}
@@ -236,7 +236,7 @@ export class AbilityService {
 			return false;
 		}
 		character.AddTag("Casting"); // Add a casting tag to the entity
-		task.delay(AbilitiesMeta[abilityKey].duration, () => {
+		task.delay(AbilityCatalog[abilityKey].duration, () => {
 			character.RemoveTag("Casting"); // Remove the casting tag after the ability duration
 		});
 
@@ -247,8 +247,8 @@ export class AbilityService {
 		if (characterCFrame === undefined) return false;
 
 		/* Load Animation and Run Ability */
-		loadAnimation(character, AbilitiesMeta[abilityKey].animationKey);
-		const meta = AbilitiesMeta[abilityKey];
+		loadAnimation(character, AbilityCatalog[abilityKey].animationKey);
+		const meta = AbilityCatalog[abilityKey];
 		if (meta === undefined) {
 			warn(`No metadata found for ability ${abilityKey}`);
 			return false;

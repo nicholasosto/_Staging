@@ -1,4 +1,4 @@
-import { AbilitiesMeta, AbilityKey } from "shared/definitions/ProfileDefinitions/Ability";
+import { AbilityCatalog, AbilityKey } from "shared/definitions";
 import { BaseContainer, ListContainer, GameImage, GameText } from "../atoms";
 import { New, Value } from "@rbxts/fusion";
 
@@ -7,7 +7,7 @@ export interface AbilityInfoPanelProps {
 }
 
 export function AbilityInfoPanel({ abilityKey }: AbilityInfoPanelProps) {
-	const abilityMeta = AbilitiesMeta[abilityKey];
+	const abilityMeta = AbilityCatalog[abilityKey];
 
 	const abilityIcon = GameImage({
 		Name: `AbilityIcon-${abilityKey}`,

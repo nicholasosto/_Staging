@@ -5,7 +5,7 @@
  * @description Barrel export for shared definition modules related to player profiles.
  */
 
-export * from "./Ability";
+export * from "../AbilityDefinitions/AbilityCatalog";
 export * from "./Attributes";
 export * from "./Currency";
 export * from "./Profile";

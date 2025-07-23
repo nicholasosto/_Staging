@@ -19,7 +19,7 @@ import { Computed, Children, New } from "@rbxts/fusion";
 import { UIButton, GameImage, ListContainer, BaseContainer, BorderImage } from "client/ui/atoms";
 import { ProgressBar } from "./ProgressBar";
 import { ClientSend } from "client/network";
-import { AbilityKey, AbilitiesMeta, CooldownTimer, GameImages } from "shared";
+import { AbilityKey, AbilityCatalog, CooldownTimer, GameImages } from "shared";
 import { Padding } from "../tokens";
 
 export interface AbilityButtonProps {
@@ -27,7 +27,7 @@ export interface AbilityButtonProps {
 }
 
 export function AbilityButton(abilityKey: AbilityKey): Frame {
-	const meta = AbilitiesMeta[abilityKey];
+	const meta = AbilityCatalog[abilityKey];
 	//const remaining = Value(0); // counts down each frame
 
 	/* Timer */

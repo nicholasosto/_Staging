@@ -22,9 +22,13 @@ export const GameAudio = {
 		Hurt: "rbxassetid://124168040156203",
 	},
 	RobotTheme: {
-		BackgroundMusic: "rbxassetid://1234567890", // Replace with actual asset ID
+		/* Game Audio Assets */
+		BackgroundMusic: "rbxassetid://1234567890",
+		/* GUI Audio Assets */
 		SuccessClick: "rbxassetid://1234567891",
 		ErrorClick: "rbxassetid://1234567892",
+
+		/* Combat Audio Assets */
 		Damaged: "rbxassetid://1234567893",
 		CastSpell: "rbxassetid://1234567894",
 		MeleeAttack: "rbxassetid://1234567895",

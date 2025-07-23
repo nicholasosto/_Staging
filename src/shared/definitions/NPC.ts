@@ -5,7 +5,7 @@
  * @description Static NPC template catalogue.
  */
 
-import { AbilityKey } from "./ProfileDefinitions/Ability";
+import { AbilityKey } from "./AbilityDefinitions";
 import { LootTableKey } from "./Loot";
 import { ReplicatedStorage } from "@rbxts/services";
 

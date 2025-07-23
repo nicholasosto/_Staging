@@ -2,7 +2,7 @@ import { ReplicatedStorage, Workspace } from "@rbxts/services";
 import { GameAudio } from "shared/assets";
 import { SSEntity } from "shared/types";
 const EFFECT_FOLDER = ReplicatedStorage.WaitForChild("SS Game Package").WaitForChild("VFXParts", 3) as Folder;
-export const VFX_KEYS = ["FireAura", "HealingRing", "ToxicCloud", "TakeDamage"] as const;
+export const VFX_KEYS = ["FireAura", "HealingRing", "ToxicCloud", "TakeDamage", "CastingDefault", "CastFail"] as const;
 export type VFXKey = (typeof VFX_KEYS)[number];
 
 export interface VisualEffectMeta {
@@ -13,6 +13,38 @@ export interface VisualEffectMeta {
 }
 
 export const VisualEffectMetaMap: Record<VFXKey, VisualEffectMeta> = {
+	CastingDefault: {
+		soundId: "rbxassetid://1234567890", // Example sound
+		run: (model, duration) => {
+			const effectPart = EFFECT_FOLDER.FindFirstChild("Casting_Default")?.Clone() as Part;
+			if (!effectPart) {
+				warn("CastingDefault model not found in VFXParts.");
+				return;
+			}
+			effectPart.Position = model.GetPivot().Position;
+			effectPart.Parent = Workspace;
+			// animate the effect if desired...
+			task.delay(duration, () => {
+				effectPart.Destroy();
+			});
+		},
+	},
+	CastFail: {
+		soundId: "rbxassetid://1234567890", // Example sound
+		run: (model, duration) => {
+			const effectPart = EFFECT_FOLDER.FindFirstChild("Cast_Fail")?.Clone() as Part;
+			if (!effectPart) {
+				warn("CastFail model not found in VFXParts.");
+				return;
+			}
+			effectPart.Position = model.GetPivot().Position;
+			effectPart.Parent = Workspace;
+			// animate the effect if desired...
+			task.delay(duration, () => {
+				effectPart.Destroy();
+			});
+		},
+	},
 	ToxicCloud: {
 		soundId: "rbxassetid://1234567890", // Example sound
 		run: (model, duration) => {

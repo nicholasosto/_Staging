@@ -16,7 +16,7 @@
  * @since        0.2.0
  */
 
-import { AbilitiesMeta, AbilityKey } from "shared/definitions/ProfileDefinitions/Ability";
+import { AbilityKey, AbilityCatalog } from "shared";
 import { CooldownTimer } from "shared/classes/CooldownTimer";
 
 /** Represents a player's ability with an internal cooldown timer. */
@@ -26,7 +26,7 @@ export default class Ability {
 
 	constructor(key: AbilityKey) {
 		this.Key = key;
-		const meta = AbilitiesMeta[key];
+		const meta = AbilityCatalog[key];
 		this.cooldown = new CooldownTimer(meta.cooldown);
 	}
 
