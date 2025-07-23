@@ -44,3 +44,4 @@ export * from "./ProgressionService";
 export * from "./WeaponService";
 export * from "./OrganismService";
 export * from "./CombatService";
+export * from "./TargetingService";

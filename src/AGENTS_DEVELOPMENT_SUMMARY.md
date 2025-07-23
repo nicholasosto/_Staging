@@ -5,6 +5,7 @@ The table below lists core modules grouped by network layer and their current st
 | Layer   | Module                                   | Status             | Notes |
 |--------|------------------------------------------|--------------------|-------|
 |Shared|`shared/network`|Rock Solid|Typed event definitions|
+|Shared|`shared/network/targeting.remotes.ts`|Usable|Target selection events|
 |Shared|`shared/data/AbilityData.ts`|Under Construction|Ability metadata|
 |Shared|`shared/data/AttributeData.ts`|Rock Solid|Attribute metadata and helpers|
 |Shared|`shared/data/CodonData.ts`|Rock Solid|Genetic codon constants|
@@ -41,6 +42,7 @@ The table below lists core modules grouped by network layer and their current st
 |Client|`client/states/SettingsState.ts`|Usable|Reactive settings container|
 |Client|`client/network/ClientNetworkService.ts`|Usable|Client RPC helpers|
 |Client|`client/network/listener.client.ts`|Usable|Receives server events|
+|Client|`client/TargetingClient.ts`|Usable|Local target selection helpers|
 |Client|`client/ui/screens`|Under Construction|Gem forge, character, inventory, shop, settings, teleport and HUD screens|
 |Client|`client/ui/screens/DragDropScreen.ts`|Usable|Drag and drop demo|
 |Client|`client/ui/screens/CharacterScreen.ts`|Stub|Character info window|
@@ -76,6 +78,7 @@ The table below lists core modules grouped by network layer and their current st
 |Server|`server/services/AttributesService.ts`|Under Construction|Validates attribute changes|
 |Server|`server/services/ProgressionService.ts`|Under Construction|Manages experience and level ups|
 |Server|`server/services/CombatService.ts`|Under Construction|Tracks damage & kill credit|
+|Server|`server/services/TargetingService.ts`|Usable|Validates and replicates target selection|
 |Server|`server/entity/npc/NPC.ts`|Usable|NPC instance with random names|
 |Server|`server/entity/entityResource/EntityResource.ts`|Usable|Drops collectible resource|
 |Server|`server/entity/EvolvingOrganism.ts`|Under Construction|DNA‑driven organism|
